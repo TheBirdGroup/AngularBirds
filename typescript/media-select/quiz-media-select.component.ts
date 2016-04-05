@@ -3,9 +3,7 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 @Component({
 	selector: 'birdid-quiz-media-select',
-	template: `
-	  <h1>{{title}}</h1>
-	`,
+	templateUrl: 'app/media-select/quiz-media-select.component.html',
 	directives: [
 
 	],
@@ -16,5 +14,5 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 
 export class QuizMediaSelectComponent {
-	  title = 'Birdid Quiz media select!';
+	  title = 'Birdid Quiz media select yolo!';
 }

@@ -23,12 +23,12 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
         execute: function() {
             QuizMediaSelectComponent = (function () {
                 function QuizMediaSelectComponent() {
-                    this.title = 'Birdid Quiz media select!';
+                    this.title = 'Birdid Quiz media select yolo!';
                 }
                 QuizMediaSelectComponent = __decorate([
                     core_1.Component({
                         selector: 'birdid-quiz-media-select',
-                        template: "\n\t  <h1>{{title}}</h1>\n\t",
+                        templateUrl: 'app/media-select/quiz-media-select.component.html',
                         directives: [],
                         providers: [
                             http_1.HTTP_PROVIDERS

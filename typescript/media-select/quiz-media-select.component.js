@@ -23,7 +23,12 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
         execute: function() {
             QuizMediaSelectComponent = (function () {
                 function QuizMediaSelectComponent() {
-                    this.title = 'Birdid Quiz media select yolo!';
+                    this.mediaTypes = {
+                        1: 'Image',
+                        2: 'Sound',
+                        3: 'Video'
+                    };
+                    this.title = 'Birdid Quiz, select your media type:';
                 }
                 QuizMediaSelectComponent = __decorate([
                     core_1.Component({

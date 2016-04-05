@@ -14,5 +14,13 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 
 export class QuizMediaSelectComponent {
-	  title = 'Birdid Quiz media select yolo!';
+
+	mediaTypes = {
+		1: 'Image',
+		2: 'Sound',
+		3: 'Video'
+
+	};
+
+	title = 'Birdid Quiz, select your media type:';
 }

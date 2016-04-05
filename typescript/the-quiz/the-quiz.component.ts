@@ -35,6 +35,9 @@ export class TheQuizComponent implements OnInit{
     questionRightAnswer = ""
 
 
+	score = 0;
+
+
 	  constructor(
 		  private _quizSettingsService: QuizSettingsService,
 		  private _quizQuestionService: QuizQuestionsService
@@ -102,10 +105,12 @@ export class TheQuizComponent implements OnInit{
 
         if(this.questionAlternatives[altID] == this.questionRightAnswer){
 
+			this.score ++;
             console.log("correct!");
 
         }else{
 
+			this.score --;
             console.log("inncorrect!");
 
         }

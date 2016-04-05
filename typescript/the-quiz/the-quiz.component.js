@@ -41,6 +41,7 @@ System.register(['angular2/core', 'angular2/http', './../shared/quiz-settings.se
                     this.quizLoaded = false;
                     this.questionNumber = 0;
                     this.questionRightAnswer = "";
+                    this.score = 0;
                 }
                 TheQuizComponent.prototype.ngOnInit = function () {
                     var _this = this;
@@ -74,9 +75,11 @@ System.register(['angular2/core', 'angular2/http', './../shared/quiz-settings.se
                 };
                 TheQuizComponent.prototype.checkIfAltCorrect = function (altID) {
                     if (this.questionAlternatives[altID] == this.questionRightAnswer) {
+                        this.score++;
                         console.log("correct!");
                     }
                     else {
+                        this.score--;
                         console.log("inncorrect!");
                     }
                 };

@@ -9,13 +9,7 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 
 @Component({
 	selector: 'birdid-quiz-master',
-	template: `
-	  <h1>{{title}}</h1>
-	  <birdid-quiz-media-select></birdid-quiz-media-select>
-	  <birdid-quiz-addditional-settings></birdid-quiz-addditional-settings>
-	  <birdid-the-quiz></birdid-the-quiz>
-	  <birdid-quiz-result></birdid-quiz-result>
-	`,
+	templateUrl: 'app/quiz-master.component.html',
 	directives: [
 		QuizMediaSelectComponent,
 		QuizAdditionalSettingsComponent,
@@ -30,4 +24,29 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 
 export class QuizMasterComponent {
 	  title = 'Birdid Quiz master!';
+
+
+	 currentActive = 0;
+
+	  nextComponent(){
+
+		  this.currentActive ++;
+		  if(this.currentActive > 3){
+			  this.currentActive = 0;
+		  }
+
+
+	  }
+
+	  subIsActive(compID){
+
+		  if(this.currentActive == compID){
+			  return true
+		  }else{
+			  return false;
+		  }
+
+
+	  }
+
 }

@@ -1,0 +1,5 @@
+<h1>{{title}}</h1>
+
+<div *ngFor="#current of mediaDiff; #i=index" >
+	<button (click)="selectMediaDiff(i+1)">{{current}}</button>
+</div>

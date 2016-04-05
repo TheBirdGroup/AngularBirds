@@ -29,10 +29,21 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx'], function(exports_
                     this._http = _http;
                     this.mediaType = 0;
                     this.allowedMediaTypes = [1, 2, 3];
+                    this.mediaDifficulities = 0;
+                    this.allowedMediaDifficulities = [1, 2, 3, 4];
                 }
                 QuizSettingsService.prototype.setMediaType = function (mediaType) {
                     if (this.allowedMediaTypes.indexOf(mediaType) > -1) {
                         this.mediaType = mediaType;
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                };
+                QuizSettingsService.prototype.setMediaDiff = function (mediaDiff) {
+                    if (this.allowedMediaDifficulities.indexOf(mediaDiff) > -1) {
+                        this.mediaDifficulities = mediaDiff;
                         return true;
                     }
                     else {

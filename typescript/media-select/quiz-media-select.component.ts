@@ -19,9 +19,7 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 export class QuizMediaSelectComponent {
 
 	mediaTypes = ['Image', 'Sound', 'Video'];
-
 	title = 'Birdid Quiz, select your media type:';
-
 	quizMediaSelectedEvent = new EventEmitter<string>();
 
 	constructor(

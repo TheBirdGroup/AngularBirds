@@ -72,4 +72,12 @@ export class QuizMasterComponent {
 
 	  }
 
+	  mediaAdditionalSettingsDoneEvent(event){
+
+		  if(event == "MediaAditionalSettingsDone"){
+			 this.currentActive = 2;
+		 }
+
+	  }
+
 }

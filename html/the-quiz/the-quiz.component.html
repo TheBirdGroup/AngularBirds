@@ -1,0 +1,14 @@
+<h1>{{title}}</h1>
+
+<div *ngIf="quizLoaded">
+	<birdid-the-quiz-image [usingMediaID]="mediaID"></birdid-the-quiz-image>
+	<br>
+
+	What bird is it?
+	<div *ngFor="#current of questionAlternatives; #i=index" >
+		<button (click)="checkIfAltCorrect(i)">{{current}} </button><br />
+	</div>
+	<br>
+
+	<button (click)="nextQuestion()">Next Question</button> (current: {{mediaID}})
+</div>

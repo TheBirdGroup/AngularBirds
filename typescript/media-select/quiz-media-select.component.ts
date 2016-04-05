@@ -1,4 +1,4 @@
-import { Component }       from 'angular2/core';
+import { Component, EventEmitter }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
@@ -11,7 +11,8 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 	],
 	providers: [
 	  HTTP_PROVIDERS
-	]
+  	],
+	outputs: ['quizMediaSelectedEvent']
 })
 
 
@@ -20,6 +21,8 @@ export class QuizMediaSelectComponent {
 	mediaTypes = ['Image', 'Sound', 'Video'];
 
 	title = 'Birdid Quiz, select your media type:';
+
+	quizMediaSelectedEvent = new EventEmitter<string>();
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService
@@ -34,7 +37,8 @@ export class QuizMediaSelectComponent {
 		}else{
 
 			console.log("cuccess");
-			//TODO: GO TO NEXT COMPONENT!
+			//Const for value?
+			this.quizMediaSelectedEvent.emit("MediatypeSelected");
 
 		}
 

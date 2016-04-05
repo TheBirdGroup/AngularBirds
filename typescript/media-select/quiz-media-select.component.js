@@ -29,6 +29,7 @@ System.register(['angular2/core', 'angular2/http', './../shared/quiz-settings.se
                     this._quizSettingsService = _quizSettingsService;
                     this.mediaTypes = ['Image', 'Sound', 'Video'];
                     this.title = 'Birdid Quiz, select your media type:';
+                    this.quizMediaSelectedEvent = new core_1.EventEmitter();
                 }
                 QuizMediaSelectComponent.prototype.selectMediaType = function (mediaType) {
                     if (!this._quizSettingsService.setMediaType(mediaType)) {
@@ -36,6 +37,8 @@ System.register(['angular2/core', 'angular2/http', './../shared/quiz-settings.se
                     }
                     else {
                         console.log("cuccess");
+                        //Const for value?
+                        this.quizMediaSelectedEvent.emit("MediatypeSelected");
                     }
                 };
                 QuizMediaSelectComponent = __decorate([
@@ -45,7 +48,8 @@ System.register(['angular2/core', 'angular2/http', './../shared/quiz-settings.se
                         directives: [],
                         providers: [
                             http_1.HTTP_PROVIDERS
-                        ]
+                        ],
+                        outputs: ['quizMediaSelectedEvent']
                     }), 
                     __metadata('design:paramtypes', [quiz_settings_service_1.QuizSettingsService])
                 ], QuizMediaSelectComponent);

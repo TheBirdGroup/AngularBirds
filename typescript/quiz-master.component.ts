@@ -37,6 +37,10 @@ export class QuizMasterComponent {
 
 
 	 currentActive = 0;
+	 //0 = mediatype selkect
+	 //1 = additional settings
+	 //2 = quiz
+	 //3 =  result
 
 	  nextComponent(){
 
@@ -54,6 +58,15 @@ export class QuizMasterComponent {
 			  return true
 		  }else{
 			  return false;
+		  }
+
+
+	  }
+
+	  mediaTypeSelectEvent(event){
+
+		  if(event == "MediatypeSelected"){
+			  this.currentActive = 1;
 		  }
 
 

@@ -1,5 +1,5 @@
 <h1>{{title}}</h1>
-<birdid-quiz-media-select *ngIf="subIsActive(0)" ></birdid-quiz-media-select>
+<birdid-quiz-media-select *ngIf="subIsActive(0)" (quizMediaSelectedEvent)="mediaTypeSelectEvent($event)" ></birdid-quiz-media-select>
 <birdid-quiz-addditional-settings *ngIf="subIsActive(1)"  ></birdid-quiz-addditional-settings>
 <birdid-the-quiz *ngIf="subIsActive(2)"  ></birdid-the-quiz>
 <birdid-quiz-result *ngIf="subIsActive(3)"  ></birdid-quiz-result>

@@ -18,7 +18,7 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 export class QuizAdditionalSettingsComponent {
 	title = 'Birdid Quiz media additional settings!';
-	mediaDiff = ['Lvl1', 'Lvl2', 'Lvl3'];
+	mediaDiff = ['Lvl1', 'Lvl2', 'Lvl333'];
 
 	quizMediaSettingsEvent = new EventEmitter<string>();
 

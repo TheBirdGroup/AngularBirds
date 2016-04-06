@@ -1,4 +1,4 @@
-import { Component }       from 'angular2/core';
+import { Component, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './shared/quiz-settings.service';
@@ -35,11 +35,22 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 export class QuizMasterComponent {
 	  title = 'Birdid Quiz master!';
 
+	  testString = "";
+
 	  constructor(
 		  private _quizSettingsService: QuizSettingsService,
 		  private _quizQuestionService: QuizQuestionsService,
-		  private _quizLogicService: QuizLogicService
+		  private _quizLogicService: QuizLogicService,
+		  private _quizTranslationService: QuizTranslationService
 	  ){}
+
+	  ngOnInit() {
+
+		this._quizTranslationService.initialize();
+		//console.log("Trans 24 in english: ", this._quizTranslationService.getTranslationByID(24));
+
+
+	  }
 
 
 	 currentActive = 0;

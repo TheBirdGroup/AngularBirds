@@ -117,6 +117,14 @@ export class TheQuizComponent implements OnInit{
 
     }
 
+
+	getQuestionExtraInfo(){
+
+		return this.quizQuestions['mediaArray'][this.questionNumber]['extra_info'];
+
+	}
+
+
     //http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
     shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;

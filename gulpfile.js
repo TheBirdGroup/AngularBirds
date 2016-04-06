@@ -34,7 +34,7 @@ var tsProject = typescript.createProject('tsconfig.json');
 //});
 
 gulp.task('build-css', function () {
-    return gulp.src(appScss + '*.scss')
+    return gulp.src(appScss + '**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(postcss([precss, autoprefixer, cssnano]))
         .pipe(sourcemaps.write())
@@ -66,8 +66,8 @@ gulp.task('build-html', function () {
 
 gulp.task('watch', function () {
     gulp.watch(appDev + '**/*.ts', ['build-ts']);
-    gulp.watch(assetsDev + 'scss/**/*.css', ['build-css']);
-	gulp.watch(assetsDev + 'html/**/*.html', ['build-html']);
+    gulp.watch(appScss + '**/*.css', ['build-css']);
+	gulp.watch(apphtml + '**/*.html', ['build-html']);
     gulp.watch(assetsDev + 'img/*', ['build-img']);
 });
 

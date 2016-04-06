@@ -15,6 +15,7 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 @Component({
 	selector: 'birdid-quiz-master',
 	templateUrl: 'app/quiz-master.component.html',
+	styleUrls:  ['app/quiz-master.component.css'],
 	directives: [
 		QuizMediaSelectComponent,
 		QuizAdditionalSettingsComponent,

@@ -52,6 +52,12 @@ export class QuizMasterComponent {
 
 	  }
 
+	  gotoComponent(compID){
+
+	    this.currentActive = compID;
+
+	  }
+
 	  subIsActive(compID){
 
 		  if(this.currentActive == compID){

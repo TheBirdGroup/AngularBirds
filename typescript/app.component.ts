@@ -6,8 +6,6 @@ import { QuizMasterComponent }  from './quiz-master.component';
 @Component({
 	selector: 'birdid-idclient-main',
 	template: `
-	  <h1>{{title}}</h1>
-
 	  <birdid-quiz-master></birdid-quiz-master>
 	`,
 	styleUrls: ['app/app.component.css'],

@@ -6,6 +6,7 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 @Component({
 	selector: 'birdid-quiz-media-select',
 	templateUrl: 'app/media-select/quiz-media-select.component.html',
+	styleUrls:  ['app/media-select/quiz-media-select.component.css'],
 	directives: [
 
 	],
@@ -18,7 +19,11 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 export class QuizMediaSelectComponent {
 
-	mediaTypes = ['Image', 'Sound', 'Video'];
+	mediaTypes = [
+		[1, 'Image', 'glyphicon glyphicon-picture'],
+		[2, 'Sound', 'glyphicon glyphicon-volume-up'],
+		[3, 'Video', 'glyphicon glyphicon-facetime-video'],
+	];
 	title = 'Birdid Quiz, select your media type:';
 	quizMediaSelectedEvent = new EventEmitter<string>();
 

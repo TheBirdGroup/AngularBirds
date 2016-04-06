@@ -6,7 +6,7 @@
 
 	What bird is it?
 	<div *ngFor="#current of questionAlternatives; #i=index" >
-		<button (click)="checkIfAltCorrect(i)">{{current}} </button><br />
+		<button [ngClass]="{'btn-success': checkIfButtonColorIsCorrect(i), 'btn-danger': !checkIfButtonColorIsCorrect(i)}" (click)="checkIfAltCorrect(i)">{{current}}</button><br />
 	</div>
 	<br>
 	Your score: <b>{{score}}</b>
@@ -14,5 +14,5 @@
 	Extra Info: {{getQuestionExtraInfo()}}
 	<br>
 
-	<button (click)="nextQuestion()">Next Question</button> (current: {{mediaID}})
+	<button class="btn btn-primary" (click)="nextQuestion()">Next Question</button> (current: {{mediaID}})
 </div>

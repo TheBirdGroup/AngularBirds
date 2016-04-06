@@ -32,7 +32,9 @@ export class TheQuizComponent implements OnInit{
     questionNumber = 0;
 
     questionAlternatives: string[];
-    questionRightAnswer = ""
+    questionRightAnswer = "";
+    color = '';
+
 
 
 	score = 0;
@@ -107,18 +109,38 @@ export class TheQuizComponent implements OnInit{
 
 			this.score ++;
             console.log("correct!");
+            this.color = 'btn btn-success';
+
+
 
         }else{
 
 			this.score --;
-            console.log("inncorrect!");
+            console.log("incorrect!");
+            this.color = 'btn btn-danger';
 
         }
 
     }
 
+    checkIfButtonColorIsCorrect(altID){
 
-	getQuestionExtraInfo(){
+        if(this.questionAlternatives[altID] == this.questionRightAnswer){
+
+            return true;
+
+
+
+        }else{
+            
+            return false;
+        }
+
+    }
+
+
+
+    getQuestionExtraInfo(){
 
 		return this.quizQuestions['mediaArray'][this.questionNumber]['extra_info'];
 

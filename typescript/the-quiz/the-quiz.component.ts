@@ -4,6 +4,9 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizQuestionsService }  from './../shared/quiz-questions.service';
 
+import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
+//import { QuizSettingsMock }  from './../mock/quiz-settings.mock.ts';
+
 import { TheQuizImageComponent }  from './the-quiz-image.component';
 
 @Component({
@@ -40,6 +43,7 @@ export class TheQuizComponent implements OnInit{
     selectedButton = false;
     selectedButtonAltID = -1;
 
+	quizSettings;
 
 
 	score = 0;
@@ -52,7 +56,13 @@ export class TheQuizComponent implements OnInit{
 
 	  ngOnInit() {
 
-        this._quizQuestionService.getQuizQuestions()
+		  //moch while mile works on his service, replace by getting from it
+		  this.quizSettings = [
+		  	{"mediaType": 1, "areaID": 34, "timeLimit": 0, "numQuestions": 10,	"showAlternatives": true, "mediaDificulity": 1}
+		  ];
+
+
+        this._quizQuestionService.getQuizQuestions(this.quizSettings)
             .subscribe(
                 data => {
                     console.log(data);
@@ -134,8 +144,8 @@ export class TheQuizComponent implements OnInit{
     }
 
     checkIfButtonColorIsCorrect(altID){
-        
-        
+
+
         if(this.questionAlternatives[altID] == this.questionRightAnswer && this.inbetweenQuestions == true){
             return true;
 

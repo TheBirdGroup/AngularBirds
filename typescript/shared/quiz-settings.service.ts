@@ -13,11 +13,11 @@ export class QuizSettingsService{
 
 	mediaDifficulities = 0;
 //	allowedMediaDifficulities = [1,2,3,4]; for now we do not check
-    
+
     numberOfQuestions = 0;
    // allowedNumberOfQuestions = [10, 30, 60];// for now we do not check
 
-    duration=null;
+    duration=0;
     alternatives: boolean;
 
 	//constructor(private _http: Http){} // why do we need this
@@ -26,7 +26,7 @@ export class QuizSettingsService{
         /*if(this.allowedNumberOfQuestions.valueOf()){
             this.numberOfQuestions = numberOfQuestions;
             return true;
-            
+
         }else {
             return false;
         }*/
@@ -34,11 +34,28 @@ export class QuizSettingsService{
         this.numberOfQuestions=selectedNumberOfQuestions;
     }
 
-    setDuration(duration: string){
+	getQuizSettings(){
+
+		let returnSettings = [
+		  {"mediaType": this.mediaType,
+		  "areaID": 34,
+		  "timeLimit": this.duration,
+		  "numQuestions": this.numberOfQuestions,
+		  "showAlternatives": this.alternatives,
+		  "mediaDificulity": this.mediaDifficulities}
+		];
+
+		console.log("returnSettings: ", returnSettings)
+
+		return returnSettings;
+
+	}
+
+    setDuration(duration: number){
         console.log(duration);
         this.duration=duration;
     }
-    
+
     setAlternatives(SelectedAlternatives:string ){
         if (SelectedAlternatives == 'true'){
             this.alternatives = true;
@@ -75,7 +92,7 @@ export class QuizSettingsService{
         console.log(selectedDiff)
         this.mediaDifficulities=selectedDiff;
     }
-	getQuizSettings(){	}
+
 
 
 }

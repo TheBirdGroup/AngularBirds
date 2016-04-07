@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input }       from 'angular2/core';
+import { Component, EventEmitter, Input, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
@@ -9,11 +9,11 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 	],
 	providers: [
-		QuizSettingsService
+		
 	],
 	outputs: ['quizMediaSettingsEvent']
 })
-export class QuizAdditionalSettingsComponent {
+export class QuizAdditionalSettingsComponent implements OnInit{
 	title = 'Birdid Quiz media additional settings!';
 	//mediaDiff = ['1', '2', '3', '4'];
    // numberOfQuestions = ['10','30','60']; for the beggining we do not check against the array
@@ -28,6 +28,16 @@ export class QuizAdditionalSettingsComponent {
 	){}
 
 
+	ngOnInit() {
+
+		this._quizSettingsService.setMediaDiff(1);
+		this._quizSettingsService.selectNumberOfQuestions(10);
+		this._quizSettingsService.setDuration(0);
+		this._quizSettingsService.setAlternatives("true")
+
+	}
+
+
     onSelectDiff(selectedDiff: number){
         this._quizSettingsService.setMediaDiff(selectedDiff);
     }
@@ -35,14 +45,22 @@ export class QuizAdditionalSettingsComponent {
         this._quizSettingsService.selectNumberOfQuestions(selectedNumberOfQuestions);
     }
     onSelectDuration(duration: string){
-        this._quizSettingsService.setDuration(duration);
+        this._quizSettingsService.setDuration(parseInt(duration));
     }
     onSelectAlternatives(SelectedAlternatives: string){
         this._quizSettingsService.setAlternatives(SelectedAlternatives)
     }
-    
-    
-    
+
+
+
+	startQuiz(){
+
+		this.quizMediaSettingsEvent.emit("MediaAditionalSettingsDone");
+
+	}
+
+
+
 	/*selectMediaDiff(mediaDifficulity){
 		if(this._quizSettingsService.setMediaDiff(mediaDifficulity)){
 
@@ -65,7 +83,7 @@ export class QuizAdditionalSettingsComponent {
         }
     }*/
 
-    
+
 
 
 

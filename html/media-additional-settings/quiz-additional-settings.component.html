@@ -10,7 +10,7 @@
 <div class="input-controls">
     <div>
         <label>
-            <input #selectedDiff1 name="mediaDiff" type="radio" value="1" (click)="onSelectDiff(selectedDiff1.value)" /> 1
+            <input #selectedDiff1 name="mediaDiff" type="radio" value="1" (click)="onSelectDiff(selectedDiff1.value)" checked="checked" /> 1
             <input #selectedDiff2 name="mediaDiff" type="radio"  value="2" (click)="onSelectDiff(selectedDiff2.value)" /> 2
             <input #selectedDiff3 name="mediaDiff" type="radio"  value="3" (click)="onSelectDiff(selectedDiff3.value)" /> 3
             <input #selectedDiff4 name="mediaDiff" type="radio"  value="4" (click)="onSelectDiff(selectedDiff4.value)" /> 4
@@ -30,7 +30,7 @@
 <div class="input-controls">
     <div>
         <label>
-            <input #selectedNumberOfQuestions10 name="selectedNumberOfQuestions" type="radio" value="10" (click)="onSelectNumQuestions(selectedNumberOfQuestions10.value)" /> 10
+            <input #selectedNumberOfQuestions10 name="selectedNumberOfQuestions" type="radio" value="10" (click)="onSelectNumQuestions(selectedNumberOfQuestions10.value)" checked="checked" /> 10
             <input #selectedNumberOfQuestions30 name="selectedNumberOfQuestions" type="radio"  value="30" (click)="onSelectNumQuestions(selectedNumberOfQuestions30.value)" /> 30
             <input #selectedNumberOfQuestions60 name="selectedNumberOfQuestions" type="radio"  value="60" (click)="onSelectNumQuestions(selectedNumberOfQuestions60.value)" /> 60
 
@@ -43,7 +43,7 @@
 <div class="input-controls">
     <div>
         <label>
-            <input #selectedDuration0 name="duration" type="radio" value="0" (click)="onSelectDuration(selectedDuration0.value)" /> Unlimited
+            <input #selectedDuration0 name="duration" type="radio" value="0" (click)="onSelectDuration(selectedDuration0.value)" checked="checked" /> Unlimited
             <input #selectedDuration20 name="duration" type="radio"  value="20" (click)="onSelectDuration(selectedDuration20.value)" /> 20 sec
             <input #selectedDuration30 name="duration" type="radio"  value="30" (click)="onSelectDuration(selectedDuration30.value)" /> 30 sec
             <input #selectedDuration40 name="duration" type="radio"  value="40" (click)="onSelectDuration(selectedDuration40.value)" /> 40 sec
@@ -55,7 +55,7 @@
 <div class="input-controls">
     <div>
         <label>
-            <input #SelectedAlternatives1 name="alternatives" type="radio" value="true" (click)="onSelectAlternatives(SelectedAlternatives1.value)" /> yes
+            <input #SelectedAlternatives1 name="alternatives" type="radio" value="true" (click)="onSelectAlternatives(SelectedAlternatives1.value)" checked="checked" /> yes
             <input #SelectedAlternatives2 name="alternatives" type="radio"  value="false" (click)="onSelectAlternatives(SelectedAlternatives2.value)" /> no
         </label>
     </div>
@@ -64,13 +64,4 @@
 
 
 
-<button>Start </button>
-
-
-
-
-
-
-
-
-
+<button (click)="startQuiz()">Start </button>

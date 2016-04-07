@@ -61,9 +61,12 @@ export class TheQuizComponent implements OnInit{
 	  ngOnInit() {
 
 		  //moch while mile works on his service, replace by getting from it
-		  this.quizSettings = [
-		  	{"mediaType": 1, "areaID": 34, "timeLimit": 0, "numQuestions": 3,	"showAlternatives": true, "mediaDificulity": 1}
-		  ];
+		  console.log("123");
+		  this.quizSettings = this._quizSettingsService.getQuizSettings();
+		  console.log("345", this.quizSettings);
+		//   [
+		//   	{"mediaType": 1, "areaID": 34, "timeLimit": 0, "numQuestions": 3,	"showAlternatives": true, "mediaDificulity": 1}
+		//   ];
 
 
         this._quizQuestionService.getQuizQuestions(this.quizSettings)

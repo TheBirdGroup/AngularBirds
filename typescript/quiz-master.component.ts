@@ -48,7 +48,9 @@ export class QuizMasterComponent implements OnInit {
 
 	  ngOnInit() {
 
+		  //load data from server
 		this._quizTranslationService.initialize();
+		this._quizSettingsService.initialize();
 		//console.log("Trans 24 in english: ", this._quizTranslationService.getTranslationByID(24));
 
 		//this.lookForDataLoaded();

@@ -22,11 +22,11 @@
 </nav>
 
 <div class="jumbotron">
-	<div *ngIf="!_quizTranslationService.translationsAreLoaded()">
+	<div *ngIf="!_quizTranslationService.translationsAreLoaded() || !_quizSettingsService.dataLoaded()">
 		<img src="loading.gif" alt="Loading..." height="200" width="200">
 	</div>
 
-	<div *ngIf="_quizTranslationService.translationsAreLoaded()">
+	<div *ngIf="_quizTranslationService.translationsAreLoaded() && _quizSettingsService.dataLoaded()">
 	<birdid-quiz-media-select *ngIf="subIsActive(0)" (quizMediaSelectedEvent)="mediaTypeSelectEvent($event)" ></birdid-quiz-media-select>
 	<birdid-quiz-addditional-settings *ngIf="subIsActive(1)" (quizMediaSettingsEvent)="mediaAdditionalSettingsDoneEvent($event)"  ></birdid-quiz-addditional-settings>
 	<birdid-the-quiz *ngIf="subIsActive(2)" (quizDoneEvent)="quizMediaDoneEvent($event)"  ></birdid-the-quiz>

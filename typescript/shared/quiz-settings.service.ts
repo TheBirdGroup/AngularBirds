@@ -20,7 +20,10 @@ export class QuizSettingsService{
     duration=0;
     alternatives: boolean;
 
-	//constructor(private _http: Http){} // why do we need this
+	areaListLoaded = false;
+	areaListData;
+
+	constructor(private _http: Http){} // why do we need this
 
     selectNumberOfQuestions(selectedNumberOfQuestions: number){
         /*if(this.allowedNumberOfQuestions.valueOf()){
@@ -33,6 +36,38 @@ export class QuizSettingsService{
         console.log(selectedNumberOfQuestions)
         this.numberOfQuestions=selectedNumberOfQuestions;
     }
+
+	initialize(){
+
+		this.loadAreaList();
+
+	}
+
+	loadAreaList(){
+
+		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2")
+			.map(response => response.json()).subscribe(
+	            data => {
+	                this.areaListData = data['area_list'];
+					//console.log("this.areaListData: ", this.areaListData);
+	                this.areaListLoaded = true;
+	            },
+	            error => console.error("loadAreaList ERROR! ", error)
+	        );
+
+	}
+
+	dataLoaded(){
+
+		return this.areaListLoaded;
+
+	}
+
+	getAreaList(){
+
+		return this.areaListData;
+
+	}
 
 	getQuizSettings(){
 

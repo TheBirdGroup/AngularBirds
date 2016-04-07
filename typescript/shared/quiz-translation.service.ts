@@ -32,11 +32,11 @@ export class QuizTranslationService implements OnInit{
 
 	private loadTranslations(){
 
-		return this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2")
+		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2")
 			.map(response => response.json()).subscribe(
 	            data => {
 	                this.translationData = data['translations'];
-	                this.translationsLoaded();
+	                this.transDataLoaded = true;
 	            },
 	            error => console.error("getQuizQuestions ERROR! ", error)
 	        );
@@ -45,16 +45,6 @@ export class QuizTranslationService implements OnInit{
 
 	}
 
-	translationsLoaded(){
-
-		this.transDataLoaded = true;
-		//console.log("loaded!");
-		//this.promise.resolve(this.translationData['24']);
-
-
-		//console.log(this.translationData);
-
-	}
 
 	translationsAreLoaded(){
 

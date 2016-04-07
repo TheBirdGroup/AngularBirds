@@ -1,6 +1,5 @@
-import { Component, EventEmitter }       from 'angular2/core';
+import { Component, EventEmitter, Input }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
-
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 @Component({
@@ -10,15 +9,17 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 	],
 	providers: [
-	  HTTP_PROVIDERS
-  ],
-  outputs: ['quizMediaSettingsEvent']
+		QuizSettingsService
+	],
+	outputs: ['quizMediaSettingsEvent']
 })
-
-
 export class QuizAdditionalSettingsComponent {
 	title = 'Birdid Quiz media additional settings!';
-	mediaDiff = ['Lvl1', 'Lvl2', 'Lvl333'];
+	//mediaDiff = ['1', '2', '3', '4'];
+   // numberOfQuestions = ['10','30','60']; for the beggining we do not check against the array
+    mediaDiff;
+    numberOfQuestions;
+
 
 	quizMediaSettingsEvent = new EventEmitter<string>();
 
@@ -26,23 +27,46 @@ export class QuizAdditionalSettingsComponent {
 		private _quizSettingsService: QuizSettingsService
 	){}
 
-	selectMediaDiff(mediaDifficulity){
 
-		if(!this._quizSettingsService.setMediaDiff(mediaDifficulity)){
+    onSelectDiff(selectedDiff: number){
+        this._quizSettingsService.setMediaDiff(selectedDiff);
+    }
+    onSelectNumQuestions(selectedNumberOfQuestions: number){
+        this._quizSettingsService.selectNumberOfQuestions(selectedNumberOfQuestions);
+    }
+    onSelectDuration(duration: string){
+        this._quizSettingsService.setDuration(duration);
+    }
+    onSelectAlternatives(SelectedAlternatives: string){
+        this._quizSettingsService.setAlternatives(SelectedAlternatives)
+    }
+    
+    
+    
+	/*selectMediaDiff(mediaDifficulity){
+		if(this._quizSettingsService.setMediaDiff(mediaDifficulity)){
 
-			console.log("Nope", mediaDifficulity);
+            console.log(mediaDifficulity+"media diff");
+            //Const for value?
+            //this.quizMediaSettingsEvent.emit("MediaAditionalSettingsDone");
 
 		}else{
-
-			console.log("scuccess");
-			//Const for value?
-			this.quizMediaSettingsEvent.emit("MediaAditionalSettingsDone");
-
+            console.log("Nope", mediaDifficulity);
 		}
 
+	}*/
 
+   /* selectNumberOfQuestions(numberOfQuestions){
+        if (this._quizSettingsService.selectNumberOfQuestions(numberOfQuestions)) {
+            console.log(numberOfQuestions + 'number of questions')
+        }
+        else{
+            console.log('something went wrong')
+        }
+    }*/
 
-	}
+    
+
 
 
 }

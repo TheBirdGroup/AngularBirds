@@ -82,8 +82,6 @@ export class TheQuizComponent implements OnInit{
 
 	startQuiz(){
 
-        console.log("starting quiz!!!", this.quizQuestions['mediaArray'][0]['media_id']);
-
         this.setupQuestion();
 
 
@@ -117,12 +115,9 @@ export class TheQuizComponent implements OnInit{
 
     setupQuestion(){
 
-		console.log("current: ",this.questionNumber+1, "tot: ", this.quizSettings[0]['numQuestions'])
-
 		if(this.questionNumber+1 > this.quizSettings[0]['numQuestions']){
 
 			this.quizDone = true;
-			console.log("DONE qUIZ");
 			this.quizDoneEvent.emit("MediaQuizOver");
 			return;
 
@@ -200,7 +195,6 @@ export class TheQuizComponent implements OnInit{
     getQuestionExtraInfo(){
 
 		if(!this.quizDone){
-			console.log("extraInfo", this.questionNumber+1);
 			return this.quizQuestions['mediaArray'][this.questionNumber]['extra_info'];
 		}else{
 			return ""

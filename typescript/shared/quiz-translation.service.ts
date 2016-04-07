@@ -64,7 +64,8 @@ export class QuizTranslationService implements OnInit{
 
 	getTranslationByID(id){
 
-		return "TRANSLATIONS NOT LOADED"
+
+		//return "TRANSLATIONS NOT LOADED"
 
 		// this.promise = new Promise(function(resolve, reject) {
 		// 	// do a thing, possibly async, then…
@@ -72,11 +73,12 @@ export class QuizTranslationService implements OnInit{
 		// });
 		// return this.promise;
 
-		// if(!this.transDataLoaded){
-		// 	return "TRANSLATIONS NOT LOADED"
-		// }else{
-		// 	return this.translationData[id];
-		// }
+		console.log("this.transDataLoaded: ", this.transDataLoaded)
+		if(!this.transDataLoaded){
+			return "TRANSLATIONS NOT LOADED"
+		}else{
+			return this.translationData[id];
+		}
 
 
 	}

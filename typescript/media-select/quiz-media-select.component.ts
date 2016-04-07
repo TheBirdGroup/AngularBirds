@@ -1,7 +1,8 @@
-import { Component, EventEmitter }       from 'angular2/core';
+import { Component, EventEmitter, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 @Component({
 	selector: 'birdid-quiz-media-select',
@@ -17,7 +18,7 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 })
 
 
-export class QuizMediaSelectComponent {
+export class QuizMediaSelectComponent implements OnInit{
 
 	mediaTypes = [
 		[1, 'Image', 'glyphicon glyphicon-picture'],
@@ -28,8 +29,23 @@ export class QuizMediaSelectComponent {
 	quizMediaSelectedEvent = new EventEmitter<string>();
 
 	constructor(
-		private _quizSettingsService: QuizSettingsService
+		private _quizSettingsService: QuizSettingsService,
+		private _quizTranslationService: QuizTranslationService
 	){}
+
+	ngOnInit() {
+
+		//add translations:
+		//image
+		this.mediaTypes[0][1] = this._quizTranslationService.getTranslationByID(4);
+		//sound
+		this.mediaTypes[1][1] = this._quizTranslationService.getTranslationByID(5);
+		//video
+		this.mediaTypes[2][1] = this._quizTranslationService.getTranslationByID(169);
+
+		console.log("media t: ", this.mediaTypes[0][1]);
+
+	}
 
 	selectMediaType(mediaType){
 

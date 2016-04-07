@@ -33,7 +33,12 @@ export class TheQuizComponent implements OnInit{
 
     questionAlternatives: string[];
     questionRightAnswer = "";
-    color = '';
+    ButtonColor = '';
+
+    inbetweenQuestions = false;
+
+    selectedButton = false;
+    selectedButtonAltID = -1;
 
 
 
@@ -75,9 +80,18 @@ export class TheQuizComponent implements OnInit{
 
     nextQuestion(){
 
-        this.questionNumber ++;
-        this.setupQuestion();
-
+        if(!this.inbetweenQuestions) {
+            this.inbetweenQuestions = true;
+            if(this.questionAlternatives[this.selectedButtonAltID] == this.questionRightAnswer){
+                this.score ++;
+            }else{
+                this.score --;
+            }
+        }else{
+            this.inbetweenQuestions = false;
+            this.questionNumber++;
+            this.setupQuestion();
+        }
 
 
 
@@ -99,43 +113,57 @@ export class TheQuizComponent implements OnInit{
 
         this.questionRightAnswer = alts['right_answer']['name'];
 
-
+        this.selectedButtonAltID = -1;
 
     }
 
     checkIfAltCorrect(altID){
+        this.selectedButton = true;
+        this.selectedButtonAltID = altID;
 
         if(this.questionAlternatives[altID] == this.questionRightAnswer){
 
-			this.score ++;
             console.log("correct!");
-            this.color = 'btn btn-success';
-
-
 
         }else{
 
-			this.score --;
             console.log("incorrect!");
-            this.color = 'btn btn-danger';
 
         }
 
     }
 
     checkIfButtonColorIsCorrect(altID){
-
-        if(this.questionAlternatives[altID] == this.questionRightAnswer){
-
+        
+        
+        if(this.questionAlternatives[altID] == this.questionRightAnswer && this.inbetweenQuestions == true){
             return true;
 
-
-
         }else{
-            
             return false;
         }
 
+    }
+    checkIfButtonColorIsWrong(altID){
+
+
+        if(this.questionAlternatives[altID] != this.questionRightAnswer && this.inbetweenQuestions == true){
+            return true;
+
+        }else{
+            return false;
+        }
+
+    }
+    checkIfButtonIsSelected(altID){
+        if(this.inbetweenQuestions){
+            return false
+        }
+        if(altID == this.selectedButtonAltID){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

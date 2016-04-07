@@ -51,7 +51,7 @@ export class QuizMasterComponent implements OnInit {
 		this._quizTranslationService.initialize();
 		//console.log("Trans 24 in english: ", this._quizTranslationService.getTranslationByID(24));
 
-		this.lookForDataLoaded();
+		//this.lookForDataLoaded();
 
 
 	  }

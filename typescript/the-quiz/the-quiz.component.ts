@@ -17,13 +17,15 @@ import { TheQuizImageComponent }  from './the-quiz-image.component';
 	],
 	providers: [
 	  HTTP_PROVIDERS
-	]
+  ],
+  outputs: ['quizDoneEvent']
 })
 
 
 export class TheQuizComponent implements OnInit{
 	title = 'Birdid Quiz TheQuizComponent!';
 
+	quizDoneEvent = new EventEmitter<string>();
 
 	mediaID = 0;
     mediaTypeID = 0;
@@ -45,6 +47,8 @@ export class TheQuizComponent implements OnInit{
 
 	quizSettings;
 
+	quizDone = false;
+
 
 	score = 0;
 
@@ -58,7 +62,7 @@ export class TheQuizComponent implements OnInit{
 
 		  //moch while mile works on his service, replace by getting from it
 		  this.quizSettings = [
-		  	{"mediaType": 1, "areaID": 34, "timeLimit": 0, "numQuestions": 10,	"showAlternatives": true, "mediaDificulity": 1}
+		  	{"mediaType": 1, "areaID": 34, "timeLimit": 0, "numQuestions": 3,	"showAlternatives": true, "mediaDificulity": 1}
 		  ];
 
 
@@ -90,6 +94,10 @@ export class TheQuizComponent implements OnInit{
 
     nextQuestion(){
 
+		if(this.quizDone){
+			return;
+		}
+
         if(!this.inbetweenQuestions) {
             this.inbetweenQuestions = true;
             if(this.questionAlternatives[this.selectedButtonAltID] == this.questionRightAnswer){
@@ -108,6 +116,17 @@ export class TheQuizComponent implements OnInit{
     }
 
     setupQuestion(){
+
+		console.log("current: ",this.questionNumber+1, "tot: ", this.quizSettings[0]['numQuestions'])
+
+		if(this.questionNumber+1 > this.quizSettings[0]['numQuestions']){
+
+			this.quizDone = true;
+			console.log("DONE qUIZ");
+			this.quizDoneEvent.emit("MediaQuizOver");
+			return;
+
+		}
 
         this.mediaID = this.quizQuestions['mediaArray'][this.questionNumber]['media_id'];
         let alts = this.quizQuestions['mediaArray'][this.questionNumber]['mediaChoices']
@@ -180,7 +199,12 @@ export class TheQuizComponent implements OnInit{
 
     getQuestionExtraInfo(){
 
-		return this.quizQuestions['mediaArray'][this.questionNumber]['extra_info'];
+		if(!this.quizDone){
+			console.log("extraInfo", this.questionNumber+1);
+			return this.quizQuestions['mediaArray'][this.questionNumber]['extra_info'];
+		}else{
+			return ""
+		}
 
 	}
 

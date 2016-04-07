@@ -127,4 +127,12 @@ export class QuizMasterComponent implements OnInit {
 
 	  }
 
+	  quizMediaDoneEvent(event){
+
+		  if(event == "MediaQuizOver"){
+			 this.currentActive = 3;
+		 }
+
+	  }
+
 }

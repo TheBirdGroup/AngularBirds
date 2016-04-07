@@ -1,4 +1,4 @@
-import { Component }       from 'angular2/core';
+import { Component, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './shared/quiz-settings.service';
@@ -32,14 +32,29 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 })
 
 
-export class QuizMasterComponent {
+export class QuizMasterComponent implements OnInit {
 	  title = 'Birdid Quiz master!';
+
+	  testString = "";
+
+	  asyncDataLoaded = false;
 
 	  constructor(
 		  private _quizSettingsService: QuizSettingsService,
 		  private _quizQuestionService: QuizQuestionsService,
-		  private _quizLogicService: QuizLogicService
+		  private _quizLogicService: QuizLogicService,
+		  private _quizTranslationService: QuizTranslationService
 	  ){}
+
+	  ngOnInit() {
+
+		this._quizTranslationService.initialize();
+		//console.log("Trans 24 in english: ", this._quizTranslationService.getTranslationByID(24));
+
+		this.lookForDataLoaded();
+
+
+	  }
 
 
 	 currentActive = 0;
@@ -47,6 +62,26 @@ export class QuizMasterComponent {
 	 //1 = additional settings
 	 //2 = quiz
 	 //3 =  result
+
+	 //temporary, bad aproach
+	 lookForDataLoaded(){
+
+		 setTimeout(() =>
+		 	this.checkForDataLoaded()
+ 		, 200);
+
+	 }
+
+	 checkForDataLoaded(){
+
+		 if(this._quizTranslationService.translationsAreLoaded()){
+		 	this.asyncDataLoaded = true
+		}else{
+			this.lookForDataLoaded();
+		}
+
+
+	 }
 
 	  nextComponent(){
 

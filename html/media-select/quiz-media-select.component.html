@@ -1,5 +1,11 @@
-<h1>{{title}}</h1>
+<h2>{{title}}</h2>
 
-<div *ngFor="#current of mediaTypes; #i=index" >
-	<button (click)="selectMediaType(i+1)">{{current}}</button>
+<div class="buttonsDiv">
+	<div *ngFor="#current of mediaTypes; #i=index" class="row" >
+		<div class="mediaSelectTypeButtonDiv col-sm-4">
+			<button (click)="selectMediaType(current[0])" type="button" class="mediaSelectTypeButton btn btn-primary btn-lg">
+				<span [ngClass]="current[2]" aria-hidden="true"></span> {{current[1]}}
+			</button>
+		</div>
+	</div>
 </div>

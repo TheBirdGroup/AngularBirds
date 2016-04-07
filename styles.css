@@ -9,8 +9,19 @@ body {
 body, input[text], button {
   color: #888;
   font-family: Cambria, Georgia;
+
 }
-button {
+
+body {
+
+  background-image: url("images/bg1.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+
+}
+
+/*button {
   font-family: Arial;
   background-color: #eee;
   border: none;
@@ -18,15 +29,15 @@ button {
   border-radius: 4px;
   cursor: pointer;
   cursor: hand;
-}
-button:hover {
+}*/
+/*button:hover {
   background-color: #cfd8dc;
-}
-button:disabled {
+}*/
+/*button:disabled {
   background-color: #eee;
   color: #aaa;
   cursor: auto;
-}
+}*/
 /* everywhere else */
 * {
   font-family: Arial, Helvetica, sans-serif;

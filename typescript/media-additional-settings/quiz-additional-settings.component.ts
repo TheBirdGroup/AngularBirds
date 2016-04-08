@@ -35,7 +35,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		this._quizSettingsService.setMediaDiff(1);
 		this._quizSettingsService.selectNumberOfQuestions(10);
 		this._quizSettingsService.setDuration(0);
-		this._quizSettingsService.setAlternatives("true")
+		this._quizSettingsService.setAlternatives(true);
 
 	}
 
@@ -44,7 +44,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		console.log("selectedDiff:", selectedDiff);
         this._quizSettingsService.setMediaDiff(selectedDiff);
     }
-	matchCurrentSelectedDiff(diff){
+		matchCurrentSelectedDiff(diff){
 		if(diff == this._quizSettingsService.getMediaDiff()){
 			return true;
 		}else{
@@ -56,12 +56,37 @@ export class QuizAdditionalSettingsComponent implements OnInit{
     onSelectNumQuestions(selectedNumberOfQuestions: number){
         this._quizSettingsService.selectNumberOfQuestions(selectedNumberOfQuestions);
     }
+		matchCurrentNumberQuestion(numberOfQuestions){
+			if(numberOfQuestions == this._quizSettingsService.getNumberOfQuestions()){
+				return true;
+			}else{
+			return false;
+		}
+	}
+
+
     onSelectDuration(duration: string){
         this._quizSettingsService.setDuration(parseInt(duration));
     }
-    onSelectAlternatives(SelectedAlternatives: string){
-        this._quizSettingsService.setAlternatives(SelectedAlternatives)
+		matchSelectedDuration(duration){
+			if(duration == this._quizSettingsService.duration){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+    onSelectAlternative(selectedAlternative: boolean){
+        this._quizSettingsService.setAlternatives(selectedAlternative)
     }
+		matchSelectedAlternative(selectedAlternative){
+			if(selectedAlternative == this._quizSettingsService.alternative){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
 
 
 

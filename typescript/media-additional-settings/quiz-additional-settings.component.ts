@@ -5,7 +5,9 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 @Component({
 	selector: 'birdid-quiz-addditional-settings',
 	templateUrl: 'app/media-additional-settings/quiz-additional-settings.component.html',
-	directives: [
+    styleUrls:  ['app/media-additional-settings/quiz-additional-settings.component.css'],
+
+    directives: [
 
 	],
 	providers: [

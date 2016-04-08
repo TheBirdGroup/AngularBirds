@@ -1,67 +1,69 @@
-<h1>{{title}}</h1>
+<h2>{{title}}</h2>
 
+<!--<h4>Select area</h4>-->
+<br>
+<div class="input-controls">
 <h4> Select difficulty level</h4>
 <!--
 <div *ngFor="#current of mediaDiff; #i=index" >
     <button (click)="selectMediaDiff(i+1)">{{current}}</button>
 </div>
 -->
-
-<div class="input-controls">
-    <div>
-        <label>
+        <label class="radio-inline">
             <input #selectedDiff1 name="mediaDiff" type="radio" value="1" (click)="onSelectDiff(selectedDiff1.value)" checked="checked" /> 1
+        </label>
+        <label class="radio-inline">
             <input #selectedDiff2 name="mediaDiff" type="radio"  value="2" (click)="onSelectDiff(selectedDiff2.value)" /> 2
+        </label>
+        <label class="radio-inline">
             <input #selectedDiff3 name="mediaDiff" type="radio"  value="3" (click)="onSelectDiff(selectedDiff3.value)" /> 3
+        </label>
+        <label class="radio-inline">
             <input #selectedDiff4 name="mediaDiff" type="radio"  value="4" (click)="onSelectDiff(selectedDiff4.value)" /> 4
         </label>
-    </div>
 </div>
-
-
-<h4>Select area</h4>
-
-
-
+<br>
+<div class="input-controls">
 <h4> Select number of questions</h4>
 <!--<div *ngFor="#current of numberOfQuestions; #i=current" >
     <button (click)="selectNumberOfQuestions(current)">{{current}}</button>
 </div>-->
-<div class="input-controls">
-    <div>
-        <label>
+        <label class="radio-inline">
             <input #selectedNumberOfQuestions10 name="selectedNumberOfQuestions" type="radio" value="10" (click)="onSelectNumQuestions(selectedNumberOfQuestions10.value)" checked="checked" /> 10
-            <input #selectedNumberOfQuestions30 name="selectedNumberOfQuestions" type="radio"  value="30" (click)="onSelectNumQuestions(selectedNumberOfQuestions30.value)" /> 30
-            <input #selectedNumberOfQuestions60 name="selectedNumberOfQuestions" type="radio"  value="60" (click)="onSelectNumQuestions(selectedNumberOfQuestions60.value)" /> 60
-
         </label>
-    </div>
+        <label class="radio-inline">
+            <input #selectedNumberOfQuestions30 name="selectedNumberOfQuestions" type="radio"  value="30" (click)="onSelectNumQuestions(selectedNumberOfQuestions30.value)" /> 30
+        </label>
+        <label class="radio-inline">
+            <input #selectedNumberOfQuestions60 name="selectedNumberOfQuestions" type="radio"  value="60" (click)="onSelectNumQuestions(selectedNumberOfQuestions60.value)" /> 60
+        </label>
 </div>
-
-
-<h4>Select duration per question</h4>
+<br>
 <div class="input-controls">
-    <div>
-        <label>
+<h4>Select duration per question</h4>
+        <label class="radio-inline">
             <input #selectedDuration0 name="duration" type="radio" value="0" (click)="onSelectDuration(selectedDuration0.value)" checked="checked" /> Unlimited
+        </label>
+        <label class="radio-inline">
             <input #selectedDuration20 name="duration" type="radio"  value="20" (click)="onSelectDuration(selectedDuration20.value)" /> 20 sec
+        </label>
+        <label class="radio-inline">
             <input #selectedDuration30 name="duration" type="radio"  value="30" (click)="onSelectDuration(selectedDuration30.value)" /> 30 sec
+        </label>
+        <label class="radio-inline">
             <input #selectedDuration40 name="duration" type="radio"  value="40" (click)="onSelectDuration(selectedDuration40.value)" /> 40 sec
         </label>
-    </div>
 </div>
-
-<h4> Alternatives? </h4>
+<br>
 <div class="input-controls">
-    <div>
-        <label>
+<h4> Alternatives? </h4>
+        <label class="radio-inline">
             <input #SelectedAlternatives1 name="alternatives" type="radio" value="true" (click)="onSelectAlternatives(SelectedAlternatives1.value)" checked="checked" /> yes
+        </label>
+        <label class="radio-inline">
             <input #SelectedAlternatives2 name="alternatives" type="radio"  value="false" (click)="onSelectAlternatives(SelectedAlternatives2.value)" /> no
         </label>
-    </div>
+        <br>
+        <br>
+        <button class="btn btn-primary btn-lg"(click)="startQuiz()">Start </button>
 </div>
-
-
-
-
-<button (click)="startQuiz()">Start </button>

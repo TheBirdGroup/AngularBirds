@@ -39,6 +39,12 @@ export class QuizSettingsService{
 
 	initialize(){
 
+		//setup default
+		this.setMediaDiff(1);
+		this.selectNumberOfQuestions(10);
+		this.setDuration(0);
+		this.setAlternatives("true")
+
 		this.loadAreaList();
 
 	}

@@ -9,7 +9,54 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class QuizLogicService{
 
+	quizLoaded = false;
+
+	score = 0;
+	questionNumber = 0; //start at 0
+
+	quizQuestionsData;;
+	quizQuestionsSettings;
+
 	constructor(private _http: Http){}
+
+	setQuizQuestions(quizQuestionsData){
+		this.quizQuestionsData = quizQuestionsData;
+		this.quizLoaded = true;
+	}
+	setQuizQuestionsSettings(quizQuestionsSettings){
+		this.quizQuestionsSettings = quizQuestionsSettings;
+	}
+
+	setScore(score){
+		this.score = score;
+	}
+	changeScore(change){
+		this.score += change;
+	}
+	getScore(){
+		return this.score;
+	}
+
+	gotoNextQuestionNumber(){
+		this.questionNumber += 1;
+	}
+	getQuestionNumber(){
+		return this.questionNumber;
+	}
+
+	noQuestionsLeft(){
+
+
+		if(this.questionNumber+1 > this.quizQuestionsSettings[0]['numQuestions']){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+
+
+
 
 
 

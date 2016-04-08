@@ -3,11 +3,14 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizQuestionsService }  from './../shared/quiz-questions.service';
+import { QuizLogicService }  from './../shared/quiz-logic.service';
 
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 //import { QuizSettingsMock }  from './../mock/quiz-settings.mock.ts';
 
 import { TheQuizImageComponent }  from './the-quiz-image.component';
+
+
 
 @Component({
 	selector: 'birdid-the-quiz',
@@ -28,13 +31,13 @@ export class TheQuizComponent implements OnInit{
 	quizDoneEvent = new EventEmitter<string>();
 
 	mediaID = 0;
-    mediaTypeID = 0;
+    //mediaTypeID = 0;
 
     quizQuestions = [];
 
     quizLoaded = false;
 
-    questionNumber = 0;
+    //questionNumber = 0; //move to Logic service
 
     questionAlternatives: string[];
     questionRightAnswer = "";
@@ -50,20 +53,20 @@ export class TheQuizComponent implements OnInit{
 	quizDone = false;
 
 
-	score = 0;
+	//score = 0;
 
 
 	  constructor(
 		  private _quizSettingsService: QuizSettingsService,
-		  private _quizQuestionService: QuizQuestionsService
+		  private _quizQuestionService: QuizQuestionsService,
+		  private _quizLogicService: QuizLogicService
 	  ){}
 
 	  ngOnInit() {
 
 		  //moch while mile works on his service, replace by getting from it
-		  console.log("123");
 		  this.quizSettings = this._quizSettingsService.getQuizSettings();
-		  console.log("345", this.quizSettings);
+		  this._quizLogicService.setQuizQuestionsSettings(this.quizSettings);
 		//   [
 		//   	{"mediaType": 1, "areaID": 34, "timeLimit": 0, "numQuestions": 3,	"showAlternatives": true, "mediaDificulity": 1}
 		//   ];
@@ -74,6 +77,8 @@ export class TheQuizComponent implements OnInit{
                 data => {
                     console.log(data);
                     this.quizQuestions = data;
+					this._quizLogicService.setQuizQuestions(data);
+
                     this.startQuiz();
                 },
                 error => console.error("getQuizQuestions ERROR! ", error)
@@ -86,8 +91,6 @@ export class TheQuizComponent implements OnInit{
 	startQuiz(){
 
         this.setupQuestion();
-
-
 
         this.quizLoaded = true;
 
@@ -102,13 +105,16 @@ export class TheQuizComponent implements OnInit{
         if(!this.inbetweenQuestions) {
             this.inbetweenQuestions = true;
             if(this.questionAlternatives[this.selectedButtonAltID] == this.questionRightAnswer){
-                this.score ++;
+				this._quizLogicService.changeScore(1);
+                //this.score ++;
             }else{
-                this.score --;
+				this._quizLogicService.changeScore(-1);
+                //this.score --;
             }
         }else{
             this.inbetweenQuestions = false;
-            this.questionNumber++;
+			this._quizLogicService.gotoNextQuestionNumber();
+            //this.questionNumber++;
             this.setupQuestion();
         }
 
@@ -118,7 +124,7 @@ export class TheQuizComponent implements OnInit{
 
     setupQuestion(){
 
-		if(this.questionNumber+1 > this.quizSettings[0]['numQuestions']){
+		if(this._quizLogicService.noQuestionsLeft()){
 
 			this.quizDone = true;
 			this.quizDoneEvent.emit("MediaQuizOver");
@@ -126,8 +132,8 @@ export class TheQuizComponent implements OnInit{
 
 		}
 
-        this.mediaID = this.quizQuestions['mediaArray'][this.questionNumber]['media_id'];
-        let alts = this.quizQuestions['mediaArray'][this.questionNumber]['mediaChoices']
+        this.mediaID = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['media_id'];
+        let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
 
         this.questionAlternatives = [];
         this.questionAlternatives.push(alts['right_answer']['name']);
@@ -198,7 +204,7 @@ export class TheQuizComponent implements OnInit{
     getQuestionExtraInfo(){
 
 		if(!this.quizDone){
-			return this.quizQuestions['mediaArray'][this.questionNumber]['extra_info'];
+			return this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['extra_info'];
 		}else{
 			return ""
 		}

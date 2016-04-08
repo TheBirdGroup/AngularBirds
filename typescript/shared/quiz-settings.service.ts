@@ -133,6 +133,9 @@ export class QuizSettingsService{
         console.log(selectedDiff)
         this.mediaDifficulities=selectedDiff;
     }
+	getMediaDiff(){
+        return this.mediaDifficulities;
+    }
 
 
 

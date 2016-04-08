@@ -11,7 +11,7 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 	],
 	providers: [
-		
+
 	],
 	outputs: ['quizMediaSettingsEvent']
 })
@@ -41,8 +41,18 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 
     onSelectDiff(selectedDiff: number){
+		console.log("selectedDiff:", selectedDiff);
         this._quizSettingsService.setMediaDiff(selectedDiff);
     }
+	matchCurrentSelectedDiff(diff){
+		if(diff == this._quizSettingsService.getMediaDiff()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+
     onSelectNumQuestions(selectedNumberOfQuestions: number){
         this._quizSettingsService.selectNumberOfQuestions(selectedNumberOfQuestions);
     }

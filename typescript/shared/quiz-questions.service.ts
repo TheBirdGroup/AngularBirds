@@ -9,7 +9,7 @@ import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 
 
 // import { quizQuestions } from './mock-quizQuestion';
-// import { QuizQuestion } from './quizQuestion';
+ //import { QuizQuestion } from './quizQuestion';
 
 @Injectable()
 export class QuizQuestionsService{
@@ -18,7 +18,7 @@ export class QuizQuestionsService{
 
 	constructor(private _http: Http){}
 
-	getQuizQuestions(settings): Observable<any>{
+	getQuizQuestions(settings:QuizSetting[]): Observable<any>{
 
 		this.lastQuizSettings = settings;
 

@@ -16,7 +16,22 @@
 	Your score: <b>{{_quizLogicService.getScore()}}</b>
 	<br>
 	Extra Info: {{getQuestionExtraInfo()}}
+	<br><br>
+	<button class="btn btn-primary" (click)="nextQuestion()">Next Question</button>
+	<br><br>
+
+	Current Mdia ID: <b>{{mediaID}}</b>
+	<br>
+	Media Type ID: <b>{{_quizSettingsService.getQuizSettings()[0].mediaTypeID}}</b>
+	<br>
+	Media Duficulity: <b>{{_quizSettingsService.getQuizSettings()[0].mediaDificulity}}</b>
+	<br>
+	Area ID: <b>{{_quizSettingsService.getQuizSettings()[0].areaID}}</b>
+	<br>
+	Time Limit: <b>{{_quizSettingsService.getQuizSettings()[0].timeLimit}}</b>
+	<br>
+	Using alternatives: <b>{{_quizSettingsService.getQuizSettings()[0].showAlternatives}}</b>
 	<br>
 
-	<button class="btn btn-primary" (click)="nextQuestion()">Next Question</button> (current: {{mediaID}})
+
 </div>

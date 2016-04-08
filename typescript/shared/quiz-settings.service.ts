@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 // import { quizQuestions } from './mock-quizQuestion';
 // import { QuizQuestion } from './quizQuestion';
 
+import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
+
 @Injectable()
 export class QuizSettingsService{
 
@@ -40,6 +42,7 @@ export class QuizSettingsService{
 	initialize(){
 
 		//setup default
+		this.setMediaType(1);
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(10);
 		this.setDuration(0);
@@ -77,8 +80,8 @@ export class QuizSettingsService{
 
 	getQuizSettings(){
 
-		let returnSettings = [
-		  {"mediaType": this.mediaType,
+		let returnSettings: QuizSetting[] = [
+		  {"mediaTypeID": this.mediaType,
 		  "areaID": 34,
 		  "timeLimit": this.duration,
 		  "numQuestions": this.numberOfQuestions,

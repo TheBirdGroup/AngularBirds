@@ -48,7 +48,7 @@ export class TheQuizComponent implements OnInit{
     selectedButton = false;
     selectedButtonAltID = -1;
 
-	quizSettings;
+	quizSettings: QuizSetting[];
 
 	quizDone = false;
 
@@ -70,6 +70,9 @@ export class TheQuizComponent implements OnInit{
 		//   [
 		//   	{"mediaType": 1, "areaID": 34, "timeLimit": 0, "numQuestions": 3,	"showAlternatives": true, "mediaDificulity": 1}
 		//   ];
+
+
+		//console.log("_quizSettingsService.getQuizSettings()[0].mediaTypeID: ", this._quizSettingsService.getQuizSettings()[0].mediaTypeID)
 
 
         this._quizQuestionService.getQuizQuestions(this.quizSettings)

@@ -16,5 +16,5 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 
 export class QuizResultComponent {
-	  title = 'Birdid Quiz QuizResultComponent!';
+	  title = ' The Birdid Quiz QuizResultComponent!';
 }

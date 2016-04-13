@@ -24,6 +24,9 @@ export class QuizSettingsService{
 
 	areaListLoaded = false;
 	areaListData;
+	selectedArea;
+
+
 
 	constructor(private _http: Http){} // why do we need this
 
@@ -42,13 +45,13 @@ export class QuizSettingsService{
 
 	}
 
-	loadAreaList(){
+	loadAreaList() {
 
 		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2")
-			.map(response => response.json()).subscribe(
+			.map(response => response.json()).subscribe( // this is getting the translation PLUS the areas
 	            data => {
 	                this.areaListData = data['area_list'];
-					//console.log("this.areaListData: ", this.areaListData);
+				//	console.log("this.areaListData: ", this.areaListData);
 	                this.areaListLoaded = true;
 	            },
 	            error => console.error("loadAreaList ERROR! ", error)
@@ -63,8 +66,9 @@ export class QuizSettingsService{
 	}
 
 	getAreaList(){
+		//console.log("this.areaListData: ", this.areaListData);
+		return this.areaListData
 
-		return this.areaListData;
 
 	}
 
@@ -72,7 +76,7 @@ export class QuizSettingsService{
 
 		let returnSettings: QuizSetting[] = [
 		  {"mediaTypeID": this.mediaType,
-		  "areaID": 34,
+		  "areaID": this.selectedArea,
 		  "timeLimit": this.duration,
 		  "numQuestions": this.numberOfQuestions,
 		  "showAlternatives": this.alternative,
@@ -84,6 +88,14 @@ export class QuizSettingsService{
 		return returnSettings;
 
 	}
+
+		setArea(selectedArea: number){
+		//	console.log(selectedArea);
+			this.selectedArea=selectedArea;
+		}
+
+
+
 
     setDuration(duration: number){
         console.log(duration);
@@ -123,7 +135,7 @@ export class QuizSettingsService{
 		}
 	}*/
     setMediaDiff(selectedDiff: number){
-        console.log(selectedDiff)
+      //  console.log(selectedDiff)
         this.mediaDifficulities=selectedDiff;
     }
 		getMediaDiff(){

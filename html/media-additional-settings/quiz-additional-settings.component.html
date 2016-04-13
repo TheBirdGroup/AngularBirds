@@ -1,6 +1,10 @@
 <h2>{{title}}</h2>
 
-<!--<h4>Select area</h4>-->
+<h4>Select area</h4>
+    <select type="number" [(ngModel)]="selectedArea" (ngModelChange)="onSetArea()">
+      <option *ngFor="#c of areaList"  [ngValue]="c.id">{{c.country}}</option>
+    </select>
+
 
 
 <!--

@@ -21,6 +21,8 @@ export class QuizAdditionalSettingsComponent implements OnInit{
    // numberOfQuestions = ['10','30','60']; for the beggining we do not check against the array
     mediaDiff;
     numberOfQuestions;
+		areaList=[];
+		selectedArea;
 
 
 	quizMediaSettingsEvent = new EventEmitter<string>();
@@ -36,8 +38,21 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		this._quizSettingsService.selectNumberOfQuestions(10);
 		this._quizSettingsService.setDuration(0);
 		this._quizSettingsService.setAlternatives(true);
-
+		this.getAreaList();
 	}
+
+
+
+		onSetArea(){
+			 this._quizSettingsService.setArea(this.selectedArea);
+			 console.log("Selected area:", this.selectedArea);
+
+		}
+
+
+		getAreaList(){
+				this.areaList=this._quizSettingsService.getAreaList();
+			}
 
 
     onSelectDiff(selectedDiff: number){
@@ -119,7 +134,6 @@ export class QuizAdditionalSettingsComponent implements OnInit{
             console.log('something went wrong')
         }
     }*/
-
 
 
 

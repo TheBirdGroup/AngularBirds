@@ -23,7 +23,7 @@ export class QuizResultComponent {
 
 	response;
 
-	formDataUsername = "Greger";
+	formDataUsername = "";
 	dataSavedStatus = "";
 	formInformation;
 

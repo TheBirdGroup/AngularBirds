@@ -1,0 +1,72 @@
+
+import { Injectable } from 'angular2/core';
+import { Http, Headers } from 'angular2/http';
+
+import 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+
+import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
+
+
+
+// import { quizQuestions } from './mock-quizQuestion';
+ //import { QuizQuestion } from './quizQuestion';
+
+@Injectable()
+export class QuizResultsService{
+
+	constructor(private _http: Http){}
+
+	uploadQuizResults(score, maxScore, name, quizSettings:QuizSetting[]){
+
+		//for JSON, not in use
+		// let data = {
+		// 	score: score,
+		// 	maxScore: 5,
+		// 	scorePercent: 50,
+		// 	mediaTypeID: 1,
+		// 	areaID: 0,
+		// 	difficulty: 1,
+		// 	specialAreas: "false",
+		// 	siteID: 1,
+		// 	name: name
+		// };
+
+		let mediaTypeID = quizSettings[0].mediaTypeID;
+		let areaID = quizSettings[0].areaID;
+		let mediaDificulity = quizSettings[0].mediaDificulity;
+
+		let data2 = "score=" + score;
+		data2 += "&name=" + name;
+		data2 += "&maxScore=" + maxScore;
+		data2 += "&scorePercent=" + 50;
+		data2 += "&mediaTypeID=" + mediaTypeID;
+		//data2 += "&areaID=" + areaID; NOT WORKING DUE TO MILE =D
+		data2 += "&areaID=" + 0;
+		data2 += "&difficulty=" + mediaDificulity;
+		data2 += "&specialAreas=false";
+		data2 += "&siteID=" + 1;
+
+		const body = data2;
+		//they result in 501 not implemented by server
+		// const headers = new Headers();
+		// headers.append('Content-Type', 'application/json');
+
+		var headers = new Headers();
+  		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		return this._http.post('https://hembstudios.no//birdid/IDprogram/scoreQuiz.php?JSON=1', body,{
+	    	headers: headers
+	    })
+			.map(response => response.json());
+			//.map(response => response);
+
+	}
+
+	getQuizResults(){
+
+		//TODO
+
+	}
+
+
+}

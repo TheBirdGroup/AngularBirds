@@ -5,6 +5,7 @@ import { QuizSettingsService }  from './shared/quiz-settings.service';
 import { QuizQuestionsService }  from './shared/quiz-questions.service';
 import { QuizLogicService }  from './shared/quiz-logic.service';
 import { QuizTranslationService }  from './shared/quiz-translation.service';
+import { QuizResultsService }  from './shared/quiz-results.service';
 
 import { QuizMediaSelectComponent }  from './media-select/quiz-media-select.component';
 import { QuizAdditionalSettingsComponent }  from './media-additional-settings/quiz-additional-settings.component';
@@ -28,6 +29,7 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 		QuizQuestionsService,
 		QuizLogicService,
 		QuizTranslationService,
+		QuizResultsService
 	]
 })
 
@@ -43,7 +45,8 @@ export class QuizMasterComponent implements OnInit {
 		  private _quizSettingsService: QuizSettingsService,
 		  private _quizQuestionService: QuizQuestionsService,
 		  private _quizLogicService: QuizLogicService,
-		  private _quizTranslationService: QuizTranslationService
+		  private _quizTranslationService: QuizTranslationService,
+		  private _quizResultsService: QuizResultsService
 	  ){}
 
 	  ngOnInit() {

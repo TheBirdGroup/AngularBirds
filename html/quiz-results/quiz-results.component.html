@@ -1,0 +1,35 @@
+<h2>{{title}}</h2>
+
+Your score was: {{_quizLogicService.score}}
+
+<form (ngSubmit)="onSubmit(form)" #form="ngForm" >
+
+	<div class="unsernameInputContainer">
+		<h2><label for="username">Your Name:</label></h2>
+		<div class="unsernameInput input-group">
+
+			<span class="input-group-addon" id="basic-addon1">Your Name</span>
+			<input
+				type="text"
+				id="username"
+				name="username1"
+				ngControl="username"
+				[(ngModel)]="formDataUsername"
+				#username="ngForm"
+				class="form-control"
+				placeholder="Your Name"
+				value="Greger"
+				aria-describedby="sizing-addon1 basic-addon1"
+			required>
+			<span class="input-group-addon" *ngIf="!username.valid">Not Valid</span>
+
+		</div>
+		<br>
+		<button type="submit" [disabled]="!form.valid" class="btn btn-primary">Save score</button>
+
+		<br>
+		{{dataSavedStatus}}
+
+	</div>
+
+</form>

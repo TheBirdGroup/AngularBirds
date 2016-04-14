@@ -83,16 +83,16 @@ export class QuizSettingsService{
 		  "mediaDificulity": this.mediaDifficulities}
 		];
 
-		console.log("returnSettings: ", returnSettings)
+		//console.log("returnSettings: ", returnSettings)
 
 		return returnSettings;
 
 	}
 
-		setArea(selectedArea: number){
-		//	console.log(selectedArea);
-			this.selectedArea=selectedArea;
-		}
+	setArea(selectedArea: number){
+		console.log(selectedArea);
+		this.selectedArea = selectedArea;
+	}
 
 
 

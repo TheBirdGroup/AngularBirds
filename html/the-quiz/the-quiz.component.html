@@ -1,37 +1,46 @@
 <h1>{{title}}</h1>
 
-<div *ngIf="quizLoaded">
-	<birdid-the-quiz-image [usingMediaID]="mediaID"></birdid-the-quiz-image>
-	<br>
 
-	What bird is it?
-	<div *ngFor="#current of questionAlternatives; #i=index" >
-		<button class="btn btn-lg"
-				[ngClass]="{'btn-success': checkIfButtonColorIsCorrect(i), 'btn-danger': checkIfButtonColorIsWrong(i),
-					'btn-primary': checkIfButtonIsSelected(i)}"
-				(click)="checkIfAltCorrect(i)">{{current}}
-		</button><br />
+<div *ngIf="quizLoaded" class="jumbotron">
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	   <birdid-the-quiz-image [usingMediaID]="mediaID"></birdid-the-quiz-image>
 	</div>
-	<br>
-	Your score: <b>{{_quizLogicService.getScore()}}</b>
-	<br>
-	Extra Info: {{getQuestionExtraInfo()}}
-	<br><br>
-	<button class="btn btn-primary" (click)="nextQuestion()">Next Question</button>
-	<br><br>
 
-	Current Mdia ID: <b>{{mediaID}}</b>
-	<br>
-	Media Type ID: <b>{{_quizSettingsService.getQuizSettings()[0].mediaTypeID}}</b>
-	<br>
-	Media Duficulity: <b>{{_quizSettingsService.getQuizSettings()[0].mediaDificulity}}</b>
-	<br>
-	Area ID: <b>{{_quizSettingsService.getQuizSettings()[0].areaID}}</b>
-	<br>
-	Time Limit: <b>{{_quizSettingsService.getQuizSettings()[0].timeLimit}}</b>
-	<br>
-	Using alternatives: <b>{{_quizSettingsService.getQuizSettings()[0].showAlternatives}}</b>
-	<br>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
 
+  	<div class="short-div">
+  		<h3> What bird is it? </h3>
+    	<div *ngFor="#current of questionAlternatives; #i=index" >
+    		<button class="btn btn-primary"  style="margin: 5px"
+    				[ngClass]="{'btn-success': checkIfButtonColorIsCorrect(i), 'btn-danger': checkIfButtonColorIsWrong(i),
+    					'btn-primary': checkIfButtonIsSelected(i)}"
+    				(click)="checkIfAltCorrect(i)">{{current}}
+    		</button><br />
+    	</div>
+    </div>
+    <div class="short-div">
+    	<br>
+    	Your score: <b>{{_quizLogicService.getScore()}}</b>
+    	<br>
+    	Extra Info: {{getQuestionExtraInfo()}}
+    	<br><br>
+    	<button class="btn btn-primary" (click)="nextQuestion()">Next Question</button>
+    	<br><br>
 
-</div>
+    	Current Mdia ID: <b>{{mediaID}}</b>
+    	<br>
+    	Media Type ID: <b>{{_quizSettingsService.getQuizSettings()[0].mediaTypeID}}</b>
+    	<br>
+    	Media Duficulity: <b>{{_quizSettingsService.getQuizSettings()[0].mediaDificulity}}</b>
+    	<br>
+    	Area ID: <b>{{_quizSettingsService.getQuizSettings()[0].areaID}}</b>
+    	<br>
+    	Time Limit: <b>{{_quizSettingsService.getQuizSettings()[0].timeLimit}}</b>
+    	<br>
+    	Using alternatives: <b>{{_quizSettingsService.getQuizSettings()[0].showAlternatives}}</b>
+    	<br>
+    	</div>
+	</div>
+<div style="clear:both"></div>
+
+ </div>

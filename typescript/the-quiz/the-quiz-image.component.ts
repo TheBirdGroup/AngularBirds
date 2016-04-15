@@ -5,6 +5,7 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 @Component({
 	selector: 'birdid-the-quiz-image',
 	templateUrl: 'app/the-quiz/the-quiz-image.component.html',
+	styleUrls:  ['app/the-quiz/the-quiz-image.component.css'],
 	directives: [
 
 	],

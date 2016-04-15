@@ -5,10 +5,10 @@ Your score was: {{_quizLogicService.score}}
 <form (ngSubmit)="onSubmit(form)" #form="ngForm" >
 
 	<div class="unsernameInputContainer">
-		<h2><label for="username">Your Name:</label></h2>
+		<h4><label for="username">Submit your score by entering your name:</label></h4>
 		<div class="unsernameInput input-group">
 
-			<span class="input-group-addon" id="basic-addon1">Your Name</span>
+			<span class="input-group-addon" id="basic-addon1">Name:</span>
 			<input
 				type="text"
 				id="username"
@@ -21,11 +21,11 @@ Your score was: {{_quizLogicService.score}}
 				value="Greger"
 				aria-describedby="sizing-addon1 basic-addon1"
 			required>
-			<span class="input-group-addon" *ngIf="!username.valid">Not Valid</span>
+			<span class="input-group-addon redWarningText"  *ngIf="!username.valid">Not Valid</span>
 
 		</div>
 		<br>
-		<button type="submit" [disabled]="!form.valid" class="btn btn-primary">Save score</button>
+		<button type="submit" [disabled]="!form.valid" class="btn btn-primary buttonsWidth">Save score</button>
 
 		<br>
 		{{dataSavedStatus}}
@@ -35,4 +35,4 @@ Your score was: {{_quizLogicService.score}}
 </form>
 
 <br>
-<button type="button" class="btn btn-primary" (click)="startNewQuiz()">New Quiz</button>
+<button type="button" class="btn btn-primary buttonsWidth" (click)="startNewQuiz()">New Quiz</button>

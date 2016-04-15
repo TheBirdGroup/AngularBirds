@@ -20,7 +20,7 @@ import { QuizLogicService }  from './../shared/quiz-logic.service';
 
 
 export class QuizResultComponent {
-	title = ' The Birdid Quiz QuizResultComponent 15!';
+	title = ' You have successfully completed the quiz!';
 
 	response;
 

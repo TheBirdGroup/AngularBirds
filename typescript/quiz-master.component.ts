@@ -1,6 +1,6 @@
 import { Component, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
 import { QuizSettingsService }  from './shared/quiz-settings.service';
 import { QuizQuestionsService }  from './shared/quiz-questions.service';
@@ -46,50 +46,48 @@ export class QuizMasterComponent implements OnInit {
 
 	  asyncDataLoaded = false;
 
+	  currentActive = 0;
+ 	 //0 = mediatype selkect
+ 	 //1 = additional settings
+ 	 //2 = quiz
+ 	 //3 =  result
+
 	  constructor(
 		  private _quizSettingsService: QuizSettingsService,
 		  private _quizQuestionService: QuizQuestionsService,
 		  private _quizLogicService: QuizLogicService,
 		  private _quizTranslationService: QuizTranslationService,
-		  private _quizResultsService: QuizResultsService
-	  ){}
+		  private _quizResultsService: QuizResultsService,
+		  private _router: Router
+	  ){
+
+		  //looking for route change
+		  _router.subscribe((newRoute) => this.onRouteChange(newRoute))
+
+	  }
+
+	  onRouteChange(newRoute){
+
+		  console.log("Route change: ", newRoute );
+
+		  //mostly only used for dev bar on top currently
+		  if(newRoute == 'mediaSelect'){
+			  this.currentActive = 0;
+		  }else if(newRoute == 'mediaAdditionalSettings'){
+			  this.currentActive = 1;
+		  }else if(newRoute == 'mediaQuiz'){
+			  this.currentActive = 2;
+		  }else if(newRoute == 'mediaQuizResults'){
+			  this.currentActive = 3;
+		  }
+
+	  }
 
 	  ngOnInit() {
 
 		  //load data from server
 		this._quizTranslationService.initialize();
 		this._quizSettingsService.initialize();
-		//console.log("Trans 24 in english: ", this._quizTranslationService.getTranslationByID(24));
-
-		//this.lookForDataLoaded();
-
-
-	  }
-
-
-	 currentActive = 0;
-	 //0 = mediatype selkect
-	 //1 = additional settings
-	 //2 = quiz
-	 //3 =  result
-
-	 //temporary, bad aproach
-	 lookForDataLoaded(){
-
-		 setTimeout(() =>
-		 	this.checkForDataLoaded()
- 		, 200);
-
-	 }
-
-	 checkForDataLoaded(){
-
-		 if(this._quizTranslationService.translationsAreLoaded()){
-		 	this.asyncDataLoaded = true
-		}else{
-			this.lookForDataLoaded();
-		}
-
 
 	 }
 
@@ -120,29 +118,5 @@ export class QuizMasterComponent implements OnInit {
 
 	  }
 
-	  mediaTypeSelectEvent(event){
-
-		  if(event == "MediatypeSelected"){
-			  this.currentActive = 1;
-		  }
-
-
-	  }
-
-	  mediaAdditionalSettingsDoneEvent(event){
-
-		  if(event == "MediaAditionalSettingsDone"){
-			 this.currentActive = 2;
-		 }
-
-	  }
-
-	  quizMediaDoneEvent(event){
-
-		  if(event == "MediaQuizOver"){
-			 this.currentActive = 3;
-		 }
-
-	  }
 
 }

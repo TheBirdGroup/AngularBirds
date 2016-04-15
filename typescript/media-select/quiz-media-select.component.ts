@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Router } from 'angular2/router';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizTranslationService }  from './../shared/quiz-translation.service';
@@ -14,7 +15,7 @@ import { QuizTranslationService }  from './../shared/quiz-translation.service';
 	providers: [
 	  HTTP_PROVIDERS
   	],
-	outputs: ['quizMediaSelectedEvent']
+	//outputs: ['quizMediaSelectedEvent']
 })
 
 
@@ -26,11 +27,12 @@ export class QuizMediaSelectComponent implements OnInit{
 		[3, 'Video', 'glyphicon glyphicon-facetime-video'],
 	];
 	title = 'Birdid Quiz, select your media type:';
-	quizMediaSelectedEvent = new EventEmitter<string>();
+	//quizMediaSelectedEvent = new EventEmitter<string>();
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
-		private _quizTranslationService: QuizTranslationService
+		private _quizTranslationService: QuizTranslationService,
+		private _router: Router
 	){}
 
 	ngOnInit() {
@@ -55,9 +57,11 @@ export class QuizMediaSelectComponent implements OnInit{
 
 		}else{
 
-			console.log("cuccess");
+			//console.log("scuccess");
 			//Const for value?
-			this.quizMediaSelectedEvent.emit("MediatypeSelected");
+			//this.quizMediaSelectedEvent.emit("MediatypeSelected");
+
+			this._router.navigate(["QuizMediaAdditionalSettings"]);
 
 		}
 

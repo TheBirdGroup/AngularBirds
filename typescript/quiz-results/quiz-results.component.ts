@@ -1,5 +1,6 @@
 import { Component }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Router } from 'angular2/router';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';
@@ -30,7 +31,8 @@ export class QuizResultComponent {
 	constructor(
 		private _quizResultsService: QuizResultsService,
 		private _quizLogicService: QuizLogicService,
-		private _quizSettingsService: QuizSettingsService
+		private _quizSettingsService: QuizSettingsService,
+		private _router: Router
 	) {}
 
 	onSubmit(formSubmitObject){
@@ -56,6 +58,12 @@ export class QuizResultComponent {
 		console.log("working: ", response);
 
 		this.dataSavedStatus = "Saved: " + response['returnData'];
+
+	}
+
+	startNewQuiz(){
+
+		this._router.navigate(["QuizMediaSelect"]);
 
 	}
 

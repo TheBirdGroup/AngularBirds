@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Router } from 'angular2/router';
+
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 @Component({
@@ -28,7 +30,8 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 	quizMediaSettingsEvent = new EventEmitter<string>();
 
 	constructor(
-		private _quizSettingsService: QuizSettingsService
+		private _quizSettingsService: QuizSettingsService,
+		private _router: Router
 	){}
 
 
@@ -107,7 +110,9 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 	startQuiz(){
 
-		this.quizMediaSettingsEvent.emit("MediaAditionalSettingsDone");
+		this._router.navigate(["QuizMediaQuiz"]);
+
+		//this.quizMediaSettingsEvent.emit("MediaAditionalSettingsDone");
 
 	}
 

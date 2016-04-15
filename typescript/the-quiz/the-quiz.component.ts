@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Router } from 'angular2/router';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizQuestionsService }  from './../shared/quiz-questions.service';
@@ -59,7 +60,8 @@ export class TheQuizComponent implements OnInit{
 	  constructor(
 		  private _quizSettingsService: QuizSettingsService,
 		  private _quizQuestionService: QuizQuestionsService,
-		  private _quizLogicService: QuizLogicService
+		  private _quizLogicService: QuizLogicService,
+		  private _router: Router
 	  ){}
 
 	  ngOnInit() {
@@ -130,7 +132,8 @@ export class TheQuizComponent implements OnInit{
 		if(this._quizLogicService.noQuestionsLeft()){
 
 			this.quizDone = true;
-			this.quizDoneEvent.emit("MediaQuizOver");
+			//this.quizDoneEvent.emit("MediaQuizOver");
+			this._router.navigate(["QuizMediaQuizResults"]);
 			return;
 
 		}

@@ -1,5 +1,6 @@
 import { Component, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
 import { QuizSettingsService }  from './shared/quiz-settings.service';
 import { QuizQuestionsService }  from './shared/quiz-questions.service';
@@ -21,9 +22,11 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 		QuizMediaSelectComponent,
 		QuizAdditionalSettingsComponent,
 		TheQuizComponent,
-		QuizResultComponent
+		QuizResultComponent,
+		ROUTER_DIRECTIVES
 	],
 	providers: [
+		ROUTER_PROVIDERS,
 		HTTP_PROVIDERS,
 		QuizSettingsService,
 		QuizQuestionsService,
@@ -32,6 +35,8 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 		QuizResultsService
 	]
 })
+
+
 
 
 export class QuizMasterComponent implements OnInit {

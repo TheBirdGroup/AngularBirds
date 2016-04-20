@@ -66,6 +66,8 @@ export class TheQuizComponent implements OnInit{
 
 	  ngOnInit() {
 
+		  this._quizLogicService.newQuiz();
+
 		  //moch while mile works on his service, replace by getting from it
 		  this.quizSettings = this._quizSettingsService.getQuizSettings();
 		  this._quizLogicService.setQuizQuestionsSettings(this.quizSettings);

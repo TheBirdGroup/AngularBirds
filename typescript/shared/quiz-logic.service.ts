@@ -19,6 +19,15 @@ export class QuizLogicService{
 
 	constructor(private _http: Http){}
 
+	//reset for a new quiz as the service is persistent across multible quizes
+	newQuiz(){
+
+		this.score = 0;
+		this.questionNumber = 0;
+		this.quizLoaded = false;
+
+	}
+
 	setQuizQuestions(quizQuestionsData){
 		this.quizQuestionsData = quizQuestionsData;
 		this.quizLoaded = true;

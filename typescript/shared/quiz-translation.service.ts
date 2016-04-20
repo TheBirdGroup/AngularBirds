@@ -12,6 +12,8 @@ export class QuizTranslationService implements OnInit{
 
 	transDataLoaded = false;
 
+	siteID = 1;
+
 	promise;
 
 	constructor(private _http: Http){}
@@ -24,7 +26,9 @@ export class QuizTranslationService implements OnInit{
 
 	 }
 
-	initialize(){
+	initialize(siteID){
+
+		this.siteID = siteID;
 
 		this.loadTranslations();
 
@@ -32,7 +36,7 @@ export class QuizTranslationService implements OnInit{
 
 	private loadTranslations(){
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2")
+		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
 			.map(response => response.json()).subscribe(
 	            data => {
 	                this.translationData = data['translations'];

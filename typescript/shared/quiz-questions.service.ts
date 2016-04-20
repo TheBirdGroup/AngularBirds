@@ -25,10 +25,12 @@ export class QuizQuestionsService{
 
 		let mediaTypeID = settings[0].mediaTypeID;
 		let areaID = settings[0].areaID;
+		areaID = 0;
 		//let timeLimit = settings[0].timeLimit;
 		let numQuestions = settings[0].numQuestions;
 		//let showAlternatives = settings[0].showAlternatives;
 		let mediaDificulity = settings[0].mediaDificulity;
+		let siteID = settings[0].siteID;
 
 		let extraURL = "";
 		extraURL += "&numberQuestions=" + numQuestions;
@@ -37,7 +39,9 @@ export class QuizQuestionsService{
 		extraURL += "&areaID=" + areaID;
 		extraURL += "&mediaType=" + mediaTypeID;
 		extraURL += "&langID=" + 2;
+		extraURL += "&siteID=" + siteID;
 
+		console.log("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)
 
 
 		return this._http.get("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)

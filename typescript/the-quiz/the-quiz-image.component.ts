@@ -1,6 +1,7 @@
-import { Component, EventEmitter }       from 'angular2/core';
+import { Component, EventEmitter, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
+import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 @Component({
 	selector: 'birdid-the-quiz-image',
@@ -16,12 +17,24 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 })
 
 
-export class TheQuizImageComponent {
+export class TheQuizImageComponent implements OnInit{
 	title = 'Birdid Quiz TheQuizComponent!';
 
-	imageURLStart = "https://hembstudios.no//birdid/IDprogram/getMedia.php?mediaID=";
+	imageURLStart = "https://hembstudios.no/birdid/IDprogram/getMedia.php?mediaID=";
+	extraSiteID;
 
     mediaID = 0;
+
+	constructor(private _quizSettingsService: QuizSettingsService){}
+
+	ngOnInit() {
+
+		let quizSettings = this._quizSettingsService.getQuizSettings();
+		let siteID = quizSettings[0].siteID;
+
+		this.extraSiteID = "&siteID="+siteID;
+
+	}
 
 
 }

@@ -46,6 +46,8 @@ export class QuizMasterComponent implements OnInit {
 
 	  asyncDataLoaded = false;
 
+	  siteID = 1;
+
 	  currentActive = 0;
  	 //0 = mediatype selkect
  	 //1 = additional settings
@@ -86,8 +88,9 @@ export class QuizMasterComponent implements OnInit {
 	  ngOnInit() {
 
 		  //load data from server
-		this._quizTranslationService.initialize();
-		this._quizSettingsService.initialize();
+		this._quizTranslationService.initialize(this.siteID);
+		this._quizSettingsService.initialize(this.siteID);
+		this._quizResultsService.initialize(this.siteID);
 
 	 }
 

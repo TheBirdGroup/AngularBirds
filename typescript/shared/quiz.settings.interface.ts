@@ -5,4 +5,5 @@ export interface QuizSetting {
   numQuestions: number;
   showAlternatives: boolean;
   mediaDificulity: number;
+  siteID: number;
 }

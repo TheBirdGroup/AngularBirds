@@ -15,7 +15,15 @@ import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 @Injectable()
 export class QuizResultsService{
 
+	siteID = 1;
+
 	constructor(private _http: Http){}
+
+	initialize(siteID){
+
+		this.siteID = siteID;
+
+	}
 
 	uploadQuizResults(score, maxScore, name, quizSettings:QuizSetting[]){
 
@@ -45,7 +53,7 @@ export class QuizResultsService{
 		data2 += "&areaID=" + 0;
 		data2 += "&difficulty=" + mediaDificulity;
 		data2 += "&specialAreas=false";
-		data2 += "&siteID=" + 1;
+		data2 += "&siteID=" + this.siteID;
 
 		const body = data2;
 		//they result in 501 not implemented by server
@@ -54,7 +62,7 @@ export class QuizResultsService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post('https://hembstudios.no//birdid/IDprogram/scoreQuiz.php?JSON=1', body,{
+		return this._http.post('https://hembstudios.no//birdid/IDprogram/scoreQuiz.php?JSON=1&siteID='+this.siteID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());

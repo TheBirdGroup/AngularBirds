@@ -22,6 +22,8 @@ export class QuizSettingsService{
     duration=0;
     alternative: boolean;
 
+	siteID = 1;
+
 	areaListLoaded = false;
 	areaListData;
 	selectedArea;
@@ -32,7 +34,9 @@ export class QuizSettingsService{
 
 
 
-	initialize(){
+	initialize(siteID){
+
+		this.siteID = siteID;
 
 		//setup default
 		this.setMediaType(1);
@@ -47,7 +51,7 @@ export class QuizSettingsService{
 
 	loadAreaList() {
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2")
+		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
 			.map(response => response.json()).subscribe( // this is getting the translation PLUS the areas
 	            data => {
 	                this.areaListData = data['area_list'];
@@ -80,7 +84,8 @@ export class QuizSettingsService{
 		  "timeLimit": this.duration,
 		  "numQuestions": this.numberOfQuestions,
 		  "showAlternatives": this.alternative,
-		  "mediaDificulity": this.mediaDifficulities}
+		  "mediaDificulity": this.mediaDifficulities,
+	  	  "siteID": this.siteID}
 		];
 
 		//console.log("returnSettings: ", returnSettings)

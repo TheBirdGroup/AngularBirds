@@ -25,6 +25,7 @@ export class QuizSettingsService{
 	siteID = 1;
 
 	areaListLoaded = false;
+	areaLoadProblems = false;
 	areaListData;
 	selectedArea;
 
@@ -58,7 +59,10 @@ export class QuizSettingsService{
 				//	console.log("this.areaListData: ", this.areaListData);
 	                this.areaListLoaded = true;
 	            },
-	            error => console.error("loadAreaList ERROR! ", error)
+	            error => {
+					this.areaLoadProblems = true;
+					console.error("loadAreaList ERROR! ", error)
+				}
 	        );
 
 	}
@@ -66,6 +70,12 @@ export class QuizSettingsService{
 	dataLoaded(){
 
 		return this.areaListLoaded;
+
+	}
+
+	dataLoadProblems(){
+
+		return this.areaLoadProblems;
 
 	}
 

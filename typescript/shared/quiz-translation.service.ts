@@ -11,6 +11,7 @@ export class QuizTranslationService implements OnInit{
 	translationData;
 
 	transDataLoaded = false;
+	transLoadProblems = false;
 
 	siteID = 1;
 
@@ -42,7 +43,10 @@ export class QuizTranslationService implements OnInit{
 	                this.translationData = data['translations'];
 	                this.transDataLoaded = true;
 	            },
-	            error => console.error("getQuizQuestions ERROR! ", error)
+	            error => {
+					this.transLoadProblems = true;
+					console.error("getQuizQuestions ERROR! ", error)
+				}
 	        );
 
 		//return Promise.resolve(quizQuestions);
@@ -53,6 +57,12 @@ export class QuizTranslationService implements OnInit{
 	translationsAreLoaded(){
 
 		return this.transDataLoaded;
+
+	}
+
+	translationsLoadProblems(){
+
+		return this.transLoadProblems;
 
 	}
 

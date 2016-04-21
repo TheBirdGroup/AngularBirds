@@ -27,7 +27,7 @@ export class QuizSettingsService{
 	areaListLoaded = false;
 	areaLoadProblems = false;
 	areaListData;
-	selectedArea;
+	selectedArea = 0;
 
 
 
@@ -45,6 +45,9 @@ export class QuizSettingsService{
 		this.selectNumberOfQuestions(10);
 		this.setDuration(0);
 		this.setAlternatives(true);
+		this.setArea(0);
+
+
 
 		this.loadAreaList();
 
@@ -80,11 +83,26 @@ export class QuizSettingsService{
 	}
 
 	getAreaList(){
-		//console.log("this.areaListData: ", this.areaListData);
-		return this.areaListData
 
+
+			return this.areaListData;
+	}
+
+	getCurrentAreaName(){
+
+	//	console.log("this.areaListData: ", this.areaListData);
+		let tempID = this.selectedArea;
+		var currentAreaName = this.areaListData.find(function(element, index, array) {
+		//	console.log("current", element['id'], " tempID: ", tempID);
+			if(element['id'] == tempID){
+				return true;
+			}
+		});
+		//console.log("BKJHGHJGJHGHGJ",countryData.country);
+		return currentAreaName.country;
 
 	}
+
 
 	getQuizSettings(){
 
@@ -105,15 +123,23 @@ export class QuizSettingsService{
 	}
 
 	setArea(selectedArea: number){
-		console.log(selectedArea);
-		this.selectedArea = selectedArea;
+	//	console.log("the selected area is", selectedArea);
+		if (selectedArea==undefined || selectedArea==null){
+			this.selectedArea=2;
+			}else{
+				this.selectedArea = selectedArea;
+			}
+
+
+
+
 	}
 
 
 
 
     setDuration(duration: number){
-        console.log(duration);
+      //  console.log(duration);
         this.duration=duration;
     }
 		getDuration(){
@@ -122,7 +148,7 @@ export class QuizSettingsService{
 
     setAlternatives(selectedAlternative:boolean ){
             this.alternative = selectedAlternative;
-        		console.log(this.alternative);
+        	//	console.log(this.alternative);
         //this.alternatives=alternatives;
     }
 		getAlternative(){

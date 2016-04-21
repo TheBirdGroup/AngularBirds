@@ -25,6 +25,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
     numberOfQuestions;
 		areaList=[];
 		selectedArea;
+		//areaProp={areaID:''};
 
 
 	quizMediaSettingsEvent = new EventEmitter<string>();
@@ -45,13 +46,13 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 	}
 
 
-
+/*
 		onSetArea(){
 			 this._quizSettingsService.setArea(this.selectedArea);
 			 console.log("Selected area:", this.selectedArea);
 
 		}
-
+*/
 
 		getAreaList(){
 				this.areaList=this._quizSettingsService.getAreaList();
@@ -108,11 +109,16 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 
 
-	startQuiz(){
+	startQuiz(form){
 
+//this.areaProp.areaID=form.value['areaID'];
+//console.log(form.value);
+//this.selectedArea=form.value;
+
+this._quizSettingsService.setArea(form.value['areaID']);
 		this._router.navigate(["QuizMediaQuiz"]);
 
-		//this.quizMediaSettingsEvent.emit("MediaAditionalSettingsDone");
+
 
 	}
 

@@ -25,7 +25,7 @@ export class QuizQuestionsService{
 
 		let mediaTypeID = settings[0].mediaTypeID;
 		let areaID = settings[0].areaID;
-		areaID = 0;
+		//areaID = 0;
 		//let timeLimit = settings[0].timeLimit;
 		let numQuestions = settings[0].numQuestions;
 		//let showAlternatives = settings[0].showAlternatives;

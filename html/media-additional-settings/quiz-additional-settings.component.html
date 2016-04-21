@@ -1,11 +1,9 @@
 <h2>{{title}}</h2>
-
+<!--
 <h4>Select area</h4>
     <select type="number" [(ngModel)]="selectedArea" (ngModelChange)="onSetArea()">
       <option *ngFor="#c of areaList"  [ngValue]="c.id">{{c.country}}</option>
-    </select>
-
-
+    </select>-->
 
 <!--
 <div *ngFor="#current of mediaDiff; #i=index" >
@@ -73,6 +71,15 @@
   </button>
 </div>
 <br>
-<br>
+<form (ngSubmit)="startQuiz(f)" #f="ngForm">
 
-<button class="btn btn-primary btn-lg"(click)="startQuiz()">Start </button>
+        <h4>Select area</h4>
+            <select type="number" ngControl="areaID">
+              <option  *ngFor="#area of areaList" [selected]="area.country == 'Albania'"  [ngValue]="area.id">{{area.country}}</option>
+            </select>
+            <br><!-- choosing default area [selected] is working only in mozila! waiting for the new realise of angular2 -->
+  <!-- <button class="btn btn-primary btn-lg"(click)="startQuiz()">Start </button>-->
+  <br>
+  <br>
+   <button class="btn btn-primary btn-lg" type="submit">Start Quiz </button>
+</form>

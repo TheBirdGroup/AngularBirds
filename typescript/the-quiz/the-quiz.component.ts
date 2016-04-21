@@ -10,6 +10,7 @@ import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 //import { QuizSettingsMock }  from './../mock/quiz-settings.mock.ts';
 
 import { TheQuizImageComponent }  from './the-quiz-image.component';
+import { TheQuizSoundComponent }  from './the-quiz-sound.component';
 
 
 
@@ -17,7 +18,8 @@ import { TheQuizImageComponent }  from './the-quiz-image.component';
 	selector: 'birdid-the-quiz',
 	templateUrl: 'app/the-quiz/the-quiz.component.html',
 	directives: [
-		TheQuizImageComponent
+		TheQuizImageComponent,
+		TheQuizSoundComponent
 	],
 	providers: [
 	  HTTP_PROVIDERS
@@ -32,6 +34,7 @@ export class TheQuizComponent implements OnInit{
 	quizDoneEvent = new EventEmitter<string>();
 
 	mediaID = 0;
+	mediaURL = "";
     //mediaTypeID = 0;
 
     quizQuestions = [];
@@ -139,6 +142,8 @@ export class TheQuizComponent implements OnInit{
 			return;
 
 		}
+
+		this.mediaURL = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['media_url'];
 
         this.mediaID = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['media_id'];
         let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']

@@ -14,8 +14,10 @@
     		<button class="btn btn-primary"  style="margin: 5px"
     				[ngClass]="{'btn-success': checkIfButtonColorIsCorrect(i), 'btn-danger': checkIfButtonColorIsWrong(i),
     					'btn-primary': checkIfButtonIsSelected(i)}"
-    				(click)="checkIfAltCorrect(i)">{{current}}
-    		</button><br />
+    				(click)="checkIfAltCorrect(i)">{{current[1]}}
+    		</button>
+			<a *ngIf="inbetweenQuestions" href="https://hembstudios.no/birdid/bird/eBook.php?specieID={{current[0]}}" target="_blank"><img src="../images/book.png"></a>
+			<br />
     	</div>
     </div>
     <div class="short-div">

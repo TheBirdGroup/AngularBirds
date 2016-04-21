@@ -40,8 +40,8 @@ export class TheQuizComponent implements OnInit{
 
     //questionNumber = 0; //move to Logic service
 
-    questionAlternatives: string[];
-    questionRightAnswer = "";
+    questionAlternatives: string[][]; //[id, name]
+    questionRightAnswerID = "";
     ButtonColor = '';
 
     inbetweenQuestions = false;
@@ -111,7 +111,7 @@ export class TheQuizComponent implements OnInit{
 
         if(!this.inbetweenQuestions) {
             this.inbetweenQuestions = true;
-            if(this.questionAlternatives[this.selectedButtonAltID] == this.questionRightAnswer){
+            if(this.questionAlternatives[this.selectedButtonAltID][0] == this.questionRightAnswerID){
 				this._quizLogicService.changeScore(1);
                 //this.score ++;
             }else{
@@ -143,16 +143,24 @@ export class TheQuizComponent implements OnInit{
         this.mediaID = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['media_id'];
         let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
 
+		let tempArr = [alts['right_answer']['id'], alts['right_answer']['name']];
+
         this.questionAlternatives = [];
-        this.questionAlternatives.push(alts['right_answer']['name']);
-        this.questionAlternatives.push(alts['choice_2']['name']);
-        this.questionAlternatives.push(alts['choice_3']['name']);
-        this.questionAlternatives.push(alts['choice_4']['name']);
-        this.questionAlternatives.push(alts['choice_5']['name']);
+		this.questionAlternatives.push([alts['right_answer']['id'], alts['right_answer']['name']]);
+		this.questionAlternatives.push([alts['choice_2']['id'], alts['choice_2']['name']]);
+		this.questionAlternatives.push([alts['choice_3']['id'], alts['choice_3']['name']]);
+		this.questionAlternatives.push([alts['choice_4']['id'], alts['choice_4']['name']]);
+		this.questionAlternatives.push([alts['choice_5']['id'], alts['choice_5']['name']]);
+
+		// this.questionAlternatives.push(alts['right_answer']['name']);
+        // this.questionAlternatives.push(alts['choice_2']['name']);
+        // this.questionAlternatives.push(alts['choice_3']['name']);
+        // this.questionAlternatives.push(alts['choice_4']['name']);
+        // this.questionAlternatives.push(alts['choice_5']['name']);
 
         this.questionAlternatives = this.shuffle(this.questionAlternatives);
 
-        this.questionRightAnswer = alts['right_answer']['name'];
+        this.questionRightAnswerID = alts['right_answer']['id'];
 
         this.selectedButtonAltID = -1;
 
@@ -162,7 +170,7 @@ export class TheQuizComponent implements OnInit{
         this.selectedButton = true;
         this.selectedButtonAltID = altID;
 
-        if(this.questionAlternatives[altID] == this.questionRightAnswer){
+        if(this.questionAlternatives[altID][0] == this.questionRightAnswerID){
 
             console.log("correct!");
 
@@ -177,7 +185,7 @@ export class TheQuizComponent implements OnInit{
     checkIfButtonColorIsCorrect(altID){
 
 
-        if(this.questionAlternatives[altID] == this.questionRightAnswer && this.inbetweenQuestions == true){
+        if(this.questionAlternatives[altID][0] == this.questionRightAnswerID && this.inbetweenQuestions == true){
             return true;
 
         }else{
@@ -188,7 +196,7 @@ export class TheQuizComponent implements OnInit{
     checkIfButtonColorIsWrong(altID){
 
 
-        if(this.questionAlternatives[altID] != this.questionRightAnswer && this.inbetweenQuestions == true){
+        if(this.questionAlternatives[altID][0] != this.questionRightAnswerID && this.inbetweenQuestions == true){
             return true;
 
         }else{

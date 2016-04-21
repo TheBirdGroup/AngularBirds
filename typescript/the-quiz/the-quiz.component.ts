@@ -114,13 +114,27 @@ export class TheQuizComponent implements OnInit{
 
         if(!this.inbetweenQuestions) {
             this.inbetweenQuestions = true;
+
+			// console.log("this.selectedButtonAltID: ", this.selectedButtonAltID);
+			// console.log("A: ", this.questionAlternatives);
+			// console.log("A2: ", this.questionAlternatives[this.selectedButtonAltID][0]);
+
+			//right answer selected
             if(this.questionAlternatives[this.selectedButtonAltID][0] == this.questionRightAnswerID){
-				this._quizLogicService.changeScore(1);
+
+				if(Number(this.questionAlternatives[this.selectedButtonAltID][0]) >= 0){ //NOT i don't know
+					this._quizLogicService.changeScore(1);
+				}
                 //this.score ++;
             }else{
-				this._quizLogicService.changeScore(-1);
+
+				//wrong answer selected
+				if(Number(this.questionAlternatives[this.selectedButtonAltID][0]) >= 0){ //NOT i don't know
+					this._quizLogicService.changeScore(-1);
+				}
                 //this.score --;
             }
+
         }else{
             this.inbetweenQuestions = false;
 			this._quizLogicService.gotoNextQuestionNumber();
@@ -157,6 +171,7 @@ export class TheQuizComponent implements OnInit{
 		this.questionAlternatives.push([alts['choice_4']['id'], alts['choice_4']['name']]);
 		this.questionAlternatives.push([alts['choice_5']['id'], alts['choice_5']['name']]);
 
+
 		// this.questionAlternatives.push(alts['right_answer']['name']);
         // this.questionAlternatives.push(alts['choice_2']['name']);
         // this.questionAlternatives.push(alts['choice_3']['name']);
@@ -164,10 +179,12 @@ export class TheQuizComponent implements OnInit{
         // this.questionAlternatives.push(alts['choice_5']['name']);
 
         this.questionAlternatives = this.shuffle(this.questionAlternatives);
+		//always last
+		this.questionAlternatives.push(["-1", "I don't know"]);
 
         this.questionRightAnswerID = alts['right_answer']['id'];
 
-        this.selectedButtonAltID = -1;
+        this.selectedButtonAltID = 5;
 
     }
 

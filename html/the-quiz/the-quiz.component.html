@@ -3,7 +3,8 @@
 
 <div *ngIf="quizLoaded" class="jumbotron">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-	   <birdid-the-quiz-image [usingMediaID]="mediaID"></birdid-the-quiz-image>
+		<birdid-the-quiz-image *ngIf="_quizSettingsService.getQuizSettings()[0].mediaTypeID == 1" [usingMediaID]="mediaID"></birdid-the-quiz-image>
+ 		<birdid-the-quiz-sound *ngIf="_quizSettingsService.getQuizSettings()[0].mediaTypeID == 2" [usingMediaURL]="mediaURL"></birdid-the-quiz-sound>
 	</div>
 
   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >

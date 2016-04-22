@@ -128,7 +128,7 @@ export class TheQuizImageComponent implements OnInit{
 
 	mouseLeaveCanvas(event){
 
-		console.log("bye");
+		//console.log("bye");
 		this.mouseOnImage = false;
 		this.updateImage();
 
@@ -137,7 +137,7 @@ export class TheQuizImageComponent implements OnInit{
 
 	mouseEnterCanvas(event){
 
-		console.log("welcome");
+		//console.log("welcome");
 		this.mouseOnImage = true;
 		this.updateImage();
 

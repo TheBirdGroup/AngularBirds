@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { Router } from 'angular2/router';
-
+import 'rxjs/Rx';
+import {Observable} from 'rxjs/Rx';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizQuestionsService }  from './../shared/quiz-questions.service';
 import { QuizLogicService }  from './../shared/quiz-logic.service';
@@ -55,6 +56,10 @@ export class TheQuizComponent implements OnInit{
 	quizSettings: QuizSetting[];
 
 	quizDone = false;
+	duration=0;
+	ticks=0;
+	timer;
+	timerSubscription;
 
 
 	//score = 0;
@@ -68,6 +73,7 @@ export class TheQuizComponent implements OnInit{
 	  ){}
 
 	  ngOnInit() {
+
 
 		  this._quizLogicService.newQuiz();
 
@@ -108,12 +114,20 @@ export class TheQuizComponent implements OnInit{
 
     nextQuestion(){
 
+			if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){
+				this.timerSubscription.unsubscribe();
+			}
+
+
 		if(this.quizDone){
 			return;
 		}
 
         if(!this.inbetweenQuestions) {
             this.inbetweenQuestions = true;
+
+						//this.timer = Observable.timer(2000,1000);
+
 
 			// console.log("this.selectedButtonAltID: ", this.selectedButtonAltID);
 			// console.log("A: ", this.questionAlternatives);
@@ -140,11 +154,23 @@ export class TheQuizComponent implements OnInit{
 			this._quizLogicService.gotoNextQuestionNumber();
             //this.questionNumber++;
             this.setupQuestion();
+
+
         }
 
 
 
     }
+
+		timerTick(t){
+
+			this.ticks = t
+			if(this._quizSettingsService.getQuizSettings()[0].timeLimit-this.ticks < 1){
+
+				this.nextQuestion();
+			}
+
+		}
 
     setupQuestion(){
 
@@ -185,6 +211,14 @@ export class TheQuizComponent implements OnInit{
         this.questionRightAnswerID = alts['right_answer']['id'];
 
         this.selectedButtonAltID = 5;
+
+				if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){
+				console.log("hehe");
+				this.ticks=0;
+				this.timer = Observable.timer(2000,1000);
+				this.timerSubscription = 	this.timer.subscribe(t=>this.timerTick(t));
+			}
+
 
     }
 

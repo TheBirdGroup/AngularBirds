@@ -38,7 +38,8 @@
     	<br>
 			Area ID: <b>{{_quizSettingsService.getCurrentAreaName()}}</b>
     	<br>
-    	Time Limit: <b>{{_quizSettingsService.getQuizSettings()[0].timeLimit}}</b>
+    	Time Limit: <b>{{_quizSettingsService.getQuizSettings()[0].timeLimit-ticks}}</b>
+			<br>Ticks: {{ticks}}
     	<br>
     	Using alternatives: <b>{{_quizSettingsService.getQuizSettings()[0].showAlternatives}}</b>
     	<br>

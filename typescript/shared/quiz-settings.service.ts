@@ -1,7 +1,8 @@
 import { Injectable } from 'angular2/core';
 import { Http } from 'angular2/http';
 import 'rxjs/Rx';
-import { Observable } from 'rxjs/Observable';
+//import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 // import { quizQuestions } from './mock-quizQuestion';
 // import { QuizQuestion } from './quizQuestion';
 
@@ -31,6 +32,7 @@ export class QuizSettingsService{
 
 
 
+
 	constructor(private _http: Http){} // why do we need this
 
 
@@ -43,7 +45,7 @@ export class QuizSettingsService{
 		this.setMediaType(1);
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(10);
-		this.setDuration(0);
+		this.setDuration(5);
 		this.setAlternatives(true);
 		this.setArea(0);
 
@@ -105,6 +107,8 @@ export class QuizSettingsService{
 
 
 	getQuizSettings(){
+	//	let timer = Observable.timer(2000, 1000 );
+					//	timer.subscribe(t => this.tickerFunc(t));
 
 		let returnSettings: QuizSetting[] = [
 		  {"mediaTypeID": this.mediaType,
@@ -136,7 +140,10 @@ export class QuizSettingsService{
 	}
 
 
-
+	tickerFunc(duration){
+				console.log(this);
+				this.duration = duration
+			}
 
     setDuration(duration: number){
       //  console.log(duration);

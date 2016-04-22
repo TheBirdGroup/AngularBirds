@@ -108,9 +108,15 @@ export class TheQuizImageComponent implements OnInit{
 
 	mouseMoveCanvas(event){
 
+		var ctx = this.context;
+
+		let offLeft = ctx.canvas.offsetLeft;
+		let offTop = ctx.canvas.offsetTop;
+
+
 		// console.log("hehe1223", event);
-		this.zoomPointX = event.layerX - 135; //temp fix
-		this.zoomPointY = event.layerY - 1;
+		this.zoomPointX = event.layerX - offLeft; //temp fix
+		this.zoomPointY = event.layerY - offTop;
 
 		// console.log(this.zoomPointX);
 		// console.log(this.zoomPointY);

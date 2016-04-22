@@ -1,4 +1,4 @@
-import { Component }       from 'angular2/core';
+import { Component, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { Router } from 'angular2/router';
 
@@ -19,7 +19,7 @@ import { QuizLogicService }  from './../shared/quiz-logic.service';
 })
 
 
-export class QuizResultComponent {
+export class QuizResultComponent implements OnInit  {
 	title = ' You have successfully completed the quiz!';
 
 	response;
@@ -28,12 +28,47 @@ export class QuizResultComponent {
 	dataSavedStatus = "";
 	formInformation;
 
+	quizSettings;
+	quizHighscoreData;
+	quizHighscoreLoaded = false;
+
 	constructor(
 		private _quizResultsService: QuizResultsService,
 		private _quizLogicService: QuizLogicService,
 		private _quizSettingsService: QuizSettingsService,
 		private _router: Router
 	) {}
+
+	ngOnInit() {
+
+		this.quizSettings = this._quizSettingsService.getQuizSettings();
+
+		this.loadQuizResults();
+
+	}
+
+	loadQuizResults(){
+
+		this._quizResultsService.getQuizResults(this.quizSettings)
+            .subscribe(
+                data => {
+                    //console.log(data);
+                    this.quizHighscoreData = Object.keys(data).map(function(k) {
+						//console.log("data[k]: ", data[k], " K:",k)
+						// if(k != 'returnData'){
+							return data[k];
+						// }
+					});
+					//remove returnData = true/false
+					this.quizHighscoreData.pop();
+
+					//console.log(this.quizHighscoreData);
+                    this.quizHighscoreLoaded = true;
+                },
+                error => console.error("getQuizResults ERROR! ", error)
+            )
+	}
+
 
 	onSubmit(formSubmitObject){
 
@@ -55,9 +90,10 @@ export class QuizResultComponent {
 
 	onServerSubmit(response){
 
-		console.log("working: ", response);
+		//console.log("working: ", response);
 
 		this.dataSavedStatus = "Saved: " + response['returnData'];
+		this.loadQuizResults();
 
 	}
 

@@ -6,10 +6,8 @@ import {Observable} from 'rxjs/Rx';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizQuestionsService }  from './../shared/quiz-questions.service';
 import { QuizLogicService }  from './../shared/quiz-logic.service';
-
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 //import { QuizSettingsMock }  from './../mock/quiz-settings.mock.ts';
-
 import { TheQuizImageComponent }  from './the-quiz-image.component';
 import { TheQuizSoundComponent }  from './the-quiz-sound.component';
 
@@ -60,6 +58,7 @@ export class TheQuizComponent implements OnInit{
 	ticks=0;
 	timer;
 	timerSubscription;
+
 
 
 	//score = 0;
@@ -222,6 +221,15 @@ export class TheQuizComponent implements OnInit{
 
     }
 
+
+		selectAnswerDisabled(){
+			if( this.inbetweenQuestions == true){
+					return true;
+			}else{
+					return false;
+			}
+		}
+
     checkIfAltCorrect(altID){
         this.selectedButton = true;
         this.selectedButtonAltID = altID;
@@ -252,7 +260,8 @@ export class TheQuizComponent implements OnInit{
     checkIfButtonColorIsWrong(altID){
 
 
-        if(this.questionAlternatives[altID][0] != this.questionRightAnswerID && this.inbetweenQuestions == true){
+        if(this.questionAlternatives[altID][0] != this.questionRightAnswerID && this.inbetweenQuestions == true
+					&& altID == this.selectedButtonAltID){
             return true;
 
         }else{

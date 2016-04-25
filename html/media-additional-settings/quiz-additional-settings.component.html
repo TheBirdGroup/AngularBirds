@@ -1,11 +1,11 @@
 <h2>{{title}}</h2>
 
+<div style="float:left; margin-left: 50px;">
 <h4>Select area</h4>
+
     <select type="number" [(ngModel)]="selectedArea" (ngModelChange)="onSetArea()">
       <option *ngFor="#c of areaList"  [ngValue]="c.id">{{c.country}}</option>
     </select>
-
-
 
 <!--
 <div *ngFor="#current of mediaDiff; #i=index" >
@@ -76,3 +76,80 @@
 <br>
 
 <button class="btn btn-primary btn-lg"(click)="startQuiz()">Start </button>
+<br>
+</div>
+
+<!--
+<h2> top 20 today </h2>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="float:right">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Area</th>
+        <th>Score</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="#current of quizHighscoreData; #i=index">
+        <th>{{i+1}}</th>
+        <td>{{current.name}}</td>
+        <td>{{current.area}}</td>
+      <td>{{current.scorePercent}}</td>
+      <td>{{current.time}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="clear:both"></div>
+-->
+
+<h2> top 20 today </h2>
+<div style="height:250px; padding-right:50px;padding-left:50px; overflow-x:auto" >
+  <table class="table table-bordered">
+
+        <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Area</th>
+        <th>Score</th>
+        <th>Time</th>
+      </tr>
+
+      <tr *ngFor="#current of quizHighscoreData; #i=index">
+        <td>{{i+1}}</td>
+        <td>{{current.name}}</td>
+        <td>{{current.area}}</td>
+        <td>{{current.scorePercent}}</td>
+        <td>{{current.time}}</td>
+      </tr>
+  </table>
+</div>
+
+
+
+<h2> top 50 today </h2>
+<div style="height:250px; padding-right:50px;padding-left:50px; overflow-x:auto" >
+  <table class="table table-bordered">
+
+        <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Area</th>
+        <th>Score</th>
+        <th>Time</th>
+      </tr>
+
+      <tr *ngFor="#current of quizHighscoreDataLimit50; #i=index">
+        <td>{{i+1}}</td>
+        <td>{{current.name}}</td>
+        <td>{{current.area}}</td>
+        <td>{{current.scorePercent}}</td>
+        <td>{{current.time}}</td>
+      </tr>
+  </table>
+</div>
+
+<div style="clear:both"></div>

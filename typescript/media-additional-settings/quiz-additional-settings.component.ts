@@ -3,6 +3,7 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { Router } from 'angular2/router';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
+import { QuizResultsService }  from './../shared/quiz-results.service';
 
 @Component({
 	selector: 'birdid-quiz-addditional-settings',
@@ -25,13 +26,18 @@ export class QuizAdditionalSettingsComponent implements OnInit{
     numberOfQuestions;
 		areaList=[];
 		selectedArea;
+		quizHighscoreData;
+		quizHighscoreDataLimit50;
+		quizHighscoreLoaded = false;
+		quizSettings;
 
 
 	quizMediaSettingsEvent = new EventEmitter<string>();
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
-		private _router: Router
+		private _router: Router,
+		private _quizResultsService: QuizResultsService
 	){}
 
 
@@ -42,6 +48,10 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		this._quizSettingsService.setDuration(0);
 		this._quizSettingsService.setAlternatives(true);
 		this.getAreaList();
+		this.quizSettings = this._quizSettingsService.getQuizSettings();
+
+		this.loadQuizResults();
+		this.loadQuizResultsLimit50();
 
 		console.log("My area: ", this._quizSettingsService.getCurrentAreaName());
 
@@ -49,9 +59,10 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 
 
+
 		onSetArea(){
 			 this._quizSettingsService.setArea(this.selectedArea);
-			 console.log("Selected area:", this.selectedArea);
+			 //console.log("Selected area:", this.selectedArea);
 
 		}
 
@@ -62,8 +73,9 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 
     onSelectDiff(selectedDiff: number){
-		console.log("selectedDiff:", selectedDiff);
+				console.log("selectedDiff:", selectedDiff);
         this._quizSettingsService.setMediaDiff(selectedDiff);
+			
     }
 		matchCurrentSelectedDiff(diff){
 		if(diff == this._quizSettingsService.getMediaDiff()){
@@ -144,6 +156,49 @@ export class QuizAdditionalSettingsComponent implements OnInit{
     }*/
 
 
+		loadQuizResults(){
 
+			this._quizResultsService.getQuizResults(this.quizSettings)
+							.subscribe(
+									data => {
+											//console.log(data);
+											this.quizHighscoreData = Object.keys(data).map(function(k) {
+							//console.log("data[k]: ", data[k], " K:",k)
+							// if(k != 'returnData'){
+								return data[k];
+							// }
+						});
+						//remove returnData = true/false
+						this.quizHighscoreData.pop();
+
+						//console.log(this.quizHighscoreData);
+											this.quizHighscoreLoaded = true;
+									},
+									error => console.error("getQuizResults ERROR! ", error)
+							)
+		}
+
+
+		loadQuizResultsLimit50(){
+
+			this._quizResultsService.getQuizResultsLimit50(this.quizSettings)
+							.subscribe(
+									data => {
+											//console.log(data);
+											this.quizHighscoreDataLimit50 = Object.keys(data).map(function(k) {
+							//console.log("data[k]: ", data[k], " K:",k)
+							// if(k != 'returnData'){
+								return data[k];
+							// }
+						});
+						//remove returnData = true/false
+						this.quizHighscoreDataLimit50.pop();
+
+						//console.log(this.quizHighscoreData);
+											this.quizHighscoreLoaded = true;
+									},
+									error => console.error("getQuizResults ERROR! ", error)
+							)
+		}
 
 }

@@ -97,5 +97,35 @@ export class QuizResultsService{
 
 	}
 
+	getQuizResultsLimit50(quizSettings){
+
+		let mediaTypeID = quizSettings[0].mediaTypeID;
+		let areaID = quizSettings[0].areaID;
+		//areaID = 0;
+		//let timeLimit = quizSettings[0].timeLimit;
+		let numQuestions = quizSettings[0].numQuestions;
+		//let showAlternatives = quizSettings[0].showAlternatives;
+	//	let mediaDificulity = quizSettings[0].mediaDificulity;
+		let mediaDificulity = quizSettings[0].mediaDificulity;
+
+		let siteID = quizSettings[0].siteID;
+
+		let extraURL = "";
+		extraURL += "&retriveBy=" + "year";
+		extraURL += "&limit=" + 50;
+		extraURL += "&specialAreas=" + "false";
+		extraURL += "&difficulty=" + mediaDificulity;
+		extraURL += "&areaID=" + areaID;
+		extraURL += "&mediaTypeID=" + mediaTypeID;
+		extraURL += "&langID=" + 2;
+		extraURL += "&siteID=" + siteID;
+		extraURL += "&competitionGroupID=" + "false";
+
+		return this._http.get("https://hembstudios.no/birdid/IDprogram/scoreQuiz.php?JSON=1"+extraURL)
+			.map(response => response.json());
+
+	}
+
+
 
 }

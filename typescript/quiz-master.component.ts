@@ -12,6 +12,7 @@ import { QuizMediaSelectComponent }  from './media-select/quiz-media-select.comp
 import { QuizAdditionalSettingsComponent }  from './media-additional-settings/quiz-additional-settings.component';
 import { TheQuizComponent }  from './the-quiz/the-quiz.component';
 import { QuizResultComponent }  from './quiz-results/quiz-results.component';
+import {SelectSpeciesComponent} from "./select-species/select-species.component";
 
 
 @Component({
@@ -21,6 +22,7 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 	directives: [
 		QuizMediaSelectComponent,
 		QuizAdditionalSettingsComponent,
+		SelectSpeciesComponent,
 		TheQuizComponent,
 		QuizResultComponent,
 		ROUTER_DIRECTIVES
@@ -77,10 +79,12 @@ export class QuizMasterComponent implements OnInit {
 			  this.currentActive = 0;
 		  }else if(newRoute == 'mediaAdditionalSettings'){
 			  this.currentActive = 1;
-		  }else if(newRoute == 'mediaQuiz'){
+		  }else if(newRoute == 'mediaSelectSpecies'){
 			  this.currentActive = 2;
-		  }else if(newRoute == 'mediaQuizResults'){
+		  }else if(newRoute == 'mediaQuiz'){
 			  this.currentActive = 3;
+		  }else if(newRoute == 'mediaQuizResults'){
+			  this.currentActive = 4;
 		  }
 
 	  }
@@ -97,7 +101,7 @@ export class QuizMasterComponent implements OnInit {
 	  nextComponent(){
 
 		  this.currentActive ++;
-		  if(this.currentActive > 3){
+		  if(this.currentActive > 4){
 			  this.currentActive = 0;
 		  }
 

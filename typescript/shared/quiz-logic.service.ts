@@ -14,7 +14,7 @@ export class QuizLogicService{
 	score = 0;
 	questionNumber = 0; //start at 0
 
-	quizQuestionsData;;
+	quizQuestionsData;
 	quizQuestionsSettings;
 
 	constructor(private _http: Http){}

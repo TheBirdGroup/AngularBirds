@@ -1,14 +1,12 @@
-/**
- * Created by larsdolvik on 25/04/16.
- */
 import { Component, EventEmitter, Input, OnInit } from 'angular2/core';
+import { Router } from 'angular2/router';
 
 
 
 @Component({
-    selector: 'birdid-quiz-addditional-settings',
-    templateUrl: 'app/media-additional-settings/quiz-additional-settings.component.html',
-    styleUrls:  ['app/media-additional-settings/quiz-additional-settings.component.css'],
+    selector: 'birdid-select-species',
+    templateUrl: 'app/select-species/select-species.component.html',
+    styleUrls:  [''],
 
     directives: [
 
@@ -19,11 +17,11 @@ import { Component, EventEmitter, Input, OnInit } from 'angular2/core';
     outputs: ['']
 })
 export class SelectSpeciesComponent implements OnInit {
+    title = "Select species";
 
-
-    constructor(){
-    }
-
+    constructor(
+        private _router: Router
+    ){}
 
     ngOnInit() {
 

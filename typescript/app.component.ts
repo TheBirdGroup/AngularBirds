@@ -16,6 +16,7 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 
 
 import { QuizMasterComponent }  from './quiz-master.component';
+import {SelectSpeciesComponent} from "./select-species/select-species.component";
 
 @Component({
 	selector: 'birdid-idclient-main',
@@ -27,6 +28,7 @@ import { QuizMasterComponent }  from './quiz-master.component';
 		QuizMasterComponent,
 		QuizMediaSelectComponent,
 		QuizAdditionalSettingsComponent,
+		SelectSpeciesComponent,
 		TheQuizComponent,
 		QuizResultComponent,
 		ROUTER_DIRECTIVES
@@ -40,6 +42,7 @@ import { QuizMasterComponent }  from './quiz-master.component';
 @RouteConfig([
 	{path: '/mediaSelect', 				name: 'QuizMediaSelect', 				component: QuizMediaSelectComponent, useAsDefault: true},
     {path: '/mediaAdditionalSettings', 	name: 'QuizMediaAdditionalSettings', 	component: QuizAdditionalSettingsComponent  },
+	{path: '/mediaSelectSpecies',		name: 'QuizSelectSpecies',				component: SelectSpeciesComponent },
   	{path: '/mediaQuiz',				name: 'QuizMediaQuiz',					component: TheQuizComponent },
 	{path: '/mediaQuizResults',			name: 'QuizMediaQuizResults',			component: QuizResultComponent  }
 ])

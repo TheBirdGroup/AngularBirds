@@ -1,82 +1,82 @@
 <h2>{{title}}</h2>
 
 <div style="float:left; margin-left: 50px;">
-<h4>Select area</h4>
+	<h4>Select area</h4>
 
-    <select type="number" [(ngModel)]="selectedArea" (ngModelChange)="onSetArea()">
-      <option *ngFor="#c of areaList"  [ngValue]="c.id">{{c.country}}</option>
-    </select>
+	    <select type="number" [(ngModel)]="selectedArea" (ngModelChange)="onSetArea()">
+	      <option *ngFor="#c of areaList"  [ngValue]="c.id">{{c.country}}</option>
+	    </select>
 
-<!--
-<div *ngFor="#current of mediaDiff; #i=index" >
-    <button (click)="selectMediaDiff(i+1)">{{current}}</button>
-</div>
--->
-<h4> Select difficulty level</h4>
-<div class="btn-group" data-toggle="buttons">
-  <button (click)="onSelectDiff(1)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentSelectedDiff(1)}" >
-     1
-  </button>
-  <button (click)="onSelectDiff(2)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentSelectedDiff(2)}">
-     2
-  </button>
-  <button (click)="onSelectDiff(3)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentSelectedDiff(3)}">
-     3
-  </button>
-  <button (click)="onSelectDiff(4)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentSelectedDiff(4)}">
-     4
-  </button>
-</div>
+	<!--
+	<div *ngFor="#current of mediaDiff; #i=index" >
+	    <button (click)="selectMediaDiff(i+1)">{{current}}</button>
+	</div>
+	-->
+	<h4> Select difficulty level</h4>
+	<div class="btn-group" data-toggle="buttons">
+	  <button (click)="onSelectDiff(1)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentSelectedDiff(1)}" >
+	     1
+	  </button>
+	  <button (click)="onSelectDiff(2)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentSelectedDiff(2)}">
+	     2
+	  </button>
+	  <button (click)="onSelectDiff(3)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentSelectedDiff(3)}">
+	     3
+	  </button>
+	  <button (click)="onSelectDiff(4)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentSelectedDiff(4)}">
+	     4
+	  </button>
+	</div>
+
+		<br>
+
+	  <h4> Select number of questions</h4>
+	<div class="btn-group" data-toggle="buttons">
+	  <button (click)="onSelectNumQuestions(10)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentNumberQuestion(10)}">
+	    10
+	  </button>
+	  <button (click)="onSelectNumQuestions(30)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentNumberQuestion(30)}">
+	    30
+	  </button>
+	  <button (click)="onSelectNumQuestions(60)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentNumberQuestion(60)}">
+	    60
+	  </button>
+	</div>
 
 	<br>
 
-  <h4> Select number of questions</h4>
-<div class="btn-group" data-toggle="buttons">
-  <button (click)="onSelectNumQuestions(10)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentNumberQuestion(10)}">
-    10
-  </button>
-  <button (click)="onSelectNumQuestions(30)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentNumberQuestion(30)}">
-    30
-  </button>
-  <button (click)="onSelectNumQuestions(60)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentNumberQuestion(60)}">
-    60
-  </button>
-</div>
+	<h4>Select duration per question</h4>
+	<div class="btn-group" data-toggle="buttons">
+	  <button (click)="onSelectDuration(0)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(0)}">
+	    Unlimited
+	  </button>
+	  <button (click)="onSelectDuration(20)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(20)}">
+	    20sec
+	  </button>
+	  <button (click)="onSelectDuration(30)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(30)}">
+	    30sec
+	  </button>
+	  <button (click)="onSelectDuration(40)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(40)}">
+	    40sec
+	  </button>
+	</div>
 
-<br>
+	<br>
 
-<h4>Select duration per question</h4>
-<div class="btn-group" data-toggle="buttons">
-  <button (click)="onSelectDuration(0)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(0)}">
-    Unlimited
-  </button>
-  <button (click)="onSelectDuration(20)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(20)}">
-    20sec
-  </button>
-  <button (click)="onSelectDuration(30)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(30)}">
-    30sec
-  </button>
-  <button (click)="onSelectDuration(40)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(40)}">
-    40sec
-  </button>
-</div>
+	<h4> Alternatives? </h4>
+	<div class="btn-group" data-toggle="buttons">
+	  <button (click)="onSelectAlternative(true)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedAlternative(true)}">
+	    yes
+	  </button>
+	  <button (click)="onSelectAlternative(false)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedAlternative(false)}">
+	    no
+	  </button>
+	</div>
+	<br>
+	<br>
 
-<br>
-
-<h4> Alternatives? </h4>
-<div class="btn-group" data-toggle="buttons">
-  <button (click)="onSelectAlternative(true)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedAlternative(true)}">
-    yes
-  </button>
-  <button (click)="onSelectAlternative(false)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedAlternative(false)}">
-    no
-  </button>
-</div>
-<br>
-<br>
-
-<button class="btn btn-primary btn-lg"(click)="startQuiz()">Start </button>
-<br>
+	<button class="btn btn-primary btn-lg"(click)="startQuiz()">Start </button>
+	<br>
 </div>
 
 <!--
@@ -106,50 +106,9 @@
 <div style="clear:both"></div>
 -->
 
-<h2> top 20 today </h2>
-<div style="height:250px; padding-right:50px;padding-left:50px; overflow-x:auto" >
-  <table class="table table-bordered">
+<birdid-resultlist [usingTimespan]="'day'" [usingLimit]="20" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
 
-        <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Area</th>
-        <th>Score</th>
-        <th>Time</th>
-      </tr>
+<birdid-resultlist [usingTimespan]="'year'" [usingLimit]="50" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
 
-      <tr *ngFor="#current of quizHighscoreData; #i=index">
-        <td>{{i+1}}</td>
-        <td>{{current.name}}</td>
-        <td>{{current.area}}</td>
-        <td>{{current.scorePercent}}</td>
-        <td>{{current.time}}</td>
-      </tr>
-  </table>
-</div>
-
-
-
-<h2> top 50 today </h2>
-<div style="height:250px; padding-right:50px;padding-left:50px; overflow-x:auto" >
-  <table class="table table-bordered">
-
-        <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Area</th>
-        <th>Score</th>
-        <th>Time</th>
-      </tr>
-
-      <tr *ngFor="#current of quizHighscoreDataLimit50; #i=index">
-        <td>{{i+1}}</td>
-        <td>{{current.name}}</td>
-        <td>{{current.area}}</td>
-        <td>{{current.scorePercent}}</td>
-        <td>{{current.time}}</td>
-      </tr>
-  </table>
-</div>
 
 <div style="clear:both"></div>

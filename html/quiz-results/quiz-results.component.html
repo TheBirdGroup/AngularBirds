@@ -45,27 +45,8 @@
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
 
-		<table class="table table-bordered">
-		  <thead>
-		    <tr>
-			  <th>#</th>
-		      <th>Name</th>
-		      <th>Area</th>
-		      <th>Score</th>
-		      <th>Time</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr *ngFor="#current of quizHighscoreData; #i=index">
-		      <th scope="row">1</th>
-		      <td>{{current.name}}</td>
-		      <td>{{current.area}}</td>
-			  <td>{{current.scorePercent}}</td>
-			  <td>{{current.time}}</td>
-		    </tr>
-
-		  </tbody>
-		</table>
+		<birdid-resultlist [usingTimespan]="'day'" [usingLimit]="20" ></birdid-resultlist>
+		<birdid-resultlist [usingTimespan]="'year'" [usingLimit]="50" ></birdid-resultlist>
 
 	</div>
 

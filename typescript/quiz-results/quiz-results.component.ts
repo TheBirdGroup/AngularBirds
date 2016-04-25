@@ -1,4 +1,4 @@
-import { Component, OnInit }       from 'angular2/core';
+import { Component, OnInit, EventEmitter }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { Router } from 'angular2/router';
 
@@ -6,12 +6,14 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';
 import { QuizLogicService }  from './../shared/quiz-logic.service';
 
+import { ResultlistComponent }  from './../shared.component/resultlist.component';
+
 @Component({
 	selector: 'birdid-quiz-result',
 	templateUrl: 'app/quiz-results/quiz-results.component.html',
 	styleUrls:  ['app/quiz-results/quiz-results.component.css'],
 	directives: [
-
+		ResultlistComponent
 	],
 	providers: [
 		HTTP_PROVIDERS
@@ -32,6 +34,8 @@ export class QuizResultComponent implements OnInit  {
 	quizHighscoreData;
 	quizHighscoreLoaded = false;
 
+	randomValue = 0;
+
 	constructor(
 		private _quizResultsService: QuizResultsService,
 		private _quizLogicService: QuizLogicService,
@@ -49,24 +53,7 @@ export class QuizResultComponent implements OnInit  {
 
 	loadQuizResults(){
 
-		this._quizResultsService.getQuizResults(this.quizSettings)
-            .subscribe(
-                data => {
-                    //console.log(data);
-                    this.quizHighscoreData = Object.keys(data).map(function(k) {
-						//console.log("data[k]: ", data[k], " K:",k)
-						// if(k != 'returnData'){
-							return data[k];
-						// }
-					});
-					//remove returnData = true/false
-					this.quizHighscoreData.pop();
 
-					//console.log(this.quizHighscoreData);
-                    this.quizHighscoreLoaded = true;
-                },
-                error => console.error("getQuizResults ERROR! ", error)
-            )
 	}
 
 

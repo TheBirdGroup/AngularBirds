@@ -70,7 +70,7 @@ export class QuizResultsService{
 
 	}
 
-	getQuizResults(quizSettings){
+	getQuizResults(quizSettings, timespan, limit){
 
 		let mediaTypeID = quizSettings[0].mediaTypeID;
 		let areaID = quizSettings[0].areaID;
@@ -82,8 +82,8 @@ export class QuizResultsService{
 		let siteID = quizSettings[0].siteID;
 
 		let extraURL = "";
-		extraURL += "&retriveBy=" + "year";
-		extraURL += "&limit=" + 20;
+		extraURL += "&retriveBy=" + timespan;
+		extraURL += "&limit=" + limit;
 		extraURL += "&specialAreas=" + "false";
 		extraURL += "&difficulty=" + mediaDificulity;
 		extraURL += "&areaID=" + areaID;

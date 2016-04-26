@@ -18,6 +18,8 @@ export class SelectSpeciesComponent implements OnInit {
     arrayOfSelectedSpecies = [];
     i = 0;
     j = 0;
+    delSpecieId;
+    delSpecieName;
 
 
     constructor(
@@ -34,7 +36,7 @@ export class SelectSpeciesComponent implements OnInit {
 
     selectSpecie(){
         this.displaySelectedSpecies[this.i++] = this.selectedSpecie;
-        this.arrayOfSelectedSpecies[this.j++] = this.selectedSpecie[0];
+        this.arrayOfSelectedSpecies[this.j++] = this.selectedSpecie.id;
         this._quizSpeciesService.setSpecie(this.arrayOfSelectedSpecies);
         console.log(this.arrayOfSelectedSpecies);
     }
@@ -44,7 +46,13 @@ export class SelectSpeciesComponent implements OnInit {
     }
 
     deleteSpecie(specie){
+        this.delSpecieId = specie.id;
+        this.delSpecieName = specie.name;
+        delete this.displaySelectedSpecies[this.delSpecieName];
 
+        console.log(this.delSpecieName);
+        console.log(this.displaySelectedSpecies);
+        
     }
 
 }

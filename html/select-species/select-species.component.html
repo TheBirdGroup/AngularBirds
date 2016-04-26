@@ -7,6 +7,6 @@
 <h3>Selected species</h3>
 <ul>
     <li *ngFor="#specie of displaySelectedSpecies">
-        {{specie.name}} ({{specie.latin}}) <button (onclick)="deleteSpecie(specie)">Delete</button>
+        {{specie.name}} ({{specie.latin}}) <button (click)="deleteSpecie(specie)">Delete</button>
     </li>
 </ul>

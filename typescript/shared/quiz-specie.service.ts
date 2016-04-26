@@ -11,6 +11,7 @@ export class QuizSpecieService implements OnInit{
 	speciesData;
 	specieList: string[][];
 	numSpecies = 0;
+	arrayOfSpecies;
 
 	speciesDataLoaded = false;
 	speciesLoadProblems = false;
@@ -82,6 +83,14 @@ export class QuizSpecieService implements OnInit{
 	getSpecieList(){
 
 		return this.specieList;
+
+	}
+	setSpecie(arrayOfSelectedSpecies){
+		if(arrayOfSelectedSpecies==undefined || arrayOfSelectedSpecies==null){
+
+		}else{
+			this.arrayOfSpecies = arrayOfSelectedSpecies;
+		}
 
 	}
 

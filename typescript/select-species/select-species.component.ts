@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit } from 'angular2/core';
 import { Router } from 'angular2/router';
-import { QuizSettingsService }  from './../shared/quiz-settings.service';
+import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 
 
@@ -19,36 +19,31 @@ export class SelectSpeciesComponent implements OnInit {
     i = 0;
     j = 0;
 
-    mockSpecies = [
-        {"id": "1", "name":"Lars"},
-        {"id": "2", "name":"Greger"},
-        {"id": "3", "name":"Mile"},
-        {"id": "4", "name":"Mariya"},
-
-    ];
-
-
     
     constructor(
-        private _quizSettingsService: QuizSettingsService,
+        private _quizSpeciesService: QuizSpecieService,
         private _router: Router
     ){}
 
     ngOnInit() {
-        this._quizSettingsService.getSpecieList();
+        this._quizSpeciesService.getSpecieList();
         console.log(this.specieList);
         this.getSpecieList();
 
     }
     
     selectSpecie(){
-        this.displaySelectedSpecies[this.i++] = this.selectedSpecie.name;
-        this.arrayOfSelectedSpecies[this.j++] = this.selectedSpecie.id;
-        this._quizSettingsService.setSpecie(this.arrayOfSelectedSpecies);
-        console.log(this.specieList[1]);
+        this.displaySelectedSpecies[this.i++] = this.selectedSpecie;
+        this.arrayOfSelectedSpecies[this.j++] = this.selectedSpecie[0];
+        this._quizSpeciesService.setSpecie(this.arrayOfSelectedSpecies);
+        console.log(this.arrayOfSelectedSpecies);
     }
     getSpecieList(){
-        this.specieList=this._quizSettingsService.getSpecieList();
+        this.specieList=this._quizSpeciesService.getSpecieList();
+    }
+
+    deleteSpecie(specie){
+
     }
     
 }

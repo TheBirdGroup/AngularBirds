@@ -37,8 +37,7 @@ export class SelectSpeciesComponent implements OnInit {
     selectSpecie(){
         this.displaySelectedSpecies[this.i++] = this.selectedSpecie;
         this.arrayOfSelectedSpecies[this.j++] = this.selectedSpecie.id;
-        this._quizSpeciesService.setSpecie(this.arrayOfSelectedSpecies);
-        console.log(this.arrayOfSelectedSpecies);
+       // console.log(this.arrayOfSelectedSpecies);
     }
     getSpecieList(){
 		//console.log("this._quizSpeciesService.getSpecieList(): ", this._quizSpeciesService.getSpecieList());
@@ -46,13 +45,35 @@ export class SelectSpeciesComponent implements OnInit {
     }
 
     deleteSpecie(specie){
+        this.j = 0;
+        this.i = 0;
+        let tempSpecieNames = [];
+        let tempSpecieId = [];
         this.delSpecieId = specie.id;
-        this.delSpecieName = specie.name;
-        delete this.displaySelectedSpecies[this.delSpecieName];
+        this.delSpecieName = specie;
 
-        console.log(this.delSpecieName);
-        console.log(this.displaySelectedSpecies);
+        for (let p of Object.keys(this.displaySelectedSpecies)) {
+            if(this.displaySelectedSpecies[this.j].id != this.delSpecieName.id) {
+                tempSpecieNames.push(this.displaySelectedSpecies[p]);
+                this.j++;
+            }
+        }
+        this.displaySelectedSpecies = tempSpecieNames;
+        console.log(this.displaySelectedSpecies, "Name array");
+
+
+        for (let k of Object.keys(this.arrayOfSelectedSpecies)) {
+            if(this.arrayOfSelectedSpecies[this.i] != this.delSpecieId) {
+                tempSpecieId.push(this.arrayOfSelectedSpecies[k]);
+                this.i++;
+            }
+        }
+        this.arrayOfSelectedSpecies = tempSpecieId;
+        console.log(this.arrayOfSelectedSpecies, "ID array");
         
+    }
+    postSpeciesId(){
+        this._quizSpeciesService.setSpecie(this.arrayOfSelectedSpecies);
     }
 
 }

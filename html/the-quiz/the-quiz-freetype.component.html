@@ -13,17 +13,20 @@
 				[(ngModel)]="formSpecieName"
 				#username="ngForm"
 				class="form-control"
-				placeholder="Your Name"
+				placeholder="Specie Name"
 				(keyup)="inputSpecieNameChange()"
 				aria-describedby="sizing-addon1 basic-addon1"
 			required>
 			<span class="input-group-addon redWarningText"  *ngIf="!username.valid">Not Valid</span>
 
 		</div>
+
+		<select [(ngModel)]="selectedSpecie" class="form-control" >
+		    <option *ngFor="#specie of specieListProsessed" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
+		</select>
+
 	</div>
 
-	<select [(ngModel)]="selectedSpecie" >
-	    <option *ngFor="#specie of specieList | nameSearch:formSpecieName" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
-	</select>
+
 
 </form>

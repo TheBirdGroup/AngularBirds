@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from "angular2/core"
 
+//NOT WORKING!!!!!
+
 @Pipe({
 	name: 'nameSearch'
 })
@@ -7,7 +9,9 @@ export class NameSearchPipe implements PipeTransform{
 
 	returnArray;
 
-	transform(value: string, args:any){
+	transform(value: string, args:string){
+
+		console.log("test tolower: ", "ThisIsGood".toLowerCase())
 
 		this.returnArray = [];
 		let compaareString:string = args;

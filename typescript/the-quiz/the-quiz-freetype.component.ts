@@ -29,6 +29,7 @@ export class TheQuizFreetypeComponent implements OnInit{
 	selectedSpecie;
 
 	specieList;
+	specieListProsessed;
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
@@ -38,6 +39,7 @@ export class TheQuizFreetypeComponent implements OnInit{
 	ngOnInit() {
 
 		this.specieList = this._quizSpeciesService.getSpecieList();
+		this.specieListProsessed = this.specieList;
 
 	}
 
@@ -47,11 +49,26 @@ export class TheQuizFreetypeComponent implements OnInit{
 
 	}
 
+	//well, pipes did not work, neither did pre prosessing of list so this will have to do...
 	inputSpecieNameChange(){
 
-		console.log("inputSpecieNameChange: ", this.formSpecieName);
+		this.specieListProsessed = [];
+
+		for (let id of Object.keys(this.specieList)) {
+
+			//if formSpecieName is a substring of name in list, or there is no formSpecieName
+			if(this.specieList[id].name.toLowerCase().indexOf(this.formSpecieName.toLowerCase()) >= 0 || this.formSpecieName.length == 0){
+
+				this.specieListProsessed.push(this.specieList[id]);
+
+			}
+
+		}
+
+
 
 	}
+
 
 
 

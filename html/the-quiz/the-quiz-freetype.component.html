@@ -1,0 +1,29 @@
+<form (ngSubmit)="false" #form="ngForm" >
+
+	<div class="freetypeInputContainer">
+
+		<h4><label for="username">Start by spelling the specie:</label></h4>
+		<div class="unsernameInput input-group">
+
+			<span class="input-group-addon" id="basic-addon1">Name:</span>
+			<input
+				type="text"
+				id="username"
+				ngControl="username"
+				[(ngModel)]="formSpecieName"
+				#username="ngForm"
+				class="form-control"
+				placeholder="Your Name"
+				(keyup)="inputSpecieNameChange()"
+				aria-describedby="sizing-addon1 basic-addon1"
+			required>
+			<span class="input-group-addon redWarningText"  *ngIf="!username.valid">Not Valid</span>
+
+		</div>
+	</div>
+
+	<select [(ngModel)]="selectedSpecie" >
+	    <option *ngFor="#specie of specieList | nameSearch:formSpecieName" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
+	</select>
+
+</form>

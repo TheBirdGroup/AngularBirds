@@ -10,6 +10,7 @@ export class QuizSpecieService implements OnInit{
 
 	speciesData;
 	specieList: string[][];
+	specieListJSON;
 	numSpecies = 0;
 	arrayOfSpecies;
 
@@ -43,6 +44,9 @@ export class QuizSpecieService implements OnInit{
 		this._http.get("https://hembstudios.no//birdid/IDprogram/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID)
 			.map(response => response.json()).subscribe(
 	            data => {
+
+					this.specieListJSON = data;
+					delete this.specieListJSON['numSpeciesDiplayed'];
 
 	                this.speciesData = data;
 					this.prosessSpecielist();
@@ -91,6 +95,12 @@ export class QuizSpecieService implements OnInit{
 		}else{
 			this.arrayOfSpecies = arrayOfSelectedSpecies;
 		}
+
+	}
+
+	getSpecieListJSON(){
+
+		return this.specieListJSON;
 
 	}
 

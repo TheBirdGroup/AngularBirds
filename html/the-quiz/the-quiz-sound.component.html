@@ -16,7 +16,7 @@
 		[attr.aria-valuenow]="progressPercent"
 		aria-valuemin="0"
 		aria-valuemax="100"
-		[ngStyle]="{width: (progressPercent < 100 ? progressPercent : 100) + '%', transition: 'all 0s ease 0s'}"
+		[ngStyle]="{width: progressPercent + '%'}"
 		style="width:70%">
 
 		<span>{{currentTime}}s/{{totTime}}s</span>

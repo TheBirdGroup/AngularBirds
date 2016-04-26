@@ -1,12 +1,12 @@
 <h2>{{title}}</h2>
 
 <select [(ngModel)]="selectedSpecie" (ngModelChange)="selectSpecie()">
-    <option *ngFor="#specie of specieList"  [ngValue]="specie">{{specie[1]}} ({{specie[2]}})</option>
+    <option *ngFor="#specie of specieList"  [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 </select>
 
 <h3>Selected species</h3>
 <ul>
     <li *ngFor="#specie of displaySelectedSpecies">
-        {{specie[1]}} ({{specie[2]}}) <button (onclick)="deleteSpecie(specie)">Delete</button>
+        {{specie.name}} ({{specie.latin}}) <button (onclick)="deleteSpecie(specie)">Delete</button>
     </li>
 </ul>

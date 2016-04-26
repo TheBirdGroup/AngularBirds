@@ -39,7 +39,7 @@ export class SelectSpeciesComponent implements OnInit {
         console.log(this.arrayOfSelectedSpecies);
     }
     getSpecieList(){
-        this.specieList=this._quizSpeciesService.getSpecieList();
+        this.specieList=this._quizSpeciesService.getSpecieListJSON();
     }
 
     deleteSpecie(specie){

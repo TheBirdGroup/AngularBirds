@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 export class QuizSpecieService implements OnInit{
 
 	speciesData;
-	specieList: string[][];
+	specieList;
 	specieListJSON;
 	numSpecies = 0;
 	arrayOfSpecies;
@@ -65,6 +65,8 @@ export class QuizSpecieService implements OnInit{
 	//somewhat JSON to js array
 	private prosessSpecielist(){
 
+
+
 		// console.log(this.speciesData);
 		// console.log(this.speciesData['numSpeciesDiplayed']);
 
@@ -72,13 +74,14 @@ export class QuizSpecieService implements OnInit{
 
 		this.specieList = [];
 
-		for(var i = 0; i < this.numSpecies; i ++){
-			this.specieList.push([this.speciesData[i]['id'], this.speciesData[i]['name'], this.speciesData[i]['latin']])
+		//make Array of JSON objects
+		for (let id of Object.keys(this.speciesData)) {
+			this.specieList.push(this.speciesData[id]);
 		}
 
 
 		// console.log(this.speciesData[5]);
-		// console.log("this.specieList: ", this.specieList);
+		//console.log("this.specieList: ---------- ", this.specieList);
 		// console.log("this.specieList11: ", this.specieList[1][1]);
 
 

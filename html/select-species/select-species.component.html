@@ -1,7 +1,7 @@
 <h2>{{title}}</h2>
 
 <select [(ngModel)]="selectedSpecie" (ngModelChange)="selectSpecie()">
-    <option *ngFor="#specie of specieList"  [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
+    <option *ngFor="#specie of specieList" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 </select>
 
 <h3>Selected species</h3>

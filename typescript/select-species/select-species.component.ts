@@ -19,7 +19,7 @@ export class SelectSpeciesComponent implements OnInit {
     i = 0;
     j = 0;
 
-    
+
     constructor(
         private _quizSpeciesService: QuizSpecieService,
         private _router: Router
@@ -27,11 +27,11 @@ export class SelectSpeciesComponent implements OnInit {
 
     ngOnInit() {
         this._quizSpeciesService.getSpecieList();
-        console.log(this.specieList);
+        //console.log(this.specieList);
         this.getSpecieList();
 
     }
-    
+
     selectSpecie(){
         this.displaySelectedSpecies[this.i++] = this.selectedSpecie;
         this.arrayOfSelectedSpecies[this.j++] = this.selectedSpecie[0];
@@ -39,14 +39,12 @@ export class SelectSpeciesComponent implements OnInit {
         console.log(this.arrayOfSelectedSpecies);
     }
     getSpecieList(){
-        this.specieList=this._quizSpeciesService.getSpecieListJSON();
+		//console.log("this._quizSpeciesService.getSpecieList(): ", this._quizSpeciesService.getSpecieList());
+        this.specieList=this._quizSpeciesService.getSpecieList();
     }
 
     deleteSpecie(specie){
 
     }
-    
+
 }
-
-
-

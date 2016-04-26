@@ -1,1 +1,12 @@
-<h1>{{title}}</h1>
+<h2>{{title}}</h2>
+
+<select [(ngModel)]="selectedSpecie" (ngModelChange)="selectSpecie()">
+    <option *ngFor="#specie of specieList"  [ngValue]="specie">{{specie.name}}</option>
+</select>
+
+<h3>Selected species</h3>
+<ul>
+    <li *ngFor="#specie of displaySelectedSpecies">
+        {{ specie }}
+    </li>
+</ul>

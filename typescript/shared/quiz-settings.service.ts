@@ -29,6 +29,11 @@ export class QuizSettingsService{
 	areaLoadProblems = false;
 	areaListData;
 	selectedArea = 0;
+	
+	arrayOfSpecies =[];
+	specieListData = [];
+	specieListLoaded = false;
+	specieLoadProblems = false;
 
 
 
@@ -52,6 +57,7 @@ export class QuizSettingsService{
 
 
 		this.loadAreaList();
+		this.loadSpecieList();
 
 	}
 
@@ -71,7 +77,29 @@ export class QuizSettingsService{
 	        );
 
 	}
+	loadSpecieList() {
 
+		this._http.get("https://hembstudios.no//birdid/IDprogram/getSpecieList.php?JSON=1")
+			.map(response => response.json()).subscribe( // this is getting the translation PLUS the areas
+			data => {
+				this.specieListData = [];
+				if (data) {
+					for (let id of Object.keys(data)) {
+						this.specieListData.push(data[id]);
+
+
+					}
+				}
+				//	console.log("this.areaListData: ", this.areaListData);
+				this.specieListLoaded = true;
+			},
+			error => {
+				this.specieLoadProblems = true;
+				console.error("loadSpecieList ERROR! ", error)
+			}
+		);
+
+	}
 	dataLoaded(){
 
 		return this.areaListLoaded;
@@ -88,6 +116,10 @@ export class QuizSettingsService{
 
 
 			return this.areaListData;
+	}
+	getSpecieList(){
+		
+		return this.specieListData;
 	}
 
 	getCurrentAreaName(){
@@ -136,6 +168,14 @@ export class QuizSettingsService{
 
 
 
+
+	}
+	setSpecie(arrayOfSelectedSpecies){
+		if(arrayOfSelectedSpecies==undefined || arrayOfSelectedSpecies==null){
+
+		}else{
+			this.arrayOfSpecies = arrayOfSelectedSpecies;
+		}
 
 	}
 

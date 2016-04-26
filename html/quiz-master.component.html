@@ -22,11 +22,11 @@
 </nav>
 
 <div class="jumbotron">
-	<div *ngIf="(!_quizTranslationService.translationsAreLoaded() || !_quizSettingsService.dataLoaded()) && !_quizTranslationService.translationsLoadProblems() && !_quizSettingsService.dataLoadProblems()">
+	<div *ngIf="(!_quizTranslationService.translationsAreLoaded() || !_quizSettingsService.dataLoaded() || !_quizSpecieService.dataLoaded()) && !_quizTranslationService.translationsLoadProblems() && !_quizSettingsService.dataLoadProblems()">
 		<img src="loading.gif" alt="Loading..." height="200" width="200">
 	</div>
 
-	<div *ngIf="_quizTranslationService.translationsAreLoaded() && _quizSettingsService.dataLoaded()">
+	<div *ngIf="_quizTranslationService.translationsAreLoaded() && _quizSettingsService.dataLoaded() && _quizSpecieService.dataLoaded()">
 		<router-outlet></router-outlet>
 	</div>
 	<div *ngIf="_quizTranslationService.translationsLoadProblems() || _quizSettingsService.dataLoadProblems()" class="alert alert-danger">

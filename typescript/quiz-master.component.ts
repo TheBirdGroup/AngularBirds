@@ -7,6 +7,7 @@ import { QuizQuestionsService }  from './shared/quiz-questions.service';
 import { QuizLogicService }  from './shared/quiz-logic.service';
 import { QuizTranslationService }  from './shared/quiz-translation.service';
 import { QuizResultsService }  from './shared/quiz-results.service';
+import { QuizSpecieService }  from './shared/quiz-specie.service';
 
 import { QuizMediaSelectComponent }  from './media-select/quiz-media-select.component';
 import { QuizAdditionalSettingsComponent }  from './media-additional-settings/quiz-additional-settings.component';
@@ -32,7 +33,8 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 		QuizQuestionsService,
 		QuizLogicService,
 		QuizTranslationService,
-		QuizResultsService
+		QuizResultsService,
+		QuizSpecieService
 	]
 })
 
@@ -60,6 +62,7 @@ export class QuizMasterComponent implements OnInit {
 		  private _quizLogicService: QuizLogicService,
 		  private _quizTranslationService: QuizTranslationService,
 		  private _quizResultsService: QuizResultsService,
+		  private _quizSpecieService: QuizSpecieService,
 		  private _router: Router
 	  ){
 
@@ -70,7 +73,7 @@ export class QuizMasterComponent implements OnInit {
 
 	  onRouteChange(newRoute){
 
-		  console.log("Route change: ", newRoute );
+		  //console.log("Route change: ", newRoute );
 
 		  //mostly only used for dev bar on top currently
 		  if(newRoute == 'mediaSelect'){
@@ -91,6 +94,7 @@ export class QuizMasterComponent implements OnInit {
 		this._quizTranslationService.initialize(this.siteID);
 		this._quizSettingsService.initialize(this.siteID);
 		this._quizResultsService.initialize(this.siteID);
+		this._quizSpecieService.initialize(this.siteID);
 
 	 }
 

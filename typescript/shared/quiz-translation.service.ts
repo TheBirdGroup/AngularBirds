@@ -77,7 +77,7 @@ export class QuizTranslationService implements OnInit{
 		// });
 		// return this.promise;
 
-		console.log("this.transDataLoaded: ", this.transDataLoaded)
+		//console.log("this.transDataLoaded: ", this.transDataLoaded)
 		if(!this.transDataLoaded){
 			return "TRANSLATIONS NOT LOADED"
 		}else{

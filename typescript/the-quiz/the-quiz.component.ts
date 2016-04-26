@@ -11,6 +11,8 @@ import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 import { TheQuizImageComponent }  from './the-quiz-image.component';
 import { TheQuizSoundComponent }  from './the-quiz-sound.component';
 
+import { QuizQuestion }  from './the-quiz-question.class';
+
 
 
 @Component({
@@ -211,12 +213,25 @@ export class TheQuizComponent implements OnInit{
 
         this.selectedButtonAltID = 5;
 
-				if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){
-				console.log("hehe");
-				this.ticks=0;
-				this.timer = Observable.timer(2000,1000);
-				this.timerSubscription = 	this.timer.subscribe(t=>this.timerTick(t));
-			}
+		if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){
+			console.log("hehe");
+			this.ticks=0;
+			this.timer = Observable.timer(2000,1000);
+			this.timerSubscription = 	this.timer.subscribe(t=>this.timerTick(t));
+		}
+
+		let tempQuestion = new QuizQuestion();
+		tempQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
+		tempQuestion.addChoice(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['name']);
+		tempQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['name']);
+		tempQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['name']);
+		tempQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['name']);
+
+		tempQuestion.prosessData();
+
+		if(tempQuestion.checkIfAnserIsCorrect(alts['right_answer']['id'])){
+			//RIGHT ANSWER!
+		}
 
 
     }

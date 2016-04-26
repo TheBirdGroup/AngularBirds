@@ -1,4 +1,33 @@
-<audio controls autoplay loop>
+<audio
+	id="player"
+	(timeupdate)="updateProgressbar($event)"
+	(loadeddata)="soundLoadedEvent(event)"
+	#myAudio
+	loop>
 	<source [src]="mediaURLStart+soundMiddleURL+mediaURL" type="audio/mpeg">
 	Your browser does not support the audio element.
 </audio>
+
+<div class="progress">
+	<div
+		class="progress-bar progress-bar-striped"
+		#progressBar
+		role="progressbar"
+		[attr.aria-valuenow]="progressPercent"
+		aria-valuemin="0"
+		aria-valuemax="100"
+		[ngStyle]="{width: progressPercent + '%'}"
+		style="width:70%">
+
+		<span>{{currentTime}}s/{{totTime}}s</span>
+
+	</div>
+</div>
+<br>
+
+<div>
+	<button class="btn btn-primary btn-lg" (click)="playAudio()"><span class="glyphicon glyphicon-play"></span></button>
+	<button class="btn btn-danger btn-lg" (click)="pauseAudio()"><span class="glyphicon glyphicon-pause"></span></button>
+	<button class="btn btn-info btn-lg" (click)="volumeIncrease()"><span class="glyphicon glyphicon-volume-up"></span></button>
+	<button class="btn btn-info btn-lg" (click)="volumeDecrease()"><span class="glyphicon glyphicon-volume-down"></span></button>
+</div>

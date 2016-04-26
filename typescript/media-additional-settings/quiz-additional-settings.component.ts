@@ -5,18 +5,19 @@ import { Router } from 'angular2/router';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';
 
+import { ResultlistComponent }  from './../shared.component/resultlist.component';
+
 @Component({
 	selector: 'birdid-quiz-addditional-settings',
 	templateUrl: 'app/media-additional-settings/quiz-additional-settings.component.html',
     styleUrls:  ['app/media-additional-settings/quiz-additional-settings.component.css'],
 
     directives: [
-
+		ResultlistComponent
 	],
 	providers: [
 
 	],
-	outputs: ['quizMediaSettingsEvent']
 })
 export class QuizAdditionalSettingsComponent implements OnInit{
 	title = 'Birdid Quiz media additional settings!';
@@ -31,8 +32,8 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		quizHighscoreLoaded = false;
 		quizSettings;
 
+	updateResultlistIncrement = 0;
 
-	quizMediaSettingsEvent = new EventEmitter<string>();
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
@@ -50,32 +51,38 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		this.getAreaList();
 		this.quizSettings = this._quizSettingsService.getQuizSettings();
 
-		this.loadQuizResults();
-		this.loadQuizResultsLimit50();
-
 		console.log("My area: ", this._quizSettingsService.getCurrentAreaName());
+
+	}
+
+	updatehighscorelist(){
+
+		//ugly solution, but it works. It forces an onInput hange event in highscorelist and it loads the new list
+		this.updateResultlistIncrement ++;
 
 	}
 
 
 
 
-		onSetArea(){
-			 this._quizSettingsService.setArea(this.selectedArea);
-			 //console.log("Selected area:", this.selectedArea);
+	onSetArea(){
+		 this._quizSettingsService.setArea(this.selectedArea);
+		 //console.log("Selected area:", this.selectedArea);
+		 this.updatehighscorelist();
 
-		}
+	}
 
 
-		getAreaList(){
-				this.areaList=this._quizSettingsService.getAreaList();
-			}
+	getAreaList(){
+		this.areaList=this._quizSettingsService.getAreaList();
+	}
 
 
     onSelectDiff(selectedDiff: number){
 				console.log("selectedDiff:", selectedDiff);
         this._quizSettingsService.setMediaDiff(selectedDiff);
-			
+		this.updatehighscorelist();
+
     }
 		matchCurrentSelectedDiff(diff){
 		if(diff == this._quizSettingsService.getMediaDiff()){
@@ -156,49 +163,5 @@ export class QuizAdditionalSettingsComponent implements OnInit{
     }*/
 
 
-		loadQuizResults(){
-
-			this._quizResultsService.getQuizResults(this.quizSettings)
-							.subscribe(
-									data => {
-											//console.log(data);
-											this.quizHighscoreData = Object.keys(data).map(function(k) {
-							//console.log("data[k]: ", data[k], " K:",k)
-							// if(k != 'returnData'){
-								return data[k];
-							// }
-						});
-						//remove returnData = true/false
-						this.quizHighscoreData.pop();
-
-						//console.log(this.quizHighscoreData);
-											this.quizHighscoreLoaded = true;
-									},
-									error => console.error("getQuizResults ERROR! ", error)
-							)
-		}
-
-
-		loadQuizResultsLimit50(){
-
-			this._quizResultsService.getQuizResultsLimit50(this.quizSettings)
-							.subscribe(
-									data => {
-											//console.log(data);
-											this.quizHighscoreDataLimit50 = Object.keys(data).map(function(k) {
-							//console.log("data[k]: ", data[k], " K:",k)
-							// if(k != 'returnData'){
-								return data[k];
-							// }
-						});
-						//remove returnData = true/false
-						this.quizHighscoreDataLimit50.pop();
-
-						//console.log(this.quizHighscoreData);
-											this.quizHighscoreLoaded = true;
-									},
-									error => console.error("getQuizResults ERROR! ", error)
-							)
-		}
 
 }

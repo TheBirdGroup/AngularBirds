@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit }       from 'angular2/core';
+import { Component, ViewChild, EventEmitter, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
@@ -19,17 +19,18 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 export class TheQuizSoundComponent implements OnInit{
 	title = 'Birdid Quiz TheQuizComponent!';
-
+	@ViewChild("myAudio") myAudio;
 	mediaURLStart = "https://hembstudios.no/birdid/";
 	extraSiteID;
 	soundMiddleURL = ""
 
     mediaURL = "";
+		volume = 0.5;
 
 	constructor(private _quizSettingsService: QuizSettingsService){}
 
 	ngOnInit() {
-
+		let audio = this.myAudio;
 		let quizSettings = this._quizSettingsService.getQuizSettings();
 		let siteID = quizSettings[0].siteID;
 		if(siteID == 1){
@@ -43,6 +44,32 @@ export class TheQuizSoundComponent implements OnInit{
 		this.extraSiteID = "&siteID="+siteID;
 
 	}
+playAudio(){
+	this.myAudio.nativeElement.play();
+	console.log(this.myAudio);
+}
+
+pauseAudio(){
+	this.myAudio.nativeElement.pause();
+}
+
+volumeIncrease(){
+	this.volume+=0.1;
+	if(this.volume>1){
+		this.volume = 1;
+	}
+	this.myAudio.nativeElement.volume=this.volume;
+}
+
+volumeDecrease(){
+	this.volume-=0.1;
+	if(this.volume<0){
+		this.volume = 0;
+	}
+	this.myAudio.nativeElement.volume=this.volume;
+}
+
+
 
 
 }

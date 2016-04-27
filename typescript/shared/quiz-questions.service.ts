@@ -6,6 +6,7 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
+import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 
 // import { quizQuestions } from './mock-quizQuestion';
@@ -16,7 +17,10 @@ export class QuizQuestionsService{
 
 	lastQuizSettings;
 
-	constructor(private _http: Http){}
+	constructor(
+		private _http: Http,
+		private _quizSpeciesService: QuizSpecieService
+	){}
 
 	getQuizQuestions(settings:QuizSetting[]): Observable<any>{
 
@@ -38,6 +42,12 @@ export class QuizQuestionsService{
 		extraURL += "&difficulty=" + mediaDificulity;
 		extraURL += "&areaID=" + areaID;
 		extraURL += "&mediaType=" + mediaTypeID;
+
+		if(this._quizSpeciesService.getSelectedSpecieList().length > 0){
+			extraURL += "&custumSpecieList=" + this._quizSpeciesService.getSelectedSpecieListCSV();
+		}
+
+
 		extraURL += "&langID=" + 2;
 		extraURL += "&siteID=" + siteID;
 

@@ -68,7 +68,7 @@ export class SelectSpeciesComponent implements OnInit {
 
     }
     postSpeciesId(){
-        this._quizSpeciesService.setSpecie(this.arrayOfSelectedSpecies);
+        this._quizSpeciesService.setSelectedSpecie(this.arrayOfSelectedSpecies);
         this._router.navigate(["QuizMediaQuiz"]);
     }
 

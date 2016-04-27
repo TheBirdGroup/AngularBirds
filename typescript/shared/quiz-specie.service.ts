@@ -5,6 +5,8 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
 
+
+
 @Injectable()
 export class QuizSpecieService implements OnInit{
 
@@ -12,7 +14,7 @@ export class QuizSpecieService implements OnInit{
 	specieList;
 	specieListJSON;
 	numSpecies = 0;
-	arrayOfSpecies;
+	arrayOfSelectedSpecies = [];
 
 	speciesDataLoaded = false;
 	speciesLoadProblems = false;
@@ -21,7 +23,9 @@ export class QuizSpecieService implements OnInit{
 
 	promise;
 
-	constructor(private _http: Http){}
+	constructor(
+		private _http: Http
+	){}
 
 	//not working in services?
 	ngOnInit() {
@@ -36,6 +40,8 @@ export class QuizSpecieService implements OnInit{
 		this.siteID = siteID;
 
 		this.loadSpecies();
+
+		//this.setSelectedSpecie([1854,1422,1901,1136,1221,1791,1729,1984,1313,1359,1628,1409,1149,1669,1531]);
 
 	}
 
@@ -92,11 +98,30 @@ export class QuizSpecieService implements OnInit{
 		return this.specieList;
 
 	}
-	setSpecie(arrayOfSelectedSpecies){
+
+	getSelectedSpecieList(){
+
+		return this.arrayOfSelectedSpecies;
+
+	}
+
+	getSelectedSpecieListCSV(){
+
+		let stringList = ""
+
+		for (let id of Object.keys(this.arrayOfSelectedSpecies)) {
+			stringList += this.arrayOfSelectedSpecies[id] + ","
+		}
+
+		return stringList.substring(0, stringList.length-1);
+
+	}
+
+	setSelectedSpecie(arrayOfSelectedSpecies){
 		if(arrayOfSelectedSpecies==undefined || arrayOfSelectedSpecies==null){
 
 		}else{
-			this.arrayOfSpecies = arrayOfSelectedSpecies;
+			this.arrayOfSelectedSpecies = arrayOfSelectedSpecies;
 		}
 
 	}

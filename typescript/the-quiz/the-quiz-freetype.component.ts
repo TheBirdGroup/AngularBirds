@@ -1,8 +1,6 @@
 import { Component, EventEmitter, OnInit, ViewChild, AfterViewInit, ElementRef }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
-import { NameSearchPipe }  from './../shared.pipe/name-search.pipe';
-
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
@@ -17,7 +15,7 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 	  HTTP_PROVIDERS
 	],
 	pipes: [
-		NameSearchPipe
+
 	]
 	//inputs: ['mediaID:usingMediaID'], //using ALIAS
 })

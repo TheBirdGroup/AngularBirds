@@ -53,10 +53,10 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	ngOnChanges(){
 		if(this.inbetweenQuestions){
-			console.log("inbetween quests ", this.specieQuestionObject);
+			//console.log("inbetween quests ", this.specieQuestionObject);
 
 		}else{
-			console.log("!inbetween quests");
+			//console.log("!inbetween quests");
 		}
 	}
 

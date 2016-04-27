@@ -28,9 +28,9 @@
 	  </button>
 	</div>
 
-		<br>
+	<br>
 
-	  <h4> Select number of questions</h4>
+	<h4> Select number of questions</h4>
 	<div class="btn-group" data-toggle="buttons">
 	  <button (click)="onSelectNumQuestions(10)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchCurrentNumberQuestion(10)}">
 	    10
@@ -63,17 +63,20 @@
 
 	<br>
 
-	<h4> Alternatives? </h4>
-	<div class="btn-group" data-toggle="buttons">
-	  <button (click)="onSelectAlternative(true)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedAlternative(true)}">
-	    yes
-	  </button>
-	  <button (click)="onSelectAlternative(false)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedAlternative(false)}">
-	    no
-	  </button>
-	</div>
-	<br>
-	<br>
+	<span *ngIf="!_quizSettingsService.isSeveralSoundQuiz()">
+		<h4> Alternatives? </h4>
+		<div class="btn-group" data-toggle="buttons">
+		  <button (click)="onSelectAlternative(true)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedAlternative(true)}">
+		    yes
+		  </button>
+		  <button (click)="onSelectAlternative(false)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedAlternative(false)}">
+		    no
+		  </button>
+		</div>
+		<br>
+		<br>
+	</span>
+
 	<h4> Select Species? </h4>
 	<div class="btn-group" data-toggle="buttons">
 		<button (click)="onSelectSpecie(true)" class="btn btn-lg btn-primary {{yes}}">

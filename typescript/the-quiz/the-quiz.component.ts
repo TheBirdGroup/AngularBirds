@@ -116,6 +116,14 @@ export class TheQuizComponent implements OnInit{
 
     }
 
+	specieSelectedEvent(event){
+
+		console.log("specieSelectedEvent: ", event);
+		this.nextQuestion();
+
+
+	}
+
     nextQuestion(){
 
 			if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){

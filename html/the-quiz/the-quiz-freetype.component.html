@@ -14,14 +14,15 @@
 				#username="ngForm"
 				class="form-control"
 				placeholder="Specie Name"
-				(keyup)="inputSpecieNameChange()"
+				(keyup)="inputSpecieNameChange($event)"
 				aria-describedby="sizing-addon1 basic-addon1"
-			required>
+				autocomplete="off"
+				autofocus>
 			<span class="input-group-addon redWarningText"  *ngIf="!username.valid">Not Valid</span>
 
 		</div>
 
-		<select [(ngModel)]="selectedSpecie" class="form-control" >
+		<select [(ngModel)]="selectedSpecie" class="form-control" size="30" >
 		    <option *ngFor="#specie of specieListProsessed" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 		</select>
 

@@ -45,8 +45,8 @@ export class QuizSettingsService{
 		this.setMediaType(2);
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(10);
-		this.setDuration(5);
-		this.setAlternatives(true);
+		this.setDuration(0);
+		this.setAlternatives(false);
 		this.setArea(0);
 
 
@@ -138,7 +138,7 @@ export class QuizSettingsService{
 
 
 	}
-	
+
 	tickerFunc(duration){
 				console.log(this);
 				this.duration = duration

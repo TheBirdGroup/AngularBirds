@@ -47,14 +47,13 @@ export class TheQuizComponent implements OnInit{
 
     //questionNumber = 0; //move to Logic service
 
-    questionAlternatives: string[][]; //[id, name]
-    questionRightAnswerID = "";
+	currentQuizQuestion;
     ButtonColor = '';
 
     inbetweenQuestions = false;
 
     selectedButton = false;
-    selectedButtonAltID = -1;
+	selectedButtonSpecieID = -1;
 
 	quizSettings: QuizSetting[];
 
@@ -126,9 +125,9 @@ export class TheQuizComponent implements OnInit{
 
     nextQuestion(){
 
-			if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){
-				this.timerSubscription.unsubscribe();
-			}
+		if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){
+			this.timerSubscription.unsubscribe();
+		}
 
 
 		if(this.quizDone){
@@ -138,24 +137,18 @@ export class TheQuizComponent implements OnInit{
         if(!this.inbetweenQuestions) {
             this.inbetweenQuestions = true;
 
-						//this.timer = Observable.timer(2000,1000);
-
-
-			// console.log("this.selectedButtonAltID: ", this.selectedButtonAltID);
-			// console.log("A: ", this.questionAlternatives);
-			// console.log("A2: ", this.questionAlternatives[this.selectedButtonAltID][0]);
 
 			//right answer selected
-            if(this.questionAlternatives[this.selectedButtonAltID][0] == this.questionRightAnswerID){
+            if(this.currentQuizQuestion.checkIfAnserIsCorrect(this.selectedButtonSpecieID)){
 
-				if(Number(this.questionAlternatives[this.selectedButtonAltID][0]) >= 0){ //NOT i don't know
+				if(Number(this.selectedButtonSpecieID) >= 0){ //NOT i don't know
 					this._quizLogicService.changeScore(1);
 				}
                 //this.score ++;
             }else{
 
 				//wrong answer selected
-				if(Number(this.questionAlternatives[this.selectedButtonAltID][0]) >= 0){ //NOT i don't know
+				if(Number(this.selectedButtonSpecieID) >= 0){ //NOT i don't know
 					this._quizLogicService.changeScore(-1);
 				}
                 //this.score --;
@@ -174,15 +167,15 @@ export class TheQuizComponent implements OnInit{
 
     }
 
-		timerTick(t){
+	timerTick(t){
 
-			this.ticks = t
-			if(this._quizSettingsService.getQuizSettings()[0].timeLimit-this.ticks < 1){
+		this.ticks = t
+		if(this._quizSettingsService.getQuizSettings()[0].timeLimit-this.ticks < 1){
 
-				this.nextQuestion();
-			}
-
+			this.nextQuestion();
 		}
+
+	}
 
     setupQuestion(){
 
@@ -200,36 +193,32 @@ export class TheQuizComponent implements OnInit{
         this.mediaID = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['media_id'];
         let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
 
-		let tempArr = [alts['right_answer']['id'], alts['right_answer']['name']];
 
-        this.questionAlternatives = [];
-		this.questionAlternatives.push([alts['right_answer']['id'], alts['right_answer']['name']]);
-		this.questionAlternatives.push([alts['choice_2']['id'], alts['choice_2']['name']]);
-		this.questionAlternatives.push([alts['choice_3']['id'], alts['choice_3']['name']]);
-		this.questionAlternatives.push([alts['choice_4']['id'], alts['choice_4']['name']]);
-		this.questionAlternatives.push([alts['choice_5']['id'], alts['choice_5']['name']]);
+		this.currentQuizQuestion = new QuizQuestion();
+		this.currentQuizQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
+		this.currentQuizQuestion.addChoice(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['name']);
+		this.currentQuizQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['name']);
+		this.currentQuizQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['name']);
+		this.currentQuizQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['name']);
+		this.currentQuizQuestion.prosessData();
+		this.currentQuizQuestion.addChoice(-1, "I don't know", "I don't know");
 
+		console.log("this.currentQuizQuestion: ", this.currentQuizQuestion.getChoices());
 
-		// this.questionAlternatives.push(alts['right_answer']['name']);
-        // this.questionAlternatives.push(alts['choice_2']['name']);
-        // this.questionAlternatives.push(alts['choice_3']['name']);
-        // this.questionAlternatives.push(alts['choice_4']['name']);
-        // this.questionAlternatives.push(alts['choice_5']['name']);
-
-        this.questionAlternatives = this.shuffle(this.questionAlternatives);
-		//always last
-		this.questionAlternatives.push(["-1", "I don't know"]);
-
-        this.questionRightAnswerID = alts['right_answer']['id'];
-
-        this.selectedButtonAltID = 5;
 
 		if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){
-			console.log("hehe");
 			this.ticks=0;
 			this.timer = Observable.timer(2000,1000);
-			this.timerSubscription = 	this.timer.subscribe(t=>this.timerTick(t));
+			this.timerSubscription = this.timer.subscribe(t=>this.timerTick(t));
 		}
+
+		//this.testQuizQuestionClass();
+
+    }
+
+	testQuizQuestionClass(){
+
+		let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
 
 		let tempQuestion = new QuizQuestion();
 		tempQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
@@ -253,25 +242,23 @@ export class TheQuizComponent implements OnInit{
 			console.log("checkIfAnserIsCorrect: ", "FALSE")
 		}
 
+	}
 
-    }
-
-
-		selectAnswerDisabled(){
-			if( this.inbetweenQuestions == true){
-					return true;
-			}else{
-					return false;
-			}
+	selectAnswerDisabled(){
+		if( this.inbetweenQuestions == true){
+				return true;
+		}else{
+				return false;
 		}
+	}
 
-    checkIfAltCorrect(altID){
+    checkIfAltCorrect(specieID){
         this.selectedButton = true;
-        this.selectedButtonAltID = altID;
+		this.selectedButtonSpecieID = specieID;
 
-        if(this.questionAlternatives[altID][0] == this.questionRightAnswerID){
+		if(this.currentQuizQuestion.checkIfAnserIsCorrect(specieID)){
 
-            console.log("correct!");
+            console.log("correct!", specieID);
 
         }else{
 
@@ -281,10 +268,10 @@ export class TheQuizComponent implements OnInit{
 
     }
 
-    checkIfButtonColorIsCorrect(altID){
+    checkIfButtonColorIsCorrect(specieID){
 
 
-        if(this.questionAlternatives[altID][0] == this.questionRightAnswerID && this.inbetweenQuestions == true){
+        if(this.currentQuizQuestion.checkIfAnserIsCorrect(specieID) && this.inbetweenQuestions == true){
             return true;
 
         }else{
@@ -292,11 +279,13 @@ export class TheQuizComponent implements OnInit{
         }
 
     }
-    checkIfButtonColorIsWrong(altID){
+    checkIfButtonColorIsWrong(specieID){
 
 
-        if(this.questionAlternatives[altID][0] != this.questionRightAnswerID && this.inbetweenQuestions == true
-					&& altID == this.selectedButtonAltID){
+        if(!this.currentQuizQuestion.checkIfAnserIsCorrect(specieID)
+			&& this.inbetweenQuestions == true
+			&& specieID == this.selectedButtonSpecieID){
+
             return true;
 
         }else{
@@ -304,11 +293,11 @@ export class TheQuizComponent implements OnInit{
         }
 
     }
-    checkIfButtonIsSelected(altID){
+    checkIfButtonIsSelected(specieID){
         if(this.inbetweenQuestions){
             return false
         }
-        if(altID == this.selectedButtonAltID){
+        if(specieID == this.selectedButtonSpecieID){
             return true;
         }else{
             return false;

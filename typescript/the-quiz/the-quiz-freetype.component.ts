@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, ViewChild, AfterViewInit, ElementRef }       from 'angular2/core';
+import { Component, EventEmitter, OnInit, OnChanges, ViewChild, AfterViewInit, ElementRef }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
@@ -17,12 +17,12 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 	pipes: [
 
 	],
-	inputs: ['inbetweenQuestions'], //using ALIAS
+	inputs: ['inbetweenQuestions', 'specieQuestionObject'], //using ALIAS
 	outputs: ['specieSelectedEvent']
 })
 
 
-export class TheQuizFreetypeComponent implements OnInit{
+export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	formSpecieName;
 	selectedSpecie;
@@ -31,6 +31,7 @@ export class TheQuizFreetypeComponent implements OnInit{
 	specieListProsessed;
 
 	inbetweenQuestions = false;
+	specieQuestionObject;
 
 	specieSelectedEvent = new EventEmitter<number>();
 
@@ -46,6 +47,14 @@ export class TheQuizFreetypeComponent implements OnInit{
 		//add i don't know at beginning and elect it
 		this.compileProsessedList();
 
+	}
+
+	ngOnChanges(){
+		if(this.inbetweenQuestions){
+			console.log("inbetween quests");
+		}else{
+			console.log("!inbetween quests");
+		}
 	}
 
 	ngAfterViewInit() {
@@ -144,7 +153,7 @@ export class TheQuizFreetypeComponent implements OnInit{
 	compileProsessedList(){
 
 		this.specieListProsessed = [];
-		this.specieListProsessed.push({'id': -1, 'name': "I don't know123", latin: "I relly don't know"});
+		this.specieListProsessed.push({'id': -1, 'name': "I don't know", latin: "I relly don't know"});
 
 		for (let id of Object.keys(this.specieList)) {
 

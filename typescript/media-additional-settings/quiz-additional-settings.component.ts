@@ -31,6 +31,9 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		quizHighscoreDataLimit50;
 		quizHighscoreLoaded = false;
 		quizSettings;
+		selSpecie = false;
+		yes;
+		no = "active";
 
 	updateResultlistIncrement = 0;
 
@@ -126,14 +129,26 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 				return false;
 			}
 		}
-
-
-
+	onSelectSpecie(selectedSpecie: boolean) {
+		this.selSpecie = selectedSpecie;
+		if(selectedSpecie == true) {
+			this.yes = "active";
+		}else{
+			this.yes = "";
+		}
+		if(selectedSpecie == false){
+			this.no = "active"
+		}else{
+			this.no = "";
+		}
+	}
 
 	startQuiz(){
-
-		this._router.navigate(["QuizMediaQuiz"]);
-
+		if(this.selSpecie != true) {
+			this._router.navigate(["QuizMediaQuiz"]);
+		}else{
+			this._router.navigate(["QuizSelectSpecies"]);
+		}
 		//this.quizMediaSettingsEvent.emit("MediaAditionalSettingsDone");
 
 	}

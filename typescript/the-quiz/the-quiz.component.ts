@@ -11,6 +11,8 @@ import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 import { TheQuizImageComponent }  from './the-quiz-image.component';
 import { TheQuizSoundComponent }  from './the-quiz-sound.component';
 
+import { TheQuizFreetypeComponent }  from './the-quiz-freetype.component';
+
 import { QuizQuestion }  from './the-quiz-question.class';
 
 
@@ -20,7 +22,8 @@ import { QuizQuestion }  from './the-quiz-question.class';
 	templateUrl: 'app/the-quiz/the-quiz.component.html',
 	directives: [
 		TheQuizImageComponent,
-		TheQuizSoundComponent
+		TheQuizSoundComponent,
+		TheQuizFreetypeComponent
 	],
 	providers: [
 	  HTTP_PROVIDERS

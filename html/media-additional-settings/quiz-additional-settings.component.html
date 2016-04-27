@@ -74,8 +74,19 @@
 	</div>
 	<br>
 	<br>
+	<h4> Select Species? </h4>
+	<div class="btn-group" data-toggle="buttons">
+		<button (click)="onSelectSpecie(true)" class="btn btn-lg btn-primary {{yes}}">
+			yes
+		</button>
+		<button (click)="onSelectSpecie(false)" class="btn btn-lg btn-primary {{no}}">
+			no
+		</button>
+	</div>
+	<br>
+	<br>
 
-	<button class="btn btn-primary btn-lg"(click)="startQuiz()">Start </button>
+	<button  class="btn btn-primary btn-lg"(click)="startQuiz()">Start Quiz</button>
 	<br>
 </div>
 

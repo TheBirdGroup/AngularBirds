@@ -1,12 +1,14 @@
 <h2>{{title}}</h2>
 
-<select [(ngModel)]="selectedSpecie" (ngModelChange)="selectSpecie()">
+<select class="form-control" [(ngModel)]="selectedSpecie" (ngModelChange)="selectSpecie()">
     <option *ngFor="#specie of specieList" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 </select>
 
 <h3>Selected species</h3>
 <ul>
     <li *ngFor="#specie of displaySelectedSpecies">
-        {{specie.name}} ({{specie.latin}}) <button (click)="deleteSpecie(specie)">Delete</button>
+        {{specie.name}} ({{specie.latin}}) <button class="btn btn-lg btn-danger" (click)="deleteSpecie(specie)">Delete</button>
     </li>
 </ul>
+
+<button class="btn btn-lg btn-primary" (click)="postSpeciesId()">Start Quiz</button>

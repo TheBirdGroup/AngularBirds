@@ -2,6 +2,11 @@
 
 	<div class="freetypeInputContainer">
 
+		<h3 *ngIf="inbetweenQuestions">
+			The correct answer was
+			<b [ngClass]="{'correctColor': questionCorrect, 'inncorrectColor': !questionCorrect}">{{specieQuestionObject.getRigthAnsers()[0].name}}</b>
+		</h3>
+
 		<h4><label for="username">Start by spelling the specie:</label></h4>
 		<div class="unsernameInput input-group">
 
@@ -22,7 +27,7 @@
 
 		</div>
 
-		<select [(ngModel)]="selectedSpecie" class="form-control" size="30" >
+		<select [(ngModel)]="selectedSpecie" class="form-control" size="20" (keyup)="inputSpecieListKey($event)" >
 		    <option *ngFor="#specie of specieListProsessed" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 		</select>
 

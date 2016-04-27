@@ -116,8 +116,10 @@ export class TheQuizComponent implements OnInit{
     }
 
 	specieSelectedEvent(event){
+		//event = specieID of selecte
 
 		console.log("specieSelectedEvent: ", event);
+		this.selectedButtonSpecieID = event;
 		this.nextQuestion();
 
 
@@ -203,9 +205,9 @@ export class TheQuizComponent implements OnInit{
 		this.currentQuizQuestion.prosessData();
 		this.currentQuizQuestion.addChoice(-1, "I don't know", "I don't know");
 
-		console.log("this.currentQuizQuestion: ", this.currentQuizQuestion.getChoices());
+		this.selectedButtonSpecieID = -1;
 
-
+	
 		if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){
 			this.ticks=0;
 			this.timer = Observable.timer(2000,1000);

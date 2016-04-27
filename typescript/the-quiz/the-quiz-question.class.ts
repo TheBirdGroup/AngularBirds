@@ -26,6 +26,12 @@ export class QuizQuestion {
 
 	}
 
+	getRigthAnsers(){
+
+		return this.rightAnswers;
+
+	}
+
 	//TODO remove duplicates
 	prosessData(){
 

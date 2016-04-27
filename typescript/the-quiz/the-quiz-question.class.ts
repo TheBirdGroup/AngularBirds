@@ -1,7 +1,7 @@
 export class QuizQuestion {
 
-	rigthAswers: string[][];
-	choices: string[][];
+	private rightAnswers = [];
+	private choices = [];
 
 	constructor(){
 
@@ -10,9 +10,13 @@ export class QuizQuestion {
 	//TODO  return false if aswer is already in list
 	addRightAnswer(id, name, latin){
 
+		this.rightAnswers.push({'id': id, 'name': name, 'latin': latin});
 		this.addChoice(id, name, latin);
+
 	}
 	addChoice(id, name, latin){
+
+		this.choices.push({'id': id, 'name': name, 'latin': latin});
 
 	}
 
@@ -20,11 +24,21 @@ export class QuizQuestion {
 	prosessData(){
 
 
+
 	}
 
 	checkIfAnserIsCorrect(id){
 
-		return true;
+		for (let currentChoiceID of Object.keys(this.choices)) {
+			for (let currentRightAnsID of Object.keys(this.rightAnswers)) {
+				if(this.choices[currentChoiceID].id == this.rightAnswers[currentRightAnsID].id){
+					return true;
+				}
+			}
+
+		}
+
+		return false;
 
 	}
 

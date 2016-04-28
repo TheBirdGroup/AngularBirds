@@ -48,14 +48,15 @@ export class QuizQuestion {
 
 	}
 
+
 	//returns as one string of all extra infoes
 	getExtraInfo():string{
 
 		let returnString =  " ";
 
 		for (let currentID of Object.keys(this.extraInfoes)) {
-			if(this.extraInfoes[currentID].text.length > 0){
-				returnString += this.extraInfoes[currentID].text + ",";
+			if(this.extraInfoes[currentID].extraInfo.length > 0){
+				returnString += this.extraInfoes[currentID].extraInfo + ",";
 			}
 		}
 
@@ -89,6 +90,26 @@ export class QuizQuestion {
 	prosessData(){
 
 		this.choices = this.shuffle(this.choices);
+		this.addChoice(-1, "I don't know", "I don't know");
+
+	}
+
+	//returns score
+	scoreForMultibleAnswers(arrayOfSpecieAlternatives:number[]):number{
+
+		let score:number = 0;
+
+		for (let currentID of Object.keys(arrayOfSpecieAlternatives)) {
+
+			if(this.checkIfAnserIsCorrect){
+				score ++;
+			}else{
+				score --;
+			}
+
+		}
+
+		return score;
 
 	}
 

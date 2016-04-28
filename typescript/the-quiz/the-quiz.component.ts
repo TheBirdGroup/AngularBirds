@@ -50,7 +50,7 @@ export class TheQuizComponent implements OnInit{
 
     //questionNumber = 0; //move to Logic service
 
-	currentQuizQuestion;
+	currentQuizQuestion:QuizQuestion;
 
     inbetweenQuestions = false;
 
@@ -182,7 +182,7 @@ export class TheQuizComponent implements OnInit{
     setupQuestion(){
 
 		if(this._quizLogicService.noQuestionsLeft()){
-
+			//QUIZ DONE!
 			this.quizDone = true;
 			//this.quizDoneEvent.emit("MediaQuizOver");
 			this._router.navigate(["QuizMediaQuizResults"]);
@@ -190,20 +190,10 @@ export class TheQuizComponent implements OnInit{
 
 		}
 
-		this.mediaURL = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['media_url'];
-
-        this.mediaID = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['media_id'];
-        let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
-
-
-		this.currentQuizQuestion = new QuizQuestion();
-		this.currentQuizQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
-		this.currentQuizQuestion.addChoice(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['name']);
-		this.currentQuizQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['name']);
-		this.currentQuizQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['name']);
-		this.currentQuizQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['name']);
-		this.currentQuizQuestion.prosessData();
-		this.currentQuizQuestion.addChoice(-1, "I don't know", "I don't know");
+		this.currentQuizQuestion = this._quizLogicService.getCurrentQuizQuestion();
+		//TODO: handle more than the first object!
+		this.mediaURL = this.currentQuizQuestion.getMediaSourses()[0].mediaUrl;
+        this.mediaID = this.currentQuizQuestion.getMediaSourses()[0].addMediaId;
 
 		this.selectedButtonSpecieID = -1;
 
@@ -248,11 +238,12 @@ export class TheQuizComponent implements OnInit{
 
     getQuestionExtraInfo(){
 
-		if(!this.quizDone){
-			return this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['extra_info'];
-		}else{
-			return ""
-		}
+		return this.currentQuizQuestion.getExtraInfo();
+		// if(!this.quizDone){
+		// 	return this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['extra_info'];
+		// }else{
+		// 	return ""
+		// }
 
 	}
 

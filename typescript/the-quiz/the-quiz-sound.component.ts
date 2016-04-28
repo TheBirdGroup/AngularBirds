@@ -25,14 +25,14 @@ export class TheQuizSoundComponent implements OnInit{
 	progressPercent = 0;
 	currentTime = 0;
 	totTime = 0;
-
+	maxWidth = 0;
 
 	mediaURLStart = "https://hembstudios.no/birdid/";
 	extraSiteID;
 	soundMiddleURL = ""
 
     mediaURL = "";
-		volume = 0.5;
+	volume = 0.5;
 
 	constructor(private _quizSettingsService: QuizSettingsService){}
 
@@ -97,7 +97,13 @@ export class TheQuizSoundComponent implements OnInit{
 
 	}
 
+	moveProgress(event){
 
+		let offSet = ((event.offsetX)/4.41)/100;
 
+		this.myAudio.nativeElement.currentTime = this.myAudio.nativeElement.duration * offSet;
+
+		console.log(this.maxWidth, "Max width");
+	}
 
 }

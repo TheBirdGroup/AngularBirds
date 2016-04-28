@@ -51,11 +51,9 @@ export class TheQuizComponent implements OnInit{
     //questionNumber = 0; //move to Logic service
 
 	currentQuizQuestion;
-    ButtonColor = '';
 
     inbetweenQuestions = false;
 
-    selectedButton = false;
 	selectedButtonSpecieID = -1;
 
 	quizSettings: QuizSetting[];
@@ -65,11 +63,6 @@ export class TheQuizComponent implements OnInit{
 	ticks=0;
 	timer;
 	timerSubscription;
-
-	subSelectedSpecieID = -1;
-
-
-	//score = 0;
 
 
 	  constructor(
@@ -89,12 +82,12 @@ export class TheQuizComponent implements OnInit{
 		  this.quizSettings = this._quizSettingsService.getQuizSettings();
 		  this._quizLogicService.setQuizQuestionsSettings(this.quizSettings);
 
-	    this._quizQuestionService.getQuizQuestions(this.quizSettings)
+	    this._quizQuestionService.getQuizQuestions(this.quizSettings, this._quizSettingsService.isSeveralSoundQuiz())
 	        .subscribe(
 	            data => {
 	                console.log(data);
 	                this.quizQuestions = data;
-					this._quizLogicService.setQuizQuestions(data);
+					this._quizLogicService.setQuizQuestions(data, this._quizSettingsService.isSeveralSoundQuiz());
 
 	                this.startQuiz();
 	            },

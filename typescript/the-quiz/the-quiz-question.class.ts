@@ -24,9 +24,9 @@ export class QuizQuestion {
 
 	}
 
-	addMediaSource(id, mediaUrl){
+	addMediaSource(mediaUrl){
 
-		this.mediaSources.push({'id': id, 'mediaUrl': mediaUrl});
+		this.mediaSources.push({'mediaUrl': mediaUrl});
 
 	}
 
@@ -36,7 +36,7 @@ export class QuizQuestion {
 
 	}
 
-	addMediaIds(id){
+	addMediaId(id){
 
 		this.mediaIds.push({'id': id});
 

@@ -3,6 +3,10 @@ export class QuizQuestion {
 	private rightAnswers = [];
 	private choices = [];
 
+	private mediaIds = [];
+	private mediaSources = [];
+	private extraInfoes = [];
+
 	constructor(){
 
 	}
@@ -20,9 +24,64 @@ export class QuizQuestion {
 
 	}
 
+	addMediaSource(id, mediaUrl){
+
+		this.mediaSources.push({'id': id, 'mediaUrl': mediaUrl});
+
+	}
+
+	addExtraInfo(text){
+
+		this.extraInfoes.push({'extraInfo': text});
+
+	}
+
+	addMediaIds(id){
+
+		this.mediaIds.push({'id': id});
+
+	}
+
+	getMediaIds(){
+
+		return this.mediaIds;
+
+	}
+
+	//returns as one string of all extra infoes
+	getExtraInfo():string{
+
+		let returnString =  " ";
+
+		for (let currentID of Object.keys(this.extraInfoes)) {
+			if(this.extraInfoes[currentID].text.length > 0){
+				returnString += this.extraInfoes[currentID].text + ",";
+			}
+		}
+
+		if(returnString.length == 0){
+			return ""
+		}else{
+			return returnString.substring(0, returnString.length-1);;
+		}
+
+	}
+
+	getMediaSourses(){
+
+		return this.mediaSources;
+
+	}
+
 	getChoices(){
 
 		return this.choices;
+
+	}
+
+	getRigthAnsers(){
+
+		return this.rightAnswers;
 
 	}
 

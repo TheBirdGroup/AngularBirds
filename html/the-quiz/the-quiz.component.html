@@ -13,7 +13,7 @@
 
 		<birdid-the-quiz-freetype
 			[inbetweenQuestions]="inbetweenQuestions"
-			[specieQuestionObject]="false"
+			[specieQuestionObject]="currentQuizQuestion"
 			(specieSelectedEvent)="specieSelectedEvent($event)"
 			*ngIf="!_quizSettingsService.getQuizSettings()[0].showAlternatives">
 		</birdid-the-quiz-freetype>

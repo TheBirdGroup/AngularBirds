@@ -6,7 +6,8 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 @Component({
     selector: 'birdid-select-species',
-    templateUrl: 'app/select-species/select-species.component.html'
+    templateUrl: 'app/select-species/select-species.component.html',
+    styleUrls:  ['app/select-species/select-species.component.css']
 
 })
 export class SelectSpeciesComponent implements OnInit {
@@ -64,10 +65,10 @@ export class SelectSpeciesComponent implements OnInit {
         }
         this.arrayOfSelectedSpecies = tempSpecieId;
         console.log(this.arrayOfSelectedSpecies, "ID array");
-        
+
     }
     postSpeciesId(){
-        this._quizSpeciesService.setSpecie(this.arrayOfSelectedSpecies);
+        this._quizSpeciesService.setSelectedSpecie(this.arrayOfSelectedSpecies);
         this._router.navigate(["QuizMediaQuiz"]);
     }
 

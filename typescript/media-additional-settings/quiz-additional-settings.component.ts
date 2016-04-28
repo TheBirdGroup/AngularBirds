@@ -25,15 +25,15 @@ export class QuizAdditionalSettingsComponent implements OnInit{
    // numberOfQuestions = ['10','30','60']; for the beggining we do not check against the array
     mediaDiff;
     numberOfQuestions;
-		areaList=[];
-		selectedArea;
-		quizHighscoreData;
-		quizHighscoreDataLimit50;
-		quizHighscoreLoaded = false;
-		quizSettings;
-		selSpecie = false;
-		yes;
-		no = "active";
+	areaList=[];
+	selectedArea;
+	quizHighscoreData;
+	quizHighscoreDataLimit50;
+	quizHighscoreLoaded = false;
+	quizSettings;
+	selSpecie = false;
+	yes;
+	no = "active";
 
 	updateResultlistIncrement = 0;
 
@@ -82,12 +82,13 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 
     onSelectDiff(selectedDiff: number){
-				console.log("selectedDiff:", selectedDiff);
+		console.log("selectedDiff:", selectedDiff);
         this._quizSettingsService.setMediaDiff(selectedDiff);
 		this.updatehighscorelist();
 
     }
-		matchCurrentSelectedDiff(diff){
+
+	matchCurrentSelectedDiff(diff){
 		if(diff == this._quizSettingsService.getMediaDiff()){
 			return true;
 		}else{
@@ -99,10 +100,11 @@ export class QuizAdditionalSettingsComponent implements OnInit{
     onSelectNumQuestions(selectedNumberOfQuestions: number){
         this._quizSettingsService.selectNumberOfQuestions(selectedNumberOfQuestions);
     }
-		matchCurrentNumberQuestion(numberOfQuestions){
-			if(numberOfQuestions == this._quizSettingsService.getNumberOfQuestions()){
-				return true;
-			}else{
+
+	matchCurrentNumberQuestion(numberOfQuestions){
+		if(numberOfQuestions == this._quizSettingsService.getNumberOfQuestions()){
+			return true;
+		}else{
 			return false;
 		}
 	}
@@ -111,24 +113,27 @@ export class QuizAdditionalSettingsComponent implements OnInit{
     onSelectDuration(duration: string){
         this._quizSettingsService.setDuration(parseInt(duration));
     }
-		matchSelectedDuration(duration){
-			if(duration == this._quizSettingsService.duration){
-				return true;
-			}else{
-				return false;
-			}
+
+	matchSelectedDuration(duration){
+		if(duration == this._quizSettingsService.duration){
+			return true;
+		}else{
+			return false;
 		}
+	}
 
     onSelectAlternative(selectedAlternative: boolean){
         this._quizSettingsService.setAlternatives(selectedAlternative)
     }
-		matchSelectedAlternative(selectedAlternative){
-			if(selectedAlternative == this._quizSettingsService.alternative){
-				return true;
-			}else{
-				return false;
-			}
+
+	matchSelectedAlternative(selectedAlternative){
+		if(selectedAlternative == this._quizSettingsService.alternative){
+			return true;
+		}else{
+			return false;
 		}
+	}
+
 	onSelectSpecie(selectedSpecie: boolean) {
 		this.selSpecie = selectedSpecie;
 		if(selectedSpecie == true) {

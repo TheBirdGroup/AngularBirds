@@ -10,6 +10,7 @@ import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 //import { QuizSettingsMock }  from './../mock/quiz-settings.mock.ts';
 import { TheQuizImageComponent }  from './the-quiz-image.component';
 import { TheQuizSoundComponent }  from './the-quiz-sound.component';
+import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 import { TheQuizFreetypeComponent }  from './the-quiz-freetype.component';
 
@@ -72,6 +73,7 @@ export class TheQuizComponent implements OnInit{
 		  private _quizSettingsService: QuizSettingsService,
 		  private _quizQuestionService: QuizQuestionsService,
 		  private _quizLogicService: QuizLogicService,
+		  private _quizSpeciesService: QuizSpecieService,
 		  private _router: Router
 	  ){}
 
@@ -116,8 +118,10 @@ export class TheQuizComponent implements OnInit{
     }
 
 	specieSelectedEvent(event){
+		//event = specieID of selecte
 
 		console.log("specieSelectedEvent: ", event);
+		this.selectedButtonSpecieID = event;
 		this.nextQuestion();
 
 
@@ -203,7 +207,7 @@ export class TheQuizComponent implements OnInit{
 		this.currentQuizQuestion.prosessData();
 		this.currentQuizQuestion.addChoice(-1, "I don't know", "I don't know");
 
-		console.log("this.currentQuizQuestion: ", this.currentQuizQuestion.getChoices());
+		this.selectedButtonSpecieID = -1;
 
 
 		if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){

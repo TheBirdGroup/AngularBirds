@@ -17,7 +17,7 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 	pipes: [
 
 	],
-	inputs: ['inbetweenQuestions', 'specieQuestionObject'], //using ALIAS
+	inputs: ['inbetweenQuestions', 'specieQuestionObject'],
 	outputs: ['specieSelectedEvent']
 })
 
@@ -32,6 +32,8 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	inbetweenQuestions = false;
 	specieQuestionObject;
+	questionCorrect = false;
+
 
 	specieSelectedEvent = new EventEmitter<number>();
 
@@ -51,9 +53,10 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	ngOnChanges(){
 		if(this.inbetweenQuestions){
-			console.log("inbetween quests");
+			//console.log("inbetween quests ", this.specieQuestionObject);
+
 		}else{
-			console.log("!inbetween quests");
+			//console.log("!inbetween quests");
 		}
 	}
 
@@ -110,15 +113,37 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	}
 
-	//well, pipes did not work, neither did pre prosessing of list so this will have to do...
-	inputSpecieNameChange($event){
+	handleSelectAnswer(){
 
-		//console.log("$event: ", $event.key);
+		this.questionCorrect = this.specieQuestionObject.checkIfAnserIsCorrect(this.selectedSpecie.id);
 
-		if($event.key == 'Enter'){
+		if(this.inbetweenQuestions){
+			this.formSpecieName = ""
+		}
+
+		this.specieSelectedEvent.emit(this.selectedSpecie.id);
+
+	}
+
+	inputSpecieListKey(event){
+
+		if(event.key == 'Enter'){
 			//transmit to a higher power what was seleted
-			this.specieSelectedEvent.emit(this.selectedSpecie.id);
-		}else if($event.key  == 'ArrowUp'){
+			this.handleSelectAnswer();
+		}
+
+	}
+
+	//well, pipes did not work, neither did pre prosessing of list so this will have to do...
+	inputSpecieNameChange(event){
+
+		//key fro firefox, keycode for stupid crome
+		console.log("event: ", event.keyCode);
+
+		if(event.key == 'Enter' || event.keyCode == 13){
+			//transmit to a higher power what was seleted
+			this.handleSelectAnswer();
+		}else if(event.key  == 'ArrowUp' || event.keyCode == 38){
 
 			//select last element if no is selected
 			if(this.selectedSpecie == undefined && this.specieListProsessed.length > 0){
@@ -128,7 +153,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 				this.selectedSpecie = this.getPrevObjetInProsessedArrat(this.selectedSpecie.id);
 			}
 
-		}else if($event.key  == 'ArrowDown'){
+		}else if(event.key  == 'ArrowDown' || event.keyCode == 40){
 
 			//select first element if no is selected
 			if(this.selectedSpecie == undefined && this.specieListProsessed.length > 0){

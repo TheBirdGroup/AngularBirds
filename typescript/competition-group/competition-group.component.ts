@@ -66,6 +66,6 @@ export class QuizCompetitionGroupComponent implements OnInit{
 
 	startQuiz(){
 		console.log(this._router);
-		this._router.navigate(["QuizCompetitionGroup"]);
+		this._router.navigate(["QuizMediaQuiz"]);
 	}
 }

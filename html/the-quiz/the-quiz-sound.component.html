@@ -17,7 +17,8 @@
 		aria-valuemin="0"
 		aria-valuemax="100"
 		[ngStyle]="{width: progressPercent + '%'}"
-		style="width:70%">
+		style="width:70%"
+		(click)="moveProgress($event)">
 
 		<span>{{currentTime}}s/{{totTime}}s</span>
 

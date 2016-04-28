@@ -80,13 +80,13 @@ export class QuizMasterComponent implements OnInit {
 		  //console.log("Route change: ", newRoute );
 
 		  //mostly only used for dev bar on top currently
-		  if(newRoute == 'mediaSelect'){
-			  this.currentActive = 0;
-		  }else if(newRoute == 'mediaAdditionalSettings'){
+		  if(newRoute == 'competitionGroupComponent'){
+			this.currentActive = 0;
+		}else if(newRoute == 'mediaSelect'){
 			  this.currentActive = 1;
-			}else if(newRoute == 'competitionGroupComponent'){
+		  }else if(newRoute == 'mediaAdditionalSettings'){
 			  this.currentActive = 2;
-		  }else if(newRoute == 'mediaSelectSpecies'){
+			}else if(newRoute == 'mediaSelectSpecies'){
 			  this.currentActive = 3;
 		  }else if(newRoute == 'mediaQuiz'){
 			  this.currentActive = 4;

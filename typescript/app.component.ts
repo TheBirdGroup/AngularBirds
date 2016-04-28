@@ -44,7 +44,7 @@ import {QuizCompetitionGroupComponent} from "./competition-group/competition-gro
 @RouteConfig([
 	{path: '/mediaSelect', 				name: 'QuizMediaSelect', 				component: QuizMediaSelectComponent, useAsDefault: true},
     {path: '/mediaAdditionalSettings', 	name: 'QuizMediaAdditionalSettings', 	component: QuizAdditionalSettingsComponent  },
-		{path: '/competitionGroupComponent',		name: 'QuizCompetitionGroup',				component: QuizCompetitionGroupComponent },
+	{path: '/competitionGroup',			name: 'QuizCompetitionGroup',			component: QuizCompetitionGroupComponent },
 	{path: '/mediaSelectSpecies',		name: 'QuizSelectSpecies',				component: SelectSpeciesComponent },
   	{path: '/mediaQuiz',				name: 'QuizMediaQuiz',					component: TheQuizComponent },
 	{path: '/mediaQuizResults',			name: 'QuizMediaQuizResults',			component: QuizResultComponent  }

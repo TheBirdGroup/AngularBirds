@@ -21,13 +21,30 @@ import { ResultlistComponent }  from './../shared.component/resultlist.component
 })
 export class QuizCompetitionGroupComponent implements OnInit{
 	title = 'Birdid Quiz competition group!';
-	//mediaDiff = ['1', '2', '3', '4'];
-   // numberOfQuestions = ['10','30','60']; for the beggining we do not check against the array
-
 
 	quizHighscoreData;
 	quizHighscoreDataLimit50;
 	quizSettings;
+	mediaType = 1; //image, sound, video
+	allowedMediaTypes = [1,2];
+	quizType = 1; // 1 = normal, 2 = several soundquiz, 3 = formal test?
+	allowedQuizTypes = [1,2,3];
+
+	mediaDifficulities = 1;
+//	allowedMediaDifficulities = [1,2,3,4]; for now we do not check
+
+    numberOfQuestions = 10;
+   // allowedNumberOfQuestions = [10, 30, 60];// for now we do not check
+
+    duration=0;
+    alternative: boolean;
+
+	siteID = 1;
+
+	areaListLoaded = false;
+	areaLoadProblems = false;
+	areaListData;
+	selectedArea = 0;
 
 
 
@@ -48,9 +65,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
 
 
 	startQuiz(){
-		
+		console.log(this._router);
+		this._router.navigate(["QuizCompetitionGroup"]);
 	}
-
-
-
 }

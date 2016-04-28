@@ -79,12 +79,12 @@ export class TheQuizSoundComponent implements OnInit{
 	updateProgressbar(event){
 
 		this.progressPercent = (this.myAudio.nativeElement.currentTime / this.myAudio.nativeElement.duration) * 100;
-		console.log("this.progressPercent: ", this.progressPercent);
+		//console.log("this.progressPercent: ", this.progressPercent);
 
 		this.currentTime = Math.floor(this.myAudio.nativeElement.currentTime);
 		this.totTime = Math.floor(this.myAudio.nativeElement.duration);
 
-		console.log('tot:',this.myAudio.nativeElement.duration , ' CURRENT: ', this.myAudio.nativeElement.currentTime)
+		//console.log('tot:',this.myAudio.nativeElement.duration , ' CURRENT: ', this.myAudio.nativeElement.currentTime)
 
 		//console.log(this.progressPercent);
 
@@ -103,7 +103,7 @@ export class TheQuizSoundComponent implements OnInit{
 
 		this.myAudio.nativeElement.currentTime = this.myAudio.nativeElement.duration * offSet;
 
-		console.log(this.maxWidth, "Max width");
+		//console.log(this.maxWidth, "Max width");
 	}
 
 }

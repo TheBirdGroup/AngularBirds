@@ -12,6 +12,7 @@ import { TheQuizImageComponent }  from './the-quiz-image.component';
 import { TheQuizSoundComponent }  from './the-quiz-sound.component';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
+import { TheQuizChoicesComponent }  from './the-quiz-choices.component';
 import { TheQuizFreetypeComponent }  from './the-quiz-freetype.component';
 
 import { QuizQuestion }  from './the-quiz-question.class';
@@ -24,7 +25,8 @@ import { QuizQuestion }  from './the-quiz-question.class';
 	directives: [
 		TheQuizImageComponent,
 		TheQuizSoundComponent,
-		TheQuizFreetypeComponent
+		TheQuizFreetypeComponent,
+		TheQuizChoicesComponent
 	],
 	providers: [
 	  HTTP_PROVIDERS
@@ -64,6 +66,7 @@ export class TheQuizComponent implements OnInit{
 	timer;
 	timerSubscription;
 
+	subSelectedSpecieID = -1;
 
 
 	//score = 0;
@@ -85,25 +88,18 @@ export class TheQuizComponent implements OnInit{
 		  //moch while mile works on his service, replace by getting from it
 		  this.quizSettings = this._quizSettingsService.getQuizSettings();
 		  this._quizLogicService.setQuizQuestionsSettings(this.quizSettings);
-		//   [
-		//   	{"mediaType": 1, "areaID": 34, "timeLimit": 0, "numQuestions": 3,	"showAlternatives": true, "mediaDificulity": 1}
-		//   ];
 
-
-		//console.log("_quizSettingsService.getQuizSettings()[0].mediaTypeID: ", this._quizSettingsService.getQuizSettings()[0].mediaTypeID)
-
-
-        this._quizQuestionService.getQuizQuestions(this.quizSettings)
-            .subscribe(
-                data => {
-                    console.log(data);
-                    this.quizQuestions = data;
+	    this._quizQuestionService.getQuizQuestions(this.quizSettings)
+	        .subscribe(
+	            data => {
+	                console.log(data);
+	                this.quizQuestions = data;
 					this._quizLogicService.setQuizQuestions(data);
 
-                    this.startQuiz();
-                },
-                error => console.error("getQuizQuestions ERROR! ", error)
-            )
+	                this.startQuiz();
+	            },
+	            error => console.error("getQuizQuestions ERROR! ", error)
+	        )
 
 
 
@@ -117,13 +113,22 @@ export class TheQuizComponent implements OnInit{
 
     }
 
-	specieSelectedEvent(event){
-		//event = specieID of selecte
+	//called when one of the sun components for selecting an answer is fired
+	choiceSelectEvent(event){
+		//event = selected specie id (don't know = -1)
 
-		console.log("specieSelectedEvent: ", event);
+		//console.log("specieSelectedEvent: ", event);
+		//console.log("this.subSelectedSpecieID: ", this.subSelectedSpecieID)
 		this.selectedButtonSpecieID = event;
-		this.nextQuestion();
 
+
+
+	}
+
+	//when done by sub select component (eg next question button clicked)
+	subSelectCompleteEvent(event){
+
+		this.nextQuestion();
 
 	}
 
@@ -248,68 +253,6 @@ export class TheQuizComponent implements OnInit{
 
 	}
 
-	selectAnswerDisabled(){
-		if( this.inbetweenQuestions == true){
-				return true;
-		}else{
-				return false;
-		}
-	}
-
-    checkIfAltCorrect(specieID){
-        this.selectedButton = true;
-		this.selectedButtonSpecieID = specieID;
-
-		if(this.currentQuizQuestion.checkIfAnserIsCorrect(specieID)){
-
-            console.log("correct!", specieID);
-
-        }else{
-
-            console.log("incorrect!");
-
-        }
-
-    }
-
-    checkIfButtonColorIsCorrect(specieID){
-
-
-        if(this.currentQuizQuestion.checkIfAnserIsCorrect(specieID) && this.inbetweenQuestions == true){
-            return true;
-
-        }else{
-            return false;
-        }
-
-    }
-    checkIfButtonColorIsWrong(specieID){
-
-
-        if(!this.currentQuizQuestion.checkIfAnserIsCorrect(specieID)
-			&& this.inbetweenQuestions == true
-			&& specieID == this.selectedButtonSpecieID){
-
-            return true;
-
-        }else{
-            return false;
-        }
-
-    }
-    checkIfButtonIsSelected(specieID){
-        if(this.inbetweenQuestions){
-            return false
-        }
-        if(specieID == this.selectedButtonSpecieID){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-
-
     getQuestionExtraInfo(){
 
 		if(!this.quizDone){
@@ -319,28 +262,6 @@ export class TheQuizComponent implements OnInit{
 		}
 
 	}
-
-
-    //http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-    shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
-
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-        }
-
-        return array;
-    }
-
 
 
 }

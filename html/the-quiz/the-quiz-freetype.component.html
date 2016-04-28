@@ -27,7 +27,12 @@
 
 		</div>
 
-		<select [(ngModel)]="selectedSpecie" class="form-control" size="20" (keyup)="inputSpecieListKey($event)" >
+		<select
+			[(ngModel)]="selectedSpecie"
+			class="form-control"
+			size="20"
+			(keyup)="inputSpecieListKey($event)"
+			(change)="newValueSelectedList()" >
 		    <option *ngFor="#specie of specieListProsessed" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 		</select>
 

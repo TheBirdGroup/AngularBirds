@@ -18,7 +18,7 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 	],
 	inputs: ['inbetweenQuestions', 'specieQuestionObject'],
-	outputs: ['specieSelectedEvent']
+	outputs: ['specieSelectedEvent', 'questionDoneEvent']
 })
 
 
@@ -34,7 +34,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	specieQuestionObject;
 	questionCorrect = false;
 
-
+	questionDoneEvent = new EventEmitter<boolean>();
 	specieSelectedEvent = new EventEmitter<number>();
 
 	constructor(
@@ -119,15 +119,24 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 		if(this.inbetweenQuestions){
 			this.formSpecieName = ""
+			this.compileProsessedList();
 		}
 
+		this.questionDoneEvent.emit(true);
+
+	}
+
+	newValueSelectedList(){
+
+		//console.log("selectedSpecie: ", this.selectedSpecie);
+		console.log("correct species: ", this.specieQuestionObject.getRigthAnsers()[0].name);
 		this.specieSelectedEvent.emit(this.selectedSpecie.id);
 
 	}
 
 	inputSpecieListKey(event){
 
-		if(event.key == 'Enter'){
+		if(event.key == 'Enter' || event.keyCode == 13){
 			//transmit to a higher power what was seleted
 			this.handleSelectAnswer();
 		}
@@ -138,7 +147,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	inputSpecieNameChange(event){
 
 		//key fro firefox, keycode for stupid crome
-		console.log("event: ", event.keyCode);
+		//console.log("event: ", event.keyCode);
 
 		if(event.key == 'Enter' || event.keyCode == 13){
 			//transmit to a higher power what was seleted
@@ -153,6 +162,12 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 				this.selectedSpecie = this.getPrevObjetInProsessedArrat(this.selectedSpecie.id);
 			}
 
+			//waith for the stack to finiz and then change
+			setTimeout(e => {
+				this.newValueSelectedList();
+			}, 0);
+
+
 		}else if(event.key  == 'ArrowDown' || event.keyCode == 40){
 
 			//select first element if no is selected
@@ -162,6 +177,11 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 				//or move to next
 				this.selectedSpecie = this.getNextObjetInProsessedArrat(this.selectedSpecie.id);
 			}
+
+			//waith for the stack to finiz and then change
+			setTimeout(e => {
+				this.newValueSelectedList();
+			}, 0);
 
 		}else{
 			//do the limiting!
@@ -202,6 +222,11 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 			//select first, witch is i don't know
 			this.selectedSpecie = this.specieListProsessed[0];
 
+		}
+
+		//if one choice oly, select it (eg i don't know + choice)
+		if(this.specieListProsessed.length == 2){
+			this.selectedSpecie = this.specieListProsessed[1];
 		}
 
 

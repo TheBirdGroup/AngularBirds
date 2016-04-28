@@ -11,23 +11,26 @@
 
   	<div class="short-div">
 
+		<h3> What bird is it? </h3>
+
+		<birdid-the-quiz-choices
+			[inbetweenQuestions]="inbetweenQuestions"
+			[specieQuestionObject]="currentQuizQuestion"
+			(specieSelectedEvent)="choiceSelectEvent($event)"
+			(questionDoneEvent)="subSelectCompleteEvent($event)"
+			*ngIf="_quizSettingsService.getQuizSettings()[0].showAlternatives">
+		</birdid-the-quiz-choices>
+
 		<birdid-the-quiz-freetype
 			[inbetweenQuestions]="inbetweenQuestions"
 			[specieQuestionObject]="currentQuizQuestion"
-			(specieSelectedEvent)="specieSelectedEvent($event)"
+			(specieSelectedEvent)="choiceSelectEvent($event)"
+			(questionDoneEvent)="subSelectCompleteEvent($event)"
 			*ngIf="!_quizSettingsService.getQuizSettings()[0].showAlternatives">
 		</birdid-the-quiz-freetype>
 
-  		<h3> What bird is it? </h3>
-    	<div *ngFor="#current of currentQuizQuestion.getChoices(); #i=index" >
-    		<button class="btn btn-primary"  style="margin: 5px" [disabled]="selectAnswerDisabled()"
-    				[ngClass]="{'btn-success': checkIfButtonColorIsCorrect(current.id), 'btn-danger': checkIfButtonColorIsWrong(current.id),
-    					'btn-primary': checkIfButtonIsSelected(current.id)}"
-    				(click)="checkIfAltCorrect(current.id)">{{current.name}}
-    		</button>
-			<a *ngIf="inbetweenQuestions" href="https://hembstudios.no/birdid/bird/eBook.php?specieID={{current[0]}}" target="_blank"><img src="../images/book.png"></a>
-			<br />
-    	</div>
+
+
     </div>
     <div class="short-div">
     	<br>
@@ -35,7 +38,7 @@
     	<br>
     	Extra Info: {{getQuestionExtraInfo()}}
     	<br><br>
-    	<button class="btn btn-primary" (click)="nextQuestion()">Next Question</button>
+
     	<br><br>
 
     	Current Mdia ID: <b>{{mediaID}}</b>

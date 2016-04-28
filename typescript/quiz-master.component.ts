@@ -8,12 +8,14 @@ import { QuizLogicService }  from './shared/quiz-logic.service';
 import { QuizTranslationService }  from './shared/quiz-translation.service';
 import { QuizResultsService }  from './shared/quiz-results.service';
 import { QuizSpecieService }  from './shared/quiz-specie.service';
+import { QuizCompetitionService} from "./shared/quiz-competition-group.service";
 
 import { QuizMediaSelectComponent }  from './media-select/quiz-media-select.component';
 import { QuizAdditionalSettingsComponent }  from './media-additional-settings/quiz-additional-settings.component';
 import { TheQuizComponent }  from './the-quiz/the-quiz.component';
 import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 import {SelectSpeciesComponent} from "./select-species/select-species.component";
+import {QuizCompetitionGroupComponent} from "./competition-group/competition-group.component";
 
 
 @Component({
@@ -36,7 +38,7 @@ import {SelectSpeciesComponent} from "./select-species/select-species.component"
 		QuizLogicService,
 		QuizTranslationService,
 		QuizResultsService,
-		QuizSpecieService
+		QuizSpecieService,
 	]
 })
 
@@ -82,12 +84,14 @@ export class QuizMasterComponent implements OnInit {
 			  this.currentActive = 0;
 		  }else if(newRoute == 'mediaAdditionalSettings'){
 			  this.currentActive = 1;
-		  }else if(newRoute == 'mediaSelectSpecies'){
+			}else if(newRoute == 'competitionGroupComponent'){
 			  this.currentActive = 2;
-		  }else if(newRoute == 'mediaQuiz'){
+		  }else if(newRoute == 'mediaSelectSpecies'){
 			  this.currentActive = 3;
-		  }else if(newRoute == 'mediaQuizResults'){
+		  }else if(newRoute == 'mediaQuiz'){
 			  this.currentActive = 4;
+		  }else if(newRoute == 'mediaQuizResults'){
+			  this.currentActive = 5;
 		  }
 
 	  }
@@ -105,7 +109,7 @@ export class QuizMasterComponent implements OnInit {
 	  nextComponent(){
 
 		  this.currentActive ++;
-		  if(this.currentActive > 4){
+		  if(this.currentActive > 5){
 			  this.currentActive = 0;
 		  }
 

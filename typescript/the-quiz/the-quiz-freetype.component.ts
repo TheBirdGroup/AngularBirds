@@ -4,6 +4,8 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
+import { QuizQuestion }  from './the-quiz-question.class';
+
 @Component({
 	selector: 'birdid-the-quiz-freetype',
 	templateUrl: 'app/the-quiz/the-quiz-freetype.component.html',
@@ -31,7 +33,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	specieListProsessed;
 
 	inbetweenQuestions = false;
-	specieQuestionObject;
+	specieQuestionObject:QuizQuestion;
 	questionCorrect = false;
 
 	questionDoneEvent = new EventEmitter<boolean>();

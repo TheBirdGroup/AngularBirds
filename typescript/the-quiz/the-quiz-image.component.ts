@@ -1,7 +1,9 @@
-import { Component, EventEmitter, OnInit, ViewChild, AfterViewInit, ElementRef }       from 'angular2/core';
+import { Component, EventEmitter, OnInit, ViewChild, AfterViewInit, ElementRef, OnChanges }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
+
+import { QuizQuestion }  from './the-quiz-question.class';
 
 @Component({
 	selector: 'birdid-the-quiz-image',
@@ -13,15 +15,17 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 	providers: [
 	  HTTP_PROVIDERS
 	],
-	inputs: ['mediaID:usingMediaID'], //using ALIAS
+	inputs: ['mediaID:usingMediaID', 'specieQuestionObject'], //using ALIAS
 })
 
 
-export class TheQuizImageComponent implements OnInit{
+export class TheQuizImageComponent implements OnInit, OnChanges{
 	title = 'Birdid Quiz TheQuizComponent!';
 
 	imageURLStart = "https://hembstudios.no/birdid/IDprogram/getMedia.php?mediaID=";
 	extraSiteID;
+
+	specieQuestionObject:QuizQuestion;
 
     mediaID = 0;
 
@@ -52,6 +56,10 @@ export class TheQuizImageComponent implements OnInit{
 
 		this.extraSiteID = "&siteID="+siteID;
 
+	}
+
+	ngOnChanges(){
+		
 	}
 
 	ngAfterViewInit() {

@@ -1,7 +1,9 @@
-import { Component, ViewChild, EventEmitter, OnInit }       from 'angular2/core';
+import { Component, ViewChild, EventEmitter, OnInit, OnChanges }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
+
+import { QuizQuestion }  from './the-quiz-question.class';
 
 @Component({
 	selector: 'birdid-the-quiz-sound',
@@ -13,14 +15,16 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 	providers: [
 	  HTTP_PROVIDERS
 	],
-	inputs: ['mediaURL:usingMediaURL'], //using ALIAS
+	inputs: ['mediaURL:usingMediaURL', 'specieQuestionObject'], //using ALIAS
 })
 
 
-export class TheQuizSoundComponent implements OnInit{
+export class TheQuizSoundComponent implements OnInit, OnChanges{
 	title = 'Birdid Quiz TheQuizComponent!';
 	@ViewChild("myAudio") myAudio;
 	@ViewChild("progressBar") progressBar;
+
+	specieQuestionObject:QuizQuestion;
 
 	progressPercent = 0;
 	currentTime = 0;
@@ -51,6 +55,12 @@ export class TheQuizSoundComponent implements OnInit{
 		this.extraSiteID = "&siteID="+siteID;
 
 	}
+
+	ngOnChanges(){
+		
+	}
+
+
 	playAudio(){
 		this.myAudio.nativeElement.play();
 		console.log(this.myAudio);

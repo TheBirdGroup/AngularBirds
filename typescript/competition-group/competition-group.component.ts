@@ -20,31 +20,7 @@ import { ResultlistComponent }  from './../shared.component/resultlist.component
 	],
 })
 export class QuizCompetitionGroupComponent implements OnInit{
-	title = 'Birdid Quiz competition group!';
-
-	quizHighscoreData;
-	quizHighscoreDataLimit50;
-	quizSettings;
-	mediaType = 1; //image, sound, video
-	allowedMediaTypes = [1,2];
-	quizType = 1; // 1 = normal, 2 = several soundquiz, 3 = formal test?
-	allowedQuizTypes = [1,2,3];
-
-	mediaDifficulities = 1;
-//	allowedMediaDifficulities = [1,2,3,4]; for now we do not check
-
-    numberOfQuestions = 10;
-   // allowedNumberOfQuestions = [10, 30, 60];// for now we do not check
-
-    duration=0;
-    alternative: boolean;
-
-	siteID = 1;
-
-	areaListLoaded = false;
-	areaLoadProblems = false;
-	areaListData;
-	selectedArea = 0;
+	title = 'Birdid Q';
 
 
 
@@ -52,20 +28,32 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
 		private _router: Router,
-		private _quizResultsService: QuizResultsService
+		private _quizResultsService: QuizResultsService,
+        private _http: Http
 	){}
 
+    storeCompetitionGroupSettings(){
+
+        //setup default
+        this._quizSettingsService.setMediaType(2);
+        this._quizSettingsService.setQuizType(1);
+        this._quizSettingsService.setMediaDiff(1);
+        this._quizSettingsService.selectNumberOfQuestions(10);
+        this._quizSettingsService.setDuration(0);
+        this._quizSettingsService.setAlternatives(false);
+        this._quizSettingsService.setArea(0);
+
+    }
 
 	ngOnInit() {
-
 
 
 	}
 
 
-
 	startQuiz(){
-		console.log(this._router);
-		this._router.navigate(["QuizMediaQuiz"]);
+		//console.log(this._router);
+        this.storeCompetitionGroupSettings();
+        this._router.navigate(["QuizMediaQuiz"]);
 	}
 }

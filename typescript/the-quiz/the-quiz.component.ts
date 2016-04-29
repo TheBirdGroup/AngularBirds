@@ -40,21 +40,11 @@ export class TheQuizComponent implements OnInit{
 
 	quizDoneEvent = new EventEmitter<string>();
 
-	mediaID = 0;
-	mediaURL = "";
-    //mediaTypeID = 0;
-
-    quizQuestions = [];
-
     quizLoaded = false;
 
-    //questionNumber = 0; //move to Logic service
 
 	currentQuizQuestion:QuizQuestion;
-
     inbetweenQuestions = false;
-
-	selectedButtonSpecieID = -1;
 
 
 	quizSettings: QuizSetting[];
@@ -87,7 +77,6 @@ export class TheQuizComponent implements OnInit{
 	        .subscribe(
 	            data => {
 	                console.log(data);
-	                this.quizQuestions = data;
 					this._quizLogicService.setQuizQuestions(data, this._quizSettingsService.isSeveralSoundQuiz());
 
 	                this.startQuiz();
@@ -106,27 +95,6 @@ export class TheQuizComponent implements OnInit{
         this.quizLoaded = true;
 
     }
-
-	//called when one of the sun components for selecting an answer is fired
-	choiceSelectEvent(event){
-		//event = selected specie id (don't know = -1)
-
-		//console.log("specieSelectedEvent: ", event);
-		//console.log("this.subSelectedSpecieID: ", this.subSelectedSpecieID)
-		this.selectedButtonSpecieID = event;
-
-		this.currentQuizQuestion.addSelectedChoice(event);
-
-	}
-
-	choiceDeselectEvent(event){
-		//event = selected specie id (don't know = -1)
-		//console.log("specieDeselectEvent: ", event);
-		this.selectedButtonSpecieID = -1;
-
-		this.currentQuizQuestion.removeSelectedChoice(event);
-
-	}
 
 	//when done by sub select component (eg next question button clicked)
 	subSelectCompleteEvent(event){
@@ -187,14 +155,6 @@ export class TheQuizComponent implements OnInit{
 		}
 
 		this.currentQuizQuestion = this._quizLogicService.getCurrentQuizQuestion();
-		//TODO: handle more than the first object!
-		this.mediaURL = this.currentQuizQuestion.getMediaSourses()[0].mediaUrl;
-		//console.log("mediaURL: ", this.mediaURL);
-        this.mediaID = this.currentQuizQuestion.getMediaIds()[0].id;
-		//console.log("mediaID: ", this.mediaID);
-
-		this.selectedButtonSpecieID = -1;
-
 
 		if(this._quizSettingsService.getQuizSettings()[0].timeLimit != 0){
 			this.ticks=0;
@@ -206,42 +166,37 @@ export class TheQuizComponent implements OnInit{
 
     }
 
-	testQuizQuestionClass(){
-
-		let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
-
-		let tempQuestion = new QuizQuestion(false);
-		tempQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
-		tempQuestion.addRightAnswer(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['name']);
-		tempQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['name']);
-		tempQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['name']);
-		tempQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['name']);
-
-		tempQuestion.prosessData();
-
-		if(tempQuestion.checkIfAnserIsCorrect(alts['right_answer']['id'])){
-			console.log("checkIfAnserIsCorrect: ", "TRUE")
-		}
-		if(tempQuestion.checkIfAnserIsCorrect(alts['choice_2']['id'])){
-			console.log("checkIfAnserIsCorrect: ", "TRUE")
-		}
-		if(tempQuestion.checkIfAnserIsCorrect(alts['choice_3']['id'])){
-			console.log("checkIfAnserIsCorrect: ", "FALSE")
-		}
-		if(tempQuestion.checkIfAnserIsCorrect(alts['choice_5']['id'])){
-			console.log("checkIfAnserIsCorrect: ", "FALSE")
-		}
-
-	}
+	// testQuizQuestionClass(){
+	//
+	// 	let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
+	//
+	// 	let tempQuestion = new QuizQuestion(false);
+	// 	tempQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
+	// 	tempQuestion.addRightAnswer(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['name']);
+	// 	tempQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['name']);
+	// 	tempQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['name']);
+	// 	tempQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['name']);
+	//
+	// 	tempQuestion.prosessData();
+	//
+	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['right_answer']['id'])){
+	// 		console.log("checkIfAnserIsCorrect: ", "TRUE")
+	// 	}
+	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['choice_2']['id'])){
+	// 		console.log("checkIfAnserIsCorrect: ", "TRUE")
+	// 	}
+	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['choice_3']['id'])){
+	// 		console.log("checkIfAnserIsCorrect: ", "FALSE")
+	// 	}
+	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['choice_5']['id'])){
+	// 		console.log("checkIfAnserIsCorrect: ", "FALSE")
+	// 	}
+	//
+	// }
 
     getQuestionExtraInfo(){
 
 		return this.currentQuizQuestion.getExtraInfo();
-		// if(!this.quizDone){
-		// 	return this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['extra_info'];
-		// }else{
-		// 	return ""
-		// }
 
 	}
 

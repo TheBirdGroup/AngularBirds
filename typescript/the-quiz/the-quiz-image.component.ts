@@ -15,7 +15,7 @@ import { QuizQuestion }  from './the-quiz-question.class';
 	providers: [
 	  HTTP_PROVIDERS
 	],
-	inputs: ['mediaID:usingMediaID', 'specieQuestionObject'], //using ALIAS
+	inputs: ['specieQuestionObject'], //using ALIAS
 })
 
 
@@ -59,7 +59,9 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 	}
 
 	ngOnChanges(){
-		
+
+		this.mediaID = this.specieQuestionObject.getMediaIds()[0].id;
+
 	}
 
 	ngAfterViewInit() {

@@ -15,7 +15,7 @@ import { QuizQuestion }  from './the-quiz-question.class';
 	providers: [
 	  HTTP_PROVIDERS
 	],
-	inputs: ['mediaURL:usingMediaURL', 'specieQuestionObject'], //using ALIAS
+	inputs: ['specieQuestionObject'], //using ALIAS
 })
 
 
@@ -57,7 +57,7 @@ export class TheQuizSoundComponent implements OnInit, OnChanges{
 	}
 
 	ngOnChanges(){
-		
+		this.mediaURL = this.specieQuestionObject.getMediaSourses()[0].mediaUrl;
 	}
 
 

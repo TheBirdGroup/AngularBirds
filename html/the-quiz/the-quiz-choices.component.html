@@ -1,4 +1,4 @@
-<div *ngFor="#current of specieQuestionObject.getChoices(); #i=index" >
+<div *ngFor="let current of specieQuestionObject.getChoices(); let i=index" >
 	<button
 		class="btn btn-primary"
 		style="margin: 5px"

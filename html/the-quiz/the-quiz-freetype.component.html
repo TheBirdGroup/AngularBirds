@@ -33,7 +33,7 @@
 			size="20"
 			(keyup)="inputSpecieListKey($event)"
 			(change)="newValueSelectedList()" >
-		    <option *ngFor="#specie of specieListProsessed" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
+		    <option *ngFor="let specie of specieListProsessed" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 		</select>
 
 	</div>

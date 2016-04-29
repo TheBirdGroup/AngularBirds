@@ -4,6 +4,8 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
+import { QuizQuestion }  from './the-quiz-question.class';
+
 @Component({
 	selector: 'birdid-the-quiz-choices',
 	templateUrl: 'app/the-quiz/the-quiz-choices.component.html',
@@ -18,7 +20,7 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 	],
 	inputs: ['inbetweenQuestions', 'specieQuestionObject'],
-	outputs: ['specieSelectedEvent', 'questionDoneEvent']
+	outputs: ['questionDoneEvent']
 })
 
 
@@ -29,14 +31,12 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
 
 	inbetweenQuestions = false;
-	specieQuestionObject;
-	questionCorrect = false;
+	specieQuestionObject:QuizQuestion;
+	//questionCorrect = false;
 
 
-	selectedButtonSpecieID = -1;
+	//selectedButtonSpecieID = -1;
 
-
-	specieSelectedEvent = new EventEmitter<number>();
 	questionDoneEvent = new EventEmitter<boolean>();
 
 	constructor(
@@ -68,7 +68,8 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 	checkIfButtonColorIsCorrect(specieID){
 
 
-        if(this.specieQuestionObject.checkIfAnserIsCorrect(specieID) && this.inbetweenQuestions == true){
+        if(this.specieQuestionObject.checkIfAnserIsCorrect(specieID)
+		&& this.inbetweenQuestions == true){
             return true;
 
         }else{
@@ -82,7 +83,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
         if(!this.specieQuestionObject.checkIfAnserIsCorrect(specieID)
 			&& this.inbetweenQuestions == true
-			&& specieID == this.selectedButtonSpecieID){
+			&& this.specieQuestionObject.choiceIsSelected(specieID)){
 
             return true;
 
@@ -96,7 +97,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
         if(this.inbetweenQuestions){
             return false
         }
-        if(specieID == this.selectedButtonSpecieID){
+        if(this.specieQuestionObject.choiceIsSelected(specieID)){
             return true;
         }else{
             return false;
@@ -113,10 +114,19 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
 	setUserChoice(specieID){
 
-		this.selectedButtonSpecieID = specieID;
-		this.specieSelectedEvent.emit(specieID);
+		if(this.specieQuestionObject.choiceIsSelected(specieID)){
+			//deselect it!!
+			this.specieQuestionObject.removeSelectedChoice(specieID);
+			//this.specieDeselectEvent.emit(specieID);
+		}else{
+			//select it!!
+			this.specieQuestionObject.addSelectedChoice(specieID);
+			//this.specieSelectedEvent.emit(specieID);
+		}
 
-		if(this.specieQuestionObject.checkIfAnserIsCorrect(this.selectedButtonSpecieID)){
+
+
+		if(this.specieQuestionObject.checkIfAnserIsCorrect(specieID)){
 
 			console.log("correct!");
 
@@ -132,11 +142,11 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
 	onAnswerButtonClick(){
 
-		this.questionCorrect = this.specieQuestionObject.checkIfAnserIsCorrect(this.selectedButtonSpecieID);
+		//this.questionCorrect = this.specieQuestionObject.checkIfAnserIsCorrect(this.selectedButtonSpecieID);
 
 		if(this.inbetweenQuestions){
 			this.questionDoneEvent.emit(true);
-			this.selectedButtonSpecieID = -1;
+			//this.selectedButtonSpecieID = -1;
 		}else{
 			this.questionDoneEvent.emit(true);
 		}

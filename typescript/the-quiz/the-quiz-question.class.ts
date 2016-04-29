@@ -2,12 +2,16 @@ export class QuizQuestion {
 
 	private rightAnswers = [];
 	private choices = [];
+	private selectedChoices = [];
+	private allowMultibleSelect = false;
 
 	private mediaIds = [];
 	private mediaSources = [];
 	private extraInfoes = [];
 
-	constructor(){
+	constructor(allowMultibleSelect){
+
+		this.allowMultibleSelect = allowMultibleSelect;
 
 	}
 
@@ -23,6 +27,86 @@ export class QuizQuestion {
 		this.choices.push({'id': id, 'name': name, 'latin': latin});
 
 	}
+
+	//what the user have selected. Only adds if not in array (retuns false if in array)
+	addSelectedChoice(id){
+
+
+		//selecting i don't knoq clears all selections
+		if(id < 0){
+			this.removeAllSelectedChoices();
+			return true;
+		}
+
+
+		for (let currentID of Object.keys(this.selectedChoices)) {
+			if(this.selectedChoices[currentID].id == id){
+				return false;
+			}
+		}
+
+		if(this.allowMultibleSelect){
+			this.selectedChoices.push({'id': id});
+		}else{
+			//only one allowed in normal quiz:
+			this.removeAllSelectedChoices();
+			this.selectedChoices.push({'id': id});
+		}
+
+		return true;
+
+	}
+
+	//what the user have selected
+	getSelectedChoice(id){
+
+		return this.selectedChoices;
+
+	}
+
+	choiceIsSelected(id){
+
+		//if i don't know AND no other choice is selected return true
+		if(id < 0 && this.selectedChoices.length == 0){
+			return true;
+		}
+
+		for (let currentID of Object.keys(this.selectedChoices)) {
+			if(this.selectedChoices[currentID].id == id){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	//what the user have selected. True if deleted, false if not
+	removeSelectedChoice(id){
+
+		//can't remove i don't know
+		if(id < 0){
+			return false;
+		}
+
+		let index:number = -1;
+		for (let currentID of Object.keys(this.selectedChoices)) {
+			if(this.selectedChoices[currentID].id == id){
+				index = Number(currentID);
+			}
+		}
+
+		if (index > -1) {
+		    this.selectedChoices.splice(index, 1);
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+
+	removeAllSelectedChoices(){
+		this.selectedChoices.splice(0);
+	}
+
 
 	addMediaSource(mediaUrl){
 
@@ -86,12 +170,42 @@ export class QuizQuestion {
 
 	}
 
-	//TODO remove duplicates
+	private elementAlreadyInArray(array, id){
+
+		for (let currentID of Object.keys(array)) {
+
+			if(id == array[currentID].id){
+				return true;
+			}
+
+		}
+
+		return false;
+
+	}
+
 	prosessData(){
+
+		let tempArray = [];
+
+		//only selecting one of each
+		for (let currentChoiceID of Object.keys(this.choices)) {
+
+			if(!this.elementAlreadyInArray(tempArray, this.choices[currentChoiceID].id)){
+				tempArray.push(this.choices[currentChoiceID]);
+			}
+
+		}
+		this.choices = tempArray;
 
 		this.choices = this.shuffle(this.choices);
 		this.addChoice(-1, "I don't know", "I don't know");
 
+	}
+
+	//using internal selected choices list
+	getScoreForSelectedAnswers(){
+		return this.scoreForMultibleAnswers(this.selectedChoices);
 	}
 
 	//returns score
@@ -101,7 +215,7 @@ export class QuizQuestion {
 
 		for (let currentID of Object.keys(arrayOfSpecieAlternatives)) {
 
-			if(this.checkIfAnserIsCorrect){
+			if(this.checkIfAnserIsCorrect(arrayOfSpecieAlternatives[currentID].id)){
 				score ++;
 			}else{
 				score --;
@@ -120,8 +234,6 @@ export class QuizQuestion {
 			if(id == this.rightAnswers[currentRightAnsID].id){
 				return true;
 			}
-
-
 		}
 
 		return false;

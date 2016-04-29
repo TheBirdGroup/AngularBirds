@@ -18,7 +18,7 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 	],
 	inputs: ['inbetweenQuestions', 'specieQuestionObject'],
-	outputs: ['specieSelectedEvent', 'questionDoneEvent']
+	outputs: ['questionDoneEvent']
 })
 
 
@@ -35,7 +35,6 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	questionCorrect = false;
 
 	questionDoneEvent = new EventEmitter<boolean>();
-	specieSelectedEvent = new EventEmitter<number>();
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
@@ -120,6 +119,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		if(this.inbetweenQuestions){
 			this.formSpecieName = ""
 			this.compileProsessedList();
+			this.selectedSpecie = this.specieListProsessed[0];
 		}
 
 		this.questionDoneEvent.emit(true);
@@ -130,7 +130,10 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 		//console.log("selectedSpecie: ", this.selectedSpecie);
 		console.log("correct species: ", this.specieQuestionObject.getRigthAnsers()[0].name);
-		this.specieSelectedEvent.emit(this.selectedSpecie.id);
+
+
+		this.specieQuestionObject.addSelectedChoice(this.selectedSpecie.id);
+
 
 	}
 

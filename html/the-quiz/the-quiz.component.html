@@ -16,7 +16,6 @@
 		<birdid-the-quiz-choices
 			[inbetweenQuestions]="inbetweenQuestions"
 			[specieQuestionObject]="currentQuizQuestion"
-			(specieSelectedEvent)="choiceSelectEvent($event)"
 			(questionDoneEvent)="subSelectCompleteEvent($event)"
 			*ngIf="_quizSettingsService.getQuizSettings()[0].showAlternatives">
 		</birdid-the-quiz-choices>
@@ -24,7 +23,6 @@
 		<birdid-the-quiz-freetype
 			[inbetweenQuestions]="inbetweenQuestions"
 			[specieQuestionObject]="currentQuizQuestion"
-			(specieSelectedEvent)="choiceSelectEvent($event)"
 			(questionDoneEvent)="subSelectCompleteEvent($event)"
 			*ngIf="!_quizSettingsService.getQuizSettings()[0].showAlternatives">
 		</birdid-the-quiz-freetype>

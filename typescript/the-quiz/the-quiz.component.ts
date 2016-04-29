@@ -56,6 +56,7 @@ export class TheQuizComponent implements OnInit{
 
 	selectedButtonSpecieID = -1;
 
+
 	quizSettings: QuizSetting[];
 
 	quizDone = false;
@@ -114,7 +115,16 @@ export class TheQuizComponent implements OnInit{
 		//console.log("this.subSelectedSpecieID: ", this.subSelectedSpecieID)
 		this.selectedButtonSpecieID = event;
 
+		this.currentQuizQuestion.addSelectedChoice(event);
 
+	}
+
+	choiceDeselectEvent(event){
+		//event = selected specie id (don't know = -1)
+		//console.log("specieDeselectEvent: ", event);
+		this.selectedButtonSpecieID = -1;
+
+		this.currentQuizQuestion.removeSelectedChoice(event);
 
 	}
 
@@ -139,29 +149,15 @@ export class TheQuizComponent implements OnInit{
         if(!this.inbetweenQuestions) {
             this.inbetweenQuestions = true;
 
-
-			//right answer selected
-            if(this.currentQuizQuestion.checkIfAnserIsCorrect(this.selectedButtonSpecieID)){
-
-				if(Number(this.selectedButtonSpecieID) >= 0){ //NOT i don't know
-					this._quizLogicService.changeScore(1);
-				}
-                //this.score ++;
-            }else{
-
-				//wrong answer selected
-				if(Number(this.selectedButtonSpecieID) >= 0){ //NOT i don't know
-					this._quizLogicService.changeScore(-1);
-				}
-                //this.score --;
-            }
+			//update score based on user choices
+			this._quizLogicService.changeScore(this.currentQuizQuestion.getScoreForSelectedAnswers());
 
         }else{
+
             this.inbetweenQuestions = false;
 			this._quizLogicService.gotoNextQuestionNumber();
             //this.questionNumber++;
             this.setupQuestion();
-
 
         }
 
@@ -193,7 +189,9 @@ export class TheQuizComponent implements OnInit{
 		this.currentQuizQuestion = this._quizLogicService.getCurrentQuizQuestion();
 		//TODO: handle more than the first object!
 		this.mediaURL = this.currentQuizQuestion.getMediaSourses()[0].mediaUrl;
-        this.mediaID = this.currentQuizQuestion.getMediaSourses()[0].addMediaId;
+		//console.log("mediaURL: ", this.mediaURL);
+        this.mediaID = this.currentQuizQuestion.getMediaIds()[0].id;
+		//console.log("mediaID: ", this.mediaID);
 
 		this.selectedButtonSpecieID = -1;
 
@@ -212,7 +210,7 @@ export class TheQuizComponent implements OnInit{
 
 		let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
 
-		let tempQuestion = new QuizQuestion();
+		let tempQuestion = new QuizQuestion(false);
 		tempQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
 		tempQuestion.addRightAnswer(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['name']);
 		tempQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['name']);

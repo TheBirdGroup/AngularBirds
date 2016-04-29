@@ -85,7 +85,7 @@ export class QuizLogicService{
 		let currentQuestionObjectID = 0;
 		for (let currentGroupID of Object.keys(arrayOfQuestiongroups)) {
 
-			let currentQuizQuestion = new QuizQuestion();
+			let currentQuizQuestion = new QuizQuestion(severalSoundQuiz);
 
 			//combines the number of questions in each group together
 			for(let i = 0; i < arrayOfQuestiongroups[currentGroupID]; i ++){

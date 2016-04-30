@@ -1,4 +1,4 @@
-import { Component, ViewChild, EventEmitter, OnInit, OnChanges }       from 'angular2/core';
+import { Component, ViewChild, EventEmitter, OnInit, OnChanges, ElementRef }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
@@ -36,12 +36,16 @@ export class TheQuizSoundComponent implements OnInit, OnChanges{
 	soundMiddleURL = ""
 
     mediaURL = "";
+	mediaURLs = [];
 	volume = 0.5;
 
-	constructor(private _quizSettingsService: QuizSettingsService){}
+	constructor(
+		private _quizSettingsService: QuizSettingsService,
+		private _elementRef: ElementRef
+	){}
 
 	ngOnInit() {
-		let audio = this.myAudio;
+
 		let quizSettings = this._quizSettingsService.getQuizSettings();
 		let siteID = quizSettings[0].siteID;
 		if(siteID == 1){
@@ -54,10 +58,30 @@ export class TheQuizSoundComponent implements OnInit, OnChanges{
 
 		this.extraSiteID = "&siteID="+siteID;
 
+		this.mediaURL = this.specieQuestionObject.getMediaSourses()[0].mediaUrl;
+		this.mediaURLs = this.specieQuestionObject.getMediaSourses();
+
+		for (let currentID of Object.keys(this.mediaURLs)) {
+			let audio = new Audio();
+			//audio.type = "audio/mpeg";
+			audio.src  = this.mediaURLStart + this.soundMiddleURL + this.mediaURLs[currentID].mediaUrl;
+			audio.load();
+			audio.play();
+			console.log("playing one!");
+
+		}
+
+
+
+
 	}
 
 	ngOnChanges(){
-		this.mediaURL = this.specieQuestionObject.getMediaSourses()[0].mediaUrl;
+
+	}
+
+	getSoundMiddleUrl(){
+
 	}
 
 

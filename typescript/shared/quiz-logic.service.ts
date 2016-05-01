@@ -43,6 +43,7 @@ export class QuizLogicService{
 		}
 		let questionsLeft = Math.floor(numQuestionsTotal*0.5);
 
+		let loopCount = 0;
 		//do the rest
 		while(questionsLeft > 0){
 
@@ -53,6 +54,12 @@ export class QuizLogicService{
 				arrayOfQuestiongroups[randomnumber] += 1;
 				questionsLeft --;
 			}
+
+			loopCount ++;
+			if(loopCount > 1000){
+				throw new Error("createSeveralSoundquizDistrubutionArray infinate loop detected, > 1000");
+			}
+
 		}
 
 		//console.log("arrayOfQuestiongroups ", arrayOfQuestiongroups);

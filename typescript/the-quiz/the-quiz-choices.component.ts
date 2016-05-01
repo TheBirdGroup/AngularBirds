@@ -4,7 +4,7 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
-import { QuizQuestion }  from './the-quiz-question.class';
+import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 
 @Component({
 	selector: 'birdid-the-quiz-choices',

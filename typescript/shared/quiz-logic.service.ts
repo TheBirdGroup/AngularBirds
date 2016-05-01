@@ -5,7 +5,7 @@ import { Http } from 'angular2/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
-import { QuizQuestion }  from './../the-quiz/the-quiz-question.class';
+import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 
 @Injectable()
 export class QuizLogicService{
@@ -55,7 +55,7 @@ export class QuizLogicService{
 			}
 		}
 
-		console.log("arrayOfQuestiongroups ", arrayOfQuestiongroups);
+		//console.log("arrayOfQuestiongroups ", arrayOfQuestiongroups);
 
 		return arrayOfQuestiongroups;
 

@@ -15,7 +15,7 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 import { TheQuizChoicesComponent }  from './the-quiz-choices.component';
 import { TheQuizFreetypeComponent }  from './the-quiz-freetype.component';
 
-import { QuizQuestion }  from './the-quiz-question.class';
+import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 
 
 

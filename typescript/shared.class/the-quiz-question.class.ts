@@ -1,3 +1,4 @@
+
 export class QuizQuestion {
 
 	private rightAnswers = [];
@@ -8,6 +9,7 @@ export class QuizQuestion {
 	private mediaIds = [];
 	private mediaSources = [];
 	private extraInfoes = [];
+
 
 	constructor(allowMultibleSelect){
 

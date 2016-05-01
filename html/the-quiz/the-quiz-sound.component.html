@@ -1,14 +1,8 @@
-<audio
-	id="player"
-	(timeupdate)="updateProgressbar($event)"
-	(loadeddata)="soundLoadedEvent(event)"
-	#myAudio
-	loop>
-	<source [src]="mediaURLStart+soundMiddleURL+mediaURL" type="audio/mpeg">
-	Your browser does not support the audio element.
-</audio>
-
-<div class="progress">
+<div
+	class="progress"
+	#progressBarContainer
+	(click)="moveProgress($event)">
+	
 	<div
 		class="progress-bar progress-bar-striped"
 		#progressBar
@@ -18,7 +12,7 @@
 		aria-valuemax="100"
 		[ngStyle]="{width: progressPercent + '%'}"
 		style="width:70%"
-		(click)="moveProgress($event)">
+		>
 
 		<span>{{currentTime}}s/{{totTime}}s</span>
 
@@ -26,9 +20,10 @@
 </div>
 <br>
 
+
 <div>
-	<button class="btn btn-primary btn-lg" (click)="playAudio()"><span class="glyphicon glyphicon-play"></span></button>
-	<button class="btn btn-danger btn-lg" (click)="pauseAudio()"><span class="glyphicon glyphicon-pause"></span></button>
-	<button class="btn btn-info btn-lg" (click)="volumeIncrease()"><span class="glyphicon glyphicon-volume-up"></span></button>
-	<button class="btn btn-info btn-lg" (click)="volumeDecrease()"><span class="glyphicon glyphicon-volume-down"></span></button>
+	<button class="btn btn-primary btn-lg" (click)="playAudio()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-play"></span></button>
+	<button class="btn btn-danger btn-lg" (click)="pauseAudio()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-pause"></span></button>
+	<button class="btn btn-info btn-lg" (click)="volumeIncrease()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-volume-up"></span></button>
+	<button class="btn btn-info btn-lg" (click)="volumeDecrease()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-volume-down"></span></button>
 </div>

@@ -8,6 +8,7 @@
 		</birdid-the-quiz-image>
  		<birdid-the-quiz-sound
 			*ngIf="_quizSettingsService.getQuizSettings()[0].mediaTypeID == 2"
+			[inbetweenQuestions]="inbetweenQuestions"
 			[specieQuestionObject]="currentQuizQuestion">
 		</birdid-the-quiz-sound>
 	</div>

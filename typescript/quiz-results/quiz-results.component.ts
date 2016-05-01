@@ -53,7 +53,6 @@ export class QuizResultComponent implements OnInit  {
 
 	loadQuizResults(){
 
-		console.log("yeah");
 		setTimeout(() => {
 
 			this.updateResultlistInc ++;

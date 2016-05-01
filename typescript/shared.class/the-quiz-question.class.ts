@@ -134,6 +134,25 @@ export class QuizQuestion {
 
 	}
 
+	//returns as one string of all media ids
+	getStringMediaIds(){
+
+		let returnString =  " ";
+
+		for (let currentID of Object.keys(this.mediaIds)) {
+
+			returnString += this.mediaIds[currentID].id + ", ";
+
+		}
+
+		if(returnString.length == 0){
+			return ""
+		}else{
+			return returnString.substring(0, returnString.length-2);;
+		}
+
+	}
+
 
 	//returns as one string of all extra infoes
 	getExtraInfo():string{
@@ -142,14 +161,14 @@ export class QuizQuestion {
 
 		for (let currentID of Object.keys(this.extraInfoes)) {
 			if(this.extraInfoes[currentID].extraInfo.length > 0){
-				returnString += this.extraInfoes[currentID].extraInfo + ",";
+				returnString += this.extraInfoes[currentID].extraInfo + ", ";
 			}
 		}
 
 		if(returnString.length == 0){
 			return ""
 		}else{
-			return returnString.substring(0, returnString.length-1);;
+			return returnString.substring(0, returnString.length-2);;
 		}
 
 	}

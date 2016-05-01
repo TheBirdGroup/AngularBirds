@@ -1,0 +1,29 @@
+<div
+	class="progress"
+	#progressBarContainer
+	(click)="moveProgress($event)">
+	
+	<div
+		class="progress-bar progress-bar-striped"
+		#progressBar
+		role="progressbar"
+		[attr.aria-valuenow]="progressPercent"
+		aria-valuemin="0"
+		aria-valuemax="100"
+		[ngStyle]="{width: progressPercent + '%'}"
+		style="width:70%"
+		>
+
+		<span>{{currentTime}}s/{{totTime}}s</span>
+
+	</div>
+</div>
+<br>
+
+
+<div>
+	<button class="btn btn-primary btn-lg" (click)="playAudio()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-play"></span></button>
+	<button class="btn btn-danger btn-lg" (click)="pauseAudio()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-pause"></span></button>
+	<button class="btn btn-info btn-lg" (click)="volumeIncrease()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-volume-up"></span></button>
+	<button class="btn btn-info btn-lg" (click)="volumeDecrease()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-volume-down"></span></button>
+</div>

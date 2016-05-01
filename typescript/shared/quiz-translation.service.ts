@@ -11,6 +11,9 @@ export class QuizTranslationService implements OnInit{
 	translationData;
 
 	transDataLoaded = false;
+	transLoadProblems = false;
+
+	siteID = 1;
 
 	promise;
 
@@ -24,7 +27,9 @@ export class QuizTranslationService implements OnInit{
 
 	 }
 
-	initialize(){
+	initialize(siteID){
+
+		this.siteID = siteID;
 
 		this.loadTranslations();
 
@@ -32,13 +37,16 @@ export class QuizTranslationService implements OnInit{
 
 	private loadTranslations(){
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2")
+		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
 			.map(response => response.json()).subscribe(
 	            data => {
 	                this.translationData = data['translations'];
 	                this.transDataLoaded = true;
 	            },
-	            error => console.error("getQuizQuestions ERROR! ", error)
+	            error => {
+					this.transLoadProblems = true;
+					console.error("getQuizQuestions ERROR! ", error)
+				}
 	        );
 
 		//return Promise.resolve(quizQuestions);
@@ -49,6 +57,12 @@ export class QuizTranslationService implements OnInit{
 	translationsAreLoaded(){
 
 		return this.transDataLoaded;
+
+	}
+
+	translationsLoadProblems(){
+
+		return this.transLoadProblems;
 
 	}
 
@@ -63,7 +77,7 @@ export class QuizTranslationService implements OnInit{
 		// });
 		// return this.promise;
 
-		console.log("this.transDataLoaded: ", this.transDataLoaded)
+		//console.log("this.transDataLoaded: ", this.transDataLoaded)
 		if(!this.transDataLoaded){
 			return "TRANSLATIONS NOT LOADED"
 		}else{

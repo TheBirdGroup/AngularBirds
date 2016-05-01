@@ -1,0 +1,13 @@
+<h2>{{title}}</h2>
+<select  [(ngModel)]="selectedSpecie" (ngModelChange)="selectSpecie()">
+    <option  *ngFor="let specie of specieList" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
+</select>
+
+<h3>Selected species</h3>
+<ul>
+    <li class="styled-select" *ngFor="let specie of displaySelectedSpecies">
+        {{specie.name}} ({{specie.latin}}) <button class="btn btn-xs btn-danger" (click)="deleteSpecie(specie)">x</button>
+    </li>
+</ul>
+
+<button class="btn btn-lg btn-primary" (click)="postSpeciesId()">Start Quiz</button>

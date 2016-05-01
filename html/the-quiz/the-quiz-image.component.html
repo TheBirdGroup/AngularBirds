@@ -1,1 +1,12 @@
-<img [src]="imageURLStart+mediaID" >
+<canvas
+	(mousemove)="mouseMoveCanvas($event)"
+	(mouseleave)="mouseLeaveCanvas($event)"
+	(mouseenter)="mouseEnterCanvas($event)"
+	#myCanvas
+	id="myCanvas"
+	height="700"
+	width="700"
+	data-girar="0">
+</canvas>
+
+<img #myImage id="image" [src]="imageURLStart+mediaID+extraSiteID" class="birdimg" >

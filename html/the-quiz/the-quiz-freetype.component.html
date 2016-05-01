@@ -1,0 +1,43 @@
+<form (ngSubmit)="false" #form="ngForm" >
+
+	<div class="freetypeInputContainer">
+
+		<h3 *ngIf="inbetweenQuestions">
+			The correct answer was
+			<b [ngClass]="{'correctColor': questionCorrect, 'inncorrectColor': !questionCorrect}">{{specieQuestionObject.getRigthAnsers()[0].name}}</b>
+		</h3>
+
+		<h4><label for="username">Start by spelling the specie:</label></h4>
+		<div class="unsernameInput input-group">
+
+			<span class="input-group-addon" id="basic-addon1">Name:</span>
+			<input
+				type="text"
+				id="username"
+				ngControl="username"
+				[(ngModel)]="formSpecieName"
+				#username="ngForm"
+				class="form-control"
+				placeholder="Specie Name"
+				(keyup)="inputSpecieNameChange($event)"
+				aria-describedby="sizing-addon1 basic-addon1"
+				autocomplete="off"
+				autofocus>
+			<span class="input-group-addon redWarningText"  *ngIf="!username.valid">Not Valid</span>
+
+		</div>
+
+		<select
+			[(ngModel)]="selectedSpecie"
+			class="form-control"
+			size="20"
+			(keyup)="inputSpecieListKey($event)"
+			(change)="newValueSelectedList()" >
+		    <option *ngFor="let specie of specieListProsessed" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
+		</select>
+
+	</div>
+
+
+
+</form>

@@ -1,0 +1,24 @@
+<h3>Top {{limit}} highscore for {{timespan}} </h3>
+<div class="resultsListTable">
+	<table class="table table-bordered">
+	  <thead>
+		<tr>
+		  <th>#</th>
+		  <th>Name</th>
+		  <th>Area</th>
+		  <th>Score</th>
+		  <th>Time</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr *ngFor="let current of quizHighscoreData; let i=index">
+		  <th scope="row">{{i+1}}</th>
+		  <td>{{current.name}}</td>
+		  <td>{{current.area}}</td>
+		  <td>{{current.scorePercent}}</td>
+		  <td>{{current.time}}</td>
+		</tr>
+
+	  </tbody>
+	</table>
+</div>

@@ -45,6 +45,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 		private _element: ElementRef){}
 
 	ngOnInit() {
+		console.log(this.specieQuestionObject);
 
 
 	}

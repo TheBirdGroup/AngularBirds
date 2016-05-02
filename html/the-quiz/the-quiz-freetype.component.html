@@ -4,7 +4,7 @@
 
 		<h3 *ngIf="inbetweenQuestions">
 			The correct answer was
-			<b [ngClass]="{'correctColor': questionCorrect, 'inncorrectColor': !questionCorrect}">{{specieQuestionObject.getRigthAnsers()[0].name}}</b>
+			<b [ngClass]="{'correctColor': questionCorrect, 'inncorrectColor': !questionCorrect}">{{specieQuestionObject.getRigthAnsers()[0].name}} ({{specieQuestionObject.getRigthAnsers()[0].latin}})</b>
 		</h3>
 
 		<h4><label for="username">Start by spelling the specie:</label></h4>

@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core';
+import { Injectable, EventEmitter } from 'angular2/core';
 import { Http } from 'angular2/http';
 import 'rxjs/Rx';
 //import { Observable } from 'rxjs/Observable';
@@ -32,7 +32,7 @@ export class QuizSettingsService{
 	areaListData;
 	selectedArea = 0;
 
-
+	dataLoadedEventEmiter = new EventEmitter<boolean>();
 
 
 	constructor(private _http: Http){} // why do we need this
@@ -54,7 +54,11 @@ export class QuizSettingsService{
 
 
 
-		this.loadAreaList();
+		setTimeout(() => {
+			this.loadAreaList();
+		}, 0);
+
+		return this.dataLoadedEventEmiter;
 
 	}
 
@@ -88,9 +92,11 @@ export class QuizSettingsService{
 	                this.areaListData = data['area_list'];
 				//	console.log("this.areaListData: ", this.areaListData);
 	                this.areaListLoaded = true;
+					this.dataLoadedEventEmiter.emit(true);
 	            },
 	            error => {
 					this.areaLoadProblems = true;
+					this.dataLoadedEventEmiter.emit(false);
 					console.error("loadAreaList ERROR! ", error)
 				}
 	        );

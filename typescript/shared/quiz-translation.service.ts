@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from 'angular2/core';
+import { Injectable, OnInit, EventEmitter } from 'angular2/core';
 import { Http } from 'angular2/http';
 
 import 'rxjs/Rx';
@@ -12,6 +12,8 @@ export class QuizTranslationService implements OnInit{
 
 	transDataLoaded = false;
 	transLoadProblems = false;
+
+	dataLoadedEventEmiter = new EventEmitter<boolean>();
 
 	siteID = 1;
 
@@ -31,7 +33,13 @@ export class QuizTranslationService implements OnInit{
 
 		this.siteID = siteID;
 
-		this.loadTranslations();
+		setTimeout(() => {
+			this.loadTranslations();
+		}, 0);
+
+		return this.dataLoadedEventEmiter;
+
+
 
 	}
 
@@ -42,10 +50,12 @@ export class QuizTranslationService implements OnInit{
 	            data => {
 	                this.translationData = data['translations'];
 	                this.transDataLoaded = true;
+					this.dataLoadedEventEmiter.emit(true);
 	            },
 	            error => {
 					this.transLoadProblems = true;
-					console.error("getQuizQuestions ERROR! ", error)
+					console.error("getQuizQuestions ERROR! ", error);
+					this.dataLoadedEventEmiter.emit(false);
 				}
 	        );
 

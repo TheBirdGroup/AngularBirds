@@ -48,7 +48,10 @@ export class QuizMasterComponent implements OnInit {
 
 	  testString = "";
 
+	  currentServicedLoaded = 0;
+	  totalServicesToLoaded = 3;
 	  asyncDataLoaded = false;
+	  asyncDataLoadError = false;
 
 	  siteID = 1;
 
@@ -94,11 +97,31 @@ export class QuizMasterComponent implements OnInit {
 
 	  ngOnInit() {
 
+
+
 		  //load data from server
-		this._quizTranslationService.initialize(this.siteID);
-		this._quizSettingsService.initialize(this.siteID);
+		this._quizTranslationService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
+		this._quizSettingsService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
+		this._quizSpecieService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
+		this.totalServicesToLoaded = 3;
+
+		//not loading any data from server
 		this._quizResultsService.initialize(this.siteID);
-		this._quizSpecieService.initialize(this.siteID);
+
+	 }
+
+	 onseServiceDoneLoading(loadingSuccessfull){
+
+		 if(loadingSuccessfull){
+			 this.currentServicedLoaded ++;
+		 }else{
+			 this.asyncDataLoadError = true;
+		 }
+
+		 if(this.currentServicedLoaded == this.totalServicesToLoaded){
+			 this.asyncDataLoaded = true;
+		 }
+
 
 	 }
 

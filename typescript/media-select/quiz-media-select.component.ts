@@ -46,7 +46,7 @@ export class QuizMediaSelectComponent implements OnInit{
 		//video
 		this.mediaTypes[2][1] = this._quizTranslationService.getTranslationByID(169);
 
-		console.log("media t: ", this.mediaTypes[0][1]);
+		//console.log("media t: ", this.mediaTypes[0][1]);
 
 	}
 

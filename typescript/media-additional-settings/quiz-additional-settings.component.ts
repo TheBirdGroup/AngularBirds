@@ -54,7 +54,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		this.getAreaList();
 		this.quizSettings = this._quizSettingsService.getQuizSettings();
 
-		console.log("My area: ", this._quizSettingsService.getCurrentAreaName());
+		//console.log("My area: ", this._quizSettingsService.getCurrentAreaName());
 
 	}
 

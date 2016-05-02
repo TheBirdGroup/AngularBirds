@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from 'angular2/core';
+import { Injectable, OnInit, EventEmitter } from 'angular2/core';
 import { Http } from 'angular2/http';
 
 import 'rxjs/Rx';
@@ -23,6 +23,8 @@ export class QuizSpecieService implements OnInit{
 
 	promise;
 
+	dataLoadedEventEmiter = new EventEmitter<boolean>();
+
 	constructor(
 		private _http: Http
 	){}
@@ -39,7 +41,11 @@ export class QuizSpecieService implements OnInit{
 
 		this.siteID = siteID;
 
-		this.loadSpecies();
+		setTimeout(() => {
+			this.loadSpecies();
+		}, 0);
+
+		return this.dataLoadedEventEmiter;
 
 		//this.setSelectedSpecie([1854,1422,1901,1136,1221,1791,1729,1984,1313,1359,1628,1409,1149,1669,1531]);
 
@@ -57,10 +63,12 @@ export class QuizSpecieService implements OnInit{
 	                this.speciesData = data;
 					this.prosessSpecielist();
 	                this.speciesDataLoaded = true;
+					this.dataLoadedEventEmiter.emit(true);
 	            },
 	            error => {
 					this.speciesLoadProblems = true;
 					console.error("getQuizQuestions ERROR! ", error)
+					this.dataLoadedEventEmiter.emit(false);
 				}
 	        );
 

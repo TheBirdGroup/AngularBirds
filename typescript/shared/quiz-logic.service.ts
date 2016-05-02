@@ -28,6 +28,7 @@ export class QuizLogicService{
 		this.score = 0;
 		this.questionNumber = 0;
 		this.quizLoaded = false;
+		this.quizQuestions = [];
 
 	}
 

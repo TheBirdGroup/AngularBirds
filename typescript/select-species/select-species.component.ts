@@ -15,7 +15,7 @@ export class SelectSpeciesComponent implements OnInit {
 
     specieList = [];
     selectedSpecie;
-    displaySelectedSpecies = [];
+    //displaySelectedSpecies = [];
     arrayOfSelectedSpecies = [];
     delSpecieId;
     delSpecieName;
@@ -28,38 +28,42 @@ export class SelectSpeciesComponent implements OnInit {
 
     ngOnInit() {
         this._quizSpeciesService.getSpecieList();
+        this._quizSpeciesService.loadSpecieList();
         //console.log(this.specieList);
         this.getSpecieList();
 
+        this.loadSpecieList();
+
     }
 
-    selectSpecie(){
-        this.displaySelectedSpecies.push(this.selectedSpecie);
-        this.arrayOfSelectedSpecies.push(this.selectedSpecie.id);
-       // console.log(this.arrayOfSelectedSpecies);
-    }
-    getSpecieList(){
-		//console.log("this._quizSpeciesService.getSpecieList(): ", this._quizSpeciesService.getSpecieList());
-        this.specieList=this._quizSpeciesService.getSpecieList();
+    selectSpecie() {
+        //this.displaySelectedSpecies.push(this.selectedSpecie);
+        this.arrayOfSelectedSpecies.push(this.selectedSpecie);
+        // console.log(this.arrayOfSelectedSpecies);
     }
 
-    deleteSpecie(specie){
-        let tempSpecieNames = [];
+    getSpecieList() {
+        //console.log("this._quizSpeciesService.getSpecieList(): ", this._quizSpeciesService.getSpecieList());
+        this.specieList = this._quizSpeciesService.getSpecieList();
+    }
+
+    deleteSpecie(specie) {
+       // let tempSpecieNames = [];
         let tempSpecieId = [];
-        this.delSpecieId = specie.id;
-        this.delSpecieName = specie;
-
+        this.delSpecieId = specie;
+       // this.delSpecieName = specie;
+/*
         for (let i of Object.keys(this.displaySelectedSpecies)) {
-            if(this.displaySelectedSpecies[i].id != this.delSpecieName.id) {
+            if (this.displaySelectedSpecies[i] != this.delSpecieName) {
                 tempSpecieNames.push(this.displaySelectedSpecies[i]);
             }
         }
         this.displaySelectedSpecies = tempSpecieNames;
         console.log(this.displaySelectedSpecies, "Name array");
-
+*/
 
         for (let j of Object.keys(this.arrayOfSelectedSpecies)) {
-            if(this.arrayOfSelectedSpecies[j] != this.delSpecieId) {
+            if (this.arrayOfSelectedSpecies[j] != this.delSpecieId) {
                 tempSpecieId.push(this.arrayOfSelectedSpecies[j]);
             }
         }
@@ -67,9 +71,17 @@ export class SelectSpeciesComponent implements OnInit {
         console.log(this.arrayOfSelectedSpecies, "ID array");
 
     }
-    postSpeciesId(){
+
+    postSpeciesId() {
         this._quizSpeciesService.setSelectedSpecie(this.arrayOfSelectedSpecies);
         this._router.navigate(["QuizMediaQuiz"]);
     }
 
+    loadSpecieList() {
+       // this.displaySelectedSpecies = this._quizSpeciesService.loadSpecieList();;
+        this.arrayOfSelectedSpecies = this._quizSpeciesService.loadSpecieList();
+        console.log(this.arrayOfSelectedSpecies, " Array of ID loaded from server");
+        //console.log(this.displaySelectedSpecies, " Array of name loaded from server");
+
+    }
 }

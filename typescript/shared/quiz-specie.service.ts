@@ -96,7 +96,6 @@ export class QuizSpecieService implements OnInit{
 	getSpecieList(){
 
 		return this.specieList;
-
 	}
 
 	getSelectedSpecieList(){
@@ -142,6 +141,9 @@ export class QuizSpecieService implements OnInit{
 
 		return this.speciesDataLoaded;
 
+	}
+	loadSpecieList(){
+		return this.arrayOfSelectedSpecies;
 	}
 
 

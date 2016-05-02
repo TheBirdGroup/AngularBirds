@@ -21,6 +21,7 @@ export class ResultlistComponent implements OnInit, OnChanges{
 
 	timespan = "day";
 	limit = 10;
+	competitionGroupID;
 	updateResultlistInc = -1;
 
 	quizSettings;
@@ -45,7 +46,7 @@ export class ResultlistComponent implements OnInit, OnChanges{
 
 		loadQuizResults(){
 
-			this._quizResultsService.getQuizResults(this.quizSettings, this.timespan, this.limit)
+			this._quizResultsService.getQuizResults(this.quizSettings, this.timespan, this.limit, this.competitionGroupID)
 	            .subscribe(
 	                data => {
 	                    //console.log(data);

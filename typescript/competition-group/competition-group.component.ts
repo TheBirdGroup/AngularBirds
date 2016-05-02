@@ -21,7 +21,7 @@ import { ResultlistComponent }  from './../shared.component/resultlist.component
 })
 export class QuizCompetitionGroupComponent implements OnInit{
 	title = 'Birdid Q';
-
+competitionGroupID;
 
 
 
@@ -46,6 +46,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
     }
 
 	ngOnInit() {
+        this._quizSettingsService.setCompetitionGroupID(24);
 
 
 	}

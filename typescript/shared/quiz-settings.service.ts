@@ -31,6 +31,8 @@ export class QuizSettingsService{
 	areaLoadProblems = false;
 	areaListData;
 	selectedArea = 0;
+	competitionGroupID=-1;
+
 
 
 
@@ -51,6 +53,7 @@ export class QuizSettingsService{
 		this.setDuration(0);
 		this.setAlternatives(false);
 		this.setArea(0);
+		this.setCompetitionGroupID(-1);
 
 
 
@@ -233,6 +236,13 @@ export class QuizSettingsService{
 		return this.numberOfQuestions
 	}
 
+	setCompetitionGroupID(selectedID:number){
+		this.competitionGroupID=selectedID;
+		console.log("the group id that is set issssss ", this.competitionGroupID);
+	}
 
+	getCompetitionGroupID(){
+		return this.competitionGroupID;
+	}
 
 }

@@ -70,7 +70,7 @@ export class QuizResultsService{
 
 	}
 
-	getQuizResults(quizSettings, timespan, limit){
+	getQuizResults(quizSettings, timespan, limit, competitionGroupID){
 
 		let mediaTypeID = quizSettings[0].mediaTypeID;
 		let areaID = quizSettings[0].areaID;
@@ -90,7 +90,7 @@ export class QuizResultsService{
 		extraURL += "&mediaTypeID=" + mediaTypeID;
 		extraURL += "&langID=" + 2;
 		extraURL += "&siteID=" + siteID;
-		extraURL += "&competitionGroupID=" + "false";
+		extraURL += "&competitionGroupID=" + competitionGroupID;
 
 		return this._http.get("https://hembstudios.no/birdid/IDprogram/scoreQuiz.php?JSON=1"+extraURL)
 			.map(response => response.json());

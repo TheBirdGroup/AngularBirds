@@ -44,8 +44,8 @@ export class QuizSettingsService{
 		this.siteID = siteID;
 
 		//setup default
-		this.setMediaType(2);
-		this.setQuizType(2);
+		this.setMediaType(1);
+		this.setQuizType(1);
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(5); //min 5
 		this.setDuration(0);

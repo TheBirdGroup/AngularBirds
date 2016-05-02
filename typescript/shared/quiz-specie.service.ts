@@ -109,7 +109,7 @@ export class QuizSpecieService implements OnInit{
 		let stringList = ""
 
 		for (let id of Object.keys(this.arrayOfSelectedSpecies)) {
-			stringList += this.arrayOfSelectedSpecies[id] + ","
+			stringList += this.arrayOfSelectedSpecies[id].id + ","
 		}
 
 		return stringList.substring(0, stringList.length-1);

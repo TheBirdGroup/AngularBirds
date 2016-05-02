@@ -34,7 +34,7 @@ export class QuizResultComponent implements OnInit  {
 	quizHighscoreData;
 	quizHighscoreLoaded = false;
 
-	randomValue = 0;
+	updateResultlistInc = 0;
 
 	constructor(
 		private _quizResultsService: QuizResultsService,
@@ -52,6 +52,12 @@ export class QuizResultComponent implements OnInit  {
 	}
 
 	loadQuizResults(){
+
+		setTimeout(() => {
+
+			this.updateResultlistInc ++;
+
+		}, 500);
 
 
 	}

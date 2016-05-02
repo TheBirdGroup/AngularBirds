@@ -69,7 +69,7 @@ export class QuizMediaSelectComponent implements OnInit{
 				//console.log("scuccess");
 				//Const for value?
 				//this.quizMediaSelectedEvent.emit("MediatypeSelected");
-
+				this._quizSettingsService.setQuizType(1);
 				this._router.navigate(["QuizMediaAdditionalSettings"]);
 
 			}

@@ -4,11 +4,11 @@
 	<h4>Select area</h4>
 
 	    <select type="number" [(ngModel)]="selectedArea" (ngModelChange)="onSetArea()">
-	      <option *ngFor="#c of areaList"  [ngValue]="c.id">{{c.country}}</option>
+	      <option *ngFor="let c of areaList"  [ngValue]="c.id">{{c.country}}</option>
 	    </select>
 
 	<!--
-	<div *ngFor="#current of mediaDiff; #i=index" >
+	<div *ngFor="let current of mediaDiff; #i=index" >
 	    <button (click)="selectMediaDiff(i+1)">{{current}}</button>
 	</div>
 	-->
@@ -107,7 +107,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="#current of quizHighscoreData; #i=index">
+      <tr *ngFor="let current of quizHighscoreData; #i=index">
         <th>{{i+1}}</th>
         <td>{{current.name}}</td>
         <td>{{current.area}}</td>

@@ -1,10 +1,16 @@
 <h1>{{title}}</h1>
 
-
 <div *ngIf="quizLoaded" class=""> <!-- deleted jumbotron class so the buttons will be more visible  -->
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<birdid-the-quiz-image *ngIf="_quizSettingsService.getQuizSettings()[0].mediaTypeID == 1" [usingMediaID]="mediaID"></birdid-the-quiz-image>
- 		<birdid-the-quiz-sound *ngIf="_quizSettingsService.getQuizSettings()[0].mediaTypeID == 2" [usingMediaURL]="mediaURL"></birdid-the-quiz-sound>
+		<birdid-the-quiz-image
+			*ngIf="_quizSettingsService.getQuizSettings()[0].mediaTypeID == 1"
+			[specieQuestionObject]="currentQuizQuestion">
+		</birdid-the-quiz-image>
+ 		<birdid-the-quiz-sound
+			*ngIf="_quizSettingsService.getQuizSettings()[0].mediaTypeID == 2"
+			[inbetweenQuestions]="inbetweenQuestions"
+			[specieQuestionObject]="currentQuizQuestion">
+		</birdid-the-quiz-sound>
 	</div>
 
   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
@@ -16,7 +22,6 @@
 		<birdid-the-quiz-choices
 			[inbetweenQuestions]="inbetweenQuestions"
 			[specieQuestionObject]="currentQuizQuestion"
-			(specieSelectedEvent)="choiceSelectEvent($event)"
 			(questionDoneEvent)="subSelectCompleteEvent($event)"
 			*ngIf="_quizSettingsService.getQuizSettings()[0].showAlternatives">
 		</birdid-the-quiz-choices>
@@ -24,7 +29,6 @@
 		<birdid-the-quiz-freetype
 			[inbetweenQuestions]="inbetweenQuestions"
 			[specieQuestionObject]="currentQuizQuestion"
-			(specieSelectedEvent)="choiceSelectEvent($event)"
 			(questionDoneEvent)="subSelectCompleteEvent($event)"
 			*ngIf="!_quizSettingsService.getQuizSettings()[0].showAlternatives">
 		</birdid-the-quiz-freetype>
@@ -39,18 +43,16 @@
     	Extra Info: {{getQuestionExtraInfo()}}
     	<br><br>
 
-    	<br><br>
-
-    	Current Mdia ID: <b>{{mediaID}}</b>
+    	Current Media ID: <b>{{currentQuizQuestion.getStringMediaIds()}}</b>
     	<br>
     	Media Type ID: <b>{{_quizSettingsService.getQuizSettings()[0].mediaTypeID}}</b>
     	<br>
     	Media Duficulity: <b>{{_quizSettingsService.getQuizSettings()[0].mediaDificulity}}</b>
     	<br>
-			Area ID: <b>{{_quizSettingsService.getCurrentAreaName()}}</b>
+		Area ID: <b>{{_quizSettingsService.getCurrentAreaName()}}</b>
     	<br>
     	Time Limit: <b>{{_quizSettingsService.getQuizSettings()[0].timeLimit-ticks}}</b>
-			<br>Ticks: {{ticks}}
+		<br>Ticks: {{ticks}}
     	<br>
     	Using alternatives: <b>{{_quizSettingsService.getQuizSettings()[0].showAlternatives}}</b>
     	<br>

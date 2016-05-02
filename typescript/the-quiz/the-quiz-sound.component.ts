@@ -1,7 +1,10 @@
-import { Component, ViewChild, EventEmitter, OnInit }       from 'angular2/core';
+import { Component, ViewChild, EventEmitter, OnInit, OnChanges, ElementRef }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
+
+import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
+import { QuizSoundplayer }  from './../shared.class/the-quiz-soundplayer.class';
 
 @Component({
 	selector: 'birdid-the-quiz-sound',
@@ -13,91 +16,140 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 	providers: [
 	  HTTP_PROVIDERS
 	],
-	inputs: ['mediaURL:usingMediaURL'], //using ALIAS
+	inputs: ['specieQuestionObject', 'inbetweenQuestions'], //using ALIAS
 })
 
 
-export class TheQuizSoundComponent implements OnInit{
+export class TheQuizSoundComponent implements OnInit, OnChanges{
 	title = 'Birdid Quiz TheQuizComponent!';
-	@ViewChild("myAudio") myAudio;
+
 	@ViewChild("progressBar") progressBar;
+	@ViewChild("progressBarContainer") progressBarContainer;
+
+	specieQuestionObject:QuizQuestion;
+	quizSoundObject:QuizSoundplayer = null;
+
+	inbetweenQuestions = false;
 
 	progressPercent = 0;
 	currentTime = 0;
 	totTime = 0;
-
+	maxWidth = 0;
 
 	mediaURLStart = "https://hembstudios.no/birdid/";
 	extraSiteID;
 	soundMiddleURL = ""
 
     mediaURL = "";
-		volume = 0.5;
+	mediaURLs = [];
+	volume = 0.5;
 
-	constructor(private _quizSettingsService: QuizSettingsService){}
+	constructor(
+		private _quizSettingsService: QuizSettingsService,
+		private _elementRef: ElementRef
+	){}
 
 	ngOnInit() {
-		let audio = this.myAudio;
-		let quizSettings = this._quizSettingsService.getQuizSettings();
-		let siteID = quizSettings[0].siteID;
-		if(siteID == 1){
-			this.soundMiddleURL ="bird/db_media/sound/";
-		}else if(siteID == 2){
-			this.soundMiddleURL ="mammal/db_media/sound/";
-		}else if(siteID == 3){
-			this.soundMiddleURL ="track/db_media/sound/";
-		}
 
-		this.extraSiteID = "&siteID="+siteID;
+
 
 	}
+
+	ngOnChanges(){
+
+		if(!this.inbetweenQuestions){
+
+			let quizSettings = this._quizSettingsService.getQuizSettings();
+			let siteID = quizSettings[0].siteID;
+			if(siteID == 1){
+				this.soundMiddleURL ="bird/db_media/sound/";
+			}else if(siteID == 2){
+				this.soundMiddleURL ="mammal/db_media/sound/";
+			}else if(siteID == 3){
+				this.soundMiddleURL ="track/db_media/sound/";
+			}
+
+			this.extraSiteID = "&siteID="+siteID;
+
+			this.mediaURL = this.specieQuestionObject.getMediaSourses()[0].mediaUrl;
+			this.mediaURLs = this.specieQuestionObject.getMediaSourses();
+
+			if(this.quizSoundObject != null){
+				this.quizSoundObject.destroy();
+				this.quizSoundObject = null;
+			}
+
+			this.quizSoundObject = new QuizSoundplayer(true, true, this);
+			this.quizSoundObject.loadMedia(this.mediaURLStart + this.soundMiddleURL, this.specieQuestionObject.getMediaSourses());
+
+		}else{
+
+			if(this.quizSoundObject != null){
+				this.quizSoundObject.pause();
+			}
+
+		}
+
+	}
+
+
+
+
+
+	setCurrentAndTotalTime(current, total){
+
+		this.currentTime = Math.floor(current);
+		this.totTime = Math.floor(total);
+		this.progressPercent = (current / total) * 100;
+
+	}
+
+	getSoundMiddleUrl(){
+
+	}
+
+
 	playAudio(){
-		this.myAudio.nativeElement.play();
-		console.log(this.myAudio);
+
+		this.quizSoundObject.play();
+
 	}
 
 	pauseAudio(){
-		this.myAudio.nativeElement.pause();
+
+		this.quizSoundObject.pause();
+
 	}
 
 	volumeIncrease(){
-		this.volume+=0.1;
-		if(this.volume>1){
-			this.volume = 1;
-		}
-		this.myAudio.nativeElement.volume=this.volume;
+
+		this.quizSoundObject.setVolume(0.1);
+
 	}
 
 	volumeDecrease(){
-		this.volume-=0.1;
-		if(this.volume<0){
-			this.volume = 0;
-		}
-		this.myAudio.nativeElement.volume=this.volume;
-	}
 
-	updateProgressbar(event){
-
-		this.progressPercent = (this.myAudio.nativeElement.currentTime / this.myAudio.nativeElement.duration) * 100;
-		console.log("this.progressPercent: ", this.progressPercent);
-
-		this.currentTime = Math.floor(this.myAudio.nativeElement.currentTime);
-		this.totTime = Math.floor(this.myAudio.nativeElement.duration);
-
-		console.log('tot:',this.myAudio.nativeElement.duration , ' CURRENT: ', this.myAudio.nativeElement.currentTime)
-
-		//console.log(this.progressPercent);
-
-	}
-
-	soundLoadedEvent(event){
-
-		this.currentTime = Math.floor(this.myAudio.nativeElement.currentTime);
-		this.totTime = Math.floor(this.myAudio.nativeElement.duration);
+		this.quizSoundObject.setVolume(-0.1);
 
 	}
 
 
+	moveProgress(event){
 
+		//let offSet = ((event.offsetX)/4.41)/100;
+
+		//let startX = this.progressBar.nativeElement.offsetLeft;
+		let totSize = this.progressBarContainer.nativeElement.offsetWidth;
+
+		// console.log("event: ",event);
+		//
+		// console.log("totSize: ", totSize ," startX:", startX, " offSet:", offSet,  " event.offsetX: ", event.offsetX);
+
+		this.quizSoundObject.seek(event.layerX / totSize);
+
+		//this.myAudio.nativeElement.currentTime = this.myAudio.nativeElement.duration * offSet;
+
+		//console.log(this.maxWidth, "Max width");
+	}
 
 }

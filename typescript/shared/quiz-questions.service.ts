@@ -22,7 +22,7 @@ export class QuizQuestionsService{
 		private _quizSpeciesService: QuizSpecieService
 	){}
 
-	getQuizQuestions(settings:QuizSetting[]): Observable<any>{
+	getQuizQuestions(settings:QuizSetting[], severalSoundquiz = false): Observable<any>{
 
 		this.lastQuizSettings = settings;
 
@@ -31,7 +31,13 @@ export class QuizQuestionsService{
 		let areaID = settings[0].areaID;
 		//areaID = 0;
 		//let timeLimit = settings[0].timeLimit;
-		let numQuestions = settings[0].numQuestions;
+		let numQuestions;
+		if(severalSoundquiz){
+			numQuestions = Math.floor(settings[0].numQuestions * 2.5);
+		}else{
+			numQuestions = settings[0].numQuestions;
+		}
+
 		//let showAlternatives = settings[0].showAlternatives;
 		let mediaDificulity = settings[0].mediaDificulity;
 		let siteID = settings[0].siteID;

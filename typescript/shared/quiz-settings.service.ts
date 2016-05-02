@@ -49,9 +49,9 @@ export class QuizSettingsService{
 		this.setMediaType(1);
 		this.setQuizType(1);
 		this.setMediaDiff(1);
-		this.selectNumberOfQuestions(10);
+		this.selectNumberOfQuestions(5); //min 5
 		this.setDuration(0);
-		this.setAlternatives(false);
+		this.setAlternatives(true);
 		this.setArea(0);
 		this.setCompetitionGroupID(-1);
 

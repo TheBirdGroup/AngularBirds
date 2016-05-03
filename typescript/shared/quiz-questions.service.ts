@@ -26,7 +26,7 @@ export class QuizQuestionsService{
 
 		this.lastQuizSettings = settings;
 
-
+		let competitionGroupID = settings[0].competitionGroupID;
 		let mediaTypeID = settings[0].mediaTypeID;
 		let areaID = settings[0].areaID;
 		//areaID = 0;
@@ -48,6 +48,7 @@ export class QuizQuestionsService{
 		extraURL += "&difficulty=" + mediaDificulity;
 		extraURL += "&areaID=" + areaID;
 		extraURL += "&mediaType=" + mediaTypeID;
+		extraURL += "&competitionGroupID=" + competitionGroupID;
 
 		if(this._quizSpeciesService.getSelectedSpecieList().length > 0){
 			extraURL += "&custumSpecieList=" + this._quizSpeciesService.getSelectedSpecieListCSV();

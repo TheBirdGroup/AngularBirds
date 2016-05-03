@@ -146,7 +146,10 @@ export class QuizSettingsService{
 		  "numQuestions": this.numberOfQuestions,
 		  "showAlternatives": this.alternative,
 		  "mediaDificulity": this.mediaDifficulities,
-	  	  "siteID": this.siteID}
+	  	  "siteID": this.siteID,
+		  "competitionGroupID": this.competitionGroupID
+
+	  		}
 		];
 
 		//console.log("returnSettings: ", returnSettings)

@@ -35,7 +35,7 @@ competitionGroupID;
     storeCompetitionGroupSettings(){
 
         //setup default
-        this._quizSettingsService.setMediaType(2);
+        this._quizSettingsService.setMediaType(1);
         this._quizSettingsService.setQuizType(1);
         this._quizSettingsService.setMediaDiff(1);
         this._quizSettingsService.selectNumberOfQuestions(10);

@@ -7,4 +7,5 @@ export interface QuizSetting {
   showAlternatives: boolean;
   mediaDificulity: number;
   siteID: number;
+  competitionGroupID: number;
 }

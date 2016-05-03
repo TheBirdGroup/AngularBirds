@@ -33,6 +33,7 @@ export class ResultlistComponent implements OnInit, OnChanges{
 		private _quizSettingsService: QuizSettingsService){}
 
 		ngOnInit() {
+			//this.competitionGroupID=24;
 
 		}
 
@@ -45,6 +46,8 @@ export class ResultlistComponent implements OnInit, OnChanges{
 		}
 
 		loadQuizResults(){
+
+			this.competitionGroupID = this._quizSettingsService.getCompetitionGroupID();
 
 			this._quizResultsService.getQuizResults(this.quizSettings, this.timespan, this.limit, this.competitionGroupID)
 	            .subscribe(

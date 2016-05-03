@@ -43,6 +43,7 @@ export class QuizResultsService{
 		let mediaTypeID = quizSettings[0].mediaTypeID;
 		let areaID = quizSettings[0].areaID;
 		let mediaDificulity = quizSettings[0].mediaDificulity;
+		let competitionGroupID = quizSettings[0].competitionGroupID;
 
 		let data2 = "score=" + score;
 		data2 += "&name=" + name;
@@ -54,6 +55,7 @@ export class QuizResultsService{
 		data2 += "&difficulty=" + mediaDificulity;
 		data2 += "&specialAreas=false";
 		data2 += "&siteID=" + this.siteID;
+		data2 += "&competitionGroupID=" + competitionGroupID;
 
 		const body = data2;
 		//they result in 501 not implemented by server

@@ -8,6 +8,9 @@ import { QuizLogicService }  from './shared/quiz-logic.service';
 import { QuizTranslationService }  from './shared/quiz-translation.service';
 import { QuizResultsService }  from './shared/quiz-results.service';
 import { QuizSpecieService }  from './shared/quiz-specie.service';
+import { QuizFormalTestService }  from './shared/quiz-formal-test.service';
+
+
 
 import { QuizMediaSelectComponent }  from './media-select/quiz-media-select.component';
 import { QuizAdditionalSettingsComponent }  from './media-additional-settings/quiz-additional-settings.component';
@@ -36,7 +39,8 @@ import {SelectSpeciesComponent} from "./select-species/select-species.component"
 		QuizLogicService,
 		QuizTranslationService,
 		QuizResultsService,
-		QuizSpecieService
+		QuizSpecieService,
+		QuizFormalTestService
 	]
 })
 
@@ -68,6 +72,7 @@ export class QuizMasterComponent implements OnInit {
 		  private _quizTranslationService: QuizTranslationService,
 		  private _quizResultsService: QuizResultsService,
 		  private _quizSpecieService: QuizSpecieService,
+		  private _quizFormalTestService: QuizFormalTestService,
 		  private _router: Router
 	  ){
 
@@ -91,6 +96,10 @@ export class QuizMasterComponent implements OnInit {
 			  this.currentActive = 3;
 		  }else if(newRoute == 'mediaQuizResults'){
 			  this.currentActive = 4;
+		  }else if(newRoute == 'formalTestStart'){
+			  this.currentActive = 5;
+		  }else if(newRoute == 'formalTestEnd'){
+			  this.currentActive = 6;
 		  }
 
 	  }
@@ -107,6 +116,7 @@ export class QuizMasterComponent implements OnInit {
 
 		//not loading any data from server
 		this._quizResultsService.initialize(this.siteID);
+		this._quizFormalTestService.initialize(this.siteID);
 
 	 }
 

@@ -22,6 +22,7 @@ export class QuizSpecieService implements OnInit{
 	speciesLoadProblems = false;
 
 	siteID = 1;
+	areaID=0;
 
 	promise;
 
@@ -53,9 +54,16 @@ export class QuizSpecieService implements OnInit{
 
 	}
 
+	loadAreaId(areaID: number){
+		this.areaID = areaID;
+		this.loadSpecies();
+​
+		return this.dataLoadedEventEmiter;
+		}
+
 	private loadSpecies(){
 
-		this._http.get(constants.baseURL+"/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID)
+		this._http.get(constants.baseURL+"/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID+"&areaID="+this.areaID)
 			.map(response => response.json()).subscribe(
 	            data => {
 
@@ -116,7 +124,7 @@ export class QuizSpecieService implements OnInit{
 
 	getSelectedSpecieListCSV(){
 
-		let stringList = ""
+		let stringList = "";
 
 		for (let id of Object.keys(this.arrayOfSelectedSpecies)) {
 			stringList += this.arrayOfSelectedSpecies[id].id + ","

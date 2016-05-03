@@ -4,6 +4,8 @@ import { Http } from 'angular2/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
+import {constants} from './../constants';
+
 
 
 
@@ -53,7 +55,7 @@ export class QuizSpecieService implements OnInit{
 
 	private loadSpecies(){
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID)
+		this._http.get(constants.baseURL+"/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID)
 			.map(response => response.json()).subscribe(
 	            data => {
 

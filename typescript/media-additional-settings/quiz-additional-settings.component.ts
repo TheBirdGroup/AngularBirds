@@ -35,6 +35,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 	selSpecie = false;
 	yes;
 	no = "active";
+	loading = false;
 
 	updateResultlistIncrement = 0;
 
@@ -137,7 +138,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 	onSelectSpecie(selectedSpecie: boolean) {
 		this.selSpecie = selectedSpecie;
-		
+
 		if(selectedSpecie == true) {
 			this.yes = "active";
 		}else{
@@ -152,6 +153,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 	startQuiz(){
 		this._quizSpeciesService.loadAreaId(this.selectedArea).subscribe((event) => (this.onAreaSubscribe(event)));
+		this.loading = true;
 	}
 
 	onAreaSubscribe(event) {

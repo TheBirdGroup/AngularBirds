@@ -29,6 +29,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 	formSpecieName;
 	selectedSpecie;
 	disableButton = false;
+	hints = 3;
 
 
 	inbetweenQuestions = false;
@@ -157,8 +158,13 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
 	}
 	removeWrongAnswer(){
-		console.log()
-		this.disableButton = true;
+		this.specieQuestionObject.removeWrongAlternative();
+		this.hints--;
+		if (this.hints >= 1){
+
+		}else{
+			this.disableButton = true;
+		}
 	}
 
 

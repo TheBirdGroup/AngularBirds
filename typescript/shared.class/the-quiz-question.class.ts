@@ -281,14 +281,17 @@ export class QuizQuestion {
         return array;
     }
 	removeWrongAlternative(){
-		let tempChoices;
+		let check = false;
+		let j = 0;
 
-			for (let j of Object.keys(this.choices)) {
-				if (this.choices[j][0] != this.rightAnswers[0]) {
-					tempChoices.push(this.choices[j]);
+			while ( check == false) {
+				if (this.choices[j].id != this.rightAnswers[0].id) {
+					this.choices.splice(j, 1);
+					check = true;
+				}else{
+					j++;
 				}
 			}
-		this.choices = tempChoices;
 
 	}
 

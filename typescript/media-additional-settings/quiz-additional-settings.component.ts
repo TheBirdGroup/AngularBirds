@@ -6,6 +6,7 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';
 
 import { ResultlistComponent }  from './../shared.component/resultlist.component';
+import {QuizSpecieService} from "../shared/quiz-specie.service";
 
 @Component({
 	selector: 'birdid-quiz-addditional-settings',
@@ -40,6 +41,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
+		private _quizSpeciesService: QuizSpecieService,
 		private _router: Router,
 		private _quizResultsService: QuizResultsService
 	){}
@@ -109,7 +111,6 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		}
 	}
 
-
     onSelectDuration(duration: string){
         this._quizSettingsService.setDuration(parseInt(duration));
     }
@@ -136,6 +137,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 	onSelectSpecie(selectedSpecie: boolean) {
 		this.selSpecie = selectedSpecie;
+		
 		if(selectedSpecie == true) {
 			this.yes = "active";
 		}else{
@@ -149,17 +151,18 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 	}
 
 	startQuiz(){
-		if(this.selSpecie != true) {
-			this._router.navigate(["QuizMediaQuiz"]);
-		}else{
-			this._router.navigate(["QuizSelectSpecies"]);
-		}
-		//this.quizMediaSettingsEvent.emit("MediaAditionalSettingsDone");
-
+		this._quizSpeciesService.loadAreaId(this.selectedArea).subscribe((event) => (this.onAreaSubscribe(event)));
 	}
 
-
-
+	onAreaSubscribe(event) {
+		if (event == true) {
+			if (this.selSpecie != true) {
+				this._router.navigate(["QuizMediaQuiz"]);
+			} else {
+				this._router.navigate(["QuizSelectSpecies"]);
+			}
+		}
+	}
 	/*selectMediaDiff(mediaDifficulity){
 		if(this._quizSettingsService.setMediaDiff(mediaDifficulity)){
 

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit } from 'angular2/core';
 import { Router } from 'angular2/router';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
+import {QuizSettingsService} from "../shared/quiz-settings.service";
 
 
 
@@ -19,8 +20,7 @@ export class SelectSpeciesComponent implements OnInit {
     arrayOfSelectedSpecies = [];
     delSpecieId;
     delSpecieName;
-
-
+    
     constructor(
         private _quizSpeciesService: QuizSpecieService,
         private _router: Router
@@ -33,7 +33,6 @@ export class SelectSpeciesComponent implements OnInit {
         this.getSpecieList();
 
         this.loadSpecieList();
-
     }
 
     selectSpecie() {

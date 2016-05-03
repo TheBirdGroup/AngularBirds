@@ -8,7 +8,13 @@ import { QuizLogicService }  from './shared/quiz-logic.service';
 import { QuizTranslationService }  from './shared/quiz-translation.service';
 import { QuizResultsService }  from './shared/quiz-results.service';
 import { QuizSpecieService }  from './shared/quiz-specie.service';
+
 import { QuizCompetitionService} from "./shared/quiz-competition-group.service";
+
+import { QuizFormalTestService }  from './shared/quiz-formal-test.service';
+
+
+
 
 import { QuizMediaSelectComponent }  from './media-select/quiz-media-select.component';
 import { QuizAdditionalSettingsComponent }  from './media-additional-settings/quiz-additional-settings.component';
@@ -39,6 +45,10 @@ import {QuizCompetitionGroupComponent} from "./competition-group/competition-gro
 		QuizTranslationService,
 		QuizResultsService,
 		QuizSpecieService,
+
+
+		QuizFormalTestService
+
 	]
 })
 
@@ -50,7 +60,10 @@ export class QuizMasterComponent implements OnInit {
 
 	  testString = "";
 
+	  currentServicedLoaded = 0;
+	  totalServicesToLoaded = 3;
 	  asyncDataLoaded = false;
+	  asyncDataLoadError = false;
 
 	  siteID = 1;
 
@@ -67,6 +80,7 @@ export class QuizMasterComponent implements OnInit {
 		  private _quizTranslationService: QuizTranslationService,
 		  private _quizResultsService: QuizResultsService,
 		  private _quizSpecieService: QuizSpecieService,
+		  private _quizFormalTestService: QuizFormalTestService,
 		  private _router: Router
 	  ){
 
@@ -90,19 +104,47 @@ export class QuizMasterComponent implements OnInit {
 			  this.currentActive = 3;
 		  }else if(newRoute == 'mediaQuiz'){
 			  this.currentActive = 4;
+
 		  }else if(newRoute == 'mediaQuizResults'){
 			  this.currentActive = 5;
+
+		  }else if(newRoute == 'formalTestStart'){
+			  this.currentActive = 6;
+		  }else if(newRoute == 'formalTestEnd'){
+			  this.currentActive = 7;
+
 		  }
 
 	  }
 
 	  ngOnInit() {
 
+
+
 		  //load data from server
-		this._quizTranslationService.initialize(this.siteID);
-		this._quizSettingsService.initialize(this.siteID);
+		this._quizTranslationService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
+		this._quizSettingsService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
+		this._quizSpecieService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
+		this.totalServicesToLoaded = 3;
+
+		//not loading any data from server
 		this._quizResultsService.initialize(this.siteID);
-		this._quizSpecieService.initialize(this.siteID);
+		this._quizFormalTestService.initialize(this.siteID);
+
+	 }
+
+	 onseServiceDoneLoading(loadingSuccessfull){
+
+		 if(loadingSuccessfull){
+			 this.currentServicedLoaded ++;
+		 }else{
+			 this.asyncDataLoadError = true;
+		 }
+
+		 if(this.currentServicedLoaded == this.totalServicesToLoaded){
+			 this.asyncDataLoaded = true;
+		 }
+
 
 	 }
 

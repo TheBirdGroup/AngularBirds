@@ -5,7 +5,7 @@
 
 <h3>Selected species</h3>
 <ul>
-    <li class="styled-select" *ngFor="let specie of displaySelectedSpecies">
+    <li class="styled-select" *ngFor="let specie of arrayOfSelectedSpecies">
         {{specie.name}} ({{specie.latin}}) <button class="btn btn-xs btn-danger" (click)="deleteSpecie(specie)">x</button>
     </li>
 </ul>

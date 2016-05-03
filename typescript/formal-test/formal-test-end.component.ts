@@ -6,9 +6,9 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 @Component({
-	selector: 'birdid-quiz-media-select',
-	templateUrl: 'app/media-select/quiz-media-select.component.html',
-	styleUrls:  ['app/media-select/quiz-media-select.component.css'],
+	selector: 'birdid-formal-test-end',
+	templateUrl: 'app/formal-test/formal-test-end.component.html',
+	styleUrls:  ['app/formal-test/formal-test-end.component.css'],
 	directives: [
 
 	],
@@ -19,7 +19,7 @@ import { QuizTranslationService }  from './../shared/quiz-translation.service';
 })
 
 
-export class QuizMediaSelectComponent implements OnInit{
+export class FormalTestEndComponent implements OnInit{
 
 	mediaTypes = [
 		[1, 'Image', 'glyphicon glyphicon-picture'],

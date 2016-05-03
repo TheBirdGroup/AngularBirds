@@ -8,7 +8,7 @@
 						'btn-primary': checkIfButtonIsSelected(current.id)}"
 		(click)="setUserChoice(current.id)">
 
-		{{current.name}}
+		{{current.name}} ({{current.latin}})
 
 	</button>
 	<a *ngIf="inbetweenQuestions" href="https://hembstudios.no/birdid/bird/eBook.php?specieID={{current.id}}" target="_blank"><img src="../images/book.png"></a>

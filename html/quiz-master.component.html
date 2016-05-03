@@ -12,26 +12,31 @@
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
+
 				<li [ngClass]="{active: subIsActive(0)}" [routerLink]="['QuizCompetitionGroup']"><a href="javascript:void(0)">Competition group</a></li>
 				<li [ngClass]="{active: subIsActive(1)}" [routerLink]="['QuizMediaSelect']"><a href="javascript:void(0)">New Quiz</a></li>
 				<li [ngClass]="{active: subIsActive(2)}" [routerLink]="['QuizMediaAdditionalSettings']"><a href="javascript:void(0)">Additional Settings</a></li>
 				<li [ngClass]="{active: subIsActive(3)}" [routerLink]="['QuizSelectSpecies']"><a href="javascript:void(0)">Select Species</a></li>
 				<li [ngClass]="{active: subIsActive(4)}" [routerLink]="['QuizMediaQuiz']"><a href="javascript:void(0)">The Quiz</a></li>
 				<li [ngClass]="{active: subIsActive(5)}" [routerLink]="['QuizMediaQuizResults']"><a href="javascript:void(0)">Results</a></li>
+				<li [ngClass]="{active: subIsActive(6)}" [routerLink]="['QuizFormalTestStart']"><a href="javascript:void(0)">Formal test start</a></li>
+				<li [ngClass]="{active: subIsActive(7)}" [routerLink]="['QuizFormalTestEnd']"><a href="javascript:void(0)">Formal test end</a></li>
+
+
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>
 </nav>
 
 <div class="jumbotron">
-	<div *ngIf="(!_quizTranslationService.translationsAreLoaded() || !_quizSettingsService.dataLoaded() || !_quizSpecieService.dataLoaded()) && !_quizTranslationService.translationsLoadProblems() && !_quizSettingsService.dataLoadProblems()">
+	<div *ngIf="!asyncDataLoadError && !asyncDataLoaded">
 		<img src="loading.gif" alt="Loading..." height="200" width="200">
 	</div>
 
-	<div *ngIf="_quizTranslationService.translationsAreLoaded() && _quizSettingsService.dataLoaded() && _quizSpecieService.dataLoaded()">
+	<div *ngIf="asyncDataLoaded">
 		<router-outlet></router-outlet>
 	</div>
-	<div *ngIf="_quizTranslationService.translationsLoadProblems() || _quizSettingsService.dataLoadProblems()" class="alert alert-danger">
+	<div *ngIf="asyncDataLoadError" class="alert alert-danger">
 		<h1>Server communication problems!</h1>
 	</div>
 </div>

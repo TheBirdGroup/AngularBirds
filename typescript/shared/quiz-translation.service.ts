@@ -1,8 +1,10 @@
-import { Injectable, OnInit } from 'angular2/core';
+import { Injectable, OnInit, EventEmitter } from 'angular2/core';
 import { Http } from 'angular2/http';
 
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
+
+import {constants} from './../constants';
 
 
 @Injectable()
@@ -12,6 +14,8 @@ export class QuizTranslationService implements OnInit{
 
 	transDataLoaded = false;
 	transLoadProblems = false;
+
+	dataLoadedEventEmiter = new EventEmitter<boolean>();
 
 	siteID = 1;
 
@@ -31,21 +35,29 @@ export class QuizTranslationService implements OnInit{
 
 		this.siteID = siteID;
 
-		this.loadTranslations();
+		setTimeout(() => {
+			this.loadTranslations();
+		}, 0);
+
+		return this.dataLoadedEventEmiter;
+
+
 
 	}
 
 	private loadTranslations(){
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
+		this._http.get(constants.baseURL+"/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
 			.map(response => response.json()).subscribe(
 	            data => {
 	                this.translationData = data['translations'];
 	                this.transDataLoaded = true;
+					this.dataLoadedEventEmiter.emit(true);
 	            },
 	            error => {
 					this.transLoadProblems = true;
-					console.error("getQuizQuestions ERROR! ", error)
+					console.error("getQuizQuestions ERROR! ", error);
+					this.dataLoadedEventEmiter.emit(false);
 				}
 	        );
 

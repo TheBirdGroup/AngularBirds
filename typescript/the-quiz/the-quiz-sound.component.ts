@@ -1,4 +1,4 @@
-import { Component, ViewChild, EventEmitter, OnInit, OnChanges, ElementRef }       from 'angular2/core';
+import { Component, ViewChild, EventEmitter, OnInit, OnChanges, OnDestroy,  ElementRef }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
@@ -20,7 +20,7 @@ import { QuizSoundplayer }  from './../shared.class/the-quiz-soundplayer.class';
 })
 
 
-export class TheQuizSoundComponent implements OnInit, OnChanges{
+export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 	title = 'Birdid Quiz TheQuizComponent!';
 
 	@ViewChild("progressBar") progressBar;
@@ -88,6 +88,15 @@ export class TheQuizSoundComponent implements OnInit, OnChanges{
 				this.quizSoundObject.pause();
 			}
 
+		}
+
+	}
+
+	ngOnDestroy(){
+
+		if(this.quizSoundObject != null){
+			this.quizSoundObject.destroy();
+			this.quizSoundObject = null;
 		}
 
 	}

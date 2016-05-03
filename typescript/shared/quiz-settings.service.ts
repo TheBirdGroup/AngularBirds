@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core';
+import { Injectable, EventEmitter } from 'angular2/core';
 import { Http } from 'angular2/http';
 import 'rxjs/Rx';
 //import { Observable } from 'rxjs/Observable';
@@ -7,6 +7,8 @@ import {Observable} from 'rxjs/Rx';
 // import { QuizQuestion } from './quizQuestion';
 
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
+
+import {constants} from './../constants';
 
 @Injectable()
 export class QuizSettingsService{
@@ -34,7 +36,7 @@ export class QuizSettingsService{
 	competitionGroupID=-1;
 
 
-
+	dataLoadedEventEmiter = new EventEmitter<boolean>();
 
 
 	constructor(private _http: Http){} // why do we need this
@@ -57,7 +59,11 @@ export class QuizSettingsService{
 
 
 
-		this.loadAreaList();
+		setTimeout(() => {
+			this.loadAreaList();
+		}, 0);
+
+		return this.dataLoadedEventEmiter;
 
 	}
 
@@ -85,15 +91,17 @@ export class QuizSettingsService{
 
 	loadAreaList() {
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
+		this._http.get(constants.baseURL+"/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
 			.map(response => response.json()).subscribe( // this is getting the translation PLUS the areas
 	            data => {
 	                this.areaListData = data['area_list'];
 				//	console.log("this.areaListData: ", this.areaListData);
 	                this.areaListLoaded = true;
+					this.dataLoadedEventEmiter.emit(true);
 	            },
 	            error => {
 					this.areaLoadProblems = true;
+					this.dataLoadedEventEmiter.emit(false);
 					console.error("loadAreaList ERROR! ", error)
 				}
 	        );

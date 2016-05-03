@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 
+import {constants} from './../constants';
+
 
 
 // import { quizQuestions } from './mock-quizQuestion';
@@ -64,7 +66,7 @@ export class QuizResultsService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post('https://hembstudios.no//birdid/IDprogram/scoreQuiz.php?JSON=1&siteID='+this.siteID, body,{
+		return this._http.post(constants.baseURL+'/scoreQuiz.php?JSON=1&siteID='+this.siteID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());
@@ -94,7 +96,7 @@ export class QuizResultsService{
 		extraURL += "&siteID=" + siteID;
 		extraURL += "&competitionGroupID=" + competitionGroupID;
 
-		return this._http.get("https://hembstudios.no/birdid/IDprogram/scoreQuiz.php?JSON=1"+extraURL)
+		return this._http.get(constants.baseURL+"/scoreQuiz.php?JSON=1"+extraURL)
 			.map(response => response.json());
 
 	}
@@ -123,7 +125,7 @@ export class QuizResultsService{
 		extraURL += "&siteID=" + siteID;
 		extraURL += "&competitionGroupID=" + "false";
 
-		return this._http.get("https://hembstudios.no/birdid/IDprogram/scoreQuiz.php?JSON=1"+extraURL)
+		return this._http.get(constants.baseURL+"/scoreQuiz.php?JSON=1"+extraURL)
 			.map(response => response.json());
 
 	}

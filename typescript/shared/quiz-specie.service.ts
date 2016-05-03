@@ -1,8 +1,10 @@
-import { Injectable, OnInit } from 'angular2/core';
+import { Injectable, OnInit, EventEmitter } from 'angular2/core';
 import { Http } from 'angular2/http';
 
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
+
+import {constants} from './../constants';
 
 
 
@@ -20,8 +22,11 @@ export class QuizSpecieService implements OnInit{
 	speciesLoadProblems = false;
 
 	siteID = 1;
+	areaID=0;
 
 	promise;
+
+	dataLoadedEventEmiter = new EventEmitter<boolean>();
 
 	constructor(
 		private _http: Http
@@ -39,15 +44,26 @@ export class QuizSpecieService implements OnInit{
 
 		this.siteID = siteID;
 
-		this.loadSpecies();
+		setTimeout(() => {
+			this.loadSpecies();
+		}, 0);
+
+		return this.dataLoadedEventEmiter;
 
 		//this.setSelectedSpecie([1854,1422,1901,1136,1221,1791,1729,1984,1313,1359,1628,1409,1149,1669,1531]);
 
 	}
 
+	loadAreaId(areaID: number){
+		this.areaID = areaID;
+		this.loadSpecies();
+​
+		return this.dataLoadedEventEmiter;
+		}
+
 	private loadSpecies(){
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID)
+		this._http.get(constants.baseURL+"/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID+"&areaID="+this.areaID)
 			.map(response => response.json()).subscribe(
 	            data => {
 
@@ -57,10 +73,12 @@ export class QuizSpecieService implements OnInit{
 	                this.speciesData = data;
 					this.prosessSpecielist();
 	                this.speciesDataLoaded = true;
+					this.dataLoadedEventEmiter.emit(true);
 	            },
 	            error => {
 					this.speciesLoadProblems = true;
 					console.error("getQuizQuestions ERROR! ", error)
+					this.dataLoadedEventEmiter.emit(false);
 				}
 	        );
 
@@ -96,7 +114,6 @@ export class QuizSpecieService implements OnInit{
 	getSpecieList(){
 
 		return this.specieList;
-
 	}
 
 	getSelectedSpecieList(){
@@ -107,10 +124,10 @@ export class QuizSpecieService implements OnInit{
 
 	getSelectedSpecieListCSV(){
 
-		let stringList = ""
+		let stringList = "";
 
 		for (let id of Object.keys(this.arrayOfSelectedSpecies)) {
-			stringList += this.arrayOfSelectedSpecies[id] + ","
+			stringList += this.arrayOfSelectedSpecies[id].id + ","
 		}
 
 		return stringList.substring(0, stringList.length-1);
@@ -142,6 +159,9 @@ export class QuizSpecieService implements OnInit{
 
 		return this.speciesDataLoaded;
 
+	}
+	loadSpecieList(){
+		return this.arrayOfSelectedSpecies;
 	}
 
 

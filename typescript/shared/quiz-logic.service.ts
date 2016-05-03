@@ -28,6 +28,7 @@ export class QuizLogicService{
 		this.score = 0;
 		this.questionNumber = 0;
 		this.quizLoaded = false;
+		this.quizQuestions = [];
 
 	}
 
@@ -107,11 +108,11 @@ export class QuizLogicService{
 
 				let alts = tempQuizData['mediaChoices'];
 
-				currentQuizQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
-				currentQuizQuestion.addChoice(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['name']);
-				currentQuizQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['name']);
-				currentQuizQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['name']);
-				currentQuizQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['name']);
+				currentQuizQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['nameLatin']);
+				currentQuizQuestion.addChoice(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['nameLatin']);
+				currentQuizQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['nameLatin']);
+				currentQuizQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['nameLatin']);
+				currentQuizQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['nameLatin']);
 
 				currentQuizQuestion.addMediaId(tempQuizData.media_id)
 				currentQuizQuestion.addExtraInfo(tempQuizData.extra_info);

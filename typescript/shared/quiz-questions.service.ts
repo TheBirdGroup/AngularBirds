@@ -8,6 +8,9 @@ import { Observable } from 'rxjs/Observable';
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
+import {constants} from './../constants';
+
+
 
 // import { quizQuestions } from './mock-quizQuestion';
  //import { QuizQuestion } from './quizQuestion';
@@ -61,7 +64,7 @@ export class QuizQuestionsService{
 		console.log("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)
 
 
-		return this._http.get("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)
+		return this._http.get(constants.baseURL+"/getQuestionsData.php?JSON=1"+extraURL)
 			.map(response => response.json());
 
 		//return Promise.resolve(quizQuestions);

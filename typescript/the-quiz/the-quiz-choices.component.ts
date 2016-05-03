@@ -159,12 +159,12 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 	}
 	removeWrongAnswer(){
 		this.specieQuestionObject.removeWrongAlternative();
-		this.hints--;
+		/*this.hints--;
 		if (this.hints >= 1){
 
 		}else{
 			this.disableButton = true;
-		}
+		}*/
 	}
 
 

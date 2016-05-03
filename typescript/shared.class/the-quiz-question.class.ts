@@ -284,12 +284,17 @@ export class QuizQuestion {
 		let check = false;
 		let j = 0;
 
-			while ( check == false) {
-				if (this.choices[j].id != this.rightAnswers[0].id) {
-					this.choices.splice(j, 1);
-					check = true;
+
+			while (check == false) {
+				if(this.rightAnswers.length != this.choices.length){
+					if (this.checkIfAnserIsCorrect(this.choices[j].id) == false) {
+						this.choices.splice(j, 1);
+						check = true;
+					}else{
+						j++;
+					}
 				}else{
-					j++;
+					check = true;
 				}
 			}
 

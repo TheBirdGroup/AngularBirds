@@ -280,6 +280,17 @@ export class QuizQuestion {
 
         return array;
     }
+	removeWrongAlternative(){
+		let tempChoices;
+
+			for (let j of Object.keys(this.choices)) {
+				if (this.choices[j][0] != this.rightAnswers[0]) {
+					tempChoices.push(this.choices[j]);
+				}
+			}
+		this.choices = tempChoices;
+
+	}
 
 
 

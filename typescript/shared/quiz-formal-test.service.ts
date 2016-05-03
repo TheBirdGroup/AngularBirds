@@ -51,7 +51,7 @@ export class QuizFormalTestService{
 		return this._http.post('https://hembstudios.no/birdid/IDprogram/setStartTimeFormalTest.php?JSON=1&siteID='+this.siteID, body,{
 	    	headers: headers
 	    })
-			//.map(response => response.json());
+			.map(response => response.json());
 
 
 	}

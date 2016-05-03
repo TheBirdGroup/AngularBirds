@@ -17,6 +17,9 @@ export class QuizSettingsService{
 	allowedMediaTypes = [1,2];
 	quizType = 0; // 1 = normal, 2 = several soundquiz, 3 = formal test?
 	allowedQuizTypes = [1,2,3];
+	severalSoundQuiz = false;
+	formalTestQuiz = false;
+	formalTestAccessCode = "";
 
 	mediaDifficulities = 0;
 //	allowedMediaDifficulities = [1,2,3,4]; for now we do not check
@@ -47,7 +50,7 @@ export class QuizSettingsService{
 
 		//setup default
 		this.setMediaType(1);
-		this.setQuizType(1);
+		this.setNormalQuiz();
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(5); //min 5
 		this.setDuration(0);
@@ -64,24 +67,35 @@ export class QuizSettingsService{
 
 	}
 
-	setQuizType(quizType){
-
-		this.quizType = quizType;
-		//force alts for several singingbirds
-		if(quizType == 2){
+	setNormalQuiz(){
+		this.setSeveralSoundquiz(false);
+		this.setFormalTest(false);
+	}
+	setSeveralSoundquiz(severalSoundQuiz){
+		if(severalSoundQuiz){
+			this.setAlternatives(true);
+			this.setMediaType(2);
+		}
+		this.severalSoundQuiz = severalSoundQuiz;
+	}
+	setFormalTest(formalTestQuiz){
+		if(formalTestQuiz){
 			this.setAlternatives(true);
 		}
-
+		this.formalTestQuiz = formalTestQuiz;
+	}
+	setFormalTestAccessCode(code:string){
+		this.formalTestAccessCode = code;
 	}
 
 	isNormalQuiz(){
-		return this.quizType  == 1;
+		return (!this.severalSoundQuiz && !this.formalTestQuiz);
 	}
 	isSeveralSoundQuiz(){
-		return this.quizType  == 2;
+		return this.severalSoundQuiz;
 	}
 	isFormalTestQuiz(){
-		return this.quizType  == 3;
+		return this.formalTestQuiz;
 	}
 
 
@@ -145,12 +159,14 @@ export class QuizSettingsService{
 
 		let returnSettings: QuizSetting[] = [
 		  {"mediaTypeID": this.mediaType,
-		  "quizTypeID": this.quizType,
+		  "severalSoundQuiz": this.isSeveralSoundQuiz(),
+		  "formalTestQuiz": this.isFormalTestQuiz(),
 		  "areaID": this.selectedArea,
 		  "timeLimit": this.duration,
 		  "numQuestions": this.numberOfQuestions,
 		  "showAlternatives": this.alternative,
 		  "mediaDificulity": this.mediaDifficulities,
+		  "formalTestAccessCode": this.formalTestAccessCode,
 	  	  "siteID": this.siteID}
 		];
 

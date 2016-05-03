@@ -54,8 +54,7 @@ export class QuizMediaSelectComponent implements OnInit{
 
 		if(mediaType == 4){
 
-			this._quizSettingsService.setMediaType(2);
-			this._quizSettingsService.setQuizType(2);
+			this._quizSettingsService.setSeveralSoundquiz(true);
 			this._router.navigate(["QuizMediaAdditionalSettings"]);
 
 		}else{
@@ -69,7 +68,7 @@ export class QuizMediaSelectComponent implements OnInit{
 				//console.log("scuccess");
 				//Const for value?
 				//this.quizMediaSelectedEvent.emit("MediatypeSelected");
-				this._quizSettingsService.setQuizType(1);
+				this._quizSettingsService.setNormalQuiz();
 				this._router.navigate(["QuizMediaAdditionalSettings"]);
 
 			}

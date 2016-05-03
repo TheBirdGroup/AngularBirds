@@ -27,7 +27,7 @@ export class FormalTestStartComponent implements OnInit{
 	codeOk = false;
 	specieListLoaded = false;
 	accessCodeWrong = false;
-	formAccessCode = "Greger456";
+	formAccessCode = "oXT5a5ptKo";
 
 	//quizMediaSelectedEvent = new EventEmitter<string>();
 
@@ -61,9 +61,27 @@ export class FormalTestStartComponent implements OnInit{
 
 		//TODO acually check if status is correct
 		console.log("status formal test code:",status);
-		if(tStatus){
+		console.log("status formal test code:",status.returnData);
+
+		if(status.returnData == true){
 			//code correct
 			this.codeOk = true;
+
+			this._quizSettingsService.setMediaType(status.mediaTypeID);
+			this._quizSettingsService.setArea(status.areaID);
+			this._quizSettingsService.setFormalTest(true);
+			this._quizSettingsService.setFormalTestAccessCode(this.formAccessCode);
+			this._quizSettingsService.setMediaDiff(7);
+			this._quizSettingsService.setDuration(30);
+
+			if(status.areaID == 0){ //WP
+				this._quizSettingsService.selectNumberOfQuestions(60);
+			}else{ //NARSONAL
+				this._quizSettingsService.selectNumberOfQuestions(30);
+			}
+
+
+
 			this.startFormalTest();
 
 		}else{
@@ -82,6 +100,10 @@ export class FormalTestStartComponent implements OnInit{
 	startFormalTest(){
 
 		if(this.codeOk && this.specieListLoaded){
+
+
+
+
 			this._router.navigate(["QuizMediaQuiz"]);
 		}
 

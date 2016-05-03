@@ -1,3 +1,17 @@
+/*import {
+  describe,
+  expect,
+  beforeEach,
+  it,
+  inject,
+  injectAsync,
+  beforeEachProviders,
+
+} from 'angular2/testing';*/
+// the official documentation does not include this, the tutorials however did :|
+//it works without them.
+
+
 import {QuizSetting} from './quiz.settings.interface';
 
 describe('QuizSetting', () => {

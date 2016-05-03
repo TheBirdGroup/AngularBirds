@@ -24,7 +24,12 @@
     });
 
     // #3. Import the spec file explicitly
-    System.import('app/shared/quiz-settings-interface.spec')
+    Promise.all([
+        System.import('app/shared/quiz-settings-interface.spec'),
+        System.import('app/media-additional-settings/quiz-additional-settings-component.spec')
+ ])
+
+
 
       // #4. wait for all imports to load ...
       //     then re-execute `window.onload` which

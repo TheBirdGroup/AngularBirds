@@ -22,12 +22,15 @@ import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 export class TheQuizImageComponent implements OnInit, OnChanges{
 	title = 'Birdid Quiz TheQuizComponent!';
 
-	imageURLStart = "https://hembstudios.no/birdid/IDprogram/getMedia.php?mediaID=";
+	imageURLStart = "https://hembstudios.no/birdid/IDprogram/getMedia.php?";
+	imageUrlParms = "";
 	extraSiteID;
 
 	specieQuestionObject:QuizQuestion;
 
     mediaID = 0;
+	mediaURL = "";
+	accessCode = "";
 
 	zoomFactor = 2;
 	zoomPointX = 0;
@@ -44,6 +47,7 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 	imageLoaded = false;
 	mouseOnImage = false;
 
+	quizSettings;
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
@@ -54,6 +58,9 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 		let quizSettings = this._quizSettingsService.getQuizSettings();
 		let siteID = quizSettings[0].siteID;
 
+
+
+
 		this.extraSiteID = "&siteID="+siteID;
 
 	}
@@ -61,6 +68,22 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 	ngOnChanges(){
 
 		this.mediaID = this.specieQuestionObject.getMediaIds()[0].id;
+		this.mediaURL = this.specieQuestionObject.getMediaSourses()[0].mediaUrl;
+		this.setupImageURL();
+
+	}
+
+	setupImageURL(){
+
+		let quizSettings = this._quizSettingsService.getQuizSettings();
+		this.accessCode = quizSettings[0].formalTestAccessCode;
+		console.log(" quizSettings[0]: ",  quizSettings[0]);
+
+		if(quizSettings[0].formalTestQuiz){
+			this.imageUrlParms = "accessCode="+this.accessCode+"&mediaToken="+this.mediaURL;
+		}else{
+			this.imageUrlParms = "mediaID="+this.mediaID;
+		}
 
 	}
 
@@ -76,8 +99,6 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 		//console.log("this.myImage: ", this.myImage.nativeElement);
 		//ctx.drawImage(this.myImage.nativeElement, 10, 10);
 
-		const tmpImage = new Image();
-		tmpImage.src = "http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg";
 
 
 		this.myImage.nativeElement.onload = () => {

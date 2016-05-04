@@ -73,7 +73,7 @@ export class TheQuizComponent implements OnInit{
 		  this.quizSettings = this._quizSettingsService.getQuizSettings();
 		  this._quizLogicService.setQuizQuestionsSettings(this.quizSettings);
 
-	    this._quizQuestionService.getQuizQuestions(this.quizSettings, this._quizSettingsService.isSeveralSoundQuiz())
+	    this._quizQuestionService.getQuizQuestions(this.quizSettings)
 	        .subscribe(
 	            data => {
 	                console.log(data);

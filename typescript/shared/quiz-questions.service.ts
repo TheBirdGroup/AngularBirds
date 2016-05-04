@@ -25,7 +25,7 @@ export class QuizQuestionsService{
 		private _quizSpeciesService: QuizSpecieService
 	){}
 
-	getQuizQuestions(settings:QuizSetting[], severalSoundquiz = false): Observable<any>{
+	getQuizQuestions(settings:QuizSetting[]): Observable<any>{
 
 		this.lastQuizSettings = settings;
 
@@ -35,7 +35,7 @@ export class QuizQuestionsService{
 		//areaID = 0;
 		//let timeLimit = settings[0].timeLimit;
 		let numQuestions;
-		if(severalSoundquiz){
+		if(settings[0].severalSoundQuiz){
 			numQuestions = Math.floor(settings[0].numQuestions * 2.5);
 		}else{
 			numQuestions = settings[0].numQuestions;
@@ -52,6 +52,10 @@ export class QuizQuestionsService{
 		extraURL += "&areaID=" + areaID;
 		extraURL += "&mediaType=" + mediaTypeID;
 		extraURL += "&competitionGroupID=" + competitionGroupID;
+
+		if(settings[0].formalTestQuiz){
+			extraURL += "&accessCode=" + settings[0].formalTestAccessCode;
+		}
 
 		if(this._quizSpeciesService.getSelectedSpecieList().length > 0){
 			extraURL += "&custumSpecieList=" + this._quizSpeciesService.getSelectedSpecieListCSV();

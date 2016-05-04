@@ -75,12 +75,14 @@ export class TheQuizComponent implements OnInit{
 		  this.quizSettings = this._quizSettingsService.getQuizSettings();
 		  this._quizLogicService.setQuizQuestionsSettings(this.quizSettings);
 
-	    this._quizQuestionService.getQuizQuestions(this.quizSettings, this._quizSettingsService.isSeveralSoundQuiz())
+	    this._quizQuestionService.getQuizQuestions(this.quizSettings)
 	        .subscribe(
 	            data => {
 	                console.log(data);
 					this._quizLogicService.setQuizQuestions(data, this._quizSettingsService.isSeveralSoundQuiz());
 
+					this.checkIfRightNumberOfQuestions(data);
+					console.log("Number of questions", data.metadata['num_Questions']);
 	                this.startQuiz();
 	            },
 	            error => console.error("getQuizQuestions ERROR! ", error)
@@ -114,7 +116,8 @@ export class TheQuizComponent implements OnInit{
 			return;
 		}
 
-        if(!this.inbetweenQuestions) {
+        if(!this.inbetweenQuestions && !this.quizSettings[0].formalTestQuiz){
+			//skipping this in formal test
             this.inbetweenQuestions = true;
 
 			//update score based on user choices
@@ -123,6 +126,7 @@ export class TheQuizComponent implements OnInit{
         }else{
 
             this.inbetweenQuestions = false;
+			console.log("getSelectedChoice: ", this.currentQuizQuestion.getSelectedChoice());
 			this._quizLogicService.gotoNextQuestionNumber();
             //this.questionNumber++;
             this.setupQuestion();
@@ -132,6 +136,16 @@ export class TheQuizComponent implements OnInit{
 
 
     }
+
+	checkIfRightNumberOfQuestions(data){
+		if(data.metadata['num_Questions'] == this._quizSettingsService.getNumberOfQuestions()) {
+			return true;
+		} else {
+			console.error("Not right amount of questions loaded");
+			return false;
+
+		}
+	}
 
 	timerTick(t){
 
@@ -172,7 +186,11 @@ export class TheQuizComponent implements OnInit{
 			//QUIZ DONE!
 			this.quizDone = true;
 			//this.quizDoneEvent.emit("MediaQuizOver");
-			this._router.navigate(["QuizMediaQuizResults"]);
+			if(this.quizSettings[0].formalTestQuiz){
+				this._router.navigate(["QuizFormalTestEnd"]);
+			}else{
+				this._router.navigate(["QuizMediaQuizResults"]);
+			}
 			return;
 
 		}
@@ -185,37 +203,7 @@ export class TheQuizComponent implements OnInit{
 			this.timerSubscription = this.timer.subscribe(t=>this.timerTick(t));
 		}
 
-		//this.testQuizQuestionClass();
-
     }
-
-	// testQuizQuestionClass(){
-	//
-	// 	let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
-	//
-	// 	let tempQuestion = new QuizQuestion(false);
-	// 	tempQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
-	// 	tempQuestion.addRightAnswer(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['name']);
-	// 	tempQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['name']);
-	// 	tempQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['name']);
-	// 	tempQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['name']);
-	//
-	// 	tempQuestion.prosessData();
-	//
-	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['right_answer']['id'])){
-	// 		console.log("checkIfAnserIsCorrect: ", "TRUE")
-	// 	}
-	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['choice_2']['id'])){
-	// 		console.log("checkIfAnserIsCorrect: ", "TRUE")
-	// 	}
-	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['choice_3']['id'])){
-	// 		console.log("checkIfAnserIsCorrect: ", "FALSE")
-	// 	}
-	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['choice_5']['id'])){
-	// 		console.log("checkIfAnserIsCorrect: ", "FALSE")
-	// 	}
-	//
-	// }
 
     getQuestionExtraInfo(){
 

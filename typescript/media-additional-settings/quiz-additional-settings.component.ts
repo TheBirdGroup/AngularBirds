@@ -33,6 +33,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 	quizHighscoreLoaded = false;
 	quizSettings;
 	selSpecie = false;
+	help = false;
 	yes;
 	no = "active";
 	loading = false;
@@ -56,6 +57,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		this._quizSettingsService.setAlternatives(true);
 		this.getAreaList();
 		this.quizSettings = this._quizSettingsService.getQuizSettings();
+		this._quizSettingsService.setHelp(false);
 
 		//console.log("My area: ", this._quizSettingsService.getCurrentAreaName());
 
@@ -148,6 +150,17 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 			this.no = "active"
 		}else{
 			this.no = "";
+		}
+	}
+	setHelp(setHelp: boolean) {
+		this._quizSettingsService.setHelp(setHelp);
+	}
+
+	matchSetHelp(setHelp){
+		if(setHelp == this._quizSettingsService.help){
+			return true;
+		}else{
+			return false;
 		}
 	}
 

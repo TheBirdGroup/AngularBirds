@@ -60,7 +60,7 @@ export class QuizQuestion {
 	}
 
 	//what the user have selected
-	getSelectedChoice(id){
+	getSelectedChoice(){
 
 		return this.selectedChoices;
 
@@ -280,6 +280,30 @@ export class QuizQuestion {
 
         return array;
     }
+	removeWrongAlternative(){
+		let check = false;
+		let j = 0;
+
+
+			while (check == false) {
+				if(this.rightAnswers.length != this.choices.length){
+					if (this.checkIfAnserIsCorrect(this.choices[j].id) == false) {
+						this.choices.splice(j, 1);
+						check = true;
+					}else{
+						j++;
+					}
+				}else{
+					check = true;
+				}
+			}
+
+	}
+	getFirstLetters(numbLetters){
+
+		return this.rightAnswers[0].name.substring(0,numbLetters);
+
+	}
 
 
 

@@ -6,7 +6,7 @@
 	<div style="float:left; margin-left: 50px;">
 		<h2>{{title}}</h2>
 		<h4>Select area</h4>
-	
+
 			<select type="number" [(ngModel)]="selectedArea" (ngModelChange)="onSetArea()">
 			  <option *ngFor="let c of areaList"  [ngValue]="c.id">{{c.country}}</option>
 			</select>
@@ -87,6 +87,17 @@
 				yes
 			</button>
 			<button (click)="onSelectSpecie(false)" class="btn btn-lg btn-primary {{no}}">
+				no
+			</button>
+		</div>
+		<br>
+		<br>
+		<h4> Want help? </h4>
+		<div class="btn-group" data-toggle="buttons">
+			<button (click)="setHelp(true)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSetHelp(true)}">
+				yes
+			</button>
+			<button (click)="setHelp(false)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSetHelp(false)}">
 				no
 			</button>
 		</div>

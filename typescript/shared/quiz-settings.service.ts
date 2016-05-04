@@ -36,8 +36,10 @@ export class QuizSettingsService{
 	areaLoadProblems = false;
 	areaListData;
 	selectedArea = 0;
-	competitionGroupID=-1;
 
+	help = false;
+
+	competitionGroupID=-1;
 
 
 
@@ -85,7 +87,7 @@ export class QuizSettingsService{
 	}
 	setFormalTest(formalTestQuiz){
 		if(formalTestQuiz){
-			this.setAlternatives(true);
+			this.setAlternatives(false);
 		}
 		this.formalTestQuiz = formalTestQuiz;
 	}
@@ -296,6 +298,10 @@ export class QuizSettingsService{
 
 	getNumberOfQuestions(){
 		return this.numberOfQuestions
+	}
+	
+	setHelp(wantHelp: boolean){
+		this.help = wantHelp;
 	}
 
 	setCompetitionGroupID(selectedID:number){

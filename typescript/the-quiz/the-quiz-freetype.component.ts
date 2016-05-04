@@ -26,15 +26,21 @@ import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 
 export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
-	formSpecieName;
+	formSpecieName = "";
 	selectedSpecie;
 
-	specieList;
-	specieListProsessed;
+	specieList = [];
+	specieListProsessed = [];
 
 	inbetweenQuestions = false;
 	specieQuestionObject:QuizQuestion;
 	questionCorrect = false;
+
+	hints = "Unlimited for now";
+	disableHints = true;
+
+	letter = "";
+	nrLetters = 1;
 
 	questionDoneEvent = new EventEmitter<boolean>();
 
@@ -44,11 +50,12 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		private _element: ElementRef){}
 
 	ngOnInit() {
-
+		console.log(this.specieQuestionObject);
 		this.specieList = this._quizSpeciesService.getSpecieList();
 		this.specieListProsessed = this.specieList;
 		//add i don't know at beginning and elect it
 		this.compileProsessedList();
+		this.checkIfDisable();
 
 	}
 
@@ -58,7 +65,14 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 		}else{
 			//console.log("!inbetween quests");
+			if(this.specieList.length > 0){
+				this.formSpecieName = ""
+				this.compileProsessedList();
+				this.selectedSpecie = this.specieListProsessed[0];
+			}
 		}
+		this.letter = "";
+		this.nrLetters = 1;
 	}
 
 	ngAfterViewInit() {
@@ -66,7 +80,15 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 
 	}
+	checkIfDisable(){
+		if(this._quizSettingsService.help == false){
+			this.disableHints = true;
+			this.hints ="Hints are disabled";
+		}else{
+			this.disableHints = false;
+		}
 
+	}
 	//returns object 0 if not found
 	getNextObjetInProsessedArrat(currentID){
 
@@ -131,10 +153,12 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	newValueSelectedList(){
 
 		//console.log("selectedSpecie: ", this.selectedSpecie);
-		console.log("correct species: ", this.specieQuestionObject.getRigthAnsers()[0].name);
+		console.log("correct species: ", this.specieQuestionObject.getRigthAnsers()[0].name, " What i added: ", this.selectedSpecie.id);
+		setTimeout(() => {
+			//console.log("added to list: ", this.selectedSpecie.id);
+			this.specieQuestionObject.addSelectedChoice(this.selectedSpecie.id);
+		},1);
 
-
-		this.specieQuestionObject.addSelectedChoice(this.selectedSpecie.id);
 
 
 	}
@@ -236,6 +260,24 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 
 	}
+	showALetter(){
+		this.letter = this.specieQuestionObject.getFirstLetters(this.nrLetters);
+
+		this.formSpecieName = this.letter;
+
+		this.compileProsessedList();
+
+		this.nrLetters++;
+		
+		//this.disableButton = true;
+		/*this.hints--;
+		 if (this.hints >= 1){
+
+		 }else{
+		 this.disableButton = true;
+		 }*/
+	}
+
 
 
 

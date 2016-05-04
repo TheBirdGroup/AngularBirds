@@ -9,11 +9,19 @@ import { QuizTranslationService }  from './shared/quiz-translation.service';
 import { QuizResultsService }  from './shared/quiz-results.service';
 import { QuizSpecieService }  from './shared/quiz-specie.service';
 
+import { QuizCompetitionService} from "./shared/quiz-competition-group.service";
+
+import { QuizFormalTestService }  from './shared/quiz-formal-test.service';
+
+
+
+
 import { QuizMediaSelectComponent }  from './media-select/quiz-media-select.component';
 import { QuizAdditionalSettingsComponent }  from './media-additional-settings/quiz-additional-settings.component';
 import { TheQuizComponent }  from './the-quiz/the-quiz.component';
 import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 import {SelectSpeciesComponent} from "./select-species/select-species.component";
+import {QuizCompetitionGroupComponent} from "./competition-group/competition-group.component";
 
 
 @Component({
@@ -36,7 +44,11 @@ import {SelectSpeciesComponent} from "./select-species/select-species.component"
 		QuizLogicService,
 		QuizTranslationService,
 		QuizResultsService,
-		QuizSpecieService
+		QuizSpecieService,
+
+
+		QuizFormalTestService
+
 	]
 })
 
@@ -68,6 +80,7 @@ export class QuizMasterComponent implements OnInit {
 		  private _quizTranslationService: QuizTranslationService,
 		  private _quizResultsService: QuizResultsService,
 		  private _quizSpecieService: QuizSpecieService,
+		  private _quizFormalTestService: QuizFormalTestService,
 		  private _router: Router
 	  ){
 
@@ -81,16 +94,25 @@ export class QuizMasterComponent implements OnInit {
 		  //console.log("Route change: ", newRoute );
 
 		  //mostly only used for dev bar on top currently
-		  if(newRoute == 'mediaSelect'){
-			  this.currentActive = 0;
-		  }else if(newRoute == 'mediaAdditionalSettings'){
+		  if(newRoute == 'competitionGroupComponent'){
+			this.currentActive = 0;
+		}else if(newRoute == 'mediaSelect'){
 			  this.currentActive = 1;
-		  }else if(newRoute == 'mediaSelectSpecies'){
+		  }else if(newRoute == 'mediaAdditionalSettings'){
 			  this.currentActive = 2;
-		  }else if(newRoute == 'mediaQuiz'){
+			}else if(newRoute == 'mediaSelectSpecies'){
 			  this.currentActive = 3;
-		  }else if(newRoute == 'mediaQuizResults'){
+		  }else if(newRoute == 'mediaQuiz'){
 			  this.currentActive = 4;
+
+		  }else if(newRoute == 'mediaQuizResults'){
+			  this.currentActive = 5;
+
+		  }else if(newRoute == 'formalTestStart'){
+			  this.currentActive = 6;
+		  }else if(newRoute == 'formalTestEnd'){
+			  this.currentActive = 7;
+
 		  }
 
 	  }
@@ -107,6 +129,7 @@ export class QuizMasterComponent implements OnInit {
 
 		//not loading any data from server
 		this._quizResultsService.initialize(this.siteID);
+		this._quizFormalTestService.initialize(this.siteID);
 
 	 }
 
@@ -128,7 +151,7 @@ export class QuizMasterComponent implements OnInit {
 	  nextComponent(){
 
 		  this.currentActive ++;
-		  if(this.currentActive > 4){
+		  if(this.currentActive > 5){
 			  this.currentActive = 0;
 		  }
 

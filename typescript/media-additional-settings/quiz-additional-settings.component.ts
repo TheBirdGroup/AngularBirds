@@ -177,6 +177,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 				this._router.navigate(["QuizSelectSpecies"]);
 			}
 		}
+		
 	}
 	/*selectMediaDiff(mediaDifficulity){
 		if(this._quizSettingsService.setMediaDiff(mediaDifficulity)){

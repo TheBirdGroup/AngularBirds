@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 
+import {constants} from './../constants';
+
 
 
 // import { quizQuestions } from './mock-quizQuestion';
@@ -43,6 +45,7 @@ export class QuizResultsService{
 		let mediaTypeID = quizSettings[0].mediaTypeID;
 		let areaID = quizSettings[0].areaID;
 		let mediaDificulity = quizSettings[0].mediaDificulity;
+		let competitionGroupID = quizSettings[0].competitionGroupID;
 
 		let data2 = "score=" + score;
 		data2 += "&name=" + name;
@@ -54,6 +57,7 @@ export class QuizResultsService{
 		data2 += "&difficulty=" + mediaDificulity;
 		data2 += "&specialAreas=false";
 		data2 += "&siteID=" + this.siteID;
+		data2 += "&competitionGroupID=" + competitionGroupID;
 
 		const body = data2;
 		//they result in 501 not implemented by server
@@ -62,7 +66,7 @@ export class QuizResultsService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post('https://hembstudios.no//birdid/IDprogram/scoreQuiz.php?JSON=1&siteID='+this.siteID, body,{
+		return this._http.post(constants.baseURL+'/scoreQuiz.php?JSON=1&siteID='+this.siteID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());
@@ -70,7 +74,7 @@ export class QuizResultsService{
 
 	}
 
-	getQuizResults(quizSettings, timespan, limit){
+	getQuizResults(quizSettings, timespan, limit, competitionGroupID){
 
 		let mediaTypeID = quizSettings[0].mediaTypeID;
 		let areaID = quizSettings[0].areaID;
@@ -90,9 +94,9 @@ export class QuizResultsService{
 		extraURL += "&mediaTypeID=" + mediaTypeID;
 		extraURL += "&langID=" + 2;
 		extraURL += "&siteID=" + siteID;
-		extraURL += "&competitionGroupID=" + "false";
+		extraURL += "&competitionGroupID=" + competitionGroupID;
 
-		return this._http.get("https://hembstudios.no/birdid/IDprogram/scoreQuiz.php?JSON=1"+extraURL)
+		return this._http.get(constants.baseURL+"/scoreQuiz.php?JSON=1"+extraURL)
 			.map(response => response.json());
 
 	}
@@ -121,7 +125,7 @@ export class QuizResultsService{
 		extraURL += "&siteID=" + siteID;
 		extraURL += "&competitionGroupID=" + "false";
 
-		return this._http.get("https://hembstudios.no/birdid/IDprogram/scoreQuiz.php?JSON=1"+extraURL)
+		return this._http.get(constants.baseURL+"/scoreQuiz.php?JSON=1"+extraURL)
 			.map(response => response.json());
 
 	}

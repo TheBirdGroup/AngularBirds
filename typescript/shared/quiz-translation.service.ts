@@ -4,6 +4,8 @@ import { Http } from 'angular2/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
+import {constants} from './../constants';
+
 
 @Injectable()
 export class QuizTranslationService implements OnInit{
@@ -45,7 +47,7 @@ export class QuizTranslationService implements OnInit{
 
 	private loadTranslations(){
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
+		this._http.get(constants.baseURL+"/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
 			.map(response => response.json()).subscribe(
 	            data => {
 	                this.translationData = data['translations'];

@@ -1,0 +1,47 @@
+<div *ngIf="!loading">
+	<h1>Formal test start</h1>
+
+	<div class="jumbotron formalTestStartInfo">
+		{{_quizTranslationService.getTranslationByID(105)}}
+		Also remeber to close your windows and hide your kids
+	</div>
+
+	<div *ngIf="!accessCodeWrong" class="jumbotron formalTestStartInfo">
+
+		<form (ngSubmit)="false" #form="ngForm" >
+
+			<h1>Please enter access code:</h1>
+
+			<div class="unsernameInput input-group">
+
+				<span class="input-group-addon" id="basic-addon1">Access code:</span>
+				<input
+					type="text"
+					id="accessCode"
+					name="accessCode"
+					ngControl="accessCode"
+					[(ngModel)]="formAccessCode"
+					#accessCode="ngForm"
+					class="form-control"
+					placeholder="Your Code"
+					aria-describedby="sizing-addon1 basic-addon1"
+				required>
+				<span class="input-group-addon redWarningText"  *ngIf="!accessCode.valid">Not Valid</span>
+
+			</div>
+
+		</form>
+
+	</div>
+
+	<div *ngIf="accessCodeWrong" class="alert alert-danger formalTestStartInfo">
+		<h1>Accesscode inncorect or already used!</h1>
+	</div>
+
+	<button  class="btn btn-primary btn-lg"(click)="onStartButtonClick()">{{_quizTranslationService.getTranslationByID(149)}}</button>
+
+</div>
+
+<div *ngIf="loading">
+	<img src="loading.gif" alt="Loading..." height="200" width="200">
+</div>

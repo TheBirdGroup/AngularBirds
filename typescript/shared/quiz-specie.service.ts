@@ -4,6 +4,8 @@ import { Http } from 'angular2/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
+import {constants} from './../constants';
+
 
 
 
@@ -20,7 +22,7 @@ export class QuizSpecieService implements OnInit{
 	speciesLoadProblems = false;
 
 	siteID = 1;
-	areaID = 0;
+	areaID=0;
 
 	promise;
 
@@ -55,13 +57,13 @@ export class QuizSpecieService implements OnInit{
 	loadAreaId(areaID: number){
 		this.areaID = areaID;
 		this.loadSpecies();
-
+​
 		return this.dataLoadedEventEmiter;
-	}
+		}
 
 	private loadSpecies(){
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID+"&areaID="+this.areaID)
+		this._http.get(constants.baseURL+"/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID+"&areaID="+this.areaID)
 			.map(response => response.json()).subscribe(
 	            data => {
 
@@ -105,6 +107,8 @@ export class QuizSpecieService implements OnInit{
 		// console.log(this.speciesData[5]);
 		//console.log("this.specieList: ---------- ", this.specieList);
 		// console.log("this.specieList11: ", this.specieList[1][1]);
+
+
 	}
 
 	getSpecieList(){

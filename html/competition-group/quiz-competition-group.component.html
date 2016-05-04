@@ -1,0 +1,7 @@
+<h2>{{title}}</h2>
+
+<button  class="btn btn-primary btn-lg"(click)="startQuiz()">Start Quiz</button>
+
+<birdid-resultlist [usingTimespan]="'day'" [usingLimit]="20" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
+
+<birdid-resultlist [usingTimespan]="'year'" [usingLimit]="50" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>

@@ -8,6 +8,8 @@ import {Observable} from 'rxjs/Rx';
 
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 
+import {constants} from './../constants';
+
 @Injectable()
 export class QuizSettingsService{
 
@@ -15,6 +17,9 @@ export class QuizSettingsService{
 	allowedMediaTypes = [1,2];
 	quizType = 0; // 1 = normal, 2 = several soundquiz, 3 = formal test?
 	allowedQuizTypes = [1,2,3];
+	severalSoundQuiz = false;
+	formalTestQuiz = false;
+	formalTestAccessCode = "";
 
 	mediaDifficulities = 0;
 //	allowedMediaDifficulities = [1,2,3,4]; for now we do not check
@@ -31,7 +36,10 @@ export class QuizSettingsService{
 	areaLoadProblems = false;
 	areaListData;
 	selectedArea = 0;
+
 	help = false;
+
+	competitionGroupID=-1;
 
 	dataLoadedEventEmiter = new EventEmitter<boolean>();
 
@@ -46,12 +54,13 @@ export class QuizSettingsService{
 
 		//setup default
 		this.setMediaType(1);
-		this.setQuizType(1);
+		this.setNormalQuiz();
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(5); //min 5
 		this.setDuration(0);
 		this.setAlternatives(true);
 		this.setArea(0);
+		this.setCompetitionGroupID(-1);
 
 
 
@@ -63,31 +72,42 @@ export class QuizSettingsService{
 
 	}
 
-	setQuizType(quizType){
-
-		this.quizType = quizType;
-		//force alts for several singingbirds
-		if(quizType == 2){
+	setNormalQuiz(){
+		this.setSeveralSoundquiz(false);
+		this.setFormalTest(false);
+	}
+	setSeveralSoundquiz(severalSoundQuiz){
+		if(severalSoundQuiz){
 			this.setAlternatives(true);
+			this.setMediaType(2);
 		}
-
+		this.severalSoundQuiz = severalSoundQuiz;
+	}
+	setFormalTest(formalTestQuiz){
+		if(formalTestQuiz){
+			this.setAlternatives(false);
+		}
+		this.formalTestQuiz = formalTestQuiz;
+	}
+	setFormalTestAccessCode(code:string){
+		this.formalTestAccessCode = code;
 	}
 
 	isNormalQuiz(){
-		return this.quizType  == 1;
+		return (!this.severalSoundQuiz && !this.formalTestQuiz);
 	}
 	isSeveralSoundQuiz(){
-		return this.quizType  == 2;
+		return this.severalSoundQuiz;
 	}
 	isFormalTestQuiz(){
-		return this.quizType  == 3;
+		return this.formalTestQuiz;
 	}
 
 
 
 	loadAreaList() {
 
-		this._http.get("https://hembstudios.no//birdid/IDprogram/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
+		this._http.get(constants.baseURL+"/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
 			.map(response => response.json()).subscribe( // this is getting the translation PLUS the areas
 	            data => {
 	                this.areaListData = data['area_list'];
@@ -144,12 +164,15 @@ export class QuizSettingsService{
 
 		let returnSettings: QuizSetting[] = [
 		  {"mediaTypeID": this.mediaType,
-		  "quizTypeID": this.quizType,
+		  "severalSoundQuiz": this.isSeveralSoundQuiz(),
+		  "formalTestQuiz": this.isFormalTestQuiz(),
 		  "areaID": this.selectedArea,
 		  "timeLimit": this.duration,
 		  "numQuestions": this.numberOfQuestions,
 		  "showAlternatives": this.alternative,
 		  "mediaDificulity": this.mediaDifficulities,
+		  "formalTestAccessCode": this.formalTestAccessCode,
+		  "competitionGroupID": this.competitionGroupID,
 	  	  "siteID": this.siteID}
 		];
 
@@ -244,6 +267,13 @@ export class QuizSettingsService{
 		this.help = wantHelp;
 	}
 
+	setCompetitionGroupID(selectedID:number){
+		this.competitionGroupID=selectedID;
+		console.log("the group id that is set issssss ", this.competitionGroupID);
+	}
 
+	getCompetitionGroupID(){
+		return this.competitionGroupID;
+	}
 
 }

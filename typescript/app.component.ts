@@ -13,10 +13,16 @@ import { QuizMediaSelectComponent }  from './media-select/quiz-media-select.comp
 import { QuizAdditionalSettingsComponent }  from './media-additional-settings/quiz-additional-settings.component';
 import { TheQuizComponent }  from './the-quiz/the-quiz.component';
 import { QuizResultComponent }  from './quiz-results/quiz-results.component';
+import {SelectSpeciesComponent} from "./select-species/select-species.component";
+import {FormalTestEndComponent} from "./formal-test/formal-test-end.component";
+import {FormalTestStartComponent} from "./formal-test/formal-test-start.component";
 
 
 import { QuizMasterComponent }  from './quiz-master.component';
-import {SelectSpeciesComponent} from "./select-species/select-species.component";
+
+
+import {QuizCompetitionGroupComponent} from "./competition-group/competition-group.component";
+
 
 @Component({
 	selector: 'birdid-idclient-main',
@@ -29,8 +35,12 @@ import {SelectSpeciesComponent} from "./select-species/select-species.component"
 		QuizMediaSelectComponent,
 		QuizAdditionalSettingsComponent,
 		SelectSpeciesComponent,
+		QuizCompetitionGroupComponent,
 		TheQuizComponent,
 		QuizResultComponent,
+		FormalTestEndComponent,
+		FormalTestStartComponent,
+
 		ROUTER_DIRECTIVES
 	],
 	providers: [
@@ -42,9 +52,12 @@ import {SelectSpeciesComponent} from "./select-species/select-species.component"
 @RouteConfig([
 	{path: '/mediaSelect', 				name: 'QuizMediaSelect', 				component: QuizMediaSelectComponent, useAsDefault: true},
     {path: '/mediaAdditionalSettings', 	name: 'QuizMediaAdditionalSettings', 	component: QuizAdditionalSettingsComponent  },
+	{path: '/competitionGroup',			name: 'QuizCompetitionGroup',			component: QuizCompetitionGroupComponent },
 	{path: '/mediaSelectSpecies',		name: 'QuizSelectSpecies',				component: SelectSpeciesComponent },
   	{path: '/mediaQuiz',				name: 'QuizMediaQuiz',					component: TheQuizComponent },
-	{path: '/mediaQuizResults',			name: 'QuizMediaQuizResults',			component: QuizResultComponent  }
+	{path: '/mediaQuizResults',			name: 'QuizMediaQuizResults',			component: QuizResultComponent  },
+	{path: '/formalTestStart',			name: 'QuizFormalTestStart',			component: FormalTestStartComponent  },
+	{path: '/formalTestEnd',			name: 'QuizFormalTestEnd',				component: FormalTestEndComponent  }
 ])
 
 

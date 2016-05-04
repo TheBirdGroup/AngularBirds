@@ -8,6 +8,9 @@ import { Observable } from 'rxjs/Observable';
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
+import {constants} from './../constants';
+
+
 
 // import { quizQuestions } from './mock-quizQuestion';
  //import { QuizQuestion } from './quizQuestion';
@@ -22,17 +25,17 @@ export class QuizQuestionsService{
 		private _quizSpeciesService: QuizSpecieService
 	){}
 
-	getQuizQuestions(settings:QuizSetting[], severalSoundquiz = false): Observable<any>{
+	getQuizQuestions(settings:QuizSetting[]): Observable<any>{
 
 		this.lastQuizSettings = settings;
 
-
+		let competitionGroupID = settings[0].competitionGroupID;
 		let mediaTypeID = settings[0].mediaTypeID;
 		let areaID = settings[0].areaID;
 		//areaID = 0;
 		//let timeLimit = settings[0].timeLimit;
 		let numQuestions;
-		if(severalSoundquiz){
+		if(settings[0].severalSoundQuiz){
 			numQuestions = Math.floor(settings[0].numQuestions * 2.5);
 		}else{
 			numQuestions = settings[0].numQuestions;
@@ -48,6 +51,11 @@ export class QuizQuestionsService{
 		extraURL += "&difficulty=" + mediaDificulity;
 		extraURL += "&areaID=" + areaID;
 		extraURL += "&mediaType=" + mediaTypeID;
+		extraURL += "&competitionGroupID=" + competitionGroupID;
+
+		if(settings[0].formalTestQuiz){
+			extraURL += "&accessCode=" + settings[0].formalTestAccessCode;
+		}
 
 		if(this._quizSpeciesService.getSelectedSpecieList().length > 0){
 			extraURL += "&custumSpecieList=" + this._quizSpeciesService.getSelectedSpecieListCSV();
@@ -60,7 +68,7 @@ export class QuizQuestionsService{
 		console.log("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)
 
 
-		return this._http.get("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)
+		return this._http.get(constants.baseURL+"/getQuestionsData.php?JSON=1"+extraURL)
 			.map(response => response.json());
 
 		//return Promise.resolve(quizQuestions);

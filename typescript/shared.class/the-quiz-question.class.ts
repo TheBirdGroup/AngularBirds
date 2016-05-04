@@ -60,7 +60,7 @@ export class QuizQuestion {
 	}
 
 	//what the user have selected
-	getSelectedChoice(id){
+	getSelectedChoice(){
 
 		return this.selectedChoices;
 

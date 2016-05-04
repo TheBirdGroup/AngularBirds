@@ -77,7 +77,7 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 
 		let quizSettings = this._quizSettingsService.getQuizSettings();
 		this.accessCode = quizSettings[0].formalTestAccessCode;
-		console.log(" quizSettings[0]: ",  quizSettings[0]);
+		//console.log(" quizSettings[0]: ",  quizSettings[0]);
 
 		if(quizSettings[0].formalTestQuiz){
 			this.imageUrlParms = "accessCode="+this.accessCode+"&mediaToken="+this.mediaURL;

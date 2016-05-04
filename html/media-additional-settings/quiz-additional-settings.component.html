@@ -92,6 +92,17 @@
 		</div>
 		<br>
 		<br>
+		<h4> Want help? </h4>
+		<div class="btn-group" data-toggle="buttons">
+			<button (click)="setHelp(true)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSetHelp(true)}">
+				yes
+			</button>
+			<button (click)="setHelp(false)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSetHelp(false)}">
+				no
+			</button>
+		</div>
+		<br>
+		<br>
 
 		<button  class="btn btn-primary btn-lg"(click)="startQuiz()">Start Quiz</button>
 		<br>

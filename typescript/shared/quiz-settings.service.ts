@@ -31,6 +31,7 @@ export class QuizSettingsService{
 	areaLoadProblems = false;
 	areaListData;
 	selectedArea = 0;
+	help = false;
 
 	dataLoadedEventEmiter = new EventEmitter<boolean>();
 
@@ -237,6 +238,10 @@ export class QuizSettingsService{
 
 	getNumberOfQuestions(){
 		return this.numberOfQuestions
+	}
+	
+	setHelp(wantHelp: boolean){
+		this.help = wantHelp;
 	}
 
 

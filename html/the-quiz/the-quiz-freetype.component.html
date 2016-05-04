@@ -6,7 +6,7 @@
 			The correct answer was
 			<b [ngClass]="{'correctColor': questionCorrect, 'inncorrectColor': !questionCorrect}">{{specieQuestionObject.getRigthAnsers()[0].name}} ({{specieQuestionObject.getRigthAnsers()[0].latin}})</b>
 		</h3>
-
+		<button class="btn btn-info" [disabled]="disableButton" (click)="showALetter()">Show a letter</button> Letters left: {{hints}}
 		<h4><label for="username">Start by spelling the specie:</label></h4>
 		<div class="unsernameInput input-group">
 

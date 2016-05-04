@@ -299,6 +299,11 @@ export class QuizQuestion {
 			}
 
 	}
+	getFirstLetters(numbLetters){
+
+		return this.rightAnswers[0].name.substring(0,numbLetters);
+
+	}
 
 
 

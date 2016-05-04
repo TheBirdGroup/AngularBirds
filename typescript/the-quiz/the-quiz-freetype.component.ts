@@ -26,7 +26,7 @@ import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 
 export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
-	formSpecieName;
+	formSpecieName = "";
 	selectedSpecie;
 
 	specieList;
@@ -36,6 +36,12 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	specieQuestionObject:QuizQuestion;
 	questionCorrect = false;
 
+	hints = "Unlimited for now";
+	disableButton = false;
+
+	letter = "";
+	nrLetters = 1;
+
 	questionDoneEvent = new EventEmitter<boolean>();
 
 	constructor(
@@ -44,11 +50,12 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		private _element: ElementRef){}
 
 	ngOnInit() {
-
+		console.log(this.specieQuestionObject);
 		this.specieList = this._quizSpeciesService.getSpecieList();
 		this.specieListProsessed = this.specieList;
 		//add i don't know at beginning and elect it
 		this.compileProsessedList();
+		this.checkIfDisable();
 
 	}
 
@@ -59,6 +66,8 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		}else{
 			//console.log("!inbetween quests");
 		}
+		this.letter = "";
+		this.nrLetters = 1;
 	}
 
 	ngAfterViewInit() {
@@ -66,7 +75,13 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 
 	}
+	checkIfDisable(){
+		if(this._quizSettingsService.help == false){
+			this.disableButton = true;
+			this.hints ="Hints are disabled";
+		}
 
+	}
 	//returns object 0 if not found
 	getNextObjetInProsessedArrat(currentID){
 
@@ -236,6 +251,24 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 
 	}
+	showALetter(){
+		this.letter = this.specieQuestionObject.getFirstLetters(this.nrLetters);
+
+		this.formSpecieName = this.letter;
+
+		this.compileProsessedList();
+
+		this.nrLetters++;
+		
+		//this.disableButton = true;
+		/*this.hints--;
+		 if (this.hints >= 1){
+
+		 }else{
+		 this.disableButton = true;
+		 }*/
+	}
+
 
 
 

@@ -29,7 +29,8 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 	formSpecieName;
 	selectedSpecie;
 	disableButton = false;
-	hints = 3;
+	hints = "Unlimited for now";
+	numbOfQuestion =  0;
 
 
 	inbetweenQuestions = false;
@@ -48,7 +49,8 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
 	ngOnInit() {
 		console.log(this.specieQuestionObject);
-
+		this.numbOfQuestion = this._quizSettingsService.numberOfQuestions;
+		this.checkIfDisable();
 
 	}
 
@@ -64,6 +66,13 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 	ngAfterViewInit() {
 
 
+
+	}
+	checkIfDisable(){
+		if(this._quizSettingsService.help == false){
+			this.disableButton = true;
+			this.hints ="Hints are disabled";
+		}
 
 	}
 

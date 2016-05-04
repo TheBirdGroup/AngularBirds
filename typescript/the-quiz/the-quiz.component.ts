@@ -79,6 +79,8 @@ export class TheQuizComponent implements OnInit{
 	                console.log(data);
 					this._quizLogicService.setQuizQuestions(data, this._quizSettingsService.isSeveralSoundQuiz());
 
+					this.checkIfRightNumberOfQuestions(data);
+					console.log("Number of questions", data.metadata['num_Questions']);
 	                this.startQuiz();
 	            },
 	            error => console.error("getQuizQuestions ERROR! ", error)
@@ -132,6 +134,16 @@ export class TheQuizComponent implements OnInit{
 
 
     }
+
+	checkIfRightNumberOfQuestions(data){
+		if(data.metadata['num_Questions'] == this._quizSettingsService.getNumberOfQuestions()) {
+			return true;
+		} else {
+			console.error("Not right amount of questions loaded");
+			return false;
+
+		}
+	}
 
 	timerTick(t){
 

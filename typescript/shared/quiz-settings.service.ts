@@ -39,6 +39,8 @@ export class QuizSettingsService{
 	competitionGroupID=-1;
 
 
+
+
 	dataLoadedEventEmiter = new EventEmitter<boolean>();
 
 
@@ -206,14 +208,28 @@ export class QuizSettingsService{
 		return this.duration;
 	}
 
+
+
     setAlternatives(selectedAlternative:boolean ){
         this.alternative = selectedAlternative;
         	//	console.log(this.alternative);
         //this.alternatives=alternatives;
+
     }
 
 	getAlternative(){
 		return this.alternative;
+	}
+
+
+
+	getAlternativeUserFriendly(){
+		if(this.alternative === true){ // this is just for the user to see yes/no in the table below the choices
+			return "Yes";
+		}else{
+			return "No";
+		}
+
 	}
 
 
@@ -222,8 +238,29 @@ export class QuizSettingsService{
 			this.mediaType = mediaType;
 
 			return true;
+
 		}else{
 			return false;
+		}
+
+	}
+
+
+	getMediaTypeUserFriendly(){
+		if(this.mediaType==1){
+			return 'Picture exercise';
+		}
+		if(this.mediaType==2 || this.severalSoundQuiz==false){
+			return 'Sound exercise';
+		}
+		if(this.mediaType==2 || this.severalSoundQuiz==true){
+			return 'Several singing birds';
+		}
+		if(this.mediaType==3){
+			return 'Video quiz';
+		}
+		if(this.formalTestQuiz==true){
+			return 'Formal quiz';
 		}
 	}
 
@@ -268,6 +305,12 @@ export class QuizSettingsService{
 
 	getCompetitionGroupID(){
 		return this.competitionGroupID;
+	}
+
+	getCompetitionGroupIDUserFriendly(){
+		if(this.competitionGroupID!==-1){
+			return this.competitionGroupID;
+		}
 	}
 
 }

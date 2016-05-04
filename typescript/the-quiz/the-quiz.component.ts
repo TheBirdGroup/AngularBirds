@@ -22,6 +22,7 @@ import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 @Component({
 	selector: 'birdid-the-quiz',
 	templateUrl: 'app/the-quiz/the-quiz.component.html',
+	styleUrls:  ['app/the-quiz/the-quiz.component.css'],
 	directives: [
 		TheQuizImageComponent,
 		TheQuizSoundComponent,
@@ -50,8 +51,9 @@ export class TheQuizComponent implements OnInit{
 	quizSettings: QuizSetting[];
 
 	quizDone = false;
-	duration=0;
-	ticks=0;
+	//duration=0;
+	duration;
+	ticks:number;
 	timer;
 	timerSubscription;
 
@@ -83,8 +85,6 @@ export class TheQuizComponent implements OnInit{
 	            },
 	            error => console.error("getQuizQuestions ERROR! ", error)
 	        )
-
-
 
     }
 
@@ -140,6 +140,29 @@ export class TheQuizComponent implements OnInit{
 
 			this.nextQuestion();
 		}
+
+	}
+
+
+	getDurationUserFriendly(){
+		this.duration = this._quizSettingsService.getDuration();
+
+		if (this.duration==0){
+			return 'unlimited';
+		}
+		if(this.duration==20) {
+			let currentTime = this.duration - this.ticks;
+			return currentTime.toString();
+		}
+		if(this.duration==30) {
+			let currentTime = this.duration - this.ticks;
+			return currentTime.toString();
+		}
+		if(this.duration==40) {
+			let currentTime = this.duration - this.ticks;
+			return currentTime.toString();
+		}
+
 
 	}
 

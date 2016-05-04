@@ -14,10 +14,10 @@
 	</div>
 
   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+<h3> What bird is it? </h3>
+<!-- there was short-div before -->
+  	<div class="text-left">
 
-  	<div class="short-div">
-
-		<h3> What bird is it? </h3>
 
 		<birdid-the-quiz-choices
 			[inbetweenQuestions]="inbetweenQuestions"
@@ -36,29 +36,36 @@
 
 
     </div>
-    <div class="short-div">
+
+
+<!-- there was short-div class before -->
+    <div class="text-left">
     	<br>
     	Your score: <b>{{_quizLogicService.getScore()}}</b>
     	<br>
-    	Extra Info: {{getQuestionExtraInfo()}}
+		Time Limit (sec) : <b>{{getDurationUserFriendly()}}</b>
+		<br>
+		Current Question: <b>{{_quizLogicService.questionNumber+1}} / {{_quizSettingsService.getNumberOfQuestions()}}</b>
     	<br><br>
 
-    	Current Media ID: <b>{{currentQuizQuestion.getStringMediaIds()}}</b>
+
+    	Quiz Type: <b>{{_quizSettingsService.getMediaTypeUserFriendly()}}</b>
     	<br>
-    	Media Type ID: <b>{{_quizSettingsService.getQuizSettings()[0].mediaTypeID}}</b>
+    	Difficulty level: <b>{{_quizSettingsService.getQuizSettings()[0].mediaDificulity}}</b>
     	<br>
-    	Media Duficulity: <b>{{_quizSettingsService.getQuizSettings()[0].mediaDificulity}}</b>
+		Area: <b>{{_quizSettingsService.getCurrentAreaName()}}</b>
     	<br>
-		Area ID: <b>{{_quizSettingsService.getCurrentAreaName()}}</b>
+    	Using alternatives: <b>{{_quizSettingsService.getAlternativeUserFriendly()}}</b>
     	<br>
-    	Time Limit: <b>{{_quizSettingsService.getQuizSettings()[0].timeLimit-ticks}}</b>
-		<br>Ticks: {{ticks}}
+		Competition Group: <b>{{_quizSettingsService.getCompetitionGroupIDUserFriendly()}}</b>
+		<br>
+		Current Media ID: <b>{{currentQuizQuestion.getStringMediaIds()}}</b>
     	<br>
-    	Using alternatives: <b>{{_quizSettingsService.getQuizSettings()[0].showAlternatives}}</b>
-    	<br>
-		Competition Group: <b>{{_quizSettingsService.getQuizSettings()[0].competitionGroupID}}</b>
-    	</div>
-	</div>
+		Extra Info: {{getQuestionExtraInfo()}}
+
+    </div>
+
+</div>
 <div style="clear:both"></div>
 
  </div>

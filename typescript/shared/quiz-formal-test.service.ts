@@ -56,5 +56,26 @@ export class QuizFormalTestService{
 
 	}
 
+	submitFormalTestRespoce(code:string, answerListCSV:string, mediaIdsCSV:string): Observable<any>{
+
+		let accessCode = code;
+		let languageID = 2;
+
+		let data = "accessCode=" + accessCode;
+		data += "&answerList=" + answerListCSV;
+		data += "&mediaIDs=" + mediaIdsCSV;
+
+
+		const body = data;
+
+		var headers = new Headers();
+  		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		return this._http.post('https://hembstudios.no/birdid/IDprogram/postFormalTestResults.php?JSON=1&siteID='+this.siteID, body,{
+	    	headers: headers
+	    })
+			.map(response => response.json());
+
+	}
+
 
 }

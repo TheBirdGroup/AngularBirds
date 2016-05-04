@@ -169,6 +169,57 @@ export class QuizLogicService{
 
 	}
 
+	//ONLY supports one choice pr question!!
+	getAnswerListCSV(){
+
+		let answerCsvString:string = "";
+
+		for (let currentQuestionID of Object.keys(this.quizQuestions)) {
+			let currentQuestionMedias = this.quizQuestions[currentQuestionID].getSelectedChoice();
+
+			//console.log("currentQuestionMedias: ", currentQuestionMedias);
+			if(currentQuestionMedias.length > 0){
+				//API uses -1 as i donæt know, here we change to comply with that. Maby change API later?
+				if(currentQuestionMedias[0].id == -1){
+					answerCsvString += "0,";
+				}else{
+					answerCsvString += currentQuestionMedias[0].id + ",";
+				}
+			}else{
+				answerCsvString += "0,";
+			}
+
+		}
+
+		if(answerCsvString.length > 0){
+			return answerCsvString.substring(0, answerCsvString.length-1);
+		}else{
+			return "";
+		}
+
+	}
+
+	//ONLY supports one right answer!!
+	getMediaIdsCSV(){
+
+		let mediaCsvString:string = "";
+
+		for (let currentQuestionID of Object.keys(this.quizQuestions)) {
+			let currentQuestionMedias = this.quizQuestions[currentQuestionID].getMediaIds()[0].id;
+
+			mediaCsvString += currentQuestionMedias + ",";
+
+		}
+
+		if(mediaCsvString.length > 0){
+			return mediaCsvString.substring(0, mediaCsvString.length-1);
+		}else{
+			return "";
+		}
+
+
+	}
+
 
 
 

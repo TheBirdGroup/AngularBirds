@@ -4,6 +4,8 @@ import { Router } from 'angular2/router';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizTranslationService }  from './../shared/quiz-translation.service';
+import { QuizLogicService }  from './../shared/quiz-logic.service';
+import { QuizFormalTestService }  from './../shared/quiz-formal-test.service';
 
 @Component({
 	selector: 'birdid-formal-test-end',
@@ -21,63 +23,58 @@ import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 export class FormalTestEndComponent implements OnInit{
 
-	mediaTypes = [
-		[1, 'Image', 'glyphicon glyphicon-picture'],
-		[2, 'Sound', 'glyphicon glyphicon-volume-up'],
-		[3, 'Video', 'glyphicon glyphicon-facetime-video'],
-		[4, 'Several singingbirds', 'glyphicon glyphicon-volume-up'],
-	];
-	title = 'Birdid Quiz, select your media type:';
-	//quizMediaSelectedEvent = new EventEmitter<string>();
+	answerListCSV = "";
+	mediaIdsCSV = "";
+	submitErrorText = "";
+	submitError = false;
+	loading = true;
+	submitSuccess = false;
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
 		private _quizTranslationService: QuizTranslationService,
+		private _quizLogicService: QuizLogicService,
+		private _quizFormalTestService: QuizFormalTestService,
 		private _router: Router
 	){}
 
 	ngOnInit() {
 
-		//add translations:
-		//image
-		this.mediaTypes[0][1] = this._quizTranslationService.getTranslationByID(4);
-		//sound
-		this.mediaTypes[1][1] = this._quizTranslationService.getTranslationByID(5);
-		//video
-		this.mediaTypes[2][1] = this._quizTranslationService.getTranslationByID(169);
+		this.answerListCSV = this._quizLogicService.getAnswerListCSV();
+		this.mediaIdsCSV = this._quizLogicService.getMediaIdsCSV();
+		let code = this._quizSettingsService.getQuizSettings()[0].formalTestAccessCode;
 
-		//console.log("media t: ", this.mediaTypes[0][1]);
+		if(this._quizSettingsService.getQuizSettings()[0].formalTestQuiz){
 
-	}
-
-	selectMediaType(mediaType){
-
-		if(mediaType == 4){
-
-			this._quizSettingsService.setMediaType(2);
-			this._quizSettingsService.setQuizType(2);
-			this._router.navigate(["QuizMediaAdditionalSettings"]);
-
-		}else{
-
-			if(!this._quizSettingsService.setMediaType(mediaType)){
-
-				console.log("Nope", mediaType);
-
-			}else{
-
-				//console.log("scuccess");
-				//Const for value?
-				//this.quizMediaSelectedEvent.emit("MediatypeSelected");
-				this._quizSettingsService.setQuizType(1);
-				this._router.navigate(["QuizMediaAdditionalSettings"]);
-
-			}
+			this._quizFormalTestService.submitFormalTestRespoce(code, this.answerListCSV, this.mediaIdsCSV)
+				.subscribe((response) => (this.onFormalTestSubmit(response)));
 
 		}
+		console.log("this.answerListCSV: ", this.answerListCSV);
+		console.log("this.mediaIdsCSV: ", this.mediaIdsCSV);
 
+	}
+
+	onFormalTestSubmit(responce){
+
+		this.loading = false
+
+		if(responce.returnData){
+			this.submitSuccess = true;
+		}else{
+			this.submitError = true;
+			this.submitErrorText = responce.returnData;
+		}
+
+		console.log("responce: ", responce);
 
 
 	}
+
+
+
+
+
+
 
 }

@@ -1,0 +1,11 @@
+<div *ngIf="loading">
+	<img src="loading.gif" alt="Loading..." height="200" width="200">
+</div>
+
+<div *ngIf="!loading && submitError" class="alert alert-danger formalTestEndInfo">
+	<h1>Problems posting results: {{submitErrorText}}</h1>
+</div>
+
+<div *ngIf="!loading && submitSuccess" class="jumbotron formalTestEndInfo">
+	Formal test is now over and your choices has been submitted successfully!
+</div>

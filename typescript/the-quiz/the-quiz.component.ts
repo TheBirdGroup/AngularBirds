@@ -151,7 +151,13 @@ export class TheQuizComponent implements OnInit{
 			//QUIZ DONE!
 			this.quizDone = true;
 			//this.quizDoneEvent.emit("MediaQuizOver");
-			this._router.navigate(["QuizMediaQuizResults"]);
+			if(this.quizSettings[0].formalTestQuiz){
+				//this._router.navigate(["QuizMediaQuizResults"]);
+				//TEMPORAY FOR testing
+				this._router.navigate(["QuizFormalTestEnd"]);
+			}else{
+				this._router.navigate(["QuizFormalTestEnd"]);
+			}
 			return;
 
 		}
@@ -164,37 +170,7 @@ export class TheQuizComponent implements OnInit{
 			this.timerSubscription = this.timer.subscribe(t=>this.timerTick(t));
 		}
 
-		//this.testQuizQuestionClass();
-
     }
-
-	// testQuizQuestionClass(){
-	//
-	// 	let alts = this.quizQuestions['mediaArray'][this._quizLogicService.getQuestionNumber()]['mediaChoices']
-	//
-	// 	let tempQuestion = new QuizQuestion(false);
-	// 	tempQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['name']);
-	// 	tempQuestion.addRightAnswer(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['name']);
-	// 	tempQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['name']);
-	// 	tempQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['name']);
-	// 	tempQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['name']);
-	//
-	// 	tempQuestion.prosessData();
-	//
-	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['right_answer']['id'])){
-	// 		console.log("checkIfAnserIsCorrect: ", "TRUE")
-	// 	}
-	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['choice_2']['id'])){
-	// 		console.log("checkIfAnserIsCorrect: ", "TRUE")
-	// 	}
-	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['choice_3']['id'])){
-	// 		console.log("checkIfAnserIsCorrect: ", "FALSE")
-	// 	}
-	// 	if(tempQuestion.checkIfAnserIsCorrect(alts['choice_5']['id'])){
-	// 		console.log("checkIfAnserIsCorrect: ", "FALSE")
-	// 	}
-	//
-	// }
 
     getQuestionExtraInfo(){
 

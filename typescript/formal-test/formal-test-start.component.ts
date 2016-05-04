@@ -72,7 +72,7 @@ export class FormalTestStartComponent implements OnInit{
 			this._quizSettingsService.setFormalTest(true);
 			this._quizSettingsService.setFormalTestAccessCode(this.formAccessCode);
 			this._quizSettingsService.setMediaDiff(7);
-			this._quizSettingsService.setDuration(30);
+			this._quizSettingsService.setDuration(6); //20
 
 			if(status.areaID == 0){ //WP
 				this._quizSettingsService.selectNumberOfQuestions(60);

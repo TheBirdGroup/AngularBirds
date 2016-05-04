@@ -29,8 +29,8 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	formSpecieName;
 	selectedSpecie;
 
-	specieList;
-	specieListProsessed;
+	specieList = [];
+	specieListProsessed = [];
 
 	inbetweenQuestions = false;
 	specieQuestionObject:QuizQuestion;
@@ -58,6 +58,11 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 		}else{
 			//console.log("!inbetween quests");
+			if(this.specieList.length > 0){
+				this.formSpecieName = ""
+				this.compileProsessedList();
+				this.selectedSpecie = this.specieListProsessed[0];
+			}
 		}
 	}
 
@@ -131,10 +136,12 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	newValueSelectedList(){
 
 		//console.log("selectedSpecie: ", this.selectedSpecie);
-		console.log("correct species: ", this.specieQuestionObject.getRigthAnsers()[0].name);
+		console.log("correct species: ", this.specieQuestionObject.getRigthAnsers()[0].name, " What i added: ", this.selectedSpecie.id);
+		setTimeout(() => {
+			//console.log("added to list: ", this.selectedSpecie.id);
+			this.specieQuestionObject.addSelectedChoice(this.selectedSpecie.id);
+		},1);
 
-
-		this.specieQuestionObject.addSelectedChoice(this.selectedSpecie.id);
 
 
 	}

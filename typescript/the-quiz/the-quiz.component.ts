@@ -73,7 +73,7 @@ export class TheQuizComponent implements OnInit{
 		  this.quizSettings = this._quizSettingsService.getQuizSettings();
 		  this._quizLogicService.setQuizQuestionsSettings(this.quizSettings);
 
-	    this._quizQuestionService.getQuizQuestions(this.quizSettings, this._quizSettingsService.isSeveralSoundQuiz())
+	    this._quizQuestionService.getQuizQuestions(this.quizSettings)
 	        .subscribe(
 	            data => {
 	                console.log(data);
@@ -116,7 +116,8 @@ export class TheQuizComponent implements OnInit{
 			return;
 		}
 
-        if(!this.inbetweenQuestions) {
+        if(!this.inbetweenQuestions && !this.quizSettings[0].formalTestQuiz){
+			//skipping this in formal test
             this.inbetweenQuestions = true;
 
 			//update score based on user choices
@@ -125,6 +126,7 @@ export class TheQuizComponent implements OnInit{
         }else{
 
             this.inbetweenQuestions = false;
+			console.log("getSelectedChoice: ", this.currentQuizQuestion.getSelectedChoice());
 			this._quizLogicService.gotoNextQuestionNumber();
             //this.questionNumber++;
             this.setupQuestion();

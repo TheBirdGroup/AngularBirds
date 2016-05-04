@@ -37,7 +37,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	questionCorrect = false;
 
 	hints = "Unlimited for now";
-	disableButton = false;
+	disableHints = true;
 
 	letter = "";
 	nrLetters = 1;
@@ -82,8 +82,10 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	}
 	checkIfDisable(){
 		if(this._quizSettingsService.help == false){
-			this.disableButton = true;
+			this.disableHints = true;
 			this.hints ="Hints are disabled";
+		}else{
+			this.disableHints = false;
 		}
 
 	}

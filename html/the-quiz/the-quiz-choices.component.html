@@ -19,4 +19,6 @@
 
 <button class="btn btn-primary" (click)="onAnswerButtonClick()">Next Question</button>
 <br><br>
-<button class="btn btn-info" [disabled]="disableButton" (click)="removeWrongAnswer()">Hint</button> Hints left: {{hints}}
+<div *ngIf="disableHints == false">
+<button class="btn btn-info" [disabled]="disableHints" (click)="removeWrongAnswer()">Hint</button> Hints left: {{hints}}
+</div>

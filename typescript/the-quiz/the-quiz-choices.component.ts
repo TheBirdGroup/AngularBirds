@@ -28,7 +28,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
 	formSpecieName;
 	selectedSpecie;
-	disableButton = false;
+	disableHints = false;
 	hints = "Unlimited for now";
 	numbOfQuestion =  0;
 
@@ -70,7 +70,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 	}
 	checkIfDisable(){
 		if(this._quizSettingsService.help == false){
-			this.disableButton = true;
+			this.disableHints = true;
 			this.hints ="Hints are disabled";
 		}
 

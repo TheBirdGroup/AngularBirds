@@ -31,6 +31,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	selectedGroupID;
 	updateResultlistIncrement=0;
 	selectedCompetitionGroupData;
+	loading = false;
 
 
 	constructor(
@@ -74,13 +75,28 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	selectGroup(selectedGroupID){
 		this.selectedGroupID=selectedGroupID
 		console.log('test0',this.selectedGroupID)
-		this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID)
-		this.updateResultlistIncrement++;
+
 		//this is updating the tables that show the results
 
-	this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.getSelectedCompetitionGroup(this.selectedGroupID)
-		console.log('this is the data from the selected groupid', this.selectedCompetitionGroupData)
+		this.loading = true;
+
+		this._quizCompetitionGroupService.loadSelectedCompetitionGroup(selectedGroupID).subscribe((responce) =>{
+			this.onGroupInfoLoaded();
+		});
+
+
 
 
 	}
+
+	onGroupInfoLoaded(){
+
+		this.loading = false;
+		this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID)
+		this.updateResultlistIncrement++;
+		this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.getSelectedCompetitionGroup(this.selectedGroupID)
+		console.log('this is the data from the selected groupid', this.selectedCompetitionGroupData)
+
+	}
+
 }

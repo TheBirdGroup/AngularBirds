@@ -1,31 +1,38 @@
-<h2>{{title}}</h2>
-<br>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="float:right" >
+<div *ngIf="!loading">
+	<h2>{{title}}</h2>
+	<br>
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="float:right" >
 
-    <birdid-resultlist [usingTimespan]="'day'" [usingLimit]="20" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
+	    <birdid-resultlist [usingTimespan]="'day'" [usingLimit]="20" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
 
-    <birdid-resultlist [usingTimespan]="'year'" [usingLimit]="50" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
+	    <birdid-resultlist [usingTimespan]="'year'" [usingLimit]="50" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
 
+	</div>
+
+
+	<div class="resultsListTable">
+	    <table class="table table-bordered">
+	        <th> name of the group: </th>
+	        <th> difficulty </th>
+
+	            <tr *ngFor="let competitionGroup of competitionGroups">
+	                <td>{{competitionGroup.name}}</td>
+	                <td>{{competitionGroup.media_difficulty}}</td>
+	                <button class="btn btn-m" (click)="selectGroup(competitionGroup.id)">Select</button>
+	            </tr>
+
+
+	    </table>
+	</div>
+	<div style="clear:both"></div>
+
+	<br>
+	<br>
+
+
+	<button  class="btn btn-primary btn-lg compStartBtn"(click)="startQuiz()">Play quiz</button>
 </div>
 
-
-<div class="resultsListTable">
-    <table class="table table-bordered">
-        <th> name of the group: </th>
-        <th> difficulty </th>
-
-            <tr *ngFor="let competitionGroup of competitionGroups">
-                <td>{{competitionGroup.name}}</td>
-                <td>{{competitionGroup.media_difficulty}}</td>
-                <button class="btn btn-m" (click)="selectGroup(competitionGroup.id)">Select</button>
-            </tr>
-
-
-    </table>
+<div *ngIf="loading">
+	<img src="loading.gif" alt="Loading..." height="200" width="200">
 </div>
-<div style="clear:both"></div>
-
-
-
-
-<button  class="btn btn-primary btn-lg"(click)="startQuiz()">Play quiz</button>-->

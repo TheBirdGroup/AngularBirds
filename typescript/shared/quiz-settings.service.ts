@@ -55,8 +55,8 @@ export class QuizSettingsService{
 		this.siteID = siteID;
 
 		//setup default
-		this.setMediaType(2);
-		this.setSeveralSoundquiz();
+		this.setMediaType(1);
+		this.setNormalQuiz();
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(20); //min 5
 		this.setDuration(0);
@@ -75,8 +75,8 @@ export class QuizSettingsService{
 	}
 
 	setNormalQuiz(){
-		this.setSeveralSoundquiz();
-		this.setFormalTest();
+		this.severalSoundQuiz = false;
+		this.formalTestQuiz = false;
 	}
 	setSeveralSoundquiz(){
 		this.setAlternatives(true);

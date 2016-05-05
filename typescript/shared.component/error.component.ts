@@ -49,7 +49,7 @@ export class ErrorComponent implements OnInit, OnChanges{
 
 		navigateToStart(){
 
-			this._router.navigate(["QuizMediaSelect"]);
+			this._router.navigate(["QuizWelcome"]);
 
 		}
 

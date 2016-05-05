@@ -45,6 +45,7 @@ import {QuizCompetitionGroupComponent} from "./competition-group/competition-gro
 		QuizTranslationService,
 		QuizResultsService,
 		QuizSpecieService,
+		QuizCompetitionService,
 
 
 		QuizFormalTestService
@@ -81,6 +82,7 @@ export class QuizMasterComponent implements OnInit {
 		  private _quizResultsService: QuizResultsService,
 		  private _quizSpecieService: QuizSpecieService,
 		  private _quizFormalTestService: QuizFormalTestService,
+		  private _quizCompetitionGroupService: QuizCompetitionService,
 		  private _router: Router
 	  ){
 
@@ -125,7 +127,9 @@ export class QuizMasterComponent implements OnInit {
 		this._quizTranslationService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
 		this._quizSettingsService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
 		this._quizSpecieService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
-		this.totalServicesToLoaded = 3;
+		this._quizCompetitionGroupService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
+
+		this.totalServicesToLoaded = 4;
 
 		//not loading any data from server
 		this._quizResultsService.initialize(this.siteID);

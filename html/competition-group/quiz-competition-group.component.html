@@ -1,7 +1,31 @@
 <h2>{{title}}</h2>
+<br>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="float:right" >
 
-<button  class="btn btn-primary btn-lg"(click)="startQuiz()">Start Quiz</button>
+    <birdid-resultlist [usingTimespan]="'day'" [usingLimit]="20" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
 
-<birdid-resultlist [usingTimespan]="'day'" [usingLimit]="20" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
+    <birdid-resultlist [usingTimespan]="'year'" [usingLimit]="50" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
 
-<birdid-resultlist [usingTimespan]="'year'" [usingLimit]="50" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
+</div>
+
+
+<div class="listOfCompetitionGroups">
+    <table class="table">
+        <th> name of the group: </th>
+        <th> difficulty </th>
+        <th> wanna play? </th>
+            <tr *ngFor="let competitionGroup of competitionGroups">
+                <td>{{competitionGroup.name}}</td>
+                <td>{{competitionGroup.media_difficulty}}</td>
+                <button class="btn btn-m" (click)="playInThisGroup()">Play</button>
+            </tr>
+
+
+    </table>
+</div>
+<div style="clear:both"></div>
+
+
+
+
+<!--<button  class="btn btn-primary btn-lg"(click)="startQuiz()">Start Quiz</button>-->

@@ -7,6 +7,9 @@ import { QuizResultsService }  from './../shared/quiz-results.service';
 
 import { ResultlistComponent }  from './../shared.component/resultlist.component';
 
+import {QuizCompetitionService} from '../shared/quiz-competition-group.service';
+
+
 @Component({
 	selector: 'birdid-quiz-competition-group',
 	templateUrl: 'app/competition-group/quiz-competition-group.component.html',
@@ -17,18 +20,21 @@ import { ResultlistComponent }  from './../shared.component/resultlist.component
 	],
 	providers: [
 
+
 	],
 })
 export class QuizCompetitionGroupComponent implements OnInit{
-	title = 'Birdid Q';
-competitionGroupID;
+	title = 'Competition Groups';
 
+	competitionGroupID;
+	competitionGroups;
 
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
 		private _router: Router,
 		private _quizResultsService: QuizResultsService,
+		private _quizCompetitionGroupService: QuizCompetitionService,
         private _http: Http
 	){}
 
@@ -47,14 +53,20 @@ competitionGroupID;
 
 	ngOnInit() {
         this._quizSettingsService.setCompetitionGroupID(24);
-
-
+		this._quizCompetitionGroupService.getCompetitionGroups();
+		this.getCompetitionGroups();
 	}
-
 
 	startQuiz(){
 		//console.log(this._router);
         this.storeCompetitionGroupSettings();
         this._router.navigate(["QuizMediaQuiz"]);
 	}
+
+	getCompetitionGroups(){
+		this.competitionGroups=this._quizCompetitionGroupService.getCompetitionGroups();
+		//console.log('this is COMPETITION GROUps', this.competitionGroups)
+	}
+
+
 }

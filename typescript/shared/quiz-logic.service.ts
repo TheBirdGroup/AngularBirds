@@ -1,6 +1,7 @@
 
 import { Injectable } from 'angular2/core';
 import { Http } from 'angular2/http';
+import { Router } from 'angular2/router';
 
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
@@ -20,7 +21,10 @@ export class QuizLogicService{
 
 	quizQuestions:QuizQuestion[] = [];
 
-	constructor(private _http: Http){}
+	constructor(
+		private _http: Http,
+		private _router: Router
+	){}
 
 	//reset for a new quiz as the service is persistent across multible quizes
 	newQuiz(){
@@ -58,6 +62,8 @@ export class QuizLogicService{
 
 			loopCount ++;
 			if(loopCount > 1000){
+				let link = ['QuizError', { errorID: 2 }];
+				this._router.navigate(link);
 				throw new Error("createSeveralSoundquizDistrubutionArray infinate loop detected, > 1000");
 			}
 
@@ -103,20 +109,30 @@ export class QuizLogicService{
 				//temporary!!
 				if(tempQuizData == undefined){
 					//NO QUESTIONS LEFT!
+					let link = ['QuizError', { errorID: 1 }];
+					this._router.navigate(link);
 					throw new Error("NO QUESTIONS LEFT! A check for loading of questions needs to be implemented in QuizLogicService.setQuizQuestions");
 				}
 
 				let alts = tempQuizData['mediaChoices'];
 
-				currentQuizQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['nameLatin']);
-				currentQuizQuestion.addChoice(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['nameLatin']);
-				currentQuizQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['nameLatin']);
-				currentQuizQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['nameLatin']);
-				currentQuizQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['nameLatin']);
+				//preventing the same question from containing the same specie twice.
+				//this will mean in some rare cases one question qwill ony have one right answer.
+				if(!currentQuizQuestion.checkIfAnserIsCorrect(alts['right_answer']['id'])){
 
-				currentQuizQuestion.addMediaId(tempQuizData.media_id)
-				currentQuizQuestion.addExtraInfo(tempQuizData.extra_info);
-				currentQuizQuestion.addMediaSource(tempQuizData.media_url);
+					currentQuizQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['nameLatin']);
+					currentQuizQuestion.addChoice(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['nameLatin']);
+					currentQuizQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['nameLatin']);
+					currentQuizQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['nameLatin']);
+					currentQuizQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['nameLatin']);
+
+					currentQuizQuestion.addMediaId(tempQuizData.media_id)
+					currentQuizQuestion.addExtraInfo(tempQuizData.extra_info);
+					currentQuizQuestion.addMediaSource(tempQuizData.media_url);
+
+				}else{
+					console.log("one removed due to duplicate rigth answer in question "+currentQuestionObjectID);
+				}
 
 				currentQuestionObjectID ++;
 

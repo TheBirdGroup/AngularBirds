@@ -108,15 +108,23 @@ export class QuizLogicService{
 
 				let alts = tempQuizData['mediaChoices'];
 
-				currentQuizQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['nameLatin']);
-				currentQuizQuestion.addChoice(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['nameLatin']);
-				currentQuizQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['nameLatin']);
-				currentQuizQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['nameLatin']);
-				currentQuizQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['nameLatin']);
+				//preventing the same question from containing the same specie twice.
+				//this will mean in some rare cases one question qwill ony have one right answer.
+				if(!currentQuizQuestion.checkIfAnserIsCorrect(alts['right_answer']['id'])){
 
-				currentQuizQuestion.addMediaId(tempQuizData.media_id)
-				currentQuizQuestion.addExtraInfo(tempQuizData.extra_info);
-				currentQuizQuestion.addMediaSource(tempQuizData.media_url);
+					currentQuizQuestion.addRightAnswer(alts['right_answer']['id'], alts['right_answer']['name'], alts['right_answer']['nameLatin']);
+					currentQuizQuestion.addChoice(alts['choice_2']['id'], alts['choice_2']['name'], alts['choice_2']['nameLatin']);
+					currentQuizQuestion.addChoice(alts['choice_3']['id'], alts['choice_3']['name'], alts['choice_3']['nameLatin']);
+					currentQuizQuestion.addChoice(alts['choice_4']['id'], alts['choice_4']['name'], alts['choice_4']['nameLatin']);
+					currentQuizQuestion.addChoice(alts['choice_5']['id'], alts['choice_5']['name'], alts['choice_5']['nameLatin']);
+
+					currentQuizQuestion.addMediaId(tempQuizData.media_id)
+					currentQuizQuestion.addExtraInfo(tempQuizData.extra_info);
+					currentQuizQuestion.addMediaSource(tempQuizData.media_url);
+
+				}else{
+					console.log("one removed due to duplicate rigth answer in question "+currentQuestionObjectID);
+				}
 
 				currentQuestionObjectID ++;
 

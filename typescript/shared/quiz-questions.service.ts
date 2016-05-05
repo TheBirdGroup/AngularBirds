@@ -47,7 +47,7 @@ export class QuizQuestionsService{
 
 		let extraURL = "";
 		extraURL += "&numberQuestions=" + numQuestions;
-		extraURL += "&numRepeatingSpecies=" + 2;
+		extraURL += "&numRepeatingSpecies=" + Math.floor(numQuestions*0.1);
 		extraURL += "&difficulty=" + mediaDificulity;
 		extraURL += "&areaID=" + areaID;
 		extraURL += "&mediaType=" + mediaTypeID;

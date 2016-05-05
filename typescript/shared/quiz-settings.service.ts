@@ -55,10 +55,10 @@ export class QuizSettingsService{
 		this.siteID = siteID;
 
 		//setup default
-		this.setMediaType(1);
-		this.setNormalQuiz();
+		this.setMediaType(2);
+		this.setSeveralSoundquiz();
 		this.setMediaDiff(1);
-		this.selectNumberOfQuestions(5); //min 5
+		this.selectNumberOfQuestions(20); //min 5
 		this.setDuration(0);
 		this.setAlternatives(true);
 		this.setArea(0);
@@ -75,21 +75,17 @@ export class QuizSettingsService{
 	}
 
 	setNormalQuiz(){
-		this.setSeveralSoundquiz(false);
-		this.setFormalTest(false);
+		this.setSeveralSoundquiz();
+		this.setFormalTest();
 	}
-	setSeveralSoundquiz(severalSoundQuiz){
-		if(severalSoundQuiz){
-			this.setAlternatives(true);
-			this.setMediaType(2);
-		}
-		this.severalSoundQuiz = severalSoundQuiz;
+	setSeveralSoundquiz(){
+		this.setAlternatives(true);
+		this.setMediaType(2);
+		this.severalSoundQuiz = true;
 	}
-	setFormalTest(formalTestQuiz){
-		if(formalTestQuiz){
-			this.setAlternatives(false);
-		}
-		this.formalTestQuiz = formalTestQuiz;
+	setFormalTest(){
+		this.setAlternatives(false);
+		this.formalTestQuiz = true;
 	}
 	setFormalTestAccessCode(code:string){
 		this.formalTestAccessCode = code;
@@ -299,7 +295,7 @@ export class QuizSettingsService{
 	getNumberOfQuestions(){
 		return this.numberOfQuestions
 	}
-	
+
 	setHelp(wantHelp: boolean){
 		this.help = wantHelp;
 	}

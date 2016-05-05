@@ -32,6 +32,8 @@ export class QuizSettingsService{
 
 	siteID = 1;
 
+	lastError = ""
+
 	areaListLoaded = false;
 	areaLoadProblems = false;
 	areaListData;
@@ -99,6 +101,14 @@ export class QuizSettingsService{
 	}
 	isFormalTestQuiz(){
 		return this.formalTestQuiz;
+	}
+
+
+	setErrorMessage(error){
+		this.lastError = error;
+	}
+	getLastErrorMessage(){
+		return this.lastError;
 	}
 
 

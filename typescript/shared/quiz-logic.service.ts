@@ -1,6 +1,7 @@
 
 import { Injectable } from 'angular2/core';
 import { Http } from 'angular2/http';
+import { Router } from 'angular2/router';
 
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
@@ -20,7 +21,10 @@ export class QuizLogicService{
 
 	quizQuestions:QuizQuestion[] = [];
 
-	constructor(private _http: Http){}
+	constructor(
+		private _http: Http,
+		private _router: Router
+	){}
 
 	//reset for a new quiz as the service is persistent across multible quizes
 	newQuiz(){
@@ -58,6 +62,8 @@ export class QuizLogicService{
 
 			loopCount ++;
 			if(loopCount > 1000){
+				let link = ['QuizError', { errorID: 2 }];
+				this._router.navigate(link);
 				throw new Error("createSeveralSoundquizDistrubutionArray infinate loop detected, > 1000");
 			}
 
@@ -103,6 +109,8 @@ export class QuizLogicService{
 				//temporary!!
 				if(tempQuizData == undefined){
 					//NO QUESTIONS LEFT!
+					let link = ['QuizError', { errorID: 1 }];
+					this._router.navigate(link);
 					throw new Error("NO QUESTIONS LEFT! A check for loading of questions needs to be implemented in QuizLogicService.setQuizQuestions");
 				}
 

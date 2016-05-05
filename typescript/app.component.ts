@@ -16,6 +16,7 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 import {SelectSpeciesComponent} from "./select-species/select-species.component";
 import {FormalTestEndComponent} from "./formal-test/formal-test-end.component";
 import {FormalTestStartComponent} from "./formal-test/formal-test-start.component";
+import {ErrorComponent} from "./shared.component/error.component";
 
 
 import { QuizMasterComponent }  from './quiz-master.component';
@@ -57,7 +58,8 @@ import {QuizCompetitionGroupComponent} from "./competition-group/competition-gro
   	{path: '/mediaQuiz',				name: 'QuizMediaQuiz',					component: TheQuizComponent },
 	{path: '/mediaQuizResults',			name: 'QuizMediaQuizResults',			component: QuizResultComponent  },
 	{path: '/formalTestStart',			name: 'QuizFormalTestStart',			component: FormalTestStartComponent  },
-	{path: '/formalTestEnd',			name: 'QuizFormalTestEnd',				component: FormalTestEndComponent  }
+	{path: '/formalTestEnd',			name: 'QuizFormalTestEnd',				component: FormalTestEndComponent  },
+	{path: '/quizError/:errorID',		name: 'QuizError',						component: ErrorComponent  }
 ])
 
 

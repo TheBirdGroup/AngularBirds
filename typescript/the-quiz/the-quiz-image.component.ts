@@ -103,6 +103,10 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 
 		this.myImage.nativeElement.onload = () => {
 			this.imageLoaded = true;
+			this.myCanvas.nativeElement.width = this.myImage.nativeElement.width;
+			this.myCanvas.nativeElement.height = this.myImage.nativeElement.height;
+			this.canvasSizeX = this.myImage.nativeElement.width;
+			this.canvasSizeY = this.myImage.nativeElement.height;
 			this.updateImage();
 		};
 

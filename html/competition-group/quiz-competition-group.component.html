@@ -9,15 +9,15 @@
 </div>
 
 
-<div class="listOfCompetitionGroups">
-    <table class="table">
+<div class="resultsListTable">
+    <table class="table table-bordered">
         <th> name of the group: </th>
         <th> difficulty </th>
-        <th> wanna play? </th>
+
             <tr *ngFor="let competitionGroup of competitionGroups">
                 <td>{{competitionGroup.name}}</td>
                 <td>{{competitionGroup.media_difficulty}}</td>
-                <button class="btn btn-m" (click)="playInThisGroup()">Play</button>
+                <button class="btn btn-m" (click)="selectGroup(competitionGroup.id)">Select</button>
             </tr>
 
 
@@ -28,4 +28,4 @@
 
 
 
-<!--<button  class="btn btn-primary btn-lg"(click)="startQuiz()">Start Quiz</button>-->
+<button  class="btn btn-primary btn-lg"(click)="startQuiz()">Play quiz</button>-->

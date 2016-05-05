@@ -299,14 +299,14 @@ export class QuizSettingsService{
 	getNumberOfQuestions(){
 		return this.numberOfQuestions
 	}
-	
+
 	setHelp(wantHelp: boolean){
 		this.help = wantHelp;
 	}
 
 	setCompetitionGroupID(selectedID:number){
 		this.competitionGroupID=selectedID;
-		console.log("the group id that is set issssss ", this.competitionGroupID);
+		//console.log("the group id that is set issssssss ", this.competitionGroupID);
 	}
 
 	getCompetitionGroupID(){

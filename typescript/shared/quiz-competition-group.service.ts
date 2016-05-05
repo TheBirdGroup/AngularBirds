@@ -15,8 +15,12 @@ export class QuizCompetitionService implements OnInit{
 	siteID = 1;
 	competitionGroups;
 	promise;
+	selectedCompetitionGroupID;
+	competitionGroupSelected;
 
 	dataLoadedEventEmiter = new EventEmitter<boolean>();
+	dataLoadedForSelectedCompetitionGroup = new EventEmitter<boolean>();
+
 
 	constructor(
 		private _http: Http
@@ -57,6 +61,26 @@ export class QuizCompetitionService implements OnInit{
 		return this.competitionGroups;
 
 	}
+
+	private loadSelectedCompetitionGroup(){
+		this._http.get(constants.baseURL+"/getCompetitionGroup.php?compGroupID="+this.selectedCompetitionGroupID)
+		.map(response => response.json()).subscribe(
+			data => {
+				this.competitionGroupSelected = data;
+				this.dataLoadedForSelectedCompetitionGroup.emit(true);
+			}
+		);
+		return this.dataLoadedForSelectedCompetitionGroup;
+	}
+
+	getSelectedCompetitionGroup(selectedGroupID){
+		this.selectedCompetitionGroupID=selectedGroupID;
+		this.loadSelectedCompetitionGroup();
+
+		return this.competitionGroupSelected;
+
+	}
+
 
 
 

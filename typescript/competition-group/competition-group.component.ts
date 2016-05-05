@@ -28,6 +28,9 @@ export class QuizCompetitionGroupComponent implements OnInit{
 
 	competitionGroupID;
 	competitionGroups;
+	selectedGroupID;
+	updateResultlistIncrement=0;
+	selectedCompetitionGroupData;
 
 
 	constructor(
@@ -41,18 +44,18 @@ export class QuizCompetitionGroupComponent implements OnInit{
     storeCompetitionGroupSettings(){
 
         //setup default
-        this._quizSettingsService.setMediaType(1);
+        this._quizSettingsService.setMediaType(this.selectedCompetitionGroupData.media_type_id);
         this._quizSettingsService.setNormalQuiz();
-        this._quizSettingsService.setMediaDiff(1);
-        this._quizSettingsService.selectNumberOfQuestions(10);
-        this._quizSettingsService.setDuration(0);
-        this._quizSettingsService.setAlternatives(false);
-        this._quizSettingsService.setArea(0);
+        this._quizSettingsService.setMediaDiff(this.selectedCompetitionGroupData.media_difficulty);
+        this._quizSettingsService.selectNumberOfQuestions(this.selectedCompetitionGroupData.num_questions);
+        this._quizSettingsService.setDuration(this.selectedCompetitionGroupData.time_limit);
+        this._quizSettingsService.setAlternatives(!this.selectedCompetitionGroupData.use_specie_list);
+        this._quizSettingsService.setArea(this.selectedCompetitionGroupData.area_id);
 
     }
 
 	ngOnInit() {
-        this._quizSettingsService.setCompetitionGroupID(24);
+        this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID);
 		this._quizCompetitionGroupService.getCompetitionGroups();
 		this.getCompetitionGroups();
 	}
@@ -68,5 +71,16 @@ export class QuizCompetitionGroupComponent implements OnInit{
 		//console.log('this is COMPETITION GROUps', this.competitionGroups)
 	}
 
+	selectGroup(selectedGroupID){
+		this.selectedGroupID=selectedGroupID
+		console.log('test0',this.selectedGroupID)
+		this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID)
+		this.updateResultlistIncrement++;
+		//this is updating the tables that show the results
 
+	this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.getSelectedCompetitionGroup(this.selectedGroupID)
+		console.log('this is the data from the selected groupid', this.selectedCompetitionGroupData)
+
+
+	}
 }

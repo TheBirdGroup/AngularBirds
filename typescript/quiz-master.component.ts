@@ -22,6 +22,7 @@ import { TheQuizComponent }  from './the-quiz/the-quiz.component';
 import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 import {SelectSpeciesComponent} from "./select-species/select-species.component";
 import {QuizCompetitionGroupComponent} from "./competition-group/competition-group.component";
+import {QuizSummaryComponent} from "./quiz-results/quiz-summary.component";
 
 
 @Component({
@@ -34,6 +35,7 @@ import {QuizCompetitionGroupComponent} from "./competition-group/competition-gro
 		SelectSpeciesComponent,
 		TheQuizComponent,
 		QuizResultComponent,
+		QuizSummaryComponent,
 		ROUTER_DIRECTIVES
 	],
 	providers: [
@@ -106,14 +108,14 @@ export class QuizMasterComponent implements OnInit {
 			  this.currentActive = 3;
 		  }else if(newRoute == 'mediaQuiz'){
 			  this.currentActive = 4;
-
 		  }else if(newRoute == 'mediaQuizResults'){
 			  this.currentActive = 5;
-
-		  }else if(newRoute == 'formalTestStart'){
+		  }else if(newRoute == 'mediaQuizSummary'){
 			  this.currentActive = 6;
-		  }else if(newRoute == 'formalTestEnd'){
+		  }else if(newRoute == 'formalTestStart'){
 			  this.currentActive = 7;
+		  }else if(newRoute == 'formalTestEnd'){
+			  this.currentActive = 8;
 
 		  }
 
@@ -155,7 +157,7 @@ export class QuizMasterComponent implements OnInit {
 	  nextComponent(){
 
 		  this.currentActive ++;
-		  if(this.currentActive > 5){
+		  if(this.currentActive > 9){
 			  this.currentActive = 0;
 		  }
 

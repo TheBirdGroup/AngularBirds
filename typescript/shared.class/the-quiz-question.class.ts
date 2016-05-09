@@ -48,11 +48,11 @@ export class QuizQuestion {
 		}
 
 		if(this.allowMultibleSelect){
-			this.selectedChoices.push({'id': id});
+			this.selectedChoices.push({'id': id, 'name': ''});
 		}else{
 			//only one allowed in normal quiz:
 			this.removeAllSelectedChoices();
-			this.selectedChoices.push({'id': id});
+			this.selectedChoices.push({'id': id, 'name': ''});
 		}
 
 		return true;
@@ -70,6 +70,7 @@ export class QuizQuestion {
 
 		//if i don't know AND no other choice is selected return true
 		if(id < 0 && this.selectedChoices.length == 0){
+			//this.selectedChoices.push({'id': -1});
 			return true;
 		}
 

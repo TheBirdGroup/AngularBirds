@@ -95,6 +95,10 @@ export class QuizResultComponent implements OnInit  {
 		this._router.navigate(["QuizMediaSelect"]);
 
 	}
+	goToSummary(){
+		this._router.navigate(["QuizMediaQuizSummary"]);
+
+	}
 
 
 

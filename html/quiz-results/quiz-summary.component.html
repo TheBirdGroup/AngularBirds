@@ -1,0 +1,33 @@
+<h2>{{title}}</h2>
+
+
+<div class="quizSummary">
+    <table class="table">
+        <tr *ngFor="let currentQuestion of quizSummary">
+            <td>
+                <span class="imgSummary">
+                    <birdid-the-quiz-image [specieQuestionObject]="currentQuestion"></birdid-the-quiz-image>
+                </span>
+            </td>
+            <td>
+        <tr *ngFor="let rightAns of currentQuestion.rightAnswers">
+            <td>{{rightAns.name}}</td>
+        </tr>
+        </td>
+        <td>
+            <tr *ngFor="let selected of currentQuestion.selectedChoices">
+                <td>{{selected.name}}</td>
+            </tr>
+        </td>
+            <td>
+                <tr *ngFor="let choice of currentQuestion.choices">
+                    <td>{{choice.name}}</td>
+                </tr>
+            </td>
+        </tr>
+
+
+    </table>
+</div>
+<br><br>
+<button type="button" class="btn btn-primary buttonsWidth" (click)="goToResults()">Go back</button>

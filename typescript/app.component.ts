@@ -24,6 +24,8 @@ import { QuizMasterComponent }  from './quiz-master.component';
 
 import {QuizCompetitionGroupComponent} from "./competition-group/competition-group.component";
 import {QuizSummaryComponent} from "./quiz-results/quiz-summary.component";
+import {WelcomeComponent} from "./welcome.component/the-quiz-welcome.component";
+
 
 
 @Component({
@@ -43,6 +45,8 @@ import {QuizSummaryComponent} from "./quiz-results/quiz-summary.component";
 		FormalTestEndComponent,
 		FormalTestStartComponent,
 		QuizSummaryComponent,
+		WelcomeComponent,
+
 
 		ROUTER_DIRECTIVES
 	],
@@ -53,7 +57,7 @@ import {QuizSummaryComponent} from "./quiz-results/quiz-summary.component";
 })
 
 @RouteConfig([
-	{path: '/mediaSelect', 				name: 'QuizMediaSelect', 				component: QuizMediaSelectComponent, useAsDefault: true},
+	{path: '/mediaSelect', 				name: 'QuizMediaSelect', 				component: QuizMediaSelectComponent },
     {path: '/mediaAdditionalSettings', 	name: 'QuizMediaAdditionalSettings', 	component: QuizAdditionalSettingsComponent  },
 	{path: '/competitionGroup',			name: 'QuizCompetitionGroup',			component: QuizCompetitionGroupComponent },
 	{path: '/mediaSelectSpecies',		name: 'QuizSelectSpecies',				component: SelectSpeciesComponent },
@@ -62,7 +66,8 @@ import {QuizSummaryComponent} from "./quiz-results/quiz-summary.component";
 	{path: '/formalTestStart',			name: 'QuizFormalTestStart',			component: FormalTestStartComponent  },
 	{path: '/formalTestEnd',			name: 'QuizFormalTestEnd',				component: FormalTestEndComponent  },
 	{path: '/quizError/:errorID',		name: 'QuizError',						component: ErrorComponent  },
-	{path: '/mediaQuizSummary',			name: 'QuizMediaQuizSummary',			component: QuizSummaryComponent	}
+	{path: '/mediaQuizSummary',			name: 'QuizMediaQuizSummary',			component: QuizSummaryComponent	},
+	{path: '/welcome',					name: 'QuizWelcome',					component:WelcomeComponent, useAsDefault: true}
 ])
 
 

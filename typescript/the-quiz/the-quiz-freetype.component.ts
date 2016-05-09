@@ -150,14 +150,23 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	}
 
+	newValueSelectedListEvent(event){
+		//console.log("newValueSelectedListEvent: ", event);
+		this.newValueSelectedList();
+	}
+
 	newValueSelectedList(){
 
+
+
 		//console.log("selectedSpecie: ", this.selectedSpecie);
-		console.log("correct species: ", this.specieQuestionObject.getRigthAnsers()[0].name, " What i added: ", this.selectedSpecie.id);
+
 		setTimeout(() => {
+
+			console.log("correct species: ", this.specieQuestionObject.getRigthAnsers()[0].name, " What i added: ", this.selectedSpecie.id);
 			//console.log("added to list: ", this.selectedSpecie.id);
 			this.specieQuestionObject.addSelectedChoice(this.selectedSpecie.id);
-		},1);
+		},10);
 
 
 
@@ -268,7 +277,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		this.compileProsessedList();
 
 		this.nrLetters++;
-		
+
 		//this.disableButton = true;
 		/*this.hints--;
 		 if (this.hints >= 1){

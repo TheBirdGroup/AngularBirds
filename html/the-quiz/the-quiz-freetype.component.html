@@ -34,7 +34,7 @@
 			class="form-control"
 			size="20"
 			(keyup)="inputSpecieListKey($event)"
-			(change)="newValueSelectedList()" >
+			(change)="newValueSelectedListEvent($event)" >
 		    <option *ngFor="let specie of specieListProsessed" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 		</select>
 

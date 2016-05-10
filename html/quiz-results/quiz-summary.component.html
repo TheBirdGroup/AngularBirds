@@ -7,7 +7,7 @@
             <td>
                 <div *ngIf="mediaType">
                     <span class="soundSummary">
-                        <birdid-the-quiz-sound [specieQuestionObject]="currentQuesiton"></birdid-the-quiz-sound>
+                       <birdid-the-quiz-sound [specieQuestionObject]="currentQuesiton"></birdid-the-quiz-sound>
                     </span>
                 </div>
                 <div *ngIf="!mediaType">
@@ -27,9 +27,14 @@
             </tr>
         </td>
             <td>
-                <tr *ngFor="let choice of currentQuestion.choices">
-                    <td>{{choice.name}}</td>
-                </tr>
+                <div *ngIf="alternativeType">
+                    <tr *ngFor="let choice of currentQuestion.choices">
+                        <td>{{choice.name}}</td>
+                    </tr>
+                </div>
+                <div *ngIf="!alternativeType">
+                  Alternatives were species from: {{areaCountry}}
+                </div>
             </td>
         </tr>
 

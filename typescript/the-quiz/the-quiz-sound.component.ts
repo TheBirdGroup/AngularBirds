@@ -73,6 +73,7 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 
 			this.mediaURL = this.specieQuestionObject.getMediaSourses()[0].mediaUrl;
 			this.mediaURLs = this.specieQuestionObject.getMediaSourses();
+			console.log(this.mediaURL);
 
 			if(this.quizSoundObject != null){
 				this.quizSoundObject.destroy();

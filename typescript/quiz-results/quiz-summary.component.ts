@@ -3,6 +3,7 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { Router } from 'angular2/router';
 import { QuizLogicService }  from './../shared/quiz-logic.service';
 import { TheQuizImageComponent }  from './../the-quiz/the-quiz-image.component';
+import { TheQuizSoundComponent }  from './../the-quiz/the-quiz-sound.component';   
 
 import { ResultlistComponent }  from './../shared.component/resultlist.component';
 
@@ -11,7 +12,8 @@ import { ResultlistComponent }  from './../shared.component/resultlist.component
     templateUrl: 'app/quiz-results/quiz-summary.component.html',
     styleUrls:  ['app/quiz-results/quiz-summary.component.css'],
     directives: [
-        TheQuizImageComponent
+        TheQuizImageComponent,
+        TheQuizSoundComponent
     ],
     providers: [
         HTTP_PROVIDERS
@@ -22,6 +24,7 @@ import { ResultlistComponent }  from './../shared.component/resultlist.component
 export class QuizSummaryComponent implements OnInit  {
     title = "See your quiz summary!"
     quizSummary = [];
+    mediaType = true;
     
     constructor(
         private _quizLogicService: QuizLogicService,

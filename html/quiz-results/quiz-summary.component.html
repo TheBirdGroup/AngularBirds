@@ -5,9 +5,16 @@
     <table class="table">
         <tr *ngFor="let currentQuestion of quizSummary">
             <td>
-                <span class="imgSummary">
-                    <birdid-the-quiz-image [specieQuestionObject]="currentQuestion"></birdid-the-quiz-image>
-                </span>
+                <div *ngIf="mediaType">
+                    <span class="soundSummary">
+                        <birdid-the-quiz-sound [specieQuestionObject]="currentQuesiton"></birdid-the-quiz-sound>
+                    </span>
+                </div>
+                <div *ngIf="!mediaType">
+                    <span class="imgSummary">
+                        <birdid-the-quiz-image [specieQuestionObject]="currentQuestion"></birdid-the-quiz-image>
+                    </span>
+                </div>
             </td>
             <td>
         <tr *ngFor="let rightAns of currentQuestion.rightAnswers">

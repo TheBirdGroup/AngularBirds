@@ -42,6 +42,7 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 	rectColor:string = "#FF0000";
 	context:CanvasRenderingContext2D;
   	@ViewChild("myCanvas") myCanvas;
+	@ViewChild("stretchBar") stretchBar;
 	@ViewChild("myImage") myImage;
 
 	imageLoaded = false;
@@ -103,12 +104,40 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 
 		this.myImage.nativeElement.onload = () => {
 			this.imageLoaded = true;
+
+			this.resizeImageCanvas();
+
+		};
+
+	}
+
+	resizeImageCanvas(){
+
+		if(this.imageLoaded){
+
 			this.myCanvas.nativeElement.width = this.myImage.nativeElement.width;
 			this.myCanvas.nativeElement.height = this.myImage.nativeElement.height;
 			this.canvasSizeX = this.myImage.nativeElement.width;
 			this.canvasSizeY = this.myImage.nativeElement.height;
+
+			let stretcSizeX = this.stretchBar.nativeElement.clientWidth;
+			//console.log("this.canvasSizeX > stretcSizeX>: ", this.canvasSizeX, "|", stretcSizeX);
+			if(this.canvasSizeX > stretcSizeX){
+
+				let ScaleDiff = stretcSizeX / this.canvasSizeX;
+
+				//console.log("yeah:", ScaleDiff);
+
+				this.myCanvas.nativeElement.width = this.myImage.nativeElement.width * ScaleDiff;
+				this.myCanvas.nativeElement.height = this.myImage.nativeElement.height * ScaleDiff;
+				this.canvasSizeX = this.myImage.nativeElement.width * ScaleDiff;
+				this.canvasSizeY = this.myImage.nativeElement.height * ScaleDiff;
+
+			}
+
 			this.updateImage();
-		};
+
+		}
 
 	}
 

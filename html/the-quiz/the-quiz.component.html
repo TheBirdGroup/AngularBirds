@@ -61,8 +61,11 @@
 		<br>
 		Current Media ID: <b>{{currentQuizQuestion.getStringMediaIds()}}</b>
     	<br>
-		Extra Info:
-		<br><b>Right answer +1 point
+		Extra Info: {{getQuestionExtraInfo()}}
+
+		<br><br>
+		Scoring system:<br>
+		<b>Right answer +1 point
 		<br>Wrong answer -1 point
 		<br>Don't know 0 point</b>
 

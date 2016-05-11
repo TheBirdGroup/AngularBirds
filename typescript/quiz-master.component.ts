@@ -65,6 +65,7 @@ export class QuizMasterComponent implements OnInit {
 
 	  currentServicedLoaded = 0;
 	  totalServicesToLoaded = 3;
+	  listOfInitSubs = [];
 	  asyncDataLoaded = false;
 	  asyncDataLoadError = false;
 
@@ -124,12 +125,13 @@ export class QuizMasterComponent implements OnInit {
 	  ngOnInit() {
 
 
+		let tempSub;
 
-		  //load data from server
-		this._quizTranslationService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
-		this._quizSettingsService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
-		this._quizSpecieService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
-		this._quizCompetitionGroupService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) ));
+		  //load data from server (and push subscribe object to array)
+		this.listOfInitSubs.push(this._quizTranslationService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizSettingsService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizSpecieService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizCompetitionGroupService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
 
 		this.totalServicesToLoaded = 4;
 
@@ -148,6 +150,13 @@ export class QuizMasterComponent implements OnInit {
 		 }
 
 		 if(this.currentServicedLoaded == this.totalServicesToLoaded){
+
+			 //unsubscribe from all!
+			 for (let currentID of Object.keys(this.listOfInitSubs)) {
+				 this.listOfInitSubs[currentID].unsubscribe();
+			 }
+			 this.listOfInitSubs = [];
+
 			 this.asyncDataLoaded = true;
 		 }
 

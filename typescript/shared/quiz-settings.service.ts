@@ -299,7 +299,7 @@ export class QuizSettingsService{
             return false;
         }*/
         //console.log(selectedNumberOfQuestions)
-        this.numberOfQuestions= selectedNumberOfQuestions;
+        this.numberOfQuestions = selectedNumberOfQuestions;
     }
 
 	getNumberOfQuestions(){

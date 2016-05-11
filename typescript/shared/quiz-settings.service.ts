@@ -57,10 +57,10 @@ export class QuizSettingsService{
 		this.siteID = siteID;
 
 		//setup default
-		this.setMediaType(1);
+		this.setMediaType(2);
 		this.setNormalQuiz();
 		this.setMediaDiff(1);
-		this.selectNumberOfQuestions(20); //min 5
+		this.selectNumberOfQuestions(1); //min 5
 		this.setDuration(0);
 		this.setAlternatives(true);
 		this.setArea(0);
@@ -299,8 +299,7 @@ export class QuizSettingsService{
             return false;
         }*/
         //console.log(selectedNumberOfQuestions)
-        this.numberOfQuestions= 2;
-		//selectedNumberOfQuestions SETT TILBAKE ISTEDENFOR 2
+        this.numberOfQuestions= selectedNumberOfQuestions;
     }
 
 	getNumberOfQuestions(){

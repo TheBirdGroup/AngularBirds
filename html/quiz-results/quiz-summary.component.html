@@ -3,11 +3,21 @@
 
 <div class="quizSummary">
     <table class="table">
+
+        <thead>
+  		<tr>
+  		  <th>Media</th>
+  		  <th>Name</th>
+  		  <th>My choice</th>
+          <th>All Choices</th>
+  		</tr>
+  	  </thead>
+
         <tr *ngFor="let currentQuestion of quizSummary">
             <td>
                 <div *ngIf="mediaType">
                     <span class="soundSummary">
-                       <birdid-the-quiz-sound [specieQuestionObject]="currentQuesiton"></birdid-the-quiz-sound>
+                       <birdid-the-quiz-sound [specieQuestionObject]="currentQuestion" [autoplay]="false" ></birdid-the-quiz-sound>
                     </span>
                 </div>
                 <div *ngIf="!mediaType">

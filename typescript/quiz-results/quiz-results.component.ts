@@ -5,6 +5,7 @@ import { Router } from 'angular2/router';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';
 import { QuizLogicService }  from './../shared/quiz-logic.service';
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 import { ResultlistComponent }  from './../shared.component/resultlist.component';
 
@@ -38,10 +39,13 @@ export class QuizResultComponent implements OnInit  {
 
 	disableSubmitScore = false;
 
+	fomralTestInfoTranslation = "";
+
 	constructor(
 		private _quizResultsService: QuizResultsService,
 		private _quizLogicService: QuizLogicService,
 		private _quizSettingsService: QuizSettingsService,
+		private _quizTranslationService: QuizTranslationService,
 		private _router: Router
 	) {}
 
@@ -55,6 +59,8 @@ export class QuizResultComponent implements OnInit  {
 		}
 
 		this.loadQuizResults();
+
+		this.fomralTestInfoTranslation = this._quizTranslationService.getTranslationByID(162);
 
 	}
 
@@ -109,9 +115,7 @@ export class QuizResultComponent implements OnInit  {
 		this._router.navigate(["QuizMediaQuizSummary"]);
 
 	}
-    goToFormalTest(){
-        this._router.navigate(["QuizFormalTestStart"]);
-    }
+
 
 
 

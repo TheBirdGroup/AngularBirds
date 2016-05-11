@@ -1,7 +1,7 @@
 
 import { Injectable } from 'angular2/core';
 import { Http, Headers } from 'angular2/http';
-
+import { Router } from 'angular2/router';
 
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';

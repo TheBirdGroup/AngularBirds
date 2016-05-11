@@ -4,7 +4,7 @@ import { Router } from 'angular2/router';
 import { QuizLogicService }  from './../shared/quiz-logic.service';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 import { TheQuizImageComponent }  from './../the-quiz/the-quiz-image.component';
-import { TheQuizSoundComponent }  from './../the-quiz/the-quiz-sound.component';   
+import { TheQuizSoundComponent }  from './../the-quiz/the-quiz-sound.component';
 
 import { ResultlistComponent }  from './../shared.component/resultlist.component';
 import {QuizSettingsService} from "../shared/quiz-settings.service";
@@ -30,13 +30,13 @@ export class QuizSummaryComponent implements OnInit  {
     areaCountry;            //display area country instead of alteratives when freetype
     mediaType;      //true == sound  -  false == img
     alternativeType; //true == choices - false == freetype
-    
+
     constructor(
         private _quizSpeciesService: QuizSpecieService,
         private _quizLogicService: QuizLogicService,
         private _quizSettingsService: QuizSettingsService,
         private _router: Router
-        
+
     ) {}
     ngOnInit() {
         this.quizSummary = this._quizLogicService.quizQuestions;
@@ -45,12 +45,12 @@ export class QuizSummaryComponent implements OnInit  {
         this.areaCountry = this._quizSettingsService.getCurrentAreaName();
         this.setQuizInfo();
         this.setName();
-        
+
     }
     goToResults(){
         this._router.navigate(["QuizMediaQuizResults"]);
     }
-    
+
    setName() {
        if (this.alternativeType == true) {          //checks only alternatives when choices
            let j = 0;

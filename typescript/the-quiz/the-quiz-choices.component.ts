@@ -69,7 +69,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
 	}
 	checkIfDisable(){
-		if(this._quizSettingsService.help == false){
+		if(!this._quizSettingsService.isUsingHelp()){
 			this.disableHints = true;
 			this.hints ="Hints are disabled";
 		}

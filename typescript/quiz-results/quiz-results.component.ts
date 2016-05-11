@@ -36,6 +36,8 @@ export class QuizResultComponent implements OnInit  {
 
 	updateResultlistInc = 0;
 
+	disableSubmitScore = false;
+
 	constructor(
 		private _quizResultsService: QuizResultsService,
 		private _quizLogicService: QuizLogicService,
@@ -46,6 +48,11 @@ export class QuizResultComponent implements OnInit  {
 	ngOnInit() {
 
 		this.quizSettings = this._quizSettingsService.getQuizSettings();
+
+		if(this._quizSettingsService.isUsingHelp()){
+			this.disableSubmitScore = true;
+			this.dataSavedStatus = "You can't submit your score since you used help/hints";
+		}
 
 		this.loadQuizResults();
 
@@ -64,6 +71,8 @@ export class QuizResultComponent implements OnInit  {
 
 
 	onSubmit(formSubmitObject){
+
+		this.disableSubmitScore = true;
 
 		this.dataSavedStatus = "";
 
@@ -86,6 +95,7 @@ export class QuizResultComponent implements OnInit  {
 		//console.log("working: ", response);
 
 		this.dataSavedStatus = "Saved: " + response['returnData'];
+		this.dataSavedStatus = "Your score was successfully saved to the server";
 		this.loadQuizResults();
 
 	}

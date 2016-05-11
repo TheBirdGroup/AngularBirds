@@ -59,8 +59,9 @@ export class QuizSettingsService{
 		//setup default
 		this.setMediaType(2);
 		this.setNormalQuiz();
+		this.setSeveralSoundquiz();
 		this.setMediaDiff(1);
-		this.selectNumberOfQuestions(1); //min 5
+		this.selectNumberOfQuestions(3); //min 5
 		this.setDuration(0);
 		this.setAlternatives(true);
 		this.setArea(0);
@@ -308,6 +309,9 @@ export class QuizSettingsService{
 
 	setHelp(wantHelp: boolean){
 		this.help = wantHelp;
+	}
+	isUsingHelp(){
+		return this.help;
 	}
 
 	setCompetitionGroupID(selectedID:number){

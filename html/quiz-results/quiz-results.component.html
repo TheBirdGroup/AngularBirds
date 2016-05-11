@@ -24,15 +24,16 @@
 						placeholder="Your Name"
 						value="Greger"
 						aria-describedby="sizing-addon1 basic-addon1"
+						[disabled]="disableSubmitScore"
 					required>
 					<span class="input-group-addon redWarningText"  *ngIf="!username.valid">Not Valid</span>
 
 				</div>
 				<br>
-				<button type="submit" [disabled]="!form.valid" class="btn btn-primary buttonsWidth">Save score</button>
+				<button type="submit" [disabled]="!form.valid || disableSubmitScore" class="btn btn-primary buttonsWidth">Save score</button>
 
 				<br>
-				{{dataSavedStatus}}
+				<h3>{{dataSavedStatus}}</h3>
 
 			</div>
 

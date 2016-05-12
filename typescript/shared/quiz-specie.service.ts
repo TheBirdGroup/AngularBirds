@@ -197,9 +197,4 @@ export class QuizSpecieService implements OnInit{
 	//
 	//
 	// }
-
-
-
-
-
 }

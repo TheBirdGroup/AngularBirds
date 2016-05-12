@@ -23,7 +23,9 @@ import { QuizMasterComponent }  from './quiz-master.component';
 
 
 import {QuizCompetitionGroupComponent} from "./competition-group/competition-group.component";
+import {QuizSummaryComponent} from "./quiz-results/quiz-summary.component";
 import {WelcomeComponent} from "./welcome.component/the-quiz-welcome.component";
+
 
 
 @Component({
@@ -42,7 +44,9 @@ import {WelcomeComponent} from "./welcome.component/the-quiz-welcome.component";
 		QuizResultComponent,
 		FormalTestEndComponent,
 		FormalTestStartComponent,
+		QuizSummaryComponent,
 		WelcomeComponent,
+
 
 		ROUTER_DIRECTIVES
 	],
@@ -62,6 +66,7 @@ import {WelcomeComponent} from "./welcome.component/the-quiz-welcome.component";
 	{path: '/formalTestStart',			name: 'QuizFormalTestStart',			component: FormalTestStartComponent  },
 	{path: '/formalTestEnd',			name: 'QuizFormalTestEnd',				component: FormalTestEndComponent  },
 	{path: '/quizError/:errorID',		name: 'QuizError',						component: ErrorComponent  },
+	{path: '/mediaQuizSummary',			name: 'QuizMediaQuizSummary',			component: QuizSummaryComponent	},
 	{path: '/welcome',					name: 'QuizWelcome',					component:WelcomeComponent, useAsDefault: true}
 ])
 

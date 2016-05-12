@@ -37,6 +37,7 @@ export class FormalTestStartComponent implements OnInit{
 		private _quizSpeciesService: QuizSpecieService,
 		private _quizFormalTestService: QuizFormalTestService,
 		private _router: Router
+
 	){}
 
 	ngOnInit() {

@@ -1,10 +1,16 @@
+
+
 <canvas
 	(mousemove)="mouseMoveCanvas($event)"
 	(mouseleave)="mouseLeaveCanvas($event)"
 	(mouseenter)="mouseEnterCanvas($event)"
+	class="imageCanvasElement"
 	#myCanvas
 	id="myCanvas"
 	data-girar="0">
 </canvas>
+<div class="stretchBar" #stretchBar (window:resize)="resizeImageCanvas()"></div>
+
+
 
 <img #myImage id="image" [src]="imageURLStart+imageUrlParms" class="birdimg" >

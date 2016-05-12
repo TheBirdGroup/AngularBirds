@@ -16,7 +16,7 @@ import { QuizSoundplayer }  from './../shared.class/the-quiz-soundplayer.class';
 	providers: [
 	  HTTP_PROVIDERS
 	],
-	inputs: ['specieQuestionObject', 'inbetweenQuestions'], //using ALIAS
+	inputs: ['specieQuestionObject', 'inbetweenQuestions', 'autoplay'], //using ALIAS
 })
 
 
@@ -30,6 +30,7 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 	quizSoundObject:QuizSoundplayer = null;
 
 	inbetweenQuestions = false;
+	autoplay = true;
 
 	progressPercent = 0;
 	currentTime = 0;
@@ -79,7 +80,7 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 				this.quizSoundObject = null;
 			}
 
-			this.quizSoundObject = new QuizSoundplayer(true, true, this);
+			this.quizSoundObject = new QuizSoundplayer(this.autoplay, this.autoplay, this);
 			this.quizSoundObject.loadMedia(this.mediaURLStart + this.soundMiddleURL, this.specieQuestionObject.getMediaSourses());
 
 		}else{

@@ -31,6 +31,7 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
     mediaID = 0;
 	mediaURL = "";
 	accessCode = "";
+	siteID = 4;
 
 	zoomFactor = 2;
 	zoomPointX = 0;
@@ -57,16 +58,19 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 	ngOnInit() {
 
 		let quizSettings = this._quizSettingsService.getQuizSettings();
-		let siteID = quizSettings[0].siteID;
+		this.siteID = quizSettings[0].siteID;
 
 
 
 
-		this.extraSiteID = "&siteID="+siteID;
+		this.extraSiteID = "&siteID="+this.siteID;
 
 	}
 
 	ngOnChanges(){
+
+		let quizSettings = this._quizSettingsService.getQuizSettings();
+		this.siteID = quizSettings[0].siteID;
 
 		this.mediaID = this.specieQuestionObject.getMediaIds()[0].id;
 		this.mediaURL = this.specieQuestionObject.getMediaSourses()[0].mediaUrl;
@@ -83,7 +87,7 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 		if(quizSettings[0].formalTestQuiz){
 			this.imageUrlParms = "accessCode="+this.accessCode+"&mediaToken="+this.mediaURL;
 		}else{
-			this.imageUrlParms = "mediaID="+this.mediaID;
+			this.imageUrlParms = "mediaID="+this.mediaID+"&siteID="+this.siteID;
 		}
 
 	}

@@ -12,6 +12,7 @@ import { QuizSpecieService }  from './shared/quiz-specie.service';
 import { QuizCompetitionService} from "./shared/quiz-competition-group.service";
 
 import { QuizFormalTestService }  from './shared/quiz-formal-test.service';
+import { QuizChangingLanguageService }  from './shared/quiz-changing-language.service';
 
 
 
@@ -23,6 +24,9 @@ import { QuizResultComponent }  from './quiz-results/quiz-results.component';
 import {SelectSpeciesComponent} from "./select-species/select-species.component";
 import {QuizCompetitionGroupComponent} from "./competition-group/competition-group.component";
 import {QuizSummaryComponent} from "./quiz-results/quiz-summary.component";
+import {QuizChangingLanguageComponent} from "./shared.component/changing-language.component";
+
+
 
 
 @Component({
@@ -36,6 +40,7 @@ import {QuizSummaryComponent} from "./quiz-results/quiz-summary.component";
 		TheQuizComponent,
 		QuizResultComponent,
 		QuizSummaryComponent,
+		QuizChangingLanguageComponent,
 		ROUTER_DIRECTIVES
 	],
 	providers: [
@@ -48,6 +53,7 @@ import {QuizSummaryComponent} from "./quiz-results/quiz-summary.component";
 		QuizResultsService,
 		QuizSpecieService,
 		QuizCompetitionService,
+		QuizChangingLanguageService,
 
 
 		QuizFormalTestService
@@ -71,8 +77,6 @@ export class QuizMasterComponent implements OnInit {
 
 	  siteID = 1;
 
-	  langID = 2;
-
 	  currentActive = 0;
  	 //0 = mediatype selkect
  	 //1 = additional settings
@@ -88,6 +92,7 @@ export class QuizMasterComponent implements OnInit {
 		  private _quizSpecieService: QuizSpecieService,
 		  private _quizFormalTestService: QuizFormalTestService,
 		  private _quizCompetitionGroupService: QuizCompetitionService,
+		  private _quizChangingLanguageService: QuizChangingLanguageService,
 		  private _router: Router
 	  ){
 
@@ -126,37 +131,21 @@ export class QuizMasterComponent implements OnInit {
 
 	  ngOnInit() {
 
-		this.initAllServices();
 
-		//on language change
-		this._quizSettingsService.getLanguageChnageEvent().subscribe((event) => (this.onLanguageChange(event) ));
+		let tempSub;
 
-	 }
-
-
-	 initAllServices(){
-
-		 this.asyncDataLoaded = false;
-		 this.currentServicedLoaded = 0;
-		//load data from server
-		this.listOfInitSubs.push(this._quizTranslationService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
-		this.listOfInitSubs.push(this._quizSettingsService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
-		this.listOfInitSubs.push(this._quizSpecieService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
-		this.listOfInitSubs.push(this._quizCompetitionGroupService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
-
+		  //load data from server (and push subscribe object to array)
+		this.listOfInitSubs.push(this._quizTranslationService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizSettingsService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizSpecieService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizCompetitionGroupService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizChangingLanguageService.initialize(this.siteID).subscribe((event) => (this.onseServiceDoneLoading(event))) );
 
 		this.totalServicesToLoaded = 4;
 
 		//not loading any data from server
-		this._quizResultsService.initialize(this.siteID, this.langID);
-		this._quizFormalTestService.initialize(this.siteID, this.langID);
-
-	 }
-
-	 onLanguageChange(event){
-		 console.log("new language!", event);
-		 this.langID = this._quizSettingsService.getLanguageID();
-		 this.initAllServices();
+		this._quizResultsService.initialize(this.siteID);
+		this._quizFormalTestService.initialize(this.siteID);
 
 	 }
 

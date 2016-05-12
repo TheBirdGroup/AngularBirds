@@ -8,7 +8,7 @@ import { QuizResultsService }  from './../shared/quiz-results.service';
 import { ResultlistComponent }  from './../shared.component/resultlist.component';
 
 import {QuizCompetitionService} from '../shared/quiz-competition-group.service';
-
+import { QuizChangingLanguageService }  from './../shared/quiz-changing-language.service';
 
 @Component({
 	selector: 'birdid-quiz-competition-group',
@@ -32,6 +32,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	updateResultlistIncrement=0;
 	selectedCompetitionGroupData;
 	loading = false;
+	languageList=[];
 
 
 	constructor(
@@ -39,7 +40,8 @@ export class QuizCompetitionGroupComponent implements OnInit{
 		private _router: Router,
 		private _quizResultsService: QuizResultsService,
 		private _quizCompetitionGroupService: QuizCompetitionService,
-        private _http: Http
+        private _http: Http,
+		private _quizChangingLanguageService: QuizChangingLanguageService
 	){}
 
     storeCompetitionGroupSettings(){
@@ -59,6 +61,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
         this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID);
 		this._quizCompetitionGroupService.getCompetitionGroups();
 		this.getCompetitionGroups();
+		this.getLanguages();
 	}
 
 	startQuiz(){
@@ -96,6 +99,11 @@ export class QuizCompetitionGroupComponent implements OnInit{
 		this.updateResultlistIncrement++;
 		this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.getSelectedCompetitionGroup(this.selectedGroupID)
 		console.log('this is the data from the selected groupid', this.selectedCompetitionGroupData)
+
+	}
+	getLanguages(){
+		this.languageList=this._quizChangingLanguageService.getLanguages();
+		console.log(this.languageList);
 
 	}
 

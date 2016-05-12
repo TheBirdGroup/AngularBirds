@@ -71,6 +71,8 @@ export class QuizMasterComponent implements OnInit {
 
 	  siteID = 1;
 
+	  langID = 2;
+
 	  currentActive = 0;
  	 //0 = mediatype selkect
  	 //1 = additional settings
@@ -124,20 +126,37 @@ export class QuizMasterComponent implements OnInit {
 
 	  ngOnInit() {
 
+		this.initAllServices();
 
-		let tempSub;
+		//on language change
+		this._quizSettingsService.getLanguageChnageEvent().subscribe((event) => (this.onLanguageChange(event) ));
 
-		  //load data from server (and push subscribe object to array)
-		this.listOfInitSubs.push(this._quizTranslationService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
-		this.listOfInitSubs.push(this._quizSettingsService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
-		this.listOfInitSubs.push(this._quizSpecieService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
-		this.listOfInitSubs.push(this._quizCompetitionGroupService.initialize(this.siteID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+	 }
+
+
+	 initAllServices(){
+
+		 this.asyncDataLoaded = false;
+		 this.currentServicedLoaded = 0;
+		//load data from server
+		this.listOfInitSubs.push(this._quizTranslationService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizSettingsService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizSpecieService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+		this.listOfInitSubs.push(this._quizCompetitionGroupService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
+
 
 		this.totalServicesToLoaded = 4;
 
 		//not loading any data from server
-		this._quizResultsService.initialize(this.siteID);
-		this._quizFormalTestService.initialize(this.siteID);
+		this._quizResultsService.initialize(this.siteID, this.langID);
+		this._quizFormalTestService.initialize(this.siteID, this.langID);
+
+	 }
+
+	 onLanguageChange(event){
+		 console.log("new language!", event);
+		 this.langID = this._quizSettingsService.getLanguageID();
+		 this.initAllServices();
 
 	 }
 

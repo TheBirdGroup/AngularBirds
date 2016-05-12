@@ -18,6 +18,7 @@ export class QuizTranslationService implements OnInit{
 	dataLoadedEventEmiter = new EventEmitter<boolean>();
 
 	siteID = 1;
+	langID = 2;
 
 	promise;
 
@@ -31,9 +32,10 @@ export class QuizTranslationService implements OnInit{
 
 	 }
 
-	initialize(siteID){
+	initialize(siteID, langID){
 
 		this.siteID = siteID;
+		this.langID = langID;
 
 		setTimeout(() => {
 			this.loadTranslations();
@@ -47,7 +49,7 @@ export class QuizTranslationService implements OnInit{
 
 	private loadTranslations(){
 
-		this._http.get(constants.baseURL+"/getTranslationsAndData.php?JSON=1&langID=2&siteID="+this.siteID)
+		this._http.get(constants.baseURL+"/getTranslationsAndData.php?JSON=1&langID="+this.langID+"&siteID="+this.siteID)
 			.map(response => response.json()).subscribe(
 	            data => {
 	                this.translationData = data['translations'];

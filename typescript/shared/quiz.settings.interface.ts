@@ -10,4 +10,5 @@ export interface QuizSetting {
   formalTestAccessCode:string;
   competitionGroupID: number;
   siteID: number;
+  langID: number;
 }

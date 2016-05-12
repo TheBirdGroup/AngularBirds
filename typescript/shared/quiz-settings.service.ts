@@ -43,18 +43,20 @@ export class QuizSettingsService{
 
 	competitionGroupID=-1;
 
+	langID = 2;
 
 
 	dataLoadedEventEmiter = new EventEmitter<boolean>();
-
+	laguageChangedEE = new EventEmitter<boolean>();
 
 	constructor(private _http: Http){} // why do we need this
 
 
 
-	initialize(siteID){
+	initialize(siteID, langID){
 
 		this.siteID = siteID;
+		this.setLanguageID(langID);
 
 		//setup default
 		this.setMediaType(2);
@@ -63,7 +65,7 @@ export class QuizSettingsService{
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(3); //min 5
 		this.setDuration(0);
-		this.setAlternatives(true);
+		this.setAlternatives(false);
 		this.setArea(0);
 		this.setCompetitionGroupID(-1);
 
@@ -75,6 +77,19 @@ export class QuizSettingsService{
 
 		return this.dataLoadedEventEmiter;
 
+	}
+
+	getLanguageChnageEvent(){
+		return this.laguageChangedEE;
+	}
+	getLanguageID(){
+		return this.langID;
+	}
+	setLanguageID(langID, reload = false){
+		this.langID = langID;
+		if(reload){
+			this.laguageChangedEE.emit(true);
+		}
 	}
 
 	setNormalQuiz(){
@@ -182,7 +197,8 @@ export class QuizSettingsService{
 		  "mediaDificulity": this.mediaDifficulities,
 		  "formalTestAccessCode": this.formalTestAccessCode,
 		  "competitionGroupID": this.competitionGroupID,
-	  	  "siteID": this.siteID}
+	  	  "siteID": this.siteID,
+	  	  "langID": this.langID}
 		];
 
 		//console.log("returnSettings: ", returnSettings)

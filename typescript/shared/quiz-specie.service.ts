@@ -23,6 +23,7 @@ export class QuizSpecieService implements OnInit{
 
 	siteID = 1;
 	areaID=0;
+	langID = 2;
 
 	promise;
 
@@ -40,9 +41,10 @@ export class QuizSpecieService implements OnInit{
 
 	 }
 
-	initialize(siteID){
+	initialize(siteID, langID){
 
 		this.siteID = siteID;
+		this.langID = langID;
 
 		setTimeout(() => {
 			this.loadSpecies();
@@ -63,7 +65,7 @@ export class QuizSpecieService implements OnInit{
 
 	private loadSpecies(){
 
-		this._http.get(constants.baseURL+"/getSpecieList.php?JSON=1&langID=2&siteID="+this.siteID+"&areaID="+this.areaID)
+		this._http.get(constants.baseURL+"/getSpecieList.php?JSON=1&langID="+this.langID+"&siteID="+this.siteID+"&areaID="+this.areaID)
 			.map(response => response.json()).subscribe(
 	            data => {
 
@@ -163,7 +165,6 @@ export class QuizSpecieService implements OnInit{
 	loadSpecieList(){
 		return this.arrayOfSelectedSpecies;
 	}
-
 
 	// translationsAreLoaded(){
 	//

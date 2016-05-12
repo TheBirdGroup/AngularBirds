@@ -13,6 +13,7 @@ import {constants} from './../constants';
 export class QuizCompetitionService implements OnInit{
 
 	siteID = 1;
+	langID = 2;
 	competitionGroups;
 	promise;
 	selectedCompetitionGroupID;
@@ -33,9 +34,10 @@ export class QuizCompetitionService implements OnInit{
 		//this.initialize();
 	 }
 
-	initialize(siteID){
+	initialize(siteID, langID){
 
 		this.siteID = siteID;
+		this.langID = langID;
 
 		setTimeout(() => {
 			this.loadCompetitionGroups();

@@ -166,4 +166,36 @@ export class QuizSpecieService implements OnInit{
 		return this.arrayOfSelectedSpecies;
 	}
 
+	// translationsAreLoaded(){
+	//
+	// 	return this.transDataLoaded;
+	//
+	// }
+	//
+	// translationsLoadProblems(){
+	//
+	// 	return this.transLoadProblems;
+	//
+	// }
+
+	// getTranslationByID(id){
+	//
+	//
+	// 	//return "TRANSLATIONS NOT LOADED"
+	//
+	// 	// this.promise = new Promise(function(resolve, reject) {
+	// 	// 	// do a thing, possibly async, then…
+	// 	//
+	// 	// });
+	// 	// return this.promise;
+	//
+	// 	console.log("this.transDataLoaded: ", this.transDataLoaded)
+	// 	if(!this.transDataLoaded){
+	// 		return "TRANSLATIONS NOT LOADED"
+	// 	}else{
+	// 		return this.translationData[id];
+	// 	}
+	//
+	//
+	// }
 }

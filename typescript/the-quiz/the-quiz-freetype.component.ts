@@ -5,6 +5,7 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
+import {QuizCompetitionService} from "../shared/quiz-competition-group.service";
 
 @Component({
 	selector: 'birdid-the-quiz-freetype',
@@ -31,6 +32,8 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	specieList = [];
 	specieListProsessed = [];
+	selectedSpecieList = [];
+	selectedCompetitionGroupData;
 
 	inbetweenQuestions = false;
 	specieQuestionObject:QuizQuestion;
@@ -47,15 +50,20 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
 		private _quizSpeciesService: QuizSpecieService,
+		private _quizCompetitionGroupService: QuizCompetitionService,
 		private _element: ElementRef){}
 
 	ngOnInit() {
 		console.log(this.specieQuestionObject);
 		this.specieList = this._quizSpeciesService.getSpecieList();
-		this.specieListProsessed = this.specieList;
+		this.selectedSpecieList = this._quizSpeciesService.getSelectedSpecieList();
+		this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.competitionGroupSelected;
+
+		console.log(this.selectedCompetitionGroupData);
+		
 		//add i don't know at beginning and elect it
 		this.compileProsessedList();
-		this.checkIfDisable();
+		this.onInitcheck();
 
 	}
 
@@ -80,7 +88,14 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 
 	}
-	checkIfDisable(){
+	onInitcheck(){
+		if(this.selectedSpecieList.length == 0){
+			this.specieListProsessed = this.specieList;
+		}else{
+			this.specieList = this.selectedSpecieList;
+			this.specieListProsessed = this.specieList;
+		}
+
 		if(this._quizSettingsService.help == false){
 			this.disableHints = true;
 			this.hints ="Hints are disabled";

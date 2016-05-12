@@ -44,6 +44,7 @@ export class QuizQuestionsService{
 		//let showAlternatives = settings[0].showAlternatives;
 		let mediaDificulity = settings[0].mediaDificulity;
 		let siteID = settings[0].siteID;
+		let langID = settings[0].langID;
 
 		let extraURL = "";
 		extraURL += "&numberQuestions=" + numQuestions;
@@ -62,7 +63,7 @@ export class QuizQuestionsService{
 		}
 
 
-		extraURL += "&langID=" + 2;
+		extraURL += "&langID=" + langID;
 		extraURL += "&siteID=" + siteID;
 
 		console.log("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)

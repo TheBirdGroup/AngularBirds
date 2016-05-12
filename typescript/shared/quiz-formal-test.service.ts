@@ -19,26 +19,27 @@ export class QuizFormalTestService{
 	lastQuizSettings;
 
 	siteID = 1;
+	langID = 2;
 
 	constructor(
 		private _http: Http,
 		private _quizSpeciesService: QuizSpecieService
 	){}
 
-	initialize(siteID){
+	initialize(siteID, langID){
 
 		this.siteID = siteID;
+		this.langID = langID;
 
 	}
 
 	confirmAccessCodeCorrect(code:string): Observable<any>{
 
 		let accessCode = code;
-		let languageID = 2;
 
 		let data = "accessCode=" + accessCode;
 		data += "&siteID=" + this.siteID;
-		data += "&langID=" + languageID;
+		data += "&langID=" + this.langID;
 
 
 		const body = data;
@@ -59,11 +60,11 @@ export class QuizFormalTestService{
 	submitFormalTestRespoce(code:string, answerListCSV:string, mediaIdsCSV:string): Observable<any>{
 
 		let accessCode = code;
-		let languageID = 2;
 
 		let data = "accessCode=" + accessCode;
 		data += "&answerList=" + answerListCSV;
 		data += "&mediaIDs=" + mediaIdsCSV;
+		data += "&langID=" + this.langID;
 
 
 		const body = data;

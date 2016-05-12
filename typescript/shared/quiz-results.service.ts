@@ -18,11 +18,13 @@ import {constants} from './../constants';
 export class QuizResultsService{
 
 	siteID = 1;
+	langID = 2;
 
 	constructor(private _http: Http){}
 
-	initialize(siteID){
+	initialize(siteID, langID){
 
+		this.langID = langID;
 		this.siteID = siteID;
 
 	}
@@ -66,7 +68,7 @@ export class QuizResultsService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post(constants.baseURL+'/scoreQuiz.php?JSON=1&siteID='+this.siteID, body,{
+		return this._http.post(constants.baseURL+'/scoreQuiz.php?JSON=1&langID='+this.langID+'&siteID='+this.siteID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());

@@ -246,6 +246,7 @@ export class QuizSettingsService{
 		let returnSettings: QuizSetting[] = [
 		  {"mediaTypeID": this.mediaType,
 		  "severalSoundQuiz": this.isSeveralSoundQuiz(),
+		  "beginnerQuiz": this.isBeginnerQuiz(),
 		  "formalTestQuiz": this.isFormalTestQuiz(),
 		  "areaID": this.selectedArea,
 		  "timeLimit": this.duration,

@@ -1,6 +1,7 @@
 export interface QuizSetting {
   mediaTypeID: number;
   severalSoundQuiz: boolean;
+  beginnerQuiz: boolean;
   formalTestQuiz: boolean;
   areaID: number;
   timeLimit: number;

@@ -70,6 +70,8 @@ export class QuizSettingsService{
 		this.setArea(0);
 		this.setCompetitionGroupID(-1);
 
+		this.setBeginnerQuiz();
+
 
 
 		setTimeout(() => {

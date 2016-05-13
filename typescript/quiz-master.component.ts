@@ -75,7 +75,7 @@ export class QuizMasterComponent implements OnInit {
 	  asyncDataLoaded = false;
 	  asyncDataLoadError = false;
 
-	  siteID = 4;
+	  siteID = 1;
 
 	  langID = 2;
 

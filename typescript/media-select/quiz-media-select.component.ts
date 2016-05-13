@@ -26,7 +26,7 @@ export class QuizMediaSelectComponent implements OnInit{
 		[2, 'Sound', 'glyphicon glyphicon-volume-up'],
 		[3, 'Video', 'glyphicon glyphicon-facetime-video'],
 		[4, 'Several singingbirds', 'glyphicon glyphicon-volume-up'],
-		[5, 'Beginner quiz', 'glyphicon glyphicon-apple'],
+		[0, 'Beginner quiz', 'glyphicon glyphicon-apple'],
 	];
 	title = 'Birdid Quiz, select your media type:';
 	//quizMediaSelectedEvent = new EventEmitter<string>();
@@ -60,7 +60,7 @@ export class QuizMediaSelectComponent implements OnInit{
 			this._quizSettingsService.setSeveralSoundquiz();
 			this._router.navigate(["QuizMediaAdditionalSettings"]);
 
-		}else if(mediaType == 5){
+		}else if(mediaType == 0){
 
 			this._quizSettingsService.setBeginnerQuiz();
 			this._router.navigate(["QuizMediaQuiz"]);

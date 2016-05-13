@@ -31,12 +31,14 @@ export class QuizCompetitionGroupComponent implements OnInit{
 
 	competitionGroupID;
 	competitionGroups;
+	competitionGroupsProsessed;
 	selectedGroupID;
 	updateResultlistIncrement=0;
 	selectedCompetitionGroupData = null;
 	loading = false;
 	languageList=[];
 
+	filterGroupName = "";
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
@@ -73,8 +75,39 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	}
 
 	getCompetitionGroups(){
-		this.competitionGroups=this._quizCompetitionGroupService.getCompetitionGroups();
+		this.competitionGroups = this._quizCompetitionGroupService.getCompetitionGroups();
+		this.competitionGroupsProsessed = this.competitionGroups;
 		//console.log('this is COMPETITION GROUps', this.competitionGroups)
+	}
+
+	inputGroupName(event){
+		this.prosessCompGroups();
+	}
+
+	prosessCompGroups(){
+
+
+		this.competitionGroupsProsessed = [];
+
+		for (let id of Object.keys(this.competitionGroups)) {
+
+			//add all if undefined
+			if(this.filterGroupName == undefined){
+
+				this.competitionGroupsProsessed.push(this.competitionGroups[id]);
+				continue;
+			}
+
+			//if formSpecieName is a substring of name in list, or there is no formSpecieName
+			if(this.competitionGroups[id].name.toLowerCase().indexOf(this.filterGroupName.toLowerCase()) >= 0 || this.filterGroupName.length == 0){
+
+				this.competitionGroupsProsessed.push(this.competitionGroups[id]);
+
+			}
+
+		}
+
+
 	}
 
 	selectGroup(selectedGroupID){

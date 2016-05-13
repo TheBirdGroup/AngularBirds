@@ -1,5 +1,6 @@
 import { Component } from 'angular2/core';
 import { Router } from 'angular2/router';
+import {QuizLoginComponent} from '../login/quiz-login.component';
 
 
 
@@ -7,7 +8,9 @@ import { Router } from 'angular2/router';
 @Component({
     selector: 'birdid-welcome',
 	templateUrl: 'app/welcome.component/the-quiz-welcome.component.html',
-
+directives: [
+    QuizLoginComponent
+],
 
 })
 

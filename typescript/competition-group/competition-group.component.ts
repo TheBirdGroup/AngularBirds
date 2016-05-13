@@ -10,13 +10,16 @@ import { ResultlistComponent }  from './../shared.component/resultlist.component
 import {QuizCompetitionService} from '../shared/quiz-competition-group.service';
 import { QuizChangingLanguageService }  from './../shared/quiz-changing-language.service';
 
+import { QuizCompetitionGroupInfoComponent }  from './../competition-group/competition-group-info.component';
+
 @Component({
 	selector: 'birdid-quiz-competition-group',
 	templateUrl: 'app/competition-group/quiz-competition-group.component.html',
     styleUrls:  ['app/competition-group/quiz-competition-group.component.css'],
 
     directives: [
-		ResultlistComponent
+		ResultlistComponent,
+		QuizCompetitionGroupInfoComponent
 	],
 	providers: [
 
@@ -30,7 +33,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	competitionGroups;
 	selectedGroupID;
 	updateResultlistIncrement=0;
-	selectedCompetitionGroupData;
+	selectedCompetitionGroupData = null;
 	loading = false;
 	languageList=[];
 
@@ -61,7 +64,6 @@ export class QuizCompetitionGroupComponent implements OnInit{
         this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID);
 		this._quizCompetitionGroupService.getCompetitionGroups();
 		this.getCompetitionGroups();
-		this.getLanguages();
 	}
 
 	startQuiz(){
@@ -95,16 +97,12 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	onGroupInfoLoaded(){
 
 		this.loading = false;
-		this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID)
+		this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID);
 		this.updateResultlistIncrement++;
 		this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.getSelectedCompetitionGroup(this.selectedGroupID)
-		console.log('this is the data from the selected groupid', this.selectedCompetitionGroupData)
+		//console.log('this is the data from the selected groupid', this.selectedCompetitionGroupData)
 
 	}
-	getLanguages(){
-		this.languageList=this._quizChangingLanguageService.getLanguages();
-		console.log(this.languageList);
 
-	}
 
 }

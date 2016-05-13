@@ -19,6 +19,8 @@ export class QuizCompetitionService implements OnInit{
 	selectedCompetitionGroupID;
 	competitionGroupSelected;
 
+	compLoadProblems = false;
+
 	dataLoadedEventEmiter = new EventEmitter<boolean>();
 	dataLoadedSpesificGroupEE = new EventEmitter<boolean>();
 
@@ -52,8 +54,14 @@ export class QuizCompetitionService implements OnInit{
 		 this._http.get(constants.baseURL+"/getCompetitionGroup.php")
 			.map(response => response.json()).subscribe(
 				data => {
+					console.log("comp data: ", data);
 					this.competitionGroups = data;
 					this.dataLoadedEventEmiter.emit(true);
+				},
+	            error => {
+					this.compLoadProblems = true;
+					console.error("compLoadProblems ERROR! ", error);
+					this.dataLoadedEventEmiter.emit(false);
 				}
 			);
 

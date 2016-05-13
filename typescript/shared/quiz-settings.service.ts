@@ -127,7 +127,27 @@ export class QuizSettingsService{
 		return this.lastError;
 	}
 
+	getMediaNameFromID(mediaID):string{
+		if(mediaID == 1){
+			return 'Image';
+		}else if(mediaID == 2){
+			return 'Sound';
+		}else if(mediaID == 3){
+			return 'Video';
+		}else{
+			return "Unknown: "+mediaID;
+		}
+	}
 
+	getUserFriendlyBools(bool):string{
+		if(bool){
+		   return 'Yes';
+	   }else if(!bool){
+		   return 'No';
+	   }else{
+		   return "Unknown: "+bool;
+	   }
+	}
 
 	loadAreaList() {
 
@@ -171,6 +191,21 @@ export class QuizSettingsService{
 	//	console.log("this.areaListData: ", this.areaListData);
 		let tempID = this.selectedArea;
 		var currentAreaName = this.areaListData.find(function(element, index, array) {
+		//	console.log("current", element['id'], " tempID: ", tempID);
+			if(element['id'] == tempID){
+				return true;
+			}
+		});
+		//console.log("BKJHGHJGJHGHGJ",countryData.country);
+		return currentAreaName.country;
+
+	}
+
+	getAreaNameByID(id){
+
+	//	console.log("this.areaListData: ", this.areaListData);
+		let tempID = id;
+		let currentAreaName = this.areaListData.find(function(element, index, array) {
 		//	console.log("current", element['id'], " tempID: ", tempID);
 			if(element['id'] == tempID){
 				return true;

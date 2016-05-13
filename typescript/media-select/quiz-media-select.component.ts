@@ -52,6 +52,8 @@ export class QuizMediaSelectComponent implements OnInit{
 
 	selectMediaType(mediaType){
 
+		this._quizSettingsService.setCompetitionGroupID(-1);
+
 		if(mediaType == 4){
 
 			this._quizSettingsService.setSeveralSoundquiz();

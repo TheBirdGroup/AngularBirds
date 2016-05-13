@@ -1,13 +1,33 @@
 .resultsListTable{
     //overflow: hidden;
-//margin-top: 50px;
-height:800px;
-padding-right:50px;
-padding-left:50px;
-overflow-x:auto;
+	//margin-top: 50px;
+	height:800px;
+	padding-right:25px;
+	padding-left:25px;
+	overflow-x:auto;
 }
 
 .compStartBtn{
 	width: 50%;
 	min-width: 100px;
+}
+
+.blackBoxLoading{
+	position:fixed;
+	left:-100px;
+	top:-100px;
+	width:5000px;
+	height:5000px;
+
+	background-color:#000;
+
+	z-index: 50;
+	opacity:0.6;
+}
+
+.centered {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

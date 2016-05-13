@@ -59,13 +59,13 @@ export class QuizSettingsService{
 		this.setLanguageID(langID);
 
 		//setup default
-		this.setMediaType(2);
+		this.setMediaType(1);
 		this.setNormalQuiz();
-		this.setSeveralSoundquiz();
+		//this.setSeveralSoundquiz();
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(3); //min 5
 		this.setDuration(0);
-		this.setAlternatives(false);
+		this.setAlternatives(true);
 		this.setArea(0);
 		this.setCompetitionGroupID(-1);
 
@@ -147,6 +147,10 @@ export class QuizSettingsService{
 	   }else{
 		   return "Unknown: "+bool;
 	   }
+	}
+
+	getSiteID(){
+		return this.siteID;
 	}
 
 	loadAreaList() {

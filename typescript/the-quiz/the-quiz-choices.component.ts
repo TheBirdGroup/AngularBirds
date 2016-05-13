@@ -31,7 +31,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 	disableHints = false;
 	hints = "Unlimited for now";
 	numbOfQuestion =  0;
-
+	subsiteName = "bird"
 
 	inbetweenQuestions = false;
 	specieQuestionObject:QuizQuestion;
@@ -60,6 +60,16 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
 		}else{
 			//console.log("!inbetween quests");
+		}
+		let siteID = this._quizSettingsService.getSiteID();
+		if(siteID == 1){
+			this.subsiteName ="bird";
+		}else if(siteID == 2){
+			this.subsiteName ="mammal";
+		}else if(siteID == 3){
+			this.subsiteName ="track";
+		}else if(siteID == 4){
+			this.subsiteName ="xbook";
 		}
 	}
 

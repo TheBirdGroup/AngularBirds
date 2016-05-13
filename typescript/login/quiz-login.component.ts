@@ -24,7 +24,8 @@ export class QuizLoginComponent {
 	statusMessage="";
 	confirmPassword;
 	action;
-
+	showLogin:boolean=false;
+	showRegister: boolean = false;
 
     constructor(
 		private _quizLoginService: QuizLoginService
@@ -71,5 +72,12 @@ export class QuizLoginComponent {
 		}
 	}
 
+	loginBTN(){
+		this.showLogin=!this.showLogin
+	}
+
+	registerBTN(){
+		this.showRegister=!this.showRegister
+	}
 
 }

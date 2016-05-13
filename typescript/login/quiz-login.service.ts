@@ -11,8 +11,9 @@ export class QuizLoginService{
 
 constructor(private _http: Http){}
 
+theAction;
 
-    Login(mail,password,autoLogin){
+    Login(mail,password,autoLogin,action){ // this is also for registering, the naming is horrible
         let theMail = mail;
         let thePassword = password;
         if (autoLogin==null){
@@ -20,48 +21,21 @@ constructor(private _http: Http){}
         }else{
         let theAutoLogin = autoLogin;
             }
-        //console.log(theMail,thePassword);
+        this.theAction=action;
 
          let body = "email=" + theMail;
          body += "&password=" + thePassword;
          body += "&autologin=" + autoLogin;
-        // console.log(body);
-
 
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-            return this._http.post('https://hembstudios.no/birdid/bird/loginControlAJAX.php?action=login', body,{
+            return this._http.post('https://hembstudios.no/birdid/bird/loginControlAJAX.php?action='+this.theAction, body,{
             headers: headers
             })
             .map(response => response.json());
         }
 
-    /*Register(mail,password,autoLogin){ // it would be nice to change the action=reg not to have another fucntion call?
 
-        let theMail = mail;
-        let thePassword = password;
-        if (autoLogin==null){
-            autoLogin=false;
-        }else{
-        let theAutoLogin = autoLogin;
-            }
-        //console.log(theMail,thePassword);
-
-         let body = "email=" + theMail;
-         body += "&password=" + thePassword;
-         body += "&autologin=" + autoLogin;
-        // console.log(body);
-
-
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-            return this._http.post('https://hembstudios.no/birdid/bird/loginControlAJAX.php?action=login', body,{
-            headers: headers
-            })
-            .map(response => response.json());
-
-
-    }*/
 
 
 

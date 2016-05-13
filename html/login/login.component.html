@@ -22,15 +22,15 @@
 </form>
 <!--</div>-->
 
-<!--
-<div *ngIf="register==true">
-<form (ngSubmit)="onRegister(f)" #f="ngForm">
+
+<!--<div *ngIf="register==true"> -->
+<form (ngSubmit)="onRegister(x)" #x="ngForm">
     <div>
         <label for="mail"> Mail </label>
         <input ngControl="mail" type="mail" id="mail">
     </div>
     <div>
-        <label for="passwords"> Password </label>
+        <label for="password"> Password </label>
         <input ngControl="password" type="password" id="password">
     </div>
     <div>
@@ -43,6 +43,6 @@
     </div>
     <button type="submit">Register</button>
 </form>
-</div>-->
+<!--</div>-->
 
  <b> {{statusMessage}}  </b>

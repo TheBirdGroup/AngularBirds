@@ -1,11 +1,11 @@
 import { Component }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
-import {QuizLoginService} from '../login/quiz-login.service';
+import {QuizLoginService} from '../shared/quiz-login.service';
 
 @Component({
 	selector: 'birdid-quiz-login',
-	templateUrl: 'app/login/login.component.html',
-    styleUrls:  ['app/login/login.component.css'],
+	templateUrl: 'app/shared.component/login.component.html',
+    styleUrls:  ['app/shared.component/login.component.css'],
 
     directives: [
 
@@ -17,7 +17,7 @@ import {QuizLoginService} from '../login/quiz-login.service';
 })
 
 export class QuizLoginComponent {
-    title = 'Login or Register';
+    title = 'Login or Register!';
     mail;
     password;
 	autoLogin;

@@ -1,6 +1,6 @@
 import { Component } from 'angular2/core';
 import { Router } from 'angular2/router';
-import {QuizLoginComponent} from '../login/quiz-login.component';
+import {QuizLoginComponent} from '../shared.component/quiz-login.component';
 
 
 

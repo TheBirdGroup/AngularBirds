@@ -18,6 +18,7 @@ export class QuizSettingsService{
 	quizType = 0; // 1 = normal, 2 = several soundquiz, 3 = formal test?
 	allowedQuizTypes = [1,2,3];
 	severalSoundQuiz = false;
+	beginnerQuiz = false;
 	formalTestQuiz = false;
 	formalTestAccessCode = "";
 
@@ -95,6 +96,7 @@ export class QuizSettingsService{
 	setNormalQuiz(){
 		this.severalSoundQuiz = false;
 		this.formalTestQuiz = false;
+		this.beginnerQuiz = false;
 	}
 	setSeveralSoundquiz(){
 		this.setAlternatives(true);
@@ -107,6 +109,20 @@ export class QuizSettingsService{
 	}
 	setFormalTestAccessCode(code:string){
 		this.formalTestAccessCode = code;
+	}
+	setBeginnerQuiz(){
+
+		this.setMediaType(1);
+		this.setMediaDiff(1);
+		this.selectNumberOfQuestions(5); //min 5
+		this.setDuration(0);
+		this.setAlternatives(true);
+		this.setCompetitionGroupID(-1);
+		this.beginnerQuiz = true;
+
+	}
+	isBeginnerQuiz(){
+		return this.beginnerQuiz
 	}
 
 	isNormalQuiz(){

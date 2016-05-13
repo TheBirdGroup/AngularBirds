@@ -81,7 +81,12 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 			}
 
 			this.quizSoundObject = new QuizSoundplayer(this.autoplay, this.autoplay, this);
-			this.quizSoundObject.loadMedia(this.mediaURLStart + this.soundMiddleURL, this.specieQuestionObject.getMediaSourses());
+			if(this._quizSettingsService.isBeginnerQuiz()){
+				//passing secound media as array
+				this.quizSoundObject.loadMedia(this.mediaURLStart + this.soundMiddleURL, [this.specieQuestionObject.getMediaSourses()[1]]);
+			}else{
+				this.quizSoundObject.loadMedia(this.mediaURLStart + this.soundMiddleURL, this.specieQuestionObject.getMediaSourses());
+			}
 
 		}else{
 

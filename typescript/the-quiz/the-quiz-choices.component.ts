@@ -48,7 +48,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 		private _element: ElementRef){}
 
 	ngOnInit() {
-		console.log(this.specieQuestionObject);
+		//console.log(this.specieQuestionObject);
 		this.numbOfQuestion = this._quizSettingsService.numberOfQuestions;
 		this.checkIfDisable();
 

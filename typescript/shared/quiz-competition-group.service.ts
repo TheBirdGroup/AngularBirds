@@ -54,7 +54,7 @@ export class QuizCompetitionService implements OnInit{
 		 this._http.get(constants.baseURL+"/getCompetitionGroup.php")
 			.map(response => response.json()).subscribe(
 				data => {
-					console.log("comp data: ", data);
+					//console.log("comp data: ", data);
 					this.competitionGroups = data;
 					this.dataLoadedEventEmiter.emit(true);
 				},

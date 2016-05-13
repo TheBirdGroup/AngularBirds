@@ -80,11 +80,7 @@ export class TheQuizComponent implements OnInit{
 			this._quizQuestionService.getBeginnerQuizQuestions(this.quizSettings)
 				.subscribe(
 					data => {
-						console.log(data);
-						this._quizLogicService.setQuizQuestions(data, this._quizSettingsService.isSeveralSoundQuiz());
-
-						//console.log("Number of questions", data.metadata['num_Questions']);
-						this.startQuiz();
+						this.onQuestionsResived(data);
 					},
 					error => console.error("getQuizQuestions ERROR! ", error)
 			);
@@ -94,17 +90,36 @@ export class TheQuizComponent implements OnInit{
 			this._quizQuestionService.getQuizQuestions(this.quizSettings)
 				.subscribe(
 					data => {
-						console.log(data);
-						this._quizLogicService.setQuizQuestions(data, this._quizSettingsService.isSeveralSoundQuiz());
-
-						//console.log("Number of questions", data.metadata['num_Questions']);
-						this.startQuiz();
+						this.onQuestionsResived(data);
 					},
 					error => console.error("getQuizQuestions ERROR! ", error)
 			);
 
 		}
 
+
+	}
+
+	onQuestionsResived(data){
+		console.log(data);
+		this._quizLogicService.setQuizQuestions(data, this._quizSettingsService.isSeveralSoundQuiz(), this._quizSettingsService.isBeginnerQuiz());
+
+		//console.log("Number of questions", data.metadata['num_Questions']);
+		this.startQuiz();
+	}
+
+	shouldDisplaySoundComponent(){
+
+		if(this._quizSettingsService.getQuizSettings()[0].mediaTypeID == 2){
+			return true;
+		}
+
+		//if beginnerquiz with both image AND sound
+		if(this._quizSettingsService.isBeginnerQuiz() && this.currentQuizQuestion.getMediaSourses().length > 1){
+			return true;
+		}
+
+		return false;
 
 	}
 

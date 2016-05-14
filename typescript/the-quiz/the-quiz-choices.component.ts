@@ -115,8 +115,9 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
     }
 
-    checkIfButtonIsSelected(specieID){
-        if(this.inbetweenQuestions){
+    checkIfButtonIsSelected(specieID, anyway = false){
+		//anyway means return ing accuall value even if inbetween questions
+        if(this.inbetweenQuestions && ! anyway){
             return false
         }
         if(this.specieQuestionObject.choiceIsSelected(specieID)){

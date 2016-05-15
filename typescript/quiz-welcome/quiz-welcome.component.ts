@@ -7,14 +7,15 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 @Component({
     selector: 'birdid-welcome',
-	templateUrl: 'app/welcome.component/the-quiz-welcome.component.html',
+	templateUrl: 'app/quiz-welcome/quiz-welcome.component.html',
+    styleUrls:  ['app/quiz-welcome/quiz-welcome.component.css'],
 directives: [
     QuizLoginComponent
 ],
 
 })
 
-export class WelcomeComponent{
+export class QuizWelcomeComponent{
 
 
     constructor(

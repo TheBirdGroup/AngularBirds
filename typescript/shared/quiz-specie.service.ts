@@ -46,6 +46,8 @@ export class QuizSpecieService implements OnInit{
 		this.siteID = siteID;
 		this.langID = langID;
 
+		this.clearSelectedSpecies();
+
 		setTimeout(() => {
 			this.loadSpecies();
 		}, 0);

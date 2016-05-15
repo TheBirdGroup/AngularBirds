@@ -62,7 +62,7 @@ export class QuizSettingsService{
 		//setup default
 		this.setMediaType(1);
 		this.setNormalQuiz();
-		this.setSeveralSoundquiz();
+		//this.setSeveralSoundquiz();
 		this.setMediaDiff(1);
 		this.selectNumberOfQuestions(5); //min 5
 		this.setDuration(0);

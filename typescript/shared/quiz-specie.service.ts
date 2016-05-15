@@ -136,6 +136,10 @@ export class QuizSpecieService implements OnInit{
 
 	}
 
+	clearSelectedSpecies(){
+		this.arrayOfSelectedSpecies = [];
+	}
+
 	setSelectedSpecie(arrayOfSelectedSpecies){
 		if(arrayOfSelectedSpecies==undefined || arrayOfSelectedSpecies==null){
 

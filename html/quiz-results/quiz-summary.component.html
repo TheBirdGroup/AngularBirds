@@ -2,18 +2,19 @@
 
 
 <div class="quizSummary">
-    <table class="table">
+    <div class="table-responsive">
+    <table class="table table-hover table-bordered">
 
         <thead>
-  		<tr>
+  		<tr class="info">
   		  <th>Media</th>
   		  <th>Correct answer(s)</th>
   		  <th>My Choice(s)</th>
           <th>All Choices</th>
   		</tr>
   	  </thead>
-
-        <tr *ngFor="let currentQuestion of quizSummary">
+<tbody>
+        <tr *ngFor="let currentQuestion of quizSummary" class="table-info">
             <td>
                 <div *ngIf="mediaType">
                     <span class="soundSummary">
@@ -22,12 +23,14 @@
                 </div>
                 <div *ngIf="!mediaType">
                     <span class="imgSummary">
-                        <birdid-the-quiz-image [specieQuestionObject]="currentQuestion"></birdid-the-quiz-image>
+                        <div class="">
+                        <birdid-the-quiz-image style="width:300px"class="img-responsive" [specieQuestionObject]="currentQuestion"></birdid-the-quiz-image>
+</div>
                     </span>
                 </div>
             </td>
             <td>
-        <tr *ngFor="let rightAns of currentQuestion.rightAnswers">
+        <tr *ngFor="let rightAns of currentQuestion.rightAnswers" class="success">
             <td>{{rightAns.name}}</td>
         </tr>
         </td>
@@ -48,8 +51,9 @@
             </td>
         </tr>
 
-
+</tbody>
     </table>
+    </div>
 </div>
 <br><br>
 <button type="button" class="btn btn-primary buttonsWidth" (click)="goToResults()">Go back</button>

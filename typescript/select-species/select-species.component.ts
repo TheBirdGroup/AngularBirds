@@ -36,9 +36,20 @@ export class SelectSpeciesComponent implements OnInit {
     }
 
     selectSpecie() {
-        //this.displaySelectedSpecies.push(this.selectedSpecie);
-        this.arrayOfSelectedSpecies.push(this.selectedSpecie);
-        // console.log(this.arrayOfSelectedSpecies);
+        if(this.isSpecieInList(this.selectedSpecie.id) != true){
+            this.arrayOfSelectedSpecies.push(this.selectedSpecie)
+        }else{
+            alert("This specie has already been added!");
+        }
+    }
+
+    isSpecieInList(id: number){
+        for (let i of Object.keys(this.arrayOfSelectedSpecies)) {
+            if (id == this.arrayOfSelectedSpecies[i].id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     getSpecieList() {

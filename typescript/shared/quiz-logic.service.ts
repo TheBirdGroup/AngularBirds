@@ -76,7 +76,7 @@ export class QuizLogicService{
 
 	}
 
-	setQuizQuestions(quizQuestionsData, severalSoundQuiz = false){
+	setQuizQuestions(quizQuestionsData, severalSoundQuiz = false, beginnerQuiz = false){
 
 		let numQuestionsTotal = this.quizQuestionsSettings[0].numQuestions;
 
@@ -129,6 +129,13 @@ export class QuizLogicService{
 					currentQuizQuestion.addMediaId(tempQuizData.media_id)
 					currentQuizQuestion.addExtraInfo(tempQuizData.extra_info);
 					currentQuizQuestion.addMediaSource(tempQuizData.media_url);
+
+					if(beginnerQuiz){
+						if(tempQuizData.media_url_sound != null){
+							//add sound if is is there
+							currentQuizQuestion.addMediaSource(tempQuizData.media_url_sound);
+						}
+					}
 
 				}else{
 					console.log("one removed due to duplicate rigth answer in question "+currentQuestionObjectID);

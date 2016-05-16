@@ -81,13 +81,31 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 	setupImageURL(){
 
 		let quizSettings = this._quizSettingsService.getQuizSettings();
-		this.accessCode = quizSettings[0].formalTestAccessCode;
-		//console.log(" quizSettings[0]: ",  quizSettings[0]);
+		let siteID = quizSettings[0].siteID;
 
-		if(quizSettings[0].formalTestQuiz){
+		if(this._quizSettingsService.isBeginnerQuiz()){
+
+			this.imageURLStart = "https://hembstudios.no/birdid/";
+			if(siteID == 1){
+				this.imageURLStart += "bird/db_media/beginnerImage/";
+			}else if(siteID == 2){
+				this.imageURLStart += "mammal/db_media/beginnerImage/";
+			}else if(siteID == 3){
+				this.imageURLStart += "track/db_media/beginnerImage/";
+			}
+			this.imageUrlParms = this.mediaURL;
+
+		}else if(quizSettings[0].formalTestQuiz){
+
+			//anything but a
+			this.accessCode = quizSettings[0].formalTestAccessCode;
+			//console.log(" quizSettings[0]: ",  quizSettings[0]);
 			this.imageUrlParms = "accessCode="+this.accessCode+"&mediaToken="+this.mediaURL;
+
 		}else{
+			
 			this.imageUrlParms = "mediaID="+this.mediaID+"&siteID="+this.siteID;
+
 		}
 
 	}

@@ -25,6 +25,21 @@ export class QuizQuestionsService{
 		private _quizSpeciesService: QuizSpecieService
 	){}
 
+	getBeginnerQuizQuestions(settings:QuizSetting[]): Observable<any>{
+
+		this.lastQuizSettings = settings;
+
+		let numQuestions = settings[0].numQuestions;
+
+		let extraURL = "";
+
+		extraURL += "&numberQuestions=" + numQuestions;
+
+		return this._http.get(constants.baseURL+"/getBeginnerQuestionsData.php?JSON=1"+extraURL)
+			.map(response => response.json());
+
+	}
+
 	getQuizQuestions(settings:QuizSetting[]): Observable<any>{
 
 		this.lastQuizSettings = settings;

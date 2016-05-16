@@ -1,7 +1,14 @@
-<div *ngIf="!loading">
+<div class="blackBoxLoading" *ngIf="loading">
+	<img class="centered" src="loading2.gif" alt="Loading..." height="200" width="200">
+</div>
+<div>
 	<h2>{{title}}</h2>
 	<br>
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="float:right" >
+
+		<br>
+		<birdid-quiz-competition-group-info [competitionGroup]="selectedCompetitionGroupData"></birdid-quiz-competition-group-info>
+		<br>
 
 	    <birdid-resultlist [usingTimespan]="'day'" [usingLimit]="20" [updateResultlistInc]="updateResultlistIncrement" ></birdid-resultlist>
 
@@ -11,18 +18,49 @@
 
 
 	<div class="resultsListTable">
-	    <table class="table table-bordered">
-	        <th> name of the group: </th>
-	        <th> difficulty </th>
 
-	            <tr *ngFor="let competitionGroup of competitionGroups">
-	                <td>{{competitionGroup.name}}</td>
-	                <td>{{competitionGroup.media_difficulty}}</td>
-	                <button class="btn btn-m" (click)="selectGroup(competitionGroup.id)">Select</button>
-	            </tr>
+		<h4><label for="username">Filter groups by name:</label></h4>
+		<div class="unsernameInput input-group">
 
+			<span class="input-group-addon" id="basic-addon1">Name:</span>
+			<input
+				type="text"
+				id="filterGroupName"
+				[(ngModel)]="filterGroupName"
+				class="form-control"
+				placeholder="Group Name"
+				(keyup)="inputGroupName($event)"
+				aria-describedby="sizing-addon1 basic-addon1"
+				autocomplete="off"
+				autofocus>
 
-	    </table>
+		</div>
+
+		<table class="table table-bordered">
+		  <thead>
+			<tr>
+			  <th>ID</th>
+			  <th>Name</th>
+			  <th>Using settings</th>
+			  <th>Select</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr *ngFor="let current of competitionGroupsProsessed; let i=index">
+			  <th scope="row">{{i+1}}</th>
+			  <td>{{current.name}}</td>
+			  <td>
+				  <b [ngClass]="{	'green': current.restrict_filtes, 'red': !current.restrict_filtes  }">
+					  {{_quizSettingsService.getUserFriendlyBools(current.restrict_filtes)}}
+				  </b>
+
+				  <br>(view them by selecting the group)</td>
+			  <td><button class="btn btn-m" (click)="selectGroup(current.id)">Select</button></td>
+			</tr>
+
+		  </tbody>
+		</table>
+
 	</div>
 	<div style="clear:both"></div>
 
@@ -30,9 +68,9 @@
 	<br>
 
 
-	<button  class="btn btn-primary btn-lg compStartBtn"(click)="startQuiz()">Play quiz</button>
+	<button  class="btn btn-primary btn-lg compStartBtn"(click)="startQuiz()" [disabled]="selectedCompetitionGroupData == null">Play quiz</button>
 </div>
 
-<div *ngIf="loading">
+<div *ngIf="false">
 	<img src="loading.gif" alt="Loading..." height="200" width="200">
 </div>

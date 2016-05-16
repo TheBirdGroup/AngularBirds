@@ -9,9 +9,12 @@
 		(click)="setUserChoice(current.id)">
 
 		{{current.name}} ({{current.latin}})
+		<span *ngIf="checkIfButtonIsSelected(current.id, true)">
+			 - <b class="black" >Selected</b>
+		</span>
 
 	</button>
-	<a *ngIf="inbetweenQuestions" href="https://hembstudios.no/birdid/bird/eBook.php?specieID={{current.id}}" target="_blank"><img src="../images/book.png"></a>
+	<a *ngIf="inbetweenQuestions && current.id > 0" href="https://hembstudios.no/birdid/{{subsiteName}}/eBook.php?specieID={{current.id}}" target="_blank"><img src="../images/book.png"></a>
 	<br />
 </div>
 

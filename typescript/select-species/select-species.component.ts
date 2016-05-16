@@ -20,7 +20,7 @@ export class SelectSpeciesComponent implements OnInit {
     arrayOfSelectedSpecies = [];
     delSpecieId;
     delSpecieName;
-    
+
     constructor(
         private _quizSpeciesService: QuizSpecieService,
         private _router: Router
@@ -94,4 +94,10 @@ export class SelectSpeciesComponent implements OnInit {
         //console.log(this.displaySelectedSpecies, " Array of name loaded from server");
 
     }
+
+    resetSpecieList(){
+        this._quizSpeciesService.clearSelectedSpecies();
+        this.arrayOfSelectedSpecies = [];
+    }
+
 }

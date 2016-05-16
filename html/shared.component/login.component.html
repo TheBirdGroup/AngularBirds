@@ -1,0 +1,46 @@
+<h2> {{title}} </h2>
+
+<!-- if we implement register we will need a way to show login/register form -->
+<button (click)="loginBTN()">Login </button>
+<button (click)="registerBTN()"> Register </button>
+
+    <form *ngIf="showLogin" (ngSubmit)="onLogin(f)" #f="ngForm">
+        <div>
+            <label for="mail"> Mail </label>
+            <input ngControl="mail" type="mail" id="mail">
+        </div>
+        <div>
+            <label for="passwords"> Password </label>
+            <input ngControl="password" type="password" id="password">
+        </div>
+        <div>
+            <label for="autoLogin"> Auto Login? </label>
+            <input ngControl="autoLogin" type="checkbox" id="autoLogin">
+        </div>
+        <button type="submit"> Login </button>
+    </form>
+
+
+
+
+    <form *ngIf="showRegister" (ngSubmit)="onRegister(x)" #x="ngForm">
+        <div>
+            <label for="mail"> Mail </label>
+            <input ngControl="mail" type="mail" id="mail">
+        </div>
+        <div>
+            <label for="password"> Password </label>
+            <input ngControl="password" type="password" id="password">
+        </div>
+        <div>
+            <label for="confirmPassword"> Confirm Password </label>
+            <input ngControl="confirmPassword" type="password" id="confirmPassword">
+        </div>
+        <div>
+            <label for="autoLogin"> Auto Login? </label>
+            <input ngControl="autoLogin" type="checkbox" id="autoLogin">
+        </div>
+        <button type="submit">Register</button>
+    </form>
+
+ <b> {{statusMessage}}  </b>

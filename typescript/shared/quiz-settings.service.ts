@@ -18,6 +18,7 @@ export class QuizSettingsService{
 	quizType = 0; // 1 = normal, 2 = several soundquiz, 3 = formal test?
 	allowedQuizTypes = [1,2,3];
 	severalSoundQuiz = false;
+	beginnerQuiz = false;
 	formalTestQuiz = false;
 	formalTestAccessCode = "";
 
@@ -59,15 +60,17 @@ export class QuizSettingsService{
 		this.setLanguageID(langID);
 
 		//setup default
-		this.setMediaType(2);
+		this.setMediaType(1);
 		this.setNormalQuiz();
-		this.setSeveralSoundquiz();
+		//this.setSeveralSoundquiz();
 		this.setMediaDiff(1);
-		this.selectNumberOfQuestions(3); //min 5
+		this.selectNumberOfQuestions(5); //min 5
 		this.setDuration(0);
-		this.setAlternatives(false);
+		this.setAlternatives(true);
 		this.setArea(0);
 		this.setCompetitionGroupID(-1);
+
+		//this.setBeginnerQuiz();
 
 
 
@@ -95,6 +98,7 @@ export class QuizSettingsService{
 	setNormalQuiz(){
 		this.severalSoundQuiz = false;
 		this.formalTestQuiz = false;
+		this.beginnerQuiz = false;
 	}
 	setSeveralSoundquiz(){
 		this.setAlternatives(true);
@@ -108,9 +112,23 @@ export class QuizSettingsService{
 	setFormalTestAccessCode(code:string){
 		this.formalTestAccessCode = code;
 	}
+	setBeginnerQuiz(){
+
+		this.setMediaType(1);
+		this.setMediaDiff(1);
+		this.selectNumberOfQuestions(5); //min 5
+		this.setDuration(0);
+		this.setAlternatives(true);
+		this.setCompetitionGroupID(-1);
+		this.beginnerQuiz = true;
+
+	}
+	isBeginnerQuiz(){
+		return this.beginnerQuiz
+	}
 
 	isNormalQuiz(){
-		return (!this.severalSoundQuiz && !this.formalTestQuiz);
+		return (!this.severalSoundQuiz && !this.formalTestQuiz && !this.beginnerQuiz);
 	}
 	isSeveralSoundQuiz(){
 		return this.severalSoundQuiz;
@@ -127,7 +145,31 @@ export class QuizSettingsService{
 		return this.lastError;
 	}
 
+	getMediaNameFromID(mediaID):string{
+		if(mediaID == 1){
+			return 'Image';
+		}else if(mediaID == 2){
+			return 'Sound';
+		}else if(mediaID == 3){
+			return 'Video';
+		}else{
+			return "Unknown: "+mediaID;
+		}
+	}
 
+	getUserFriendlyBools(bool):string{
+		if(bool){
+		   return 'Yes';
+	   }else if(!bool){
+		   return 'No';
+	   }else{
+		   return "Unknown: "+bool;
+	   }
+	}
+
+	getSiteID(){
+		return this.siteID;
+	}
 
 	loadAreaList() {
 
@@ -181,6 +223,21 @@ export class QuizSettingsService{
 
 	}
 
+	getAreaNameByID(id){
+
+	//	console.log("this.areaListData: ", this.areaListData);
+		let tempID = id;
+		let currentAreaName = this.areaListData.find(function(element, index, array) {
+		//	console.log("current", element['id'], " tempID: ", tempID);
+			if(element['id'] == tempID){
+				return true;
+			}
+		});
+		//console.log("BKJHGHJGJHGHGJ",countryData.country);
+		return currentAreaName.country;
+
+	}
+
 
 	getQuizSettings(){
 	//	let timer = Observable.timer(2000, 1000 );
@@ -189,6 +246,7 @@ export class QuizSettingsService{
 		let returnSettings: QuizSetting[] = [
 		  {"mediaTypeID": this.mediaType,
 		  "severalSoundQuiz": this.isSeveralSoundQuiz(),
+		  "beginnerQuiz": this.isBeginnerQuiz(),
 		  "formalTestQuiz": this.isFormalTestQuiz(),
 		  "areaID": this.selectedArea,
 		  "timeLimit": this.duration,

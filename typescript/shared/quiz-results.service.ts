@@ -49,6 +49,12 @@ export class QuizResultsService{
 		let mediaDificulity = quizSettings[0].mediaDificulity;
 		let competitionGroupID = quizSettings[0].competitionGroupID;
 
+		if(quizSettings[0].beginnerQuiz){
+			mediaDificulity = 0;
+			mediaTypeID = 0;
+			areaID = 0;
+		}
+
 		let data2 = "score=" + score;
 		data2 += "&name=" + name;
 		data2 += "&maxScore=" + maxScore;
@@ -86,6 +92,12 @@ export class QuizResultsService{
 		//let showAlternatives = quizSettings[0].showAlternatives;
 		let mediaDificulity = quizSettings[0].mediaDificulity;
 		let siteID = quizSettings[0].siteID;
+
+		if(quizSettings[0].beginnerQuiz){
+			mediaDificulity = 0;
+			mediaTypeID = 0;
+			areaID = 0;
+		}
 
 		let extraURL = "";
 		extraURL += "&retriveBy=" + timespan;

@@ -1,0 +1,51 @@
+
+<h2>{{title}}</h2>
+
+<div *ngIf="noRestrictions">
+	<h2>No restrictions</h2>
+</div>
+
+<div *ngIf="displayInfo">
+
+	<table class="table table-bordered">
+	  <thead>
+		<tr>
+		  <th>Name</th>
+		  <th>Media type</th>
+		  <th>Media Difficulity</th>
+		  <th>Area</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+		  <td>{{competitionGroup.name}}</td>
+		  <td>{{_quizSettingsService.getMediaNameFromID(competitionGroup.media_type_id)}}</td>
+		  <td>{{competitionGroup.media_difficulty}}</td>
+		  <td>{{_quizSettingsService.getAreaNameByID(competitionGroup.area_id)}}</td>
+		</tr>
+
+	  </tbody>
+	</table>
+
+	<table class="table table-bordered">
+	  <thead>
+		<tr>
+		  <th>Time limit</th>
+		  <th>Number of questions</th>
+		  <th>Using custum species</th>
+		  <th>Using access code</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+		  <td>{{competitionGroup.time_limit}}</td>
+		  <td>{{competitionGroup.num_questions}}</td>
+		  <td>{{_quizSettingsService.getUserFriendlyBools(competitionGroup.use_specie_list)}}</td>
+		  <td>{{_quizSettingsService.getUserFriendlyBools(competitionGroup.usingAccessCode)}}</td>
+		</tr>
+
+	  </tbody>
+	</table>
+
+
+</div>

@@ -10,4 +10,6 @@
     </li>
 </ul>
 
+<button *ngIf="arrayOfSelectedSpecies.length > 0" class="btn btn-lg btn-danger" (click)="resetSpecieList()">Remove all</button>
+<br>
 <button class="btn btn-lg btn-primary" (click)="postSpeciesId()">Start Quiz</button>

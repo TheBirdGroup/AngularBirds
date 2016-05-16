@@ -31,7 +31,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 	disableHints = false;
 	hints = "Unlimited for now";
 	numbOfQuestion =  0;
-
+	subsiteName = "bird"
 
 	inbetweenQuestions = false;
 	specieQuestionObject:QuizQuestion;
@@ -48,7 +48,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 		private _element: ElementRef){}
 
 	ngOnInit() {
-		console.log(this.specieQuestionObject);
+		//console.log(this.specieQuestionObject);
 		this.numbOfQuestion = this._quizSettingsService.numberOfQuestions;
 		this.checkIfDisable();
 
@@ -60,6 +60,16 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
 		}else{
 			//console.log("!inbetween quests");
+		}
+		let siteID = this._quizSettingsService.getSiteID();
+		if(siteID == 1){
+			this.subsiteName ="bird";
+		}else if(siteID == 2){
+			this.subsiteName ="mammal";
+		}else if(siteID == 3){
+			this.subsiteName ="track";
+		}else if(siteID == 4){
+			this.subsiteName ="xbook";
 		}
 	}
 
@@ -105,8 +115,9 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 
     }
 
-    checkIfButtonIsSelected(specieID){
-        if(this.inbetweenQuestions){
+    checkIfButtonIsSelected(specieID, anyway = false){
+		//anyway means return ing accuall value even if inbetween questions
+        if(this.inbetweenQuestions && ! anyway){
             return false
         }
         if(this.specieQuestionObject.choiceIsSelected(specieID)){

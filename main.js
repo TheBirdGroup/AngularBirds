@@ -4,6 +4,8 @@ const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
+const clipboard = require('electron').clipboard;
+
 const Menu = electron.Menu;
 const Tray = electron.Tray;
 
@@ -47,10 +49,14 @@ function createWindow () {
 	appIcon.setToolTip('This is my application.');
 	appIcon.setContextMenu(contextMenu);
 
+
 	//If you want to keep exact same behaviors on all platforms, you should not rely on the click event and always attach a context menu to the tray icon.
-	//appIcon.on.'click'
+	appIcon.on('click', ()=>{
+		mainWindow.focus();
+	});
 
 
+	//clipboard.writeText('Success on clipboard');
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', function () {

@@ -13,15 +13,29 @@ let mainWindow
 let appIcon = null;
 
 function createWindow () {
+
+
+	var windowOptions = {
+      width: 1400,
+      minWidth: 500,
+      height: 900,
+	  minHeight: 500,
+	  transparent: false,
+	  frame: true,
+	  fullscreen: false,
+	  alwaysOnTop: false,
+	  autoHideMenuBar: true
+    }
+
 	// Create the browser window.
-	mainWindow = new BrowserWindow({width: 1400, height: 900})
+	mainWindow = new BrowserWindow(windowOptions)
 
 	// and load the index.html of the app.
 	mainWindow.loadURL('file://' + __dirname + '/index.html')
 	//mainWindow.loadURL('vg.no')
 
 	// Open the DevTools.
-	mainWindow.webContents.openDevTools()
+	//mainWindow.webContents.openDevTools()
 
 	appIcon = new Tray('H:/Git/ElectronTesting1/icon.png');
 	var contextMenu = Menu.buildFromTemplate([

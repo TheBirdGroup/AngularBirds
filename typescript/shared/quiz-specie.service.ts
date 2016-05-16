@@ -46,6 +46,8 @@ export class QuizSpecieService implements OnInit{
 		this.siteID = siteID;
 		this.langID = langID;
 
+		this.clearSelectedSpecies();
+
 		setTimeout(() => {
 			this.loadSpecies();
 		}, 0);
@@ -134,6 +136,10 @@ export class QuizSpecieService implements OnInit{
 
 		return stringList.substring(0, stringList.length-1);
 
+	}
+
+	clearSelectedSpecies(){
+		this.arrayOfSelectedSpecies = [];
 	}
 
 	setSelectedSpecie(arrayOfSelectedSpecies){

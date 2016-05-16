@@ -64,13 +64,13 @@ export class QuizSettingsService{
 		this.setNormalQuiz();
 		//this.setSeveralSoundquiz();
 		this.setMediaDiff(1);
-		this.selectNumberOfQuestions(3); //min 5
+		this.selectNumberOfQuestions(5); //min 5
 		this.setDuration(0);
 		this.setAlternatives(true);
 		this.setArea(0);
 		this.setCompetitionGroupID(-1);
 
-		this.setBeginnerQuiz();
+		//this.setBeginnerQuiz();
 
 
 
@@ -128,7 +128,7 @@ export class QuizSettingsService{
 	}
 
 	isNormalQuiz(){
-		return (!this.severalSoundQuiz && !this.formalTestQuiz);
+		return (!this.severalSoundQuiz && !this.formalTestQuiz && !this.beginnerQuiz);
 	}
 	isSeveralSoundQuiz(){
 		return this.severalSoundQuiz;

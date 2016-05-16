@@ -12,6 +12,8 @@ import { QuizChangingLanguageService }  from './../shared/quiz-changing-language
 
 import { QuizCompetitionGroupInfoComponent }  from './../competition-group/competition-group-info.component';
 
+import { QuizSpecieService }  from './../shared/quiz-specie.service';
+
 @Component({
 	selector: 'birdid-quiz-competition-group',
 	templateUrl: 'app/competition-group/quiz-competition-group.component.html',
@@ -46,7 +48,8 @@ export class QuizCompetitionGroupComponent implements OnInit{
 		private _quizResultsService: QuizResultsService,
 		private _quizCompetitionGroupService: QuizCompetitionService,
         private _http: Http,
-		private _quizChangingLanguageService: QuizChangingLanguageService
+		private _quizChangingLanguageService: QuizChangingLanguageService,
+		private _quizSpeciesService: QuizSpecieService
 	){}
 
     storeCompetitionGroupSettings(){
@@ -57,14 +60,12 @@ export class QuizCompetitionGroupComponent implements OnInit{
         this._quizSettingsService.setMediaDiff(this.selectedCompetitionGroupData.media_difficulty);
         this._quizSettingsService.selectNumberOfQuestions(this.selectedCompetitionGroupData.num_questions);
         this._quizSettingsService.setDuration(this.selectedCompetitionGroupData.time_limit);
-        this._quizSettingsService.setAlternatives(!this.selectedCompetitionGroupData.use_specie_list);
+        this._quizSettingsService.setAlternatives(this.selectedCompetitionGroupData.use_specie_list);
         this._quizSettingsService.setArea(this.selectedCompetitionGroupData.area_id);
 
     }
 
 	ngOnInit() {
-        this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID);
-		this._quizCompetitionGroupService.getCompetitionGroups();
 		this.getCompetitionGroups();
 	}
 
@@ -77,7 +78,6 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	getCompetitionGroups(){
 		this.competitionGroups = this._quizCompetitionGroupService.getCompetitionGroups();
 		this.competitionGroupsProsessed = this.competitionGroups;
-		//console.log('this is COMPETITION GROUps', this.competitionGroups)
 	}
 
 	inputGroupName(event){
@@ -129,11 +129,27 @@ export class QuizCompetitionGroupComponent implements OnInit{
 
 	onGroupInfoLoaded(){
 
-		this.loading = false;
+
+
 		this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID);
 		this.updateResultlistIncrement++;
 		this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.getSelectedCompetitionGroup(this.selectedGroupID)
-		//console.log('this is the data from the selected groupid', this.selectedCompetitionGroupData)
+
+		let compSpecieList = this.selectedCompetitionGroupData["specieList"];
+		this._quizSpeciesService.clearSelectedSpecies();
+
+		if(compSpecieList["usingSpecieList"]){
+
+			let storeArray = []
+			for(let i = 0; i < compSpecieList["numberOfSpecies"]; i++){
+				storeArray.push(compSpecieList[i]);
+			}
+
+			this._quizSpeciesService.setSelectedSpecie(storeArray);
+		}
+
+		this.loading = false;
+		console.log("this.competitionGroupSelected:", this.selectedCompetitionGroupData, " id: ", this.selectedGroupID);
 
 	}
 

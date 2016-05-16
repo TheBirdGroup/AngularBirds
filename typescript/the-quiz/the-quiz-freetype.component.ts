@@ -59,11 +59,9 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		this.selectedSpecieList = this._quizSpeciesService.getSelectedSpecieList();
 		this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.competitionGroupSelected;
 
-		console.log(this.selectedCompetitionGroupData);
-		
+		this.onInitcheck();
 		//add i don't know at beginning and elect it
 		this.compileProsessedList();
-		this.onInitcheck();
 
 	}
 
@@ -91,9 +89,11 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	onInitcheck(){
 		if(this.selectedSpecieList.length == 0){
 			this.specieListProsessed = this.specieList;
+			console.log("Area specieList");
 		}else{
 			this.specieList = this.selectedSpecieList;
 			this.specieListProsessed = this.specieList;
+			console.log("Specific specielist: ", this.specieList);
 		}
 
 		if(this._quizSettingsService.help == false){
@@ -102,7 +102,6 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		}else{
 			this.disableHints = false;
 		}
-
 	}
 	//returns object 0 if not found
 	getNextObjetInProsessedArrat(currentID){

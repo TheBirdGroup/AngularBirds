@@ -68,7 +68,7 @@
 	<br>
 
 
-	<button  class="btn btn-primary btn-lg compStartBtn"(click)="startQuiz()">Play quiz</button>
+	<button  class="btn btn-primary btn-lg compStartBtn"(click)="startQuiz()" [disabled]="selectedCompetitionGroupData == null">Play quiz</button>
 </div>
 
 <div *ngIf="false">

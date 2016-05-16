@@ -1,8 +1,11 @@
 {
-  "name": "angular2-quickstart",
-  "version": "1.0.0",
+  "name": "angular2-birdid-quiz",
+  "version": "1.0.1",
+  "description": "A angular 2 quiz for birdid.no",
+  "main": "main.js",
   "scripts": {
     "start": "concurrent \"npm run gulp\" \"npm run lite\" ",
+    "electron": "electron main.js",
     "gulp": "gulp",
     "lite": "lite-server",
     "typings": "typings",
@@ -36,6 +39,7 @@
     "postcss-scss": "^0.1.3",
     "precss": "^1.3.0",
     "typings": "^0.6.8",
-    "tsd": "^0.6.5-beta"
+    "tsd": "^0.6.5-beta",
+    "electron-prebuilt": "^1.0.1"
   }
 }

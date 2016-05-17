@@ -39,7 +39,7 @@ function createWindow () {
 	// Open the DevTools.
 	//mainWindow.webContents.openDevTools()
 
-	appIcon = new Tray('H:/Git/ElectronTesting1/icon.png');
+	appIcon = new Tray(__dirname + '/icon.png');
 	var contextMenu = Menu.buildFromTemplate([
 	{ label: 'Item1', type: 'radio' },
 	{ label: 'Item2', type: 'radio' },

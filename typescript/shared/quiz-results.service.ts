@@ -48,6 +48,7 @@ export class QuizResultsService{
 		let areaID = quizSettings[0].areaID;
 		let mediaDificulity = quizSettings[0].mediaDificulity;
 		let competitionGroupID = quizSettings[0].competitionGroupID;
+		let sessionID = quizSettings[0].authenticationToken;
 
 		//-100 -> 100 (just liike nord wants it...)
 		let scorePercent = 0;
@@ -81,7 +82,7 @@ export class QuizResultsService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post(constants.baseURL+'/scoreQuiz.php?JSON=1&langID='+this.langID+'&siteID='+this.siteID, body,{
+		return this._http.post(constants.baseURL+'/scoreQuiz.php?JSON=1&langID='+this.langID+'&siteID='+this.siteID+"&sessionID="+sessionID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());

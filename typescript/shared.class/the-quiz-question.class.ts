@@ -66,6 +66,12 @@ export class QuizQuestion {
 
 	}
 
+	getMaxScore(){
+
+		return this.rightAnswers.length;
+		
+	}
+
 	choiceIsSelected(id){
 
 		//if i don't know AND no other choice is selected return true

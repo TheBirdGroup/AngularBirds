@@ -54,7 +54,7 @@ export class QuizResultsService{
 		scorePercent = ((score+maxScore)/(maxScore+maxScore));
 		scorePercent = scorePercent * 200;
 		scorePercent = scorePercent - 100;
-		//console.log("scorePercent", scorePercent);
+		console.log("scorePercent", scorePercent);
 
 		if(quizSettings[0].beginnerQuiz){
 			mediaDificulity = 0;

@@ -36,6 +36,20 @@ export class QuizLogicService{
 
 	}
 
+	getMaxScoreQuiz(){
+
+		let maxScore = 0;
+
+		for (let currentQuestionID of Object.keys(this.quizQuestions)) {
+
+			maxScore += this.quizQuestions[currentQuestionID].getMaxScore();
+
+		}
+
+		return maxScore;
+
+	}
+
 	//creates an array of 2 and 3
 	createSeveralSoundquizDistrubutionArray(){
 

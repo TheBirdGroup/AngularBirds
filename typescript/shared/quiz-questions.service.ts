@@ -81,7 +81,7 @@ export class QuizQuestionsService{
 		extraURL += "&langID=" + langID;
 		extraURL += "&siteID=" + siteID;
 
-		console.log("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)
+		//console.log("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)
 
 
 		return this._http.get(constants.baseURL+"/getQuestionsData.php?JSON=1"+extraURL)

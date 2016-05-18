@@ -102,7 +102,7 @@ export class QuizMasterComponent implements OnInit {
 		  _router.subscribe((newRoute) => this.onRouteChange(newRoute));
 		  this._localStorageService.initialize(true);
 		  this._localStorageService.set("Mike", "is greak");
-		  console.log("_localStorageService: ",this._localStorageService.get("Mike"));
+		  //console.log("_localStorageService: ",this._localStorageService.get("Mike"));
 
 	  }
 

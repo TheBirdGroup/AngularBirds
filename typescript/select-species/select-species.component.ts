@@ -78,7 +78,7 @@ export class SelectSpeciesComponent implements OnInit {
             }
         }
         this.arrayOfSelectedSpecies = tempSpecieId;
-        console.log(this.arrayOfSelectedSpecies, "ID array");
+        //console.log(this.arrayOfSelectedSpecies, "ID array");
 
     }
 

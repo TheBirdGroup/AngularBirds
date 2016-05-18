@@ -41,7 +41,7 @@ export class QuizSummaryComponent implements OnInit  {
     ) {}
     ngOnInit() {
         this.quizSummary = this._quizLogicService.quizQuestions;
-        console.log(this.quizSummary);
+        //console.log(this.quizSummary);
         this.specieList = this._quizSpeciesService.getSpecieList();
         this.areaCountry = this._quizSettingsService.getCurrentAreaName();
         this.setQuizInfo();
@@ -76,7 +76,7 @@ export class QuizSummaryComponent implements OnInit  {
                }
                j = 0;
            }
-           console.log("this is quiz summary", this.quizSummary);
+           //console.log("this is quiz summary", this.quizSummary);
        }else{                                         //checks whole specielist when freetype
            let j = 0;
            for (let id of Object.keys(this.quizSummary)) {
@@ -122,12 +122,5 @@ export class QuizSummaryComponent implements OnInit  {
            }
        }
    }
-  /* testFunction(){
-       if(){
-           this.isVisible=true;
-       }else{
-           this.isVisible=false;
-       }
-
-   }*/
+  
 }

@@ -43,4 +43,8 @@ export class QuizWelcomeComponent{
 
 
     }
+
+    changeLanguage(){
+        this._router.navigate(["QuizChangingLanguage"]);
+    }
 }

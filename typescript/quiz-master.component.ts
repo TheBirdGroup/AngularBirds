@@ -163,9 +163,11 @@ export class QuizMasterComponent implements OnInit {
 	 }
 
 	 onLanguageChange(event){
-		 console.log("new language!", event);
+
 		 this.langID = this._quizSettingsService.getLanguageID();
+		 console.log("new language!", this.langID);
 		 this.initAllServices();
+		 this._router.navigate(["QuizWelcome"]);
 
 	 }
 

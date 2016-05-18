@@ -1,0 +1,11 @@
+<h1>Changing language</h1>
+
+<div class="form-group selectContainer">
+  <label for="sel1">Select language:</label>
+    <select class="form-control"  [(ngModel)]="selectedlanguage">
+        <option  *ngFor="let language of languagesList" [ngValue]="language">{{language.name}} </option>
+    </select>
+</div>
+
+<br><br>
+<button class="btn btn-lg btn-primary" (click)="postLanguageId()">Change language</button>

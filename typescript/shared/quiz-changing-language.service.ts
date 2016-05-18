@@ -12,11 +12,12 @@ import {constants} from './../constants';
 export class QuizChangingLanguageService{
 
 	siteID = 1;
-	languagesData;
+	private languagesData;
 
-	langDataLoaded = false;
+	private langDataLoaded = false;
 	langLoadProblems = false;
 	dataLoadedEventEmiter = new EventEmitter<boolean>();
+	selectedLanguageId;
 
 	constructor(private _http: Http){}
 
@@ -30,12 +31,12 @@ export class QuizChangingLanguageService{
 		return this.dataLoadedEventEmiter;
 
 	}
-	private loadLanguages(){
+	 loadLanguages(){
 
 		this._http.get("https://hembstudios.no//birdid/API/language/languages.php?JSON=1")
 			.map(response => response.json()).subscribe(
 	            data => {
-	                this.languagesData = data['languages'];
+	                this.languagesData = data;
 					console.log("langs d ", data);
 	                this.langDataLoaded = true;
 					this.dataLoadedEventEmiter.emit(true);
@@ -63,7 +64,17 @@ export class QuizChangingLanguageService{
 	}
 
 	getLanguages(){
+		//console.log("this.langDataLoaded: ", this.languagesData);
 		return this.languagesData;
+
+	}
+
+	setSelectedLanguage(languageID){
+		if(languageID==undefined || languageID==null){
+
+		}else{
+			this.selectedLanguageId = languageID;
+		}
 
 	}
 

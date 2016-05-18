@@ -33,9 +33,10 @@ export class QuizFormalTestService{
 
 	}
 
-	confirmAccessCodeCorrect(code:string): Observable<any>{
+	confirmAccessCodeCorrect(settings:QuizSetting[], code:string): Observable<any>{
 
 		let accessCode = code;
+		let sessionID = settings[0].authenticationToken;
 
 		let data = "accessCode=" + accessCode;
 		data += "&siteID=" + this.siteID;
@@ -49,7 +50,7 @@ export class QuizFormalTestService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post('https://hembstudios.no/birdid/IDprogram/setStartTimeFormalTest.php?JSON=1&siteID='+this.siteID, body,{
+		return this._http.post('https://hembstudios.no/birdid/IDprogram/setStartTimeFormalTest.php?JSON=1&siteID='+this.siteID+"&sessionID="+sessionID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());
@@ -57,9 +58,10 @@ export class QuizFormalTestService{
 
 	}
 
-	submitFormalTestRespoce(code:string, answerListCSV:string, mediaIdsCSV:string): Observable<any>{
+	submitFormalTestRespoce(settings:QuizSetting[], code:string, answerListCSV:string, mediaIdsCSV:string): Observable<any>{
 
 		let accessCode = code;
+		let sessionID = settings[0].authenticationToken;
 
 		let data = "accessCode=" + accessCode;
 		data += "&answerList=" + answerListCSV;
@@ -71,7 +73,7 @@ export class QuizFormalTestService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post('https://hembstudios.no/birdid/IDprogram/postFormalTestResults.php?JSON=1&siteID='+this.siteID, body,{
+		return this._http.post('https://hembstudios.no/birdid/IDprogram/postFormalTestResults.php?JSON=1&siteID='+this.siteID+"&sessionID="+sessionID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());

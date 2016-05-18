@@ -30,12 +30,13 @@ export class QuizQuestionsService{
 		this.lastQuizSettings = settings;
 
 		let numQuestions = settings[0].numQuestions;
+		let sessionID = settings[0].authenticationToken;
 
 		let extraURL = "";
 
 		extraURL += "&numberQuestions=" + numQuestions;
 
-		return this._http.get(constants.baseURL+"/getBeginnerQuestionsData.php?JSON=1"+extraURL)
+		return this._http.get(constants.baseURL+"/getBeginnerQuestionsData.php?JSON=1"+"&sessionID="+sessionID+extraURL)
 			.map(response => response.json());
 
 	}
@@ -60,6 +61,7 @@ export class QuizQuestionsService{
 		let mediaDificulity = settings[0].mediaDificulity;
 		let siteID = settings[0].siteID;
 		let langID = settings[0].langID;
+		let sessionID = settings[0].authenticationToken;
 
 		let extraURL = "";
 		extraURL += "&numberQuestions=" + numQuestions;
@@ -84,10 +86,8 @@ export class QuizQuestionsService{
 		//console.log("https://hembstudios.no//birdid/IDprogram/getQuestionsData.php?JSON=1"+extraURL)
 
 
-		return this._http.get(constants.baseURL+"/getQuestionsData.php?JSON=1"+extraURL)
+		return this._http.get(constants.baseURL+"/getQuestionsData.php?JSON=1"+"&sessionID="+sessionID+extraURL)
 			.map(response => response.json());
-
-		//return Promise.resolve(quizQuestions);
 
 	}
 

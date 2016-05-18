@@ -100,6 +100,7 @@ export class QuizResultsService{
 		//let showAlternatives = quizSettings[0].showAlternatives;
 		let mediaDificulity = quizSettings[0].mediaDificulity;
 		let siteID = quizSettings[0].siteID;
+		let sessionID = quizSettings[0].authenticationToken;
 
 		if(quizSettings[0].beginnerQuiz){
 			mediaDificulity = 0;
@@ -118,7 +119,7 @@ export class QuizResultsService{
 		extraURL += "&siteID=" + siteID;
 		extraURL += "&competitionGroupID=" + competitionGroupID;
 
-		return this._http.get(constants.baseURL+"/scoreQuiz.php?JSON=1"+extraURL)
+		return this._http.get(constants.baseURL+"/scoreQuiz.php?JSON=1"+"&sessionID="+sessionID+extraURL)
 			.map(response => response.json());
 
 	}

@@ -48,9 +48,8 @@ export class FormalTestStartComponent implements OnInit{
 	onStartButtonClick(){
 
 		this.loading = true;
-		this._quizSpeciesService.loadAreaId(34)
-			.subscribe((event) => (this.specieLostLoaded(event)));
-		this._quizFormalTestService.confirmAccessCodeCorrect(this.formAccessCode)
+
+		this._quizFormalTestService.confirmAccessCodeCorrect(this._quizSettingsService.getQuizSettings(), this.formAccessCode)
 			.subscribe((response) => (this.formalTestCodeStatus(response)));
 
 	}
@@ -82,7 +81,9 @@ export class FormalTestStartComponent implements OnInit{
 				this._quizSettingsService.selectNumberOfQuestions(30);
 			}
 
-
+			//loading area list!
+			this._quizSpeciesService.loadAreaId(status.areaID)
+				.subscribe((event) => (this.specieLostLoaded(event)));
 
 			this.startFormalTest();
 
@@ -103,10 +104,8 @@ export class FormalTestStartComponent implements OnInit{
 
 		if(this.codeOk && this.specieListLoaded){
 
-
-
-
 			this._router.navigate(["QuizMediaQuiz"]);
+
 		}
 
 

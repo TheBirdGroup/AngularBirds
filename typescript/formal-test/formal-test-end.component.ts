@@ -46,7 +46,7 @@ export class FormalTestEndComponent implements OnInit{
 
 		if(this._quizSettingsService.getQuizSettings()[0].formalTestQuiz){
 
-			this._quizFormalTestService.submitFormalTestRespoce(code, this.answerListCSV, this.mediaIdsCSV)
+			this._quizFormalTestService.submitFormalTestRespoce(this._quizSettingsService.getQuizSettings(), code, this.answerListCSV, this.mediaIdsCSV)
 				.subscribe((response) => (this.onFormalTestSubmit(response)));
 
 		}

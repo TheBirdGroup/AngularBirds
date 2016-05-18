@@ -116,14 +116,15 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	}
 
 	selectGroup(selectedGroupID){
-		this.selectedGroupID=selectedGroupID;
+		
+		this.selectedGroupID = selectedGroupID;
 		//console.log('test0',this.selectedGroupID)
 
 		//this is updating the tables that show the results
 
 		this.loading = true;
 
-		this._quizCompetitionGroupService.loadSelectedCompetitionGroup(selectedGroupID).subscribe((responce) =>{
+		this._quizCompetitionGroupService.loadSelectedCompetitionGroup(this._quizSettingsService.getQuizSettings(), selectedGroupID).subscribe((responce) =>{
 			this.onGroupInfoLoaded();
 		});
 

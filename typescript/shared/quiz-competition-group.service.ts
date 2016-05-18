@@ -3,6 +3,7 @@ import { Http } from 'angular2/http';
 
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
+import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 
 import {constants} from './../constants';
 
@@ -72,15 +73,21 @@ export class QuizCompetitionService implements OnInit{
 
 	}
 
-	loadSelectedCompetitionGroup(selectedGroupID){
+	loadSelectedCompetitionGroup(settings:QuizSetting[], selectedGroupID){
 
 		this.selectedCompetitionGroupID=selectedGroupID;
 
-		this._http.get(constants.baseURL+"/getCompetitionGroup.php?compGroupID="+this.selectedCompetitionGroupID)
+		let sessionID = settings[0].authenticationToken;
+
+		this._http.get(constants.baseURL+"/getCompetitionGroup.php?compGroupID="+this.selectedCompetitionGroupID+"&sessionID="+sessionID)
 		.map(response => response.json()).subscribe(
 			data => {
 				this.competitionGroupSelected = data;
 				this.dataLoadedSpesificGroupEE.emit(true);
+			},
+			error => {
+				console.error("loadSelectedCompetitionGroup ERROR! ", error);
+				this.dataLoadedEventEmiter.emit(false);
 			}
 		);
 

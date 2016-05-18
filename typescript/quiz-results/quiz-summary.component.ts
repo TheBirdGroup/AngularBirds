@@ -31,6 +31,7 @@ export class QuizSummaryComponent implements OnInit  {
     mediaType;      //true == sound  -  false == img
     alternativeType; //true == choices - false == freetype
 
+
     constructor(
         private _quizSpeciesService: QuizSpecieService,
         private _quizLogicService: QuizLogicService,
@@ -45,7 +46,7 @@ export class QuizSummaryComponent implements OnInit  {
         this.areaCountry = this._quizSettingsService.getCurrentAreaName();
         this.setQuizInfo();
         this.setName();
-
+        //this.testFunction();
     }
     goToResults(){
         this._router.navigate(["QuizMediaQuizResults"]);
@@ -60,11 +61,22 @@ export class QuizSummaryComponent implements OnInit  {
                        if (this.quizSummary[id].choices[i].id == this.quizSummary[id].selectedChoices[j].id) {
                            this.quizSummary[id].selectedChoices[j].name = this.quizSummary[id].choices[i].name;
                        }
+
                    }
+                   /*if(this.quizSummary[id].selectedChoices[j].id == this.quizSummary[id].rightAnswers[0].id){
+                      // console.log(this.quizSummary[0].rightAnswers[0].id)
+                      // console.log("we have the right answer!!!")
+                       this.isVisible=true;
+
+                   }else{
+                       this.isVisible=false;
+                   }*/
+
                    j++;
                }
                j = 0;
            }
+           console.log("this is quiz summary", this.quizSummary);
        }else{                                         //checks whole specielist when freetype
            let j = 0;
            for (let id of Object.keys(this.quizSummary)) {
@@ -100,4 +112,22 @@ export class QuizSummaryComponent implements OnInit  {
            this.alternativeType = false;
        }
    }
+
+
+   checkIfCorrectAnswer(quizObject, selectedChoiceId: number){
+
+       for (let i of Object.keys(quizObject.rightAnswers)) {
+           if(selectedChoiceId == quizObject.rightAnswers[i].id){
+              return true;
+           }
+       }
+   }
+  /* testFunction(){
+       if(){
+           this.isVisible=true;
+       }else{
+           this.isVisible=false;
+       }
+
+   }*/
 }

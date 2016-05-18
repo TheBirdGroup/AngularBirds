@@ -30,14 +30,17 @@
                 </div>
             </td>
             <td>
-        <tr *ngFor="let rightAns of currentQuestion.rightAnswers" class="success">
+        <tr *ngFor="let rightAns of currentQuestion.rightAnswers" >
             <td>{{rightAns.name}}</td>
         </tr>
         </td>
         <td>
             <tr *ngFor="let selected of currentQuestion.selectedChoices">
-                <td>{{selected.name}}</td>
-            </tr>
+               <td [ngClass]="{'green': checkIfCorrectAnswer(currentQuestion, selected.id),
+                               'red': !checkIfCorrectAnswer(currentQuestion, selected.id)}">
+                   {{selected.name}}
+               </td>
+           </tr>
         </td>
             <td>
                 <div *ngIf="alternativeType">

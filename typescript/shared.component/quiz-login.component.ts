@@ -22,10 +22,15 @@ export class QuizLoginComponent {
     password;
 	autoLogin;
 	statusMessage="";
+	statusMessageError="";
 	confirmPassword;
 	action;
 	showLogin:boolean=false;
-	showRegister: boolean = false;
+	//showRegister: boolean = false;
+	success:boolean;
+	error:boolean;
+	actionText;
+
 
     constructor(
 		private _quizLoginService: QuizLoginService
@@ -38,27 +43,50 @@ export class QuizLoginComponent {
         this.mail = form.value.mail;
         this.password = form.value.password;
 		this.autoLogin = form.value.autoLogin;
-		this.action="login";
+		this.action;
+		this.success=false;
+		this.error=false;
+		this.statusMessage="";
+		this.statusMessageError="";
+		this.actionText="";
+
         this._quizLoginService.Login(this.mail,this.password,this.autoLogin,this.action)
-		.subscribe((response)=>(this.responseFromLogin(response)));
+			.subscribe((response)=>(this.responseFromLogin(response)));
+
     }
 
 	responseFromLogin(response){
-		if (response.status==true){
+		if (response.status==true && this.action=="login"){
 			this.statusMessage= 'Login Successful';
+			this.success=true;
+			this.error = false;
 		}else{
-		//this.statusMessage = response.status;  this is the error you are getting from the server
-		// 											i had problems displaying it
-		this.statusMessage = 'Wrong mail/password, please try again';
+			if(response.status==false && this.action=="login"){
+				this.statusMessageError = 'Wrong mail/password, please try again';
+				this.error=true;
+				this.success=false;
+			}
 		}
+		if(response.status==true && this.action=="reg"){
+			this.statusMessage= 'Registering Successful please go to your inbox to confirm your email';
+			this.success=true;
+			this.error = false;
+		}else{
+			if(response.status==false && this.action=="reg"){
+				this.statusMessageError = 'Something went wrong, please try again';
+				this.error=true;
+				this.success=false;
+			}
+		}
+
 	}
 
-
+/*
 	onRegister(form){
 		this.mail = form.value.mail;
         this.password = form.value.password;
 		this.autoLogin=form.value.autoLogin;
-		this.action="reg";
+		this.action;
 		this._quizLoginService.Login(this.mail,this.password,this.autoLogin,this.action)
 		.subscribe((response)=>(this.responseFromRegister(response)));
 	}
@@ -66,18 +94,27 @@ export class QuizLoginComponent {
 	responseFromRegister(response){
 		if (response.status==true){
 			this.statusMessage= 'Registering Successful please go to your inbox to confirm your email';
+			this.success=true;
 		}else{
 
-		this.statusMessage = 'Something went wrong, please try again';
+		this.statusMessageError = 'Something went wrong, please try again';
+		this.error=true;
 		}
-	}
+	}*/
 
 	loginBTN(){
-		this.showLogin=!this.showLogin
+		this.showLogin=!this.showLogin;
+		this.action="login";
+		this.actionText="Login";
+
+
 	}
 
 	registerBTN(){
-		this.showRegister=!this.showRegister
+		this.showLogin=!this.showLogin;
+		this.action="reg";
+		this.actionText="Register"
+
 	}
 
 }

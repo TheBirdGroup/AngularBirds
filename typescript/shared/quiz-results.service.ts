@@ -49,6 +49,13 @@ export class QuizResultsService{
 		let mediaDificulity = quizSettings[0].mediaDificulity;
 		let competitionGroupID = quizSettings[0].competitionGroupID;
 
+		//-100 -> 100 (just liike nord wants it...)
+		let scorePercent = 0;
+		scorePercent = ((score+maxScore)/(maxScore+maxScore));
+		scorePercent = scorePercent * 200;
+		scorePercent = scorePercent - 100;
+		//console.log("scorePercent", scorePercent);
+
 		if(quizSettings[0].beginnerQuiz){
 			mediaDificulity = 0;
 			mediaTypeID = 0;
@@ -60,7 +67,7 @@ export class QuizResultsService{
 		data2 += "&maxScore=" + maxScore;
 		data2 += "&scorePercent=" + 50;
 		data2 += "&mediaTypeID=" + mediaTypeID;
-		//data2 += "&areaID=" + areaID; NOT WORKING DUE TO MILE =D
+		data2 += "&areaID=" + areaID;
 		data2 += "&areaID=" + 0;
 		data2 += "&difficulty=" + mediaDificulity;
 		data2 += "&specialAreas=false";

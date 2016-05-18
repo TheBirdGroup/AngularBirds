@@ -82,9 +82,10 @@ export class QuizResultComponent implements OnInit  {
 
 		this.dataSavedStatus = "";
 
+		let score = this._quizLogicService.score;
 		let maxScore = this._quizSettingsService.getQuizSettings()[0].numQuestions;
 
-		this._quizResultsService.uploadQuizResults(this._quizLogicService.score, maxScore, this.formDataUsername, this._quizSettingsService.getQuizSettings()).subscribe(
+		this._quizResultsService.uploadQuizResults(score, maxScore, this.formDataUsername, this._quizSettingsService.getQuizSettings()).subscribe(
 			//data => this.response = JSON.stringify(data),
 			data => this.onServerSubmit(data),
 			error => console.log("error: ", error)

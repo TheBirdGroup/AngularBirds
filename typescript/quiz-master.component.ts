@@ -13,6 +13,7 @@ import { QuizCompetitionService} from "./shared/quiz-competition-group.service";
 
 import { QuizFormalTestService }  from './shared/quiz-formal-test.service';
 import { QuizChangingLanguageService }  from './shared/quiz-changing-language.service';
+import { LocalStorageService }  from './shared/local-storage.service';
 
 
 
@@ -54,10 +55,8 @@ import {QuizChangingLanguageComponent} from "./shared.component/changing-languag
 		QuizSpecieService,
 		QuizCompetitionService,
 		QuizChangingLanguageService,
-
-
+		LocalStorageService,
 		QuizFormalTestService
-
 	]
 })
 
@@ -95,11 +94,15 @@ export class QuizMasterComponent implements OnInit {
 		  private _quizFormalTestService: QuizFormalTestService,
 		  private _quizCompetitionGroupService: QuizCompetitionService,
 		  private _quizChangingLanguageService: QuizChangingLanguageService,
+		  private _localStorageService: LocalStorageService,
 		  private _router: Router
 	  ){
 
 		  //looking for route change
-		  _router.subscribe((newRoute) => this.onRouteChange(newRoute))
+		  _router.subscribe((newRoute) => this.onRouteChange(newRoute));
+		  this._localStorageService.initialize(true);
+		  this._localStorageService.set("Mike", "is greak");
+		  console.log("_localStorageService: ",this._localStorageService.get("Mike"));
 
 	  }
 

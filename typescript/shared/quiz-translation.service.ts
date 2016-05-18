@@ -8,7 +8,7 @@ import {constants} from './../constants';
 
 
 @Injectable()
-export class QuizTranslationService implements OnInit{
+export class QuizTranslationService{
 
 	translationData;
 
@@ -24,14 +24,6 @@ export class QuizTranslationService implements OnInit{
 
 	constructor(private _http: Http){}
 
-	//not working in services?
-	ngOnInit() {
-
-		console.log("QuizTranslationService ngOnInit");
-		//this.initialize();
-
-	 }
-
 	initialize(siteID, langID){
 
 		this.siteID = siteID;
@@ -42,8 +34,6 @@ export class QuizTranslationService implements OnInit{
 		}, 0);
 
 		return this.dataLoadedEventEmiter;
-
-
 
 	}
 

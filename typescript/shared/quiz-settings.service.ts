@@ -22,6 +22,8 @@ export class QuizSettingsService{
 	formalTestQuiz = false;
 	formalTestAccessCode = "";
 
+	authenticationToken = "";
+
 	mediaDifficulities = 0;
 //	allowedMediaDifficulities = [1,2,3,4]; for now we do not check
 
@@ -135,6 +137,14 @@ export class QuizSettingsService{
 	}
 	isFormalTestQuiz(){
 		return this.formalTestQuiz;
+	}
+
+
+	setAuthenticationToken(token){
+		this.authenticationToken = token;
+	}
+	getAuthenticationToken(token){
+		return this.authenticationToken = token;
 	}
 
 
@@ -256,7 +266,8 @@ export class QuizSettingsService{
 		  "formalTestAccessCode": this.formalTestAccessCode,
 		  "competitionGroupID": this.competitionGroupID,
 	  	  "siteID": this.siteID,
-	  	  "langID": this.langID}
+	  	  "langID": this.langID,
+	  	  "authenticationToken": this.authenticationToken}
 		];
 
 		//console.log("returnSettings: ", returnSettings)

@@ -13,10 +13,10 @@
             <label for="password"> Password </label>
             <input ngControl="password" type="password" id="password" required>
         </div>
-        <div>
+        <!-- <div>
             <label for="autoLogin"> Auto Login? </label>
             <input ngControl="autoLogin" type="checkbox" id="autoLogin">
-        </div>
+        </div> -->
         <button class="btn btn-primary" type="submit" [disabled]="!f.valid"> {{actionText}} </button>
     </form>
 
@@ -30,3 +30,6 @@
       {{statusMessageError}}
     </div>
 </div>
+
+<h3 *ngIf="_quizAuthenticationService.getAuthenticated()">You are authenticated and logged inn</h3>
+<h3 *ngIf="!_quizAuthenticationService.getAuthenticated()">You are neither authenticated or logged inn></h3>

@@ -14,6 +14,7 @@ import { QuizCompetitionService} from "./shared/quiz-competition-group.service";
 import { QuizFormalTestService }  from './shared/quiz-formal-test.service';
 import { QuizChangingLanguageService }  from './shared/quiz-changing-language.service';
 import { LocalStorageService }  from './shared/local-storage.service';
+import { QuizAuthenticationService } from './shared/quiz-authentication.service';
 
 
 
@@ -56,7 +57,8 @@ import {QuizChangingLanguageComponent} from "./shared.component/changing-languag
 		QuizCompetitionService,
 		QuizChangingLanguageService,
 		LocalStorageService,
-		QuizFormalTestService
+		QuizFormalTestService,
+		QuizAuthenticationService
 	]
 })
 
@@ -95,12 +97,14 @@ export class QuizMasterComponent implements OnInit {
 		  private _quizCompetitionGroupService: QuizCompetitionService,
 		  private _quizChangingLanguageService: QuizChangingLanguageService,
 		  private _localStorageService: LocalStorageService,
+		  private _quizAuthenticationService: QuizAuthenticationService,
 		  private _router: Router
 	  ){
 
+
 		  //looking for route change
 		  _router.subscribe((newRoute) => this.onRouteChange(newRoute));
-		  this._localStorageService.initialize(true);
+		  this._localStorageService.initialize(false);
 		  this._localStorageService.set("Mike", "is greak");
 		  //console.log("_localStorageService: ",this._localStorageService.get("Mike"));
 
@@ -147,14 +151,15 @@ export class QuizMasterComponent implements OnInit {
 
 		 this.asyncDataLoaded = false;
 		 this.currentServicedLoaded = 0;
-		//load data from server
+		//load data from server. Remember none of them can use session ID as it is not ready yet
 		this.listOfInitSubs.push(this._quizTranslationService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
 		this.listOfInitSubs.push(this._quizSettingsService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
 		this.listOfInitSubs.push(this._quizSpecieService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
 		this.listOfInitSubs.push(this._quizCompetitionGroupService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
 		this.listOfInitSubs.push(this._quizChangingLanguageService.initialize(this.siteID).subscribe((event) => (this.onseServiceDoneLoading(event))) );
+		this.listOfInitSubs.push(this._quizAuthenticationService.initialize(this.siteID).subscribe((event) => (this.onseServiceDoneLoading(event))) );
 
-		this.totalServicesToLoaded = 5;
+		this.totalServicesToLoaded = 6;
 
 		//not loading any data from server
 		this._quizResultsService.initialize(this.siteID, this.langID);

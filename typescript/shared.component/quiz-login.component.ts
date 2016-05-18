@@ -1,6 +1,6 @@
 import { Component }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
-import {QuizLoginService} from '../shared/quiz-login.service';
+import { QuizAuthenticationService } from '../shared/quiz-authentication.service';
 
 @Component({
 	selector: 'birdid-quiz-login',
@@ -11,7 +11,6 @@ import {QuizLoginService} from '../shared/quiz-login.service';
 
 	],
 	providers: [
-        QuizLoginService // maybe not depends where the login should be accessed from
 
 	],
 })
@@ -33,7 +32,7 @@ export class QuizLoginComponent {
 
 
     constructor(
-		private _quizLoginService: QuizLoginService
+		private _quizAuthenticationService: QuizAuthenticationService
 
 
 	){}
@@ -48,31 +47,43 @@ export class QuizLoginComponent {
 		this.error=false;
 		this.statusMessage="";
 		this.statusMessageError="";
-		this.actionText="";
 
-        this._quizLoginService.Login(this.mail,this.password,this.autoLogin,this.action)
-			.subscribe((response)=>(this.responseFromLogin(response)));
+        this._quizAuthenticationService.authenticate(this.mail,this.password,this.autoLogin,this.action)
+			.subscribe((response)=>(this.onResponseFromAuthentication(response)));
 
     }
 
-	responseFromLogin(response){
-		if (response.status==true && this.action=="login"){
-			this.statusMessage= 'Login Successful';
+	onResponseFromAuthentication(response){
+
+		//login
+		if (response.status && this.action=="login"){
+			this.statusMessage = 'Login Successful';
 			this.success=true;
 			this.error = false;
+
+			this._quizAuthenticationService.setAuthenticated(true);
+			this._quizAuthenticationService.setAuthenticationToken(response.sessionID);
+			this._quizAuthenticationService.storeAutoLogin(response);
+
 		}else{
-			if(response.status==false && this.action=="login"){
+			if(!response.status && this.action == "login"){
 				this.statusMessageError = 'Wrong mail/password, please try again';
 				this.error=true;
 				this.success=false;
 			}
 		}
-		if(response.status==true && this.action=="reg"){
+
+		if(response.status && this.action == "reg"){
 			this.statusMessage= 'Registering Successful please go to your inbox to confirm your email';
 			this.success=true;
 			this.error = false;
+
+			this._quizAuthenticationService.setAuthenticated(true);
+			this._quizAuthenticationService.setAuthenticationToken(response.sessionID);
+			this._quizAuthenticationService.storeAutoLogin(response);
+
 		}else{
-			if(response.status==false && this.action=="reg"){
+			if(!response.status && this.action == "reg"){
 				this.statusMessageError = 'Something went wrong, please try again';
 				this.error=true;
 				this.success=false;
@@ -81,29 +92,8 @@ export class QuizLoginComponent {
 
 	}
 
-/*
-	onRegister(form){
-		this.mail = form.value.mail;
-        this.password = form.value.password;
-		this.autoLogin=form.value.autoLogin;
-		this.action;
-		this._quizLoginService.Login(this.mail,this.password,this.autoLogin,this.action)
-		.subscribe((response)=>(this.responseFromRegister(response)));
-	}
-
-	responseFromRegister(response){
-		if (response.status==true){
-			this.statusMessage= 'Registering Successful please go to your inbox to confirm your email';
-			this.success=true;
-		}else{
-
-		this.statusMessageError = 'Something went wrong, please try again';
-		this.error=true;
-		}
-	}*/
-
 	loginBTN(){
-		this.showLogin=!this.showLogin;
+		this.showLogin = !this.showLogin;
 		this.action="login";
 		this.actionText="Login";
 
@@ -111,9 +101,9 @@ export class QuizLoginComponent {
 	}
 
 	registerBTN(){
-		this.showLogin=!this.showLogin;
-		this.action="reg";
-		this.actionText="Register"
+		this.showLogin = !this.showLogin;
+		this.action = "reg";
+		this.actionText = "Register"
 
 	}
 

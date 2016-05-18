@@ -12,4 +12,5 @@ export interface QuizSetting {
   competitionGroupID: number;
   siteID: number;
   langID: number;
+  authenticationToken: string;
 }

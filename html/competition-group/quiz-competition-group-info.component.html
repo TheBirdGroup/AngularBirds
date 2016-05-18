@@ -2,10 +2,10 @@
 <h2>{{title}}</h2>
 
 <div *ngIf="noRestrictions">
-	<h2>No restrictions</h2>
+	<h2><b>No restrictions</b></h2>
 </div>
 
-<div *ngIf="displayInfo">
+<div *ngIf="displayInfo && !noRestrictions">
 
 	<table class="table table-bordered">
 	  <thead>

@@ -71,8 +71,13 @@ export class QuizCompetitionGroupComponent implements OnInit{
 
 	startQuiz(){
 		//console.log(this._router);
-        this.storeCompetitionGroupSettings();
-        this._router.navigate(["QuizMediaQuiz"]);
+		if(this.selectedCompetitionGroupData.restrict_filtes){
+			this.storeCompetitionGroupSettings();
+	        this._router.navigate(["QuizMediaQuiz"]);
+		}else{
+			this._router.navigate(["QuizMediaSelect"]);
+		}
+
 	}
 
 	getCompetitionGroups(){
@@ -111,8 +116,8 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	}
 
 	selectGroup(selectedGroupID){
-		this.selectedGroupID=selectedGroupID
-		console.log('test0',this.selectedGroupID)
+		this.selectedGroupID=selectedGroupID;
+		//console.log('test0',this.selectedGroupID)
 
 		//this is updating the tables that show the results
 

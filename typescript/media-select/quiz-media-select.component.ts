@@ -21,12 +21,13 @@ import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 export class QuizMediaSelectComponent implements OnInit{
 
+	//TODO, convert to array of JSON object
 	mediaTypes = [
-		[1, 'Image', 'glyphicon glyphicon-picture'],
-		[2, 'Sound', 'glyphicon glyphicon-volume-up'],
-		[3, 'Video', 'glyphicon glyphicon-facetime-video'],
-		[4, 'Several singingbirds', 'glyphicon glyphicon-volume-up'],
-		[0, 'Beginner quiz', 'glyphicon glyphicon-apple'],
+		[1, 'Image', 'glyphicon glyphicon-picture', true],
+		[2, 'Sound', 'glyphicon glyphicon-volume-up', true],
+		[3, 'Video', 'glyphicon glyphicon-facetime-video', true],
+		[4, 'Several singingbirds', 'glyphicon glyphicon-volume-up', true],
+		[0, 'Beginner quiz', 'glyphicon glyphicon-apple', true],
 	];
 	title = 'Birdid Quiz, select your media type:';
 	//quizMediaSelectedEvent = new EventEmitter<string>();
@@ -47,13 +48,18 @@ export class QuizMediaSelectComponent implements OnInit{
 		//video
 		this.mediaTypes[2][1] = this._quizTranslationService.getTranslationByID(169);
 
+		//disable beginner quiz if on comp group qithout restrictions
+		if(this._quizSettingsService.getCompetitionGroupID() >= 0){
+			this.mediaTypes[4][3] = false;
+		}
+
 		//console.log("media t: ", this.mediaTypes[0][1]);
 
 	}
 
 	selectMediaType(mediaType){
 
-		this._quizSettingsService.setCompetitionGroupID(-1);
+
 
 		if(mediaType == 4){
 

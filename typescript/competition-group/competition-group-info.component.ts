@@ -45,10 +45,11 @@ export class QuizCompetitionGroupInfoComponent implements OnInit, OnChanges{
 
 		if(this.competitionGroup != null){
 			this.displayInfo = true;
+			console.log("this.competitionGroup.restrict_filtes: ", this.competitionGroup.restrict_filtes);
 			if(this.competitionGroup.restrict_filtes){
-				this.noRestrictions = true;
-			}else{
 				this.noRestrictions = false;
+			}else{
+				this.noRestrictions = true;
 			}
 		}else{
 			this.displayInfo = false;

@@ -67,7 +67,9 @@ export class QuizResultComponent implements OnInit  {
 		this.fomralTestInfoTranslation = this._quizTranslationService.getTranslationByID(162);
 
 		//submit statistic if logged in and not several soundquiz
-		if(this._quizAuthenticationService.getAuthenticated() && !this._quizSettingsService.isSeveralSoundQuiz()){
+		if(	this._quizAuthenticationService.getAuthenticated()
+			&& !this._quizSettingsService.isSeveralSoundQuiz()
+			&& !this._quizSettingsService.isUsingHelp()){
 
 			let payload:string = this._quizLogicService.getQuizPayload();
 

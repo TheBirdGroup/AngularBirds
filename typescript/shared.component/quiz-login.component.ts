@@ -91,7 +91,7 @@ export class QuizLoginComponent implements OnInit{
 
 		}else{
 			if(!response.status && this.action == "login"){
-				this.statusMessageError = this.loginFailed;
+				this.statusMessageError = response.statusTextClean;
 				this.error=true;
 				this.success=false;
 			}
@@ -108,7 +108,7 @@ export class QuizLoginComponent implements OnInit{
 
 		}else{
 			if(!response.status && this.action == "reg"){
-				this.statusMessageError = this.somethingWrong;
+				this.statusMessageError = response.statusTextClean;
 				this.error=true;
 				this.success=false;
 			}

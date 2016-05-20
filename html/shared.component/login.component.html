@@ -24,10 +24,10 @@
         <br>
         <button class="btn btn-primary" type="submit" [disabled]="!f.valid"> {{actionText}} </button>
         <div [class.alert-success]="success">
-          {{statusMessage}}
+          <h3>{{statusMessage}}</h3>
         </div>
-        <div [class.alert-warning]="error">
-          {{statusMessageError}}
+        <div [class.alert-danger]="error">
+          <h3>{{statusMessageError}}</h3>
         </div>
     </form>
 

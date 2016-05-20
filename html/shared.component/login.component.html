@@ -2,18 +2,18 @@
 <div class="form-signin">
 
 
-<button class="btn btn-primary btn-m"(click)="loginBTN()">{{login}}</button>
-<button class="btn btn-primary btn-m"(click)="registerBTN()">{{register}}</button>
+<button class="btn btn-primary btn-m"(click)="loginBTN()">{{loginTranslation}}</button>
+<button class="btn btn-primary btn-m"(click)="registerBTN()">{{registerTranslation}}</button>
 
 <br>
 
     <form *ngIf="showLogin"(ngSubmit)="onLogin(f)" #f="ngForm">
         <div class="form-group">
-            <label for="mail"> {{email}} </label>
+            <label for="mail"> {{emailTranslation}} </label>
             <input ngControl="mail" type="mail" class="form-control" id="mail" required>
         </div>
         <div>
-            <label for="password"> {{passwordd}} </label>
+            <label for="password"> {{passworddTranslation}} </label>
             <input ngControl="password" type="password" class="form-control" id="password" required>
         </div>
         <!-- <div>

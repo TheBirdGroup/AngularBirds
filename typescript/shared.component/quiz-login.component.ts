@@ -18,14 +18,14 @@ import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 export class QuizLoginComponent implements OnInit{
 	//translation variables
-	login;
-	loginFailed;
-	register;
-	regSuccessfull;
-	loginSuccessfull;
-	email;
-	passwordd;
-	somethingWrong;
+	loginTranslation;
+	loginFailedTranslation;
+	registerTranslation;
+	regSuccessfullTranslation;
+	loginSuccessfullTranslation;
+	emailTranslation;
+	passworddTranslation;
+	somethingWrongTranslation;
 
     mail;
     password;
@@ -49,16 +49,16 @@ export class QuizLoginComponent implements OnInit{
 	){}
 
 	ngOnInit(){
-		this.login = this._quizTranslationService.getTranslationByID(425);
-		this.register = this._quizTranslationService.getTranslationByID(18);
-		this.loginSuccessfull = this._quizTranslationService.getTranslationByID(419);
-		this.email = this._quizTranslationService.getTranslationByID(187);
-		this.passwordd = this._quizTranslationService.getTranslationByID(428);
-		this.somethingWrong = this._quizTranslationService.getTranslationByID(39);
-		this.regSuccessfull = this._quizTranslationService.getTranslationByID(420);
-		this.loginFailed = this._quizTranslationService.getTranslationByID(495);
+		this.loginTranslation = this._quizTranslationService.getTranslationByID(425);
+		this.registerTranslation = this._quizTranslationService.getTranslationByID(18);
+		this.loginSuccessfullTranslation = this._quizTranslationService.getTranslationByID(419);
+		this.emailTranslation = this._quizTranslationService.getTranslationByID(187);
+		this.passworddTranslation = this._quizTranslationService.getTranslationByID(428);
+		this.somethingWrongTranslation = this._quizTranslationService.getTranslationByID(39);
+		this.regSuccessfullTranslation = this._quizTranslationService.getTranslationByID(420);
+		this.loginFailedTranslation = this._quizTranslationService.getTranslationByID(495);
 
-		this.actionText = this.login;
+		this.actionText = this.loginTranslation;
 	}
 
 
@@ -81,7 +81,7 @@ export class QuizLoginComponent implements OnInit{
 
 		//login
 		if (response.status && this.action=="login"){
-			this.statusMessage = this.loginSuccessfull;
+			this.statusMessage = this.loginSuccessfullTranslation;
 			this.success=true;
 			this.error = false;
 
@@ -98,7 +98,7 @@ export class QuizLoginComponent implements OnInit{
 		}
 
 		if(response.status && this.action == "reg"){
-			this.statusMessage = this.regSuccessfull;
+			this.statusMessage = this.regSuccessfullTranslation;
 			this.success=true;
 			this.error = false;
 
@@ -138,10 +138,10 @@ export class QuizLoginComponent implements OnInit{
 
 	checkActionType(){
 		if(this.action == "login"){
-			this.actionText = this.login;
+			this.actionText = this.loginTranslation;
 
 		}else{
-			this.actionText = this.register;
+			this.actionText = this.registerTranslation;
 		}
 	}
 

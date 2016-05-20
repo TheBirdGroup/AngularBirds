@@ -26,6 +26,11 @@ export class QuizLoginComponent implements OnInit{
 	emailTranslation;
 	passworddTranslation;
 	somethingWrongTranslation;
+	logoutTranslation;
+	forgotPasswordTranslation;
+	resetPasswordTranslation;
+	resetPasswordSuccessfullTranslation;
+	logoutSuccessfullTranslation;
 
     email;
     password;
@@ -58,6 +63,11 @@ export class QuizLoginComponent implements OnInit{
 		this.somethingWrongTranslation = this._quizTranslationService.getTranslationByID(39);
 		this.regSuccessfullTranslation = this._quizTranslationService.getTranslationByID(420);
 		this.loginFailedTranslation = this._quizTranslationService.getTranslationByID(495);
+		this.logoutTranslation = this._quizTranslationService.getTranslationByID(423);
+		this.forgotPasswordTranslation = this._quizTranslationService.getTranslationByID(426);
+		this.resetPasswordTranslation = this._quizTranslationService.getTranslationByID(500);
+		this.logoutSuccessfullTranslation = this._quizTranslationService.getTranslationByID(422);
+		this.resetPasswordSuccessfullTranslation = this._quizTranslationService.getTranslationByID(421);
 
 		this.actionText = this.loginTranslation;
 	}
@@ -119,7 +129,7 @@ export class QuizLoginComponent implements OnInit{
 		}
 
 		if(response.status && this.action == "resetPass"){
-			this.statusMessage = "reset password link sendt successfully";
+			this.statusMessage = this.resetPasswordSuccessfullTranslation;
 			this.success=true;
 			this.error = false;
 
@@ -136,7 +146,7 @@ export class QuizLoginComponent implements OnInit{
 		}
 
 		if(response.status && this.action == "logout"){
-			this.statusMessage = "logout successfull";
+			this.statusMessage = this.logoutSuccessfullTranslation;
 			this.success = true;
 			this.error = false;
 			this._quizAuthenticationService.setAuthenticated(false);
@@ -144,7 +154,7 @@ export class QuizLoginComponent implements OnInit{
 			this._quizAuthenticationService.removeAutoLogin();
 		}else{
 			if(!response.status && this.action == "logout"){
-				this.statusMessageError = "error login out";
+				this.statusMessageError = "error logging out";
 				console.log("response: ",response);
 				this.error=true;
 				this.success=false;
@@ -226,7 +236,7 @@ export class QuizLoginComponent implements OnInit{
 			this.actionText = this.loginTranslation;
 
 		}else if(this.action == "resetPass"){
-			this.actionText = "Reset password";
+			this.actionText = this.resetPasswordTranslation;
 		}else{
 			this.actionText = this.registerTranslation;
 		}

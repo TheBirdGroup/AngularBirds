@@ -18,11 +18,11 @@ directives: [
 
 export class QuizWelcomeComponent implements OnInit{
     //translation variables
-    title;
-    normalQuiz;
-    competitionGroups;
-    takeFormalTest;
-    selectLanguage;
+    titleTranslation;
+    normalQuizTranslation;
+    competitionGroupsTranslation;
+    takeFormalTestTranslation;
+    selectLanguageTranslation;
 
 
     constructor(
@@ -33,11 +33,11 @@ export class QuizWelcomeComponent implements OnInit{
     ){}
     
     ngOnInit(){
-        this.title = this._quizTranslationService.getTranslationByID(120);
-        this.normalQuiz = this._quizTranslationService.getTranslationByID(158);
-        this.competitionGroups = this._quizTranslationService.getTranslationByID(439);
-        this.takeFormalTest = this._quizTranslationService.getTranslationByID(217);
-        this.selectLanguage = this._quizTranslationService.getTranslationByID(27);
+        this.titleTranslation = this._quizTranslationService.getTranslationByID(120);
+        this.normalQuizTranslation = this._quizTranslationService.getTranslationByID(158);
+        this.competitionGroupsTranslation = this._quizTranslationService.getTranslationByID(439);
+        this.takeFormalTestTranslation = this._quizTranslationService.getTranslationByID(217);
+        this.selectLanguageTranslation = this._quizTranslationService.getTranslationByID(27);
         
     }
 

@@ -50,20 +50,23 @@
 		<br>
 
 		<h4>{{durationTitle}}</h4>
-		<div class="btn-group" data-toggle="buttons">
-		  <button (click)="onSelectDuration(0)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(0)}">
-			{{unlimitedButton}}
-		  </button>
-		  <button (click)="onSelectDuration(20)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(20)}">
-			20{{secButton}}
-		  </button>
-		  <button (click)="onSelectDuration(30)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(30)}">
-			30{{secButton}}
-		  </button>
-		  <button (click)="onSelectDuration(40)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(40)}">
-			40{{secButton}}
-		  </button>
-		</div>
+			<div class="btn-group" data-toggle="buttons">
+			  <button (click)="onSelectDuration(0)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(0)}">
+				{{unlimitedButton}}
+			  </button>
+		  </div>
+			<div class="btn-group" data-toggle="buttons">
+			  <button (click)="onSelectDuration(20)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(20)}">
+				20{{secButton}}
+			  </button>
+			  <button (click)="onSelectDuration(30)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(30)}">
+				30{{secButton}}
+			  </button>
+			  <button (click)="onSelectDuration(40)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSelectedDuration(40)}">
+				40{{secButton}}
+			  </button>
+		  </div>
+
 
 		<br>
 

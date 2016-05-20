@@ -36,6 +36,36 @@ export class QuizLogicService{
 
 	}
 
+	//get list of current correct answer and selected for all questios
+	getQuizPayload():string{
+
+		//selectedID:correctID,selectedID:correctID,selectedID:correctID...
+		let payload = ""
+		for (let currentQuestionID of Object.keys(this.quizQuestions)) {
+
+			let currentQuestionMedias = this.quizQuestions[currentQuestionID].getSelectedChoice();
+			//console.log("currentQuestionMedias: ", currentQuestionMedias);
+			if(currentQuestionMedias.length > 0){
+				//API uses -1 as i donæt know, here we change to comply with that. Maby change API later?
+				if(currentQuestionMedias[0].id == -1){
+					payload += "0:";
+				}else{
+					payload += currentQuestionMedias[0].id + ":";
+				}
+			}else{
+				payload += "0:";
+			}
+
+			payload += this.quizQuestions[currentQuestionID].getRigthAnsers()[0].id + ","
+		}
+
+		if(payload.length > 0){
+			return payload.substring(0, payload.length-1);
+		}else{
+			return "";
+		}
+	}
+
 	getMaxScoreQuiz(){
 
 		let maxScore = 0;

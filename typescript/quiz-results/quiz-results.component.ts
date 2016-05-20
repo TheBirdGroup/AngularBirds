@@ -6,6 +6,7 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';
 import { QuizLogicService }  from './../shared/quiz-logic.service';
 import { QuizTranslationService }  from './../shared/quiz-translation.service';
+import { QuizAuthenticationService } from '../shared/quiz-authentication.service';
 
 import { ResultlistComponent }  from './../shared.component/resultlist.component';
 
@@ -41,12 +42,15 @@ export class QuizResultComponent implements OnInit  {
 
 	fomralTestInfoTranslation = "";
 
+	loading = false;
+
 	constructor(
 		private _quizResultsService: QuizResultsService,
 		private _quizLogicService: QuizLogicService,
 		private _quizSettingsService: QuizSettingsService,
 		private _quizTranslationService: QuizTranslationService,
-		private _router: Router
+		private _router: Router,
+		private _quizAuthenticationService: QuizAuthenticationService
 	) {}
 
 	ngOnInit() {
@@ -61,6 +65,23 @@ export class QuizResultComponent implements OnInit  {
 		this.loadQuizResults();
 
 		this.fomralTestInfoTranslation = this._quizTranslationService.getTranslationByID(162);
+
+		//submit statistic if logged in and not several soundquiz
+		if(this._quizAuthenticationService.getAuthenticated() && !this._quizSettingsService.isSeveralSoundQuiz()){
+
+			let payload:string = this._quizLogicService.getQuizPayload();
+
+			//console.log("payload", payload);
+
+			this._quizResultsService.postUserQuizResults(this._quizSettingsService.getQuizSettings(), payload)
+				.subscribe((response) => (this.onUserResultSumbitted(response)));
+		}
+
+	}
+
+	onUserResultSumbitted(response){
+
+		console.log("done onUserResultSumbitted: ", response);
 
 	}
 

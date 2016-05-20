@@ -124,35 +124,29 @@ export class QuizResultsService{
 
 	}
 
-	getQuizResultsLimit50(quizSettings){
+	postUserQuizResults(settings:QuizSetting[], playload:string): Observable<any>{
 
-		let mediaTypeID = quizSettings[0].mediaTypeID;
-		let areaID = quizSettings[0].areaID;
-		//areaID = 0;
-		//let timeLimit = quizSettings[0].timeLimit;
-		let numQuestions = quizSettings[0].numQuestions;
-		//let showAlternatives = quizSettings[0].showAlternatives;
-	//	let mediaDificulity = quizSettings[0].mediaDificulity;
-		let mediaDificulity = quizSettings[0].mediaDificulity;
+		let sessionID = settings[0].authenticationToken;
+		let mediaTypeID = settings[0].mediaTypeID;
+		let areaID = settings[0].areaID;
+		let mediaDificulity = settings[0].mediaDificulity;
 
-		let siteID = quizSettings[0].siteID;
+		let data = "payloadData=" + playload;
+		data += "&areaID=" + areaID;
+		data += "&mediaTypeID=" + mediaTypeID;
+		data += "&difficulty=" + mediaDificulity;
 
-		let extraURL = "";
-		extraURL += "&retriveBy=" + "year";
-		extraURL += "&limit=" + 50;
-		extraURL += "&specialAreas=" + "false";
-		extraURL += "&difficulty=" + mediaDificulity;
-		extraURL += "&areaID=" + areaID;
-		extraURL += "&mediaTypeID=" + mediaTypeID;
-		extraURL += "&langID=" + 2;
-		extraURL += "&siteID=" + siteID;
-		extraURL += "&competitionGroupID=" + "false";
 
-		return this._http.get(constants.baseURL+"/scoreQuiz.php?JSON=1"+extraURL)
+		const body = data;
+
+		var headers = new Headers();
+  		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		return this._http.post('https://hembstudios.no/birdid/IDprogram/postUserQuizResults.php?JSON=1&siteID='+this.siteID+"&sessionID="+sessionID, body,{
+	    	headers: headers
+	    })
 			.map(response => response.json());
 
 	}
-
 
 
 }

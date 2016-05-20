@@ -18,6 +18,7 @@ export class QuizCompetitionService implements OnInit{
 	competitionGroups;
 	promise;
 	selectedCompetitionGroupID;
+	selectedCompetitionGroupAccessCode;
 	competitionGroupSelected;
 
 	compLoadProblems = false;
@@ -73,13 +74,14 @@ export class QuizCompetitionService implements OnInit{
 
 	}
 
-	loadSelectedCompetitionGroup(settings:QuizSetting[], selectedGroupID){
+	loadSelectedCompetitionGroup(settings:QuizSetting[], selectedGroupID, accessCode = ""){
 
-		this.selectedCompetitionGroupID=selectedGroupID;
+		this.selectedCompetitionGroupID = selectedGroupID;
+		this.selectedCompetitionGroupAccessCode = accessCode
 
 		let sessionID = settings[0].authenticationToken;
 
-		this._http.get(constants.baseURL+"/getCompetitionGroup.php?compGroupID="+this.selectedCompetitionGroupID+"&sessionID="+sessionID)
+		this._http.get(constants.baseURL+"/getCompetitionGroup.php?compGroupID="+this.selectedCompetitionGroupID+"&accessCode="+accessCode+"&sessionID="+sessionID)
 		.map(response => response.json()).subscribe(
 			data => {
 				this.competitionGroupSelected = data;

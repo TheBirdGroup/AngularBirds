@@ -46,6 +46,7 @@ export class QuizQuestionsService{
 		this.lastQuizSettings = settings;
 
 		let competitionGroupID = settings[0].competitionGroupID;
+		let competitionGroupCode = settings[0].competitionGroupCode;
 		let mediaTypeID = settings[0].mediaTypeID;
 		let areaID = settings[0].areaID;
 		//areaID = 0;
@@ -70,6 +71,8 @@ export class QuizQuestionsService{
 		extraURL += "&areaID=" + areaID;
 		extraURL += "&mediaType=" + mediaTypeID;
 		extraURL += "&competitionGroupID=" + competitionGroupID;
+		extraURL += "&accessCodeCompetitionGroup=" + competitionGroupCode;
+
 
 		if(settings[0].formalTestQuiz){
 			extraURL += "&accessCode=" + settings[0].formalTestAccessCode;

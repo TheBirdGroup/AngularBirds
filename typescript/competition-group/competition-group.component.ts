@@ -13,6 +13,7 @@ import { QuizChangingLanguageService }  from './../shared/quiz-changing-language
 import { QuizCompetitionGroupInfoComponent }  from './../competition-group/competition-group-info.component';
 
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
+import { QuizAuthenticationService } from '../shared/quiz-authentication.service';
 
 @Component({
 	selector: 'birdid-quiz-competition-group',
@@ -43,7 +44,12 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	filterGroupName = "";
 	needAccessCode;
 	groupAccessCode=null;
-	errorM;
+
+	inputGroupAccessCode = "";
+
+	errorMesageCompGroup = "";
+
+	canStartCompeting = false;
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
@@ -52,7 +58,8 @@ export class QuizCompetitionGroupComponent implements OnInit{
 		private _quizCompetitionGroupService: QuizCompetitionService,
         private _http: Http,
 		private _quizChangingLanguageService: QuizChangingLanguageService,
-		private _quizSpeciesService: QuizSpecieService
+		private _quizSpeciesService: QuizSpecieService,
+		private _quizAuthenticationService: QuizAuthenticationService
 	){}
 
     storeCompetitionGroupSettings(){
@@ -130,13 +137,15 @@ export class QuizCompetitionGroupComponent implements OnInit{
 		//console.log('test0',this.selectedGroupID)
 
 		if(this.isCompetitionGroupUsingAccessCode(selectedGroupID)){
-			this.needAccessCode=true;
-			console.log("we need password",this.needAccessCode)
-
+			this.inputGroupAccessCode = "";
+			this.needAccessCode = true;
+			this.selectedCompetitionGroupData = null;
+			this.errorMesageCompGroup = "Group required access code";
 		}else{
 			this.loading = true;
-			this.needAccessCode=false;
-			console.log("we DO NOT NEED password",this.needAccessCode)
+			this.needAccessCode = false;
+			//unset password just in case previous used code
+			this._quizSettingsService.setCompetitionGroupAccesssCode("");
 			//this is updating the tables that show the results
 			this._quizCompetitionGroupService.loadSelectedCompetitionGroup(this._quizSettingsService.getQuizSettings(), selectedGroupID).subscribe((responce) =>{
 				this.onGroupInfoLoaded();
@@ -146,22 +155,24 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	}
 
 	checkAccessCode(groupAccessCode){
-		this.groupAccessCode=groupAccessCode;
+
+		this.groupAccessCode = this.inputGroupAccessCode;
 		this.loading = true;
-		console.log("we DO NOT NEED password",this.needAccessCode)
+
 		//this is updating the tables that show the results
-		this._quizCompetitionGroupService.loadSelectedCompetitionGroup(this._quizSettingsService.getQuizSettings(), this.selectedGroupID,this.groupAccessCode).subscribe((responce) =>{
+		this._quizCompetitionGroupService.loadSelectedCompetitionGroup(this._quizSettingsService.getQuizSettings(), this.selectedGroupID, this.groupAccessCode).subscribe((responce) =>{
 			let temGroup =	this._quizCompetitionGroupService.getSelectedCompetitionGroup()
-			if(temGroup.codeCorrect==true){
+			if(temGroup.codeCorrect){
 				this.needAccessCode=false;
 				this.loading = false;
+				this.errorMesageCompGroup = "";
+				this._quizSettingsService.setCompetitionGroupAccesssCode(this.groupAccessCode);
 				this.onGroupInfoLoaded();
 			}else{
 				this.loading = false;
-				this.errorM="worng password"
+				this.errorMesageCompGroup = "worng password/access code"
 			}
 
-			this.onGroupInfoLoaded();
 		});
 
 	}
@@ -179,23 +190,42 @@ export class QuizCompetitionGroupComponent implements OnInit{
 
 	onGroupInfoLoaded(){
 
-
-
 		this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID);
 		this.updateResultlistIncrement++;
 		this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.getSelectedCompetitionGroup()
 
-		let compSpecieList = this.selectedCompetitionGroupData["specieList"];
-		this._quizSpeciesService.clearSelectedSpecies();
+		 if(this.selectedCompetitionGroupData.num_attempts > 0 && this.selectedCompetitionGroupData.num_attempts_left == 0){
+			//no attems left!
 
-		if(compSpecieList["usingSpecieList"]){
+			if(this._quizAuthenticationService.getAuthenticated()){
+				//is logged inn
+				this.errorMesageCompGroup = "no attems left for you!";
 
-			let storeArray = []
-			for(let i = 0; i < compSpecieList["numberOfSpecies"]; i++){
-				storeArray.push(compSpecieList[i]);
+			}else{
+				this.errorMesageCompGroup = "You need to log in for this group!";
 			}
 
-			this._quizSpeciesService.setSelectedSpecie(storeArray);
+		}else{
+			//all ok!
+			this.errorMesageCompGroup = "";
+
+			let compSpecieList = this.selectedCompetitionGroupData["specieList"];
+			this._quizSpeciesService.clearSelectedSpecies();
+
+			if(compSpecieList["usingSpecieList"]){
+
+				let storeArray = []
+				for(let i = 0; i < compSpecieList["numberOfSpecies"]; i++){
+					storeArray.push(compSpecieList[i]);
+				}
+
+				this._quizSpeciesService.setSelectedSpecie(storeArray);
+
+
+			}
+
+			this.canStartCompeting = true;
+
 		}
 
 		this.loading = false;

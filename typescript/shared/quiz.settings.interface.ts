@@ -10,6 +10,7 @@ export interface QuizSetting {
   mediaDificulity: number;
   formalTestAccessCode:string;
   competitionGroupID: number;
+  competitionGroupCode: string;
   siteID: number;
   langID: number;
   authenticationToken: string;

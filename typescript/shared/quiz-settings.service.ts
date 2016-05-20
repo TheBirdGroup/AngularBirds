@@ -45,6 +45,7 @@ export class QuizSettingsService{
 	help = false;
 
 	competitionGroupID=-1;
+	competitionGroupAccesssCode = "";
 
 	langID = 2;
 
@@ -265,6 +266,7 @@ export class QuizSettingsService{
 		  "mediaDificulity": this.mediaDifficulities,
 		  "formalTestAccessCode": this.formalTestAccessCode,
 		  "competitionGroupID": this.competitionGroupID,
+		  "competitionGroupCode": this.competitionGroupAccesssCode,
 	  	  "siteID": this.siteID,
 	  	  "langID": this.langID,
 	  	  "authenticationToken": this.authenticationToken}
@@ -406,6 +408,14 @@ export class QuizSettingsService{
 
 	getCompetitionGroupID(){
 		return this.competitionGroupID;
+	}
+
+	setCompetitionGroupAccesssCode(code){
+		this.competitionGroupAccesssCode = code;
+	}
+
+	getCompetitionGroupAccesssCode(){
+		return this.competitionGroupAccesssCode;
 	}
 
 	getCompetitionGroupIDUserFriendly(){

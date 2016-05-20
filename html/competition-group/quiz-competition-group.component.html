@@ -17,11 +17,15 @@
 	</div>
 
 	<div *ngIf="needAccessCode" >
-		Enter Group Access Code:
-		<input type="text" #groupAccessCode name="groupAccessCode"><br>
-	<button  class="btn btn-primary btn-m"(click)="checkAccessCode(groupAccessCode.value)">Check</button>
-{{errorM}}
+		<form (ngSubmit)="checkAccessCode()" >
+			Enter Group Access Code:
+			<input type="text"[(ngModel)]="inputGroupAccessCode">
+			<button  class="btn btn-primary btn-m"(click)="checkAccessCode()">Check code</button>
+		</form>
+		<br>
+
 	</div>
+	<h2 class="red">{{errorMesageCompGroup}}</h2>
 
 	<div class="resultsListTable">
 
@@ -73,7 +77,7 @@
 	<br>
 
 
-	<button  class="btn btn-primary btn-lg compStartBtn"(click)="startQuiz()" [disabled]="selectedCompetitionGroupData == null">Play quiz</button>
+	<button  class="btn btn-primary btn-lg compStartBtn"(click)="startQuiz()" [disabled]="!canStartCompeting">Play quiz</button>
 </div>
 
 <div *ngIf="false">

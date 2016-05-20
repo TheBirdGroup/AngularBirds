@@ -47,6 +47,10 @@ export class QuizMediaSelectComponent implements OnInit{
 		this.mediaTypes[1][1] = this._quizTranslationService.getTranslationByID(5);
 		//video
 		this.mediaTypes[2][1] = this._quizTranslationService.getTranslationByID(169);
+		//siningbirds
+		this.mediaTypes[3][1] = this._quizTranslationService.getTranslationByID(312);
+		//beginner quiz
+		this.mediaTypes[4][1] = this._quizTranslationService.getTranslationByID(168);
 
 		//disable beginner quiz if on comp group qithout restrictions
 		if(this._quizSettingsService.getCompetitionGroupID() >= 0){

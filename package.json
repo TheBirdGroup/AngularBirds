@@ -22,7 +22,7 @@
     "systemjs": "0.19.26",
     "zone.js": "0.6.12",
 	"electron-json-storage": "^2.0.0",
-    "electron-shortcut-normalizer": "^1.0.0",
+    "electron-shortcut-normalizer": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.2.1",

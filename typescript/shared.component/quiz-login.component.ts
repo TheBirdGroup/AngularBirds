@@ -57,6 +57,8 @@ export class QuizLoginComponent implements OnInit{
 		this.somethingWrong = this._quizTranslationService.getTranslationByID(39);
 		this.regSuccessfull = this._quizTranslationService.getTranslationByID(420);
 		this.loginFailed = this._quizTranslationService.getTranslationByID(495);
+
+		this.actionText = this.login;
 	}
 
 
@@ -117,17 +119,21 @@ export class QuizLoginComponent implements OnInit{
 	loginBTN(){
 		this.showLogin = !this.showLogin;
 		this.action="login";
+		
+		this.statusMessage="";
+		this.statusMessageError="";
+
 		this.checkActionType();
-
-
-
 	}
 
 	registerBTN(){
 		this.showLogin = !this.showLogin;
 		this.action = "reg";
-		this.checkActionType();
+		
+		this.statusMessage="";
+		this.statusMessageError="";
 
+		this.checkActionType();
 	}
 
 	checkActionType(){

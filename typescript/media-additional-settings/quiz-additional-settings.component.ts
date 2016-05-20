@@ -7,6 +7,7 @@ import { QuizResultsService }  from './../shared/quiz-results.service';
 
 import { ResultlistComponent }  from './../shared.component/resultlist.component';
 import {QuizSpecieService} from "../shared/quiz-specie.service";
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 @Component({
 	selector: 'birdid-quiz-addditional-settings',
@@ -21,7 +22,21 @@ import {QuizSpecieService} from "../shared/quiz-specie.service";
 	],
 })
 export class QuizAdditionalSettingsComponent implements OnInit{
-	title = 'Birdid Quiz media additional settings!';
+	//translation varibles
+	title;
+	selectAreaTitle;
+	diffLevelTitle;
+	nrOfQuestionsTitle;
+	durationTitle;
+	alternativesTitle;
+	selSpeciesTitle;
+	startQuizButton;
+	yesButton;
+	noButton;
+	unlimitedButton;
+	secButton;
+
+
 	//mediaDiff = ['1', '2', '3', '4'];
    // numberOfQuestions = ['10','30','60']; for the beggining we do not check against the array
     mediaDiff;
@@ -45,11 +60,25 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		private _quizSettingsService: QuizSettingsService,
 		private _quizSpeciesService: QuizSpecieService,
 		private _router: Router,
-		private _quizResultsService: QuizResultsService
+		private _quizResultsService: QuizResultsService,
+		private _quizTranslationService: QuizTranslationService
 	){}
 
 
 	ngOnInit() {
+		//translations
+		this.title = this._quizTranslationService.getTranslationByID(340);
+		this.selectAreaTitle = this._quizTranslationService.getTranslationByID(6);
+		this.diffLevelTitle = this._quizTranslationService.getTranslationByID(170);
+		this.nrOfQuestionsTitle = this._quizTranslationService.getTranslationByID(174);
+		this.durationTitle = this._quizTranslationService.getTranslationByID(124);
+		this.alternativesTitle = this._quizTranslationService.getTranslationByID(113);
+		this.selSpeciesTitle = this._quizTranslationService.getTranslationByID(248);
+		this.startQuizButton = this._quizTranslationService.getTranslationByID(149);
+		this.yesButton = this._quizTranslationService.getTranslationByID(482);
+		this.noButton = this._quizTranslationService.getTranslationByID(483);
+		this.unlimitedButton = this._quizTranslationService.getTranslationByID(194);
+		this.secButton = this._quizTranslationService.getTranslationByID(111);
 
 		this._quizSettingsService.setMediaDiff(1);
 		this._quizSettingsService.selectNumberOfQuestions(10);

@@ -73,8 +73,10 @@ export class QuizResultComponent implements OnInit  {
 
 			//console.log("payload", payload);
 
-			this._quizResultsService.postUserQuizResults(this._quizSettingsService.getQuizSettings(), payload)
-				.subscribe((response) => (this.onUserResultSumbitted(response)));
+			if(payload.length > 0){
+				this._quizResultsService.postUserQuizResults(this._quizSettingsService.getQuizSettings(), payload)
+					.subscribe((response) => (this.onUserResultSumbitted(response)));
+			}
 		}
 
 	}

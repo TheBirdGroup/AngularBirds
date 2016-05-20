@@ -17,3 +17,10 @@ input[type="radio"] {
    transform: scale(1.0);
 /*   margin: 5px;*/
 }
+
+
+@media screen and (min-width: 374px) {
+    .btn-group {
+        padding: 2px;
+        }
+}

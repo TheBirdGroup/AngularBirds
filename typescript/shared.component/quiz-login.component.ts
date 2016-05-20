@@ -27,7 +27,7 @@ export class QuizLoginComponent implements OnInit{
 	passworddTranslation;
 	somethingWrongTranslation;
 
-    mail;
+    email;
     password;
 	autoLogin;
 	statusMessage="";
@@ -40,6 +40,7 @@ export class QuizLoginComponent implements OnInit{
 	error:boolean;
 	actionText;
 
+	displayInputPassword = true;
 
     constructor(
 		private _quizAuthenticationService: QuizAuthenticationService,
@@ -63,7 +64,7 @@ export class QuizLoginComponent implements OnInit{
 
 
     onLogin(form){
-        this.mail = form.value.mail;
+        this.email = form.value.email;
         this.password = form.value.password;
 		this.autoLogin = form.value.autoLogin;
 		this.action;
@@ -72,7 +73,7 @@ export class QuizLoginComponent implements OnInit{
 		this.statusMessage="";
 		this.statusMessageError="";
 
-        this._quizAuthenticationService.authenticate(this.mail,this.password,this.autoLogin,this.action)
+        this._quizAuthenticationService.authenticate(this.email,this.password,this.autoLogin,this.action)
 			.subscribe((response)=>(this.onResponseFromAuthentication(response)));
 
     }
@@ -117,6 +118,23 @@ export class QuizLoginComponent implements OnInit{
 			}
 		}
 
+		if(response.status && this.action == "resetPass"){
+			this.statusMessage = "reset password link sendt successfully";
+			this.success=true;
+			this.error = false;
+
+			this._quizAuthenticationService.setAuthenticated(false);
+			this._quizAuthenticationService.setAuthenticationToken(response.sessionID);
+			this._quizAuthenticationService.removeAutoLogin();
+
+		}else{
+			if(!response.status && this.action == "reg"){
+				this.statusMessageError = response.statusTextClean;
+				this.error=true;
+				this.success=false;
+			}
+		}
+
 		if(response.status && this.action == "logout"){
 			this.statusMessage = "logout successfull";
 			this.success = true;
@@ -137,7 +155,12 @@ export class QuizLoginComponent implements OnInit{
 	}
 
 	loginBTN(){
-		this.showAuthenticationForm = !this.showAuthenticationForm;
+		if(this.action == "login"){
+			this.showAuthenticationForm = !this.showAuthenticationForm;
+		}else{
+			this.showAuthenticationForm = true;
+		}
+		this.displayInputPassword = true
 		this.action="login";
 
 		this.statusMessage="";
@@ -147,7 +170,12 @@ export class QuizLoginComponent implements OnInit{
 	}
 
 	registerBTN(){
-		this.showAuthenticationForm = !this.showAuthenticationForm;
+		if(this.action == "reg"){
+			this.showAuthenticationForm = !this.showAuthenticationForm;
+		}else{
+			this.showAuthenticationForm = true;
+		}
+		this.displayInputPassword = true
 		this.action = "reg";
 
 		this.statusMessage="";
@@ -164,7 +192,7 @@ export class QuizLoginComponent implements OnInit{
 		this.statusMessage="";
 		this.statusMessageError="";
 
-		this.mail = "";
+		this.email = "";
         this.password = "";
 		this.autoLogin = "";
 		this.action;
@@ -173,15 +201,32 @@ export class QuizLoginComponent implements OnInit{
 		this.statusMessage="";
 		this.statusMessageError="";
 
-        this._quizAuthenticationService.authenticate(this.mail,this.password,this.autoLogin,this.action)
+        this._quizAuthenticationService.authenticate(this.email,this.password,this.autoLogin,this.action)
 			.subscribe((response)=>(this.onResponseFromAuthentication(response)));
 
+	}
+
+	forgotPasswordBTN(){
+		if(this.action == "resetPass"){
+			this.showAuthenticationForm = !this.showAuthenticationForm;
+		}else{
+			this.showAuthenticationForm = true;
+		}
+		this.displayInputPassword = false
+		this.action = "resetPass";
+
+		this.statusMessage="";
+		this.statusMessageError="";
+
+		this.checkActionType();
 	}
 
 	checkActionType(){
 		if(this.action == "login"){
 			this.actionText = this.loginTranslation;
 
+		}else if(this.action == "resetPass"){
+			this.actionText = "Reset password";
 		}else{
 			this.actionText = this.registerTranslation;
 		}

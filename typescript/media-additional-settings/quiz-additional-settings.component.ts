@@ -23,18 +23,18 @@ import { QuizTranslationService }  from './../shared/quiz-translation.service';
 })
 export class QuizAdditionalSettingsComponent implements OnInit{
 	//translation varibles
-	title;
-	selectAreaTitle;
-	diffLevelTitle;
-	nrOfQuestionsTitle;
-	durationTitle;
-	alternativesTitle;
-	selSpeciesTitle;
-	startQuizButton;
-	yesButton;
-	noButton;
-	unlimitedButton;
-	secButton;
+	titleTranslation;
+	selectAreaTitleTranslation;
+	diffLevelTitleTranslation;
+	nrOfQuestionsTitleTranslation;
+	durationTitleTranslation;
+	alternativesTitleTranslation;
+	selSpeciesTitleTranslation;
+	startQuizButtonTranslation;
+	yesButtonTranslation;
+	noButtonTranslation;
+	unlimitedButtonTranslation;
+	secButtonTranslation;
 
 
 	//mediaDiff = ['1', '2', '3', '4'];
@@ -67,18 +67,18 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 	ngOnInit() {
 		//translations
-		this.title = this._quizTranslationService.getTranslationByID(340);
-		this.selectAreaTitle = this._quizTranslationService.getTranslationByID(6);
-		this.diffLevelTitle = this._quizTranslationService.getTranslationByID(170);
-		this.nrOfQuestionsTitle = this._quizTranslationService.getTranslationByID(174);
-		this.durationTitle = this._quizTranslationService.getTranslationByID(124);
-		this.alternativesTitle = this._quizTranslationService.getTranslationByID(113);
-		this.selSpeciesTitle = this._quizTranslationService.getTranslationByID(248);
-		this.startQuizButton = this._quizTranslationService.getTranslationByID(149);
-		this.yesButton = this._quizTranslationService.getTranslationByID(482);
-		this.noButton = this._quizTranslationService.getTranslationByID(483);
-		this.unlimitedButton = this._quizTranslationService.getTranslationByID(194);
-		this.secButton = this._quizTranslationService.getTranslationByID(111);
+		this.titleTranslation = this._quizTranslationService.getTranslationByID(340);
+		this.selectAreaTitleTranslation = this._quizTranslationService.getTranslationByID(6);
+		this.diffLevelTitleTranslation = this._quizTranslationService.getTranslationByID(170);
+		this.nrOfQuestionsTitleTranslation = this._quizTranslationService.getTranslationByID(174);
+		this.durationTitleTranslation = this._quizTranslationService.getTranslationByID(124);
+		this.alternativesTitleTranslation = this._quizTranslationService.getTranslationByID(113);
+		this.selSpeciesTitleTranslation = this._quizTranslationService.getTranslationByID(248);
+		this.startQuizButtonTranslation = this._quizTranslationService.getTranslationByID(149);
+		this.yesButtonTranslation = this._quizTranslationService.getTranslationByID(482);
+		this.noButtonTranslation = this._quizTranslationService.getTranslationByID(483);
+		this.unlimitedButtonTranslation = this._quizTranslationService.getTranslationByID(194);
+		this.secButtonTranslation = this._quizTranslationService.getTranslationByID(111);
 
 		this._quizSettingsService.setMediaDiff(1);
 		this._quizSettingsService.selectNumberOfQuestions(10);

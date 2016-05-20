@@ -14,6 +14,7 @@ export class QuizAuthenticationService{
 
     dataLoadedEventEmiter = new EventEmitter<boolean>();
     siteID = 1;
+	langID = 2;
 
     //if logged in
     authenticated = false;
@@ -24,9 +25,10 @@ export class QuizAuthenticationService{
         private _localStorageService: LocalStorageService,
         private _quizSettingsService: QuizSettingsService){}
 
-    initialize(siteID){
+    initialize(siteID, langID){
 
 		this.siteID = siteID;
+		this.langID = langID;
 
 		setTimeout(() => {
 			this.attemtAutologin();
@@ -64,7 +66,7 @@ export class QuizAuthenticationService{
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-        return this._http.post('https://hembstudios.no/birdid/bird/loginControlAJAX.php?action='+theAction, body,{headers: headers})
+        return this._http.post('https://hembstudios.no/birdid/bird/loginControlAJAX.php?action='+theAction+"&langID="+this.langID, body,{headers: headers})
             .map(response => response.json());
 
     }
@@ -92,7 +94,7 @@ export class QuizAuthenticationService{
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-        this._http.post('https://hembstudios.no/birdid/bird/loginControlAJAX.php?action='+theAction, body,{headers: headers})
+        this._http.post('https://hembstudios.no/birdid/bird/loginControlAJAX.php?action='+theAction+"&langID="+this.langID, body,{headers: headers})
             .map(response => response.json())
             .subscribe(
 	            data => {

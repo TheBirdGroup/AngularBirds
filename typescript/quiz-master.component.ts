@@ -157,7 +157,7 @@ export class QuizMasterComponent implements OnInit {
 		this.listOfInitSubs.push(this._quizSpecieService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
 		this.listOfInitSubs.push(this._quizCompetitionGroupService.initialize(this.siteID, this.langID).subscribe((event) => ( this.onseServiceDoneLoading(event) )));
 		this.listOfInitSubs.push(this._quizChangingLanguageService.initialize(this.siteID).subscribe((event) => (this.onseServiceDoneLoading(event))) );
-		this.listOfInitSubs.push(this._quizAuthenticationService.initialize(this.siteID).subscribe((event) => (this.onseServiceDoneLoading(event))) );
+		this.listOfInitSubs.push(this._quizAuthenticationService.initialize(this.siteID, this.langID).subscribe((event) => (this.onseServiceDoneLoading(event))) );
 
 		this.totalServicesToLoaded = 6;
 

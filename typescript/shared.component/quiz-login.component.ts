@@ -1,6 +1,7 @@
-import { Component }       from 'angular2/core';
+import { Component, OnInit }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { QuizAuthenticationService } from '../shared/quiz-authentication.service';
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 @Component({
 	selector: 'birdid-quiz-login',
@@ -15,8 +16,17 @@ import { QuizAuthenticationService } from '../shared/quiz-authentication.service
 	],
 })
 
-export class QuizLoginComponent {
-    title = 'Login or Register!';
+export class QuizLoginComponent implements OnInit{
+	//translation variables
+	login;
+	loginFailed;
+	register;
+	regSuccessfull;
+	loginSuccessfull;
+	email;
+	passwordd;
+	somethingWrong;
+
     mail;
     password;
 	autoLogin;
@@ -32,10 +42,22 @@ export class QuizLoginComponent {
 
 
     constructor(
-		private _quizAuthenticationService: QuizAuthenticationService
+		private _quizAuthenticationService: QuizAuthenticationService,
+		private _quizTranslationService: QuizTranslationService
 
 
 	){}
+
+	ngOnInit(){
+		this.login = this._quizTranslationService.getTranslationByID(425);
+		this.register = this._quizTranslationService.getTranslationByID(18);
+		this.loginSuccessfull = this._quizTranslationService.getTranslationByID(419);
+		this.email = this._quizTranslationService.getTranslationByID(187);
+		this.passwordd = this._quizTranslationService.getTranslationByID(428);
+		this.somethingWrong = this._quizTranslationService.getTranslationByID(39);
+		this.regSuccessfull = this._quizTranslationService.getTranslationByID(420);
+		this.loginFailed = this._quizTranslationService.getTranslationByID(495);
+	}
 
 
     onLogin(form){
@@ -57,7 +79,7 @@ export class QuizLoginComponent {
 
 		//login
 		if (response.status && this.action=="login"){
-			this.statusMessage = 'Login Successful';
+			this.statusMessage = this.loginSuccessfull;
 			this.success=true;
 			this.error = false;
 
@@ -67,14 +89,14 @@ export class QuizLoginComponent {
 
 		}else{
 			if(!response.status && this.action == "login"){
-				this.statusMessageError = 'Wrong mail/password, please try again';
+				this.statusMessageError = this.loginFailed;
 				this.error=true;
 				this.success=false;
 			}
 		}
 
 		if(response.status && this.action == "reg"){
-			this.statusMessage= 'Registering Successful please go to your inbox to confirm your email';
+			this.statusMessage = this.regSuccessfull;
 			this.success=true;
 			this.error = false;
 
@@ -84,7 +106,7 @@ export class QuizLoginComponent {
 
 		}else{
 			if(!response.status && this.action == "reg"){
-				this.statusMessageError = 'Something went wrong, please try again';
+				this.statusMessageError = this.somethingWrong;
 				this.error=true;
 				this.success=false;
 			}
@@ -95,7 +117,8 @@ export class QuizLoginComponent {
 	loginBTN(){
 		this.showLogin = !this.showLogin;
 		this.action="login";
-		this.actionText="Login";
+		this.checkActionType();
+
 
 
 	}
@@ -103,8 +126,17 @@ export class QuizLoginComponent {
 	registerBTN(){
 		this.showLogin = !this.showLogin;
 		this.action = "reg";
-		this.actionText = "Register"
+		this.checkActionType();
 
+	}
+
+	checkActionType(){
+		if(this.action == "login"){
+			this.actionText = this.login;
+
+		}else{
+			this.actionText = this.register;
+		}
 	}
 
 }

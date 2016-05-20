@@ -1,16 +1,16 @@
 <h2> {{actionText}} </h2>
 <div class="form-signin">
 
-<button class="btn btn-primary btn-m"(click)="loginBTN()">Login </button>
-<button class="btn btn-primary btn-m"(click)="registerBTN()"> Register </button>
+<button class="btn btn-primary btn-m"(click)="loginBTN()">{{login}}</button>
+<button class="btn btn-primary btn-m"(click)="registerBTN()">{{register}}</button>
 
     <form *ngIf="showLogin"(ngSubmit)="onLogin(f)" #f="ngForm">
         <div>
-            <label for="mail"> Mail </label>
+            <label for="mail"> {{email}} </label>
             <input ngControl="mail" type="mail" id="mail" required>
         </div>
         <div>
-            <label for="password"> Password </label>
+            <label for="password"> {{passwordd}} </label>
             <input ngControl="password" type="password" id="password" required>
         </div>
         <!-- <div>
@@ -32,4 +32,4 @@
 </div>
 
 <h3 *ngIf="_quizAuthenticationService.getAuthenticated()">You are authenticated and logged inn</h3>
-<h3 *ngIf="!_quizAuthenticationService.getAuthenticated()">You are neither authenticated or logged inn></h3>
+<h3 *ngIf="!_quizAuthenticationService.getAuthenticated()">You are neither authenticated or logged inn</h3>

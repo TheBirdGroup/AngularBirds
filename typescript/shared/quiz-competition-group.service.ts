@@ -96,11 +96,13 @@ export class QuizCompetitionService implements OnInit{
 		return this.dataLoadedSpesificGroupEE;
 	}
 
-	getSelectedCompetitionGroup(selectedGroupID){
+	getSelectedCompetitionGroup(){
 
 		return this.competitionGroupSelected;
 
 	}
+
+
 
 
 

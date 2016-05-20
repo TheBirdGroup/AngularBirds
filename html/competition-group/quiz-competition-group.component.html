@@ -16,6 +16,12 @@
 
 	</div>
 
+	<div *ngIf="needAccessCode" >
+		Enter Group Access Code:
+		<input type="text" #groupAccessCode name="groupAccessCode"><br>
+	<button  class="btn btn-primary btn-m"(click)="checkAccessCode(groupAccessCode.value)">Check</button>
+{{errorM}}
+	</div>
 
 	<div class="resultsListTable">
 
@@ -57,7 +63,6 @@
 				  <br>(view them by selecting the group)</td>
 			  <td><button class="btn btn-m" (click)="selectGroup(current.id)">Select</button></td>
 			</tr>
-
 		  </tbody>
 		</table>
 

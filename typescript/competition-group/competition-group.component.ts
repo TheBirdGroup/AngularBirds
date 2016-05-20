@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit }       from 'angular2/core';
+import { Component, EventEmitter, Input, OnInit,OnChanges }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { Router } from 'angular2/router';
 
@@ -41,6 +41,9 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	languageList=[];
 
 	filterGroupName = "";
+	needAccessCode;
+	groupAccessCode=null;
+	errorM;
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
@@ -67,22 +70,28 @@ export class QuizCompetitionGroupComponent implements OnInit{
 
 	ngOnInit() {
 		this.getCompetitionGroups();
+
+
 	}
 
+
+
 	startQuiz(){
-		//console.log(this._router);
+		console.log(this._router);
 		if(this.selectedCompetitionGroupData.restrict_filtes){
 			this.storeCompetitionGroupSettings();
-	        this._router.navigate(["QuizMediaQuiz"]);
+	       	this._router.navigate(["QuizMediaQuiz"]);
 		}else{
 			this._router.navigate(["QuizMediaSelect"]);
 		}
+
 
 	}
 
 	getCompetitionGroups(){
 		this.competitionGroups = this._quizCompetitionGroupService.getCompetitionGroups();
 		this.competitionGroupsProsessed = this.competitionGroups;
+		//console.log("this are the copetition groups", this.competitionGroups)
 	}
 
 	inputGroupName(event){
@@ -116,21 +125,56 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	}
 
 	selectGroup(selectedGroupID){
-		
+
 		this.selectedGroupID = selectedGroupID;
 		//console.log('test0',this.selectedGroupID)
 
-		//this is updating the tables that show the results
+		if(this.isCompetitionGroupUsingAccessCode(selectedGroupID)){
+			this.needAccessCode=true;
+			console.log("we need password",this.needAccessCode)
 
+		}else{
+			this.loading = true;
+			this.needAccessCode=false;
+			console.log("we DO NOT NEED password",this.needAccessCode)
+			//this is updating the tables that show the results
+			this._quizCompetitionGroupService.loadSelectedCompetitionGroup(this._quizSettingsService.getQuizSettings(), selectedGroupID).subscribe((responce) =>{
+				this.onGroupInfoLoaded();
+			});
+		}
+
+	}
+
+	checkAccessCode(groupAccessCode){
+		this.groupAccessCode=groupAccessCode;
 		this.loading = true;
+		console.log("we DO NOT NEED password",this.needAccessCode)
+		//this is updating the tables that show the results
+		this._quizCompetitionGroupService.loadSelectedCompetitionGroup(this._quizSettingsService.getQuizSettings(), this.selectedGroupID,this.groupAccessCode).subscribe((responce) =>{
+			let temGroup =	this._quizCompetitionGroupService.getSelectedCompetitionGroup()
+			if(temGroup.codeCorrect==true){
+				this.needAccessCode=false;
+				this.loading = false;
+				this.onGroupInfoLoaded();
+			}else{
+				this.loading = false;
+				this.errorM="worng password"
+			}
 
-		this._quizCompetitionGroupService.loadSelectedCompetitionGroup(this._quizSettingsService.getQuizSettings(), selectedGroupID).subscribe((responce) =>{
 			this.onGroupInfoLoaded();
 		});
 
+	}
 
-
-
+	isCompetitionGroupUsingAccessCode(groupID){
+		for (let id of Object.keys(this.competitionGroups)){
+			if (this.competitionGroups[id].id == groupID){
+				if (this.competitionGroups[id].usingAccessCode == true){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	onGroupInfoLoaded(){
@@ -139,7 +183,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
 
 		this._quizSettingsService.setCompetitionGroupID(this.selectedGroupID);
 		this.updateResultlistIncrement++;
-		this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.getSelectedCompetitionGroup(this.selectedGroupID)
+		this.selectedCompetitionGroupData =	this._quizCompetitionGroupService.getSelectedCompetitionGroup()
 
 		let compSpecieList = this.selectedCompetitionGroupData["specieList"];
 		this._quizSpeciesService.clearSelectedSpecies();
@@ -155,7 +199,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
 		}
 
 		this.loading = false;
-		console.log("this.competitionGroupSelected:", this.selectedCompetitionGroupData, " id: ", this.selectedGroupID);
+		//console.log("this.competitionGroupSelected:", this.selectedCompetitionGroupData, " id: ", this.selectedGroupID);
 
 	}
 

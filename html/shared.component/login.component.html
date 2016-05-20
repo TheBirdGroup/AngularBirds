@@ -4,10 +4,11 @@
 
 <button class="btn btn-primary btn-m"(click)="loginBTN()">{{loginTranslation}}</button>
 <button class="btn btn-primary btn-m"(click)="registerBTN()">{{registerTranslation}}</button>
+<button class="btn btn-primary btn-m"(click)="logoutBTN()">Logout</button>
 
 <br>
 
-    <form *ngIf="showLogin"(ngSubmit)="onLogin(f)" #f="ngForm">
+    <form *ngIf="showAuthenticationForm"(ngSubmit)="onLogin(f)" #f="ngForm">
         <div class="form-group">
             <label for="mail"> {{emailTranslation}} </label>
             <input ngControl="mail" type="mail" class="form-control" id="mail" required>
@@ -23,13 +24,15 @@
 
         <br>
         <button class="btn btn-primary" type="submit" [disabled]="!f.valid"> {{actionText}} </button>
-        <div [class.alert-success]="success">
-          <h3>{{statusMessage}}</h3>
-        </div>
-        <div [class.alert-danger]="error">
-          <h3>{{statusMessageError}}</h3>
-        </div>
+
     </form>
+
+	<div [class.alert-success]="success">
+	  <h3>{{statusMessage}}</h3>
+	</div>
+	<div [class.alert-danger]="error">
+	  <h3>{{statusMessageError}}</h3>
+	</div>
 
 
 <!--<div [class.alert alert-success]="success">-->

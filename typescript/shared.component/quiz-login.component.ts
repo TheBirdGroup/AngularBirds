@@ -34,7 +34,7 @@ export class QuizLoginComponent implements OnInit{
 	statusMessageError="";
 	confirmPassword;
 	action;
-	showLogin:boolean=false;
+	showAuthenticationForm:boolean=false;
 	//showRegister: boolean = false;
 	success:boolean;
 	error:boolean;
@@ -79,6 +79,9 @@ export class QuizLoginComponent implements OnInit{
 
 	onResponseFromAuthentication(response){
 
+		this.statusMessage="";
+		this.statusMessageError="";
+
 		//login
 		if (response.status && this.action=="login"){
 			this.statusMessage = this.loginSuccessfullTranslation;
@@ -114,12 +117,29 @@ export class QuizLoginComponent implements OnInit{
 			}
 		}
 
+		if(response.status && this.action == "logout"){
+			this.statusMessage = "logout successfull";
+			this.success = true;
+			this.error = false;
+			this._quizAuthenticationService.setAuthenticated(false);
+			this._quizAuthenticationService.setAuthenticationToken(response.sessionID);
+			this._quizAuthenticationService.removeAutoLogin();
+		}else{
+			if(!response.status && this.action == "logout"){
+				this.statusMessageError = "error login out";
+				console.log("response: ",response);
+				this.error=true;
+				this.success=false;
+			}
+		}
+
+
 	}
 
 	loginBTN(){
-		this.showLogin = !this.showLogin;
+		this.showAuthenticationForm = !this.showAuthenticationForm;
 		this.action="login";
-		
+
 		this.statusMessage="";
 		this.statusMessageError="";
 
@@ -127,13 +147,35 @@ export class QuizLoginComponent implements OnInit{
 	}
 
 	registerBTN(){
-		this.showLogin = !this.showLogin;
+		this.showAuthenticationForm = !this.showAuthenticationForm;
 		this.action = "reg";
-		
+
 		this.statusMessage="";
 		this.statusMessageError="";
 
 		this.checkActionType();
+	}
+
+	logoutBTN(){
+
+		this.showAuthenticationForm = false;
+		this.action="logout";
+
+		this.statusMessage="";
+		this.statusMessageError="";
+
+		this.mail = "";
+        this.password = "";
+		this.autoLogin = "";
+		this.action;
+		this.success=false;
+		this.error=false;
+		this.statusMessage="";
+		this.statusMessageError="";
+
+        this._quizAuthenticationService.authenticate(this.mail,this.password,this.autoLogin,this.action)
+			.subscribe((response)=>(this.onResponseFromAuthentication(response)));
+
 	}
 
 	checkActionType(){

@@ -2,3 +2,11 @@
 .text-left{
     margin-left: 220px;
 }
+
+
+
+    @media screen and (min-width: 374px) {
+        .text-left {
+            margin-left: 20px;;
+        }
+    }

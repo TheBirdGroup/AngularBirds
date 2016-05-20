@@ -3,33 +3,38 @@
 
 <button class="btn btn-primary btn-m"(click)="loginBTN()">Login </button>
 <button class="btn btn-primary btn-m"(click)="registerBTN()"> Register </button>
+<br>
 
     <form *ngIf="showLogin"(ngSubmit)="onLogin(f)" #f="ngForm">
-        <div>
+        <div class="form-group">
             <label for="mail"> Mail </label>
-            <input ngControl="mail" type="mail" id="mail" required>
+            <input ngControl="mail" type="mail" class="form-control" id="mail" required>
         </div>
         <div>
             <label for="password"> Password </label>
-            <input ngControl="password" type="password" id="password" required>
+            <input ngControl="password" type="password" class="form-control" id="password" required>
         </div>
         <!-- <div>
             <label for="autoLogin"> Auto Login? </label>
             <input ngControl="autoLogin" type="checkbox" id="autoLogin">
         </div> -->
+
+        <br>
         <button class="btn btn-primary" type="submit" [disabled]="!f.valid"> {{actionText}} </button>
+        <div [class.alert-success]="success">
+          {{statusMessage}}
+        </div>
+        <div [class.alert-danger]="error">
+          {{statusMessageError}}
+        </div>
     </form>
 
 
 <!--<div [class.alert alert-success]="success">-->
-    <div [class.alert-success]="success">
-      {{statusMessage}}
-    </div>
 
-    <div [class.alert-danger]="error">
-      {{statusMessageError}}
-    </div>
+    <br>
+
 </div>
 
-<h3 *ngIf="_quizAuthenticationService.getAuthenticated()">You are authenticated and logged inn</h3>
-<h3 *ngIf="!_quizAuthenticationService.getAuthenticated()">You are neither authenticated or logged inn></h3>
+<h3 *ngIf="_quizAuthenticationService.getAuthenticated()">You are authenticated and logged in</h3>
+<h3 *ngIf="!_quizAuthenticationService.getAuthenticated()">You are neither authenticated or logged in</h3>

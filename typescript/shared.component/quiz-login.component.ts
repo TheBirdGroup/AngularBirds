@@ -96,6 +96,9 @@ export class QuizLoginComponent {
 		this.showLogin = !this.showLogin;
 		this.action="login";
 		this.actionText="Login";
+		//this.error = !this.error;
+		this.statusMessage="";
+		this.statusMessageError="";
 
 
 	}
@@ -104,6 +107,8 @@ export class QuizLoginComponent {
 		this.showLogin = !this.showLogin;
 		this.action = "reg";
 		this.actionText = "Register"
+		this.statusMessage="";
+		this.statusMessageError="";
 
 	}
 

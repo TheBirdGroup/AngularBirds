@@ -80,6 +80,11 @@ export class QuizAuthenticationService{
 
     }
 
+	removeAutoLogin(){
+		this._localStorageService.remove("authentication_autologinID");
+		this._localStorageService.remove("authentication_autologinValue");
+	}
+
     //can have token without beein logged inn
     setAuthenticationToken(token){
         this._quizSettingsService.setAuthenticationToken(token);

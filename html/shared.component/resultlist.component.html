@@ -1,13 +1,17 @@
-<h3>Top {{limit}} highscore for {{timespan}} <span *ngIf="competitionGroupID >= 0">for Competition Group {{competitionGroupID}} </span></h3>
+<h3>{{showAllTranslation}} {{limit}} {{highscoresTranslation}}
+	<div *ngIf="timespan =='day'">{{dayTranslation}}</div>
+	<div *ngIf="timespan =='year'">{{yearTranslation}}</div>
+	<span *ngIf="competitionGroupID >= 0">for Competition Group {{competitionGroupID}} </span>
+</h3>
 <div class="resultsListTable">
 	<table class="table table-bordered">
 	  <thead>
 		<tr>
 		  <th>#</th>
-		  <th>Name</th>
-		  <th>Area</th>
-		  <th>Score</th>
-		  <th>Time</th>
+		  <th>{{nameTranslation}}</th>
+		  <th>{{areaTranslation}}</th>
+		  <th>{{scoreTranslation}}</th>
+		  <th>{{timeTranslation}}</th>
 		</tr>
 	  </thead>
 	  <tbody>

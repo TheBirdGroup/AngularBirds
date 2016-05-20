@@ -3,6 +3,7 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 @Component({
 	selector: 'birdid-resultlist',
@@ -18,8 +19,17 @@ import { QuizResultsService }  from './../shared/quiz-results.service';
 })
 
 export class ResultlistComponent implements OnInit, OnChanges{
+	//translation variables
+	showAllTranslation;
+	highscoresTranslation;
+	dayTranslation;
+	yearTranslation;
+	nameTranslation;
+	areaTranslation;
+	scoreTranslation;
+	timeTranslation;
 
-	timespan = "day";
+	timespan;
 	limit = 10;
 	competitionGroupID;
 	updateResultlistInc = -1;
@@ -30,10 +40,18 @@ export class ResultlistComponent implements OnInit, OnChanges{
 
 	constructor(
 		private _quizResultsService: QuizResultsService,
+		private _quizTranslationService: QuizTranslationService,
 		private _quizSettingsService: QuizSettingsService){}
 
 		ngOnInit() {
-			//this.competitionGroupID=24;
+			this.showAllTranslation = this._quizTranslationService.getTranslationByID(278);
+			this.highscoresTranslation = this._quizTranslationService.getTranslationByID(331);
+			this.dayTranslation = this._quizTranslationService.getTranslationByID(85);
+			this.yearTranslation = this._quizTranslationService.getTranslationByID(87);
+			this.nameTranslation = this._quizTranslationService.getTranslationByID(525);
+			this.areaTranslation = this._quizTranslationService.getTranslationByID(171);
+			this.scoreTranslation = this._quizTranslationService.getTranslationByID(229);
+			this.timeTranslation = this._quizTranslationService.getTranslationByID(230);
 
 		}
 
@@ -42,6 +60,7 @@ export class ResultlistComponent implements OnInit, OnChanges{
 
 			this.quizSettings = this._quizSettingsService.getQuizSettings();
 			this.loadQuizResults();
+		//	this.checkTimespan();
 
 		}
 

@@ -81,7 +81,6 @@
 			  </button>
 			</div>
 			<br>
-			<br>
 		</span>
 
 		<h4> {{selSpeciesTitle}}? </h4>
@@ -93,8 +92,9 @@
 				{{noButton}}
 			</button>
 		</div>
+
 		<br>
-		<br>
+
 		<h4> Hints? </h4>
 		<div class="btn-group" data-toggle="buttons">
 			<button (click)="setHelp(true)" class="btn btn-lg btn-primary" [ngClass]="{'active': matchSetHelp(true)}">
@@ -108,6 +108,7 @@
 		<br>
 
 		<button  class="btn btn-primary btn-lg"(click)="startQuiz()">{{startQuizButton}}</button>
+		<br>
 		<br>
 	</div>
 

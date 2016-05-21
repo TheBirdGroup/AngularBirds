@@ -5,8 +5,8 @@ import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 @Component({
 	selector: 'birdid-quiz-login',
-	templateUrl: 'app/shared.component/login.component.html',
-    styleUrls:  ['app/shared.component/login.component.css'],
+	templateUrl: 'app/shared.component/quiz-login.component.html',
+    styleUrls:  ['app/shared.component/quiz-login.component.css'],
 
     directives: [
 
@@ -98,6 +98,7 @@ export class QuizLoginComponent implements OnInit{
 			this.statusMessage = this.loginSuccessfullTranslation;
 			this.success=true;
 			this.error = false;
+			this.showAuthenticationForm = false;
 
 			this._quizAuthenticationService.setAuthenticated(true);
 			this._quizAuthenticationService.setAuthenticationToken(response.sessionID);
@@ -115,6 +116,7 @@ export class QuizLoginComponent implements OnInit{
 			this.statusMessage = this.regSuccessfullTranslation;
 			this.success=true;
 			this.error = false;
+			this.showAuthenticationForm = false;
 
 			this._quizAuthenticationService.setAuthenticated(true);
 			this._quizAuthenticationService.setAuthenticationToken(response.sessionID);
@@ -132,6 +134,7 @@ export class QuizLoginComponent implements OnInit{
 			this.statusMessage = this.resetPasswordSuccessfullTranslation;
 			this.success=true;
 			this.error = false;
+			this.showAuthenticationForm = true;
 
 			this._quizAuthenticationService.setAuthenticated(false);
 			this._quizAuthenticationService.setAuthenticationToken(response.sessionID);
@@ -149,6 +152,7 @@ export class QuizLoginComponent implements OnInit{
 			this.statusMessage = this.logoutSuccessfullTranslation;
 			this.success = true;
 			this.error = false;
+
 			this._quizAuthenticationService.setAuthenticated(false);
 			this._quizAuthenticationService.setAuthenticationToken(response.sessionID);
 			this._quizAuthenticationService.removeAutoLogin();

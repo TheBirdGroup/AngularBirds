@@ -42,7 +42,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
     mediaDiff;
     numberOfQuestions;
 	areaList=[];
-	selectedArea;
+	selectedArea = 0;
 	quizHighscoreData;
 	quizHighscoreDataLimit50;
 	quizHighscoreLoaded = false;
@@ -104,7 +104,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 
 	onSetArea(){
 		 this._quizSettingsService.setArea(this.selectedArea);
-		 //console.log("Selected area:", this.selectedArea);
+		 console.log("Selected area:", this.selectedArea);
 		 this.updatehighscorelist();
 
 	}
@@ -206,7 +206,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 				this._router.navigate(["QuizSelectSpecies"]);
 			}
 		}
-		
+
 	}
 	/*selectMediaDiff(mediaDifficulity){
 		if(this._quizSettingsService.setMediaDiff(mediaDifficulity)){

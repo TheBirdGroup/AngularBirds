@@ -10,7 +10,7 @@
 
 		{{current.name}} ({{current.latin}})
 		<span *ngIf="checkIfButtonIsSelected(current.id, true)">
-			 - <b class="black" >Selected</b>
+			 - <b class="black" >{{savedSelChoiceTranslation}}</b>
 		</span>
 
 	</button>
@@ -20,8 +20,8 @@
 
 <br>
 
-<button class="btn btn-primary" (click)="onAnswerButtonClick()">Next Question</button>
+<button class="btn btn-primary" (click)="onAnswerButtonClick()">{{nextQuestionTranslation}}</button>
 <br><br>
 <div *ngIf="disableHints == false">
-<button class="btn btn-info" [disabled]="disableHints" (click)="removeWrongAnswer()">Hint</button> Hints left: {{hints}}
+<button class="btn btn-info" [disabled]="disableHints" (click)="removeWrongAnswer()">Hints</button>: {{hints}}
 </div>

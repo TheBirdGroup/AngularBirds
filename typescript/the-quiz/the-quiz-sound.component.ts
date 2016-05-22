@@ -1,5 +1,6 @@
 import { Component, ViewChild, EventEmitter, OnInit, OnChanges, OnDestroy,  ElementRef }       from 'angular2/core';
 import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
@@ -48,12 +49,23 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
-		private _elementRef: ElementRef
+		private _elementRef: ElementRef,
+		private _router: Router
 	){}
 
 	ngOnInit() {
 
+		this._router.subscribe((newRoute) => this.onRouteChange(newRoute));
 
+	}
+
+	onRouteChange(newRoute){
+
+		console.log("Not gonna see this");
+		if(this.quizSoundObject != null){
+			this.quizSoundObject.destroy();
+			this.quizSoundObject = null;
+		}
 
 	}
 
@@ -107,11 +119,10 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 
 	ngOnDestroy(){
 
-		console.log("ngOnDestroy;");
+		console.log("ngOnDestroy sound, ofc not executing");
 		if(this.quizSoundObject != null){
 			this.quizSoundObject.destroy();
 			this.quizSoundObject = null;
-			console.log("ngOnDestroy; done");
 		}
 
 	}

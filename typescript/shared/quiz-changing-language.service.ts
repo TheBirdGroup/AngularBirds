@@ -37,7 +37,7 @@ export class QuizChangingLanguageService{
 			.map(response => response.json()).subscribe(
 	            data => {
 	                this.languagesData = data;
-					console.log("langs d ", data);
+					//console.log("langs d ", data);
 	                this.langDataLoaded = true;
 					this.dataLoadedEventEmiter.emit(true);
 	            },

@@ -133,7 +133,7 @@ export class QuizResultComponent implements OnInit  {
 
 	startNewQuiz(){
 
-		this._router.navigate(["QuizMediaSelect"]);
+		this._router.navigate(["QuizWelcome"]);
 
 	}
 	goToSummary(){

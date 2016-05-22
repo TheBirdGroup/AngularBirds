@@ -86,7 +86,7 @@ export class QuizMasterComponent implements OnInit {
  	 //2 = quiz
  	 //3 =  result
 
-	 devMode = true;
+	 devMode = false;
 
 	  constructor(
 		  private _quizSettingsService: QuizSettingsService,
@@ -115,6 +115,7 @@ export class QuizMasterComponent implements OnInit {
 	  onRouteChange(newRoute){
 
 		  //console.log("Route change: ", newRoute );
+
 
 		  //mostly only used for dev bar on top currently
 		  if(newRoute == 'competitionGroupComponent'){
@@ -198,15 +199,7 @@ export class QuizMasterComponent implements OnInit {
 
 	 }
 
-	  nextComponent(){
 
-		  this.currentActive ++;
-		  if(this.currentActive > 9){
-			  this.currentActive = 0;
-		  }
-
-
-	  }
 
 	  gotoComponent(compID){
 

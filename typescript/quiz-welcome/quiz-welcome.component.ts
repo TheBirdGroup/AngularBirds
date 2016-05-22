@@ -42,6 +42,7 @@ export class QuizWelcomeComponent implements OnInit{
         this.selectLanguageTranslation = this._quizTranslationService.getTranslationByID(27);
 
 		this._quizSettingsService.setCompetitionGroupID(-1);
+		this._quizSpeciesService.clearSelectedSpecies();
 
     }
 

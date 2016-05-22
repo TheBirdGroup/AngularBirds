@@ -35,6 +35,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 	noButtonTranslation;
 	unlimitedButtonTranslation;
 	secButtonTranslation;
+	backButtonTranslation;
 
 
     mediaDiff;
@@ -77,6 +78,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		this.noButtonTranslation = this._quizTranslationService.getTranslationByID(483);
 		this.unlimitedButtonTranslation = this._quizTranslationService.getTranslationByID(194);
 		this.secButtonTranslation = this._quizTranslationService.getTranslationByID(111);
+		this.backButtonTranslation = this._quizTranslationService.getTranslationByID(115);
 
 		this._quizSettingsService.setMediaDiff(1);
 		this._quizSettingsService.selectNumberOfQuestions(10);

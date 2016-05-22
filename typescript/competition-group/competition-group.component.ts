@@ -98,7 +98,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	getCompetitionGroups(){
 		this.competitionGroups = this._quizCompetitionGroupService.getCompetitionGroups();
 		this.competitionGroupsProsessed = this.competitionGroups;
-		//console.log("this are the copetition groups", this.competitionGroups)
+
 	}
 
 	inputGroupName(event){
@@ -134,7 +134,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
 	selectGroup(selectedGroupID){
 
 		this.selectedGroupID = selectedGroupID;
-		//console.log('test0',this.selectedGroupID)
+
 
 		if(this.isCompetitionGroupUsingAccessCode(selectedGroupID)){
 			this.inputGroupAccessCode = "";
@@ -229,7 +229,7 @@ export class QuizCompetitionGroupComponent implements OnInit{
 		}
 
 		this.loading = false;
-		//console.log("this.competitionGroupSelected:", this.selectedCompetitionGroupData, " id: ", this.selectedGroupID);
+		
 
 	}
 

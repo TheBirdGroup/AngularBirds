@@ -74,7 +74,6 @@ export class QuizResultComponent implements OnInit  {
 
 			let payload:string = this._quizLogicService.getQuizPayload();
 
-			//console.log("payload", payload);
 
 			if(payload.length > 0){
 				this._quizResultsService.postUserQuizResults(this._quizSettingsService.getQuizSettings(), payload)
@@ -114,20 +113,17 @@ export class QuizResultComponent implements OnInit  {
 		console.log("maxScore: ", maxScore);
 
 		this._quizResultsService.uploadQuizResults(score, maxScore, this.formDataUsername, this._quizSettingsService.getQuizSettings()).subscribe(
-			//data => this.response = JSON.stringify(data),
 			data => this.onServerSubmit(data),
 			error => console.log("error: ", error)
 		);
 
-		//console.log(formSubmitObject);
-		//console.log("formDataUsername: ", this.formDataUsername)
+
 		this.formInformation = formSubmitObject.value;
 
 	}
 
 	onServerSubmit(response){
 
-		//console.log("working: ", response);
 
 		this.dataSavedStatus = "Saved: " + response['returnData'];
 		this.dataSavedStatus = "Your score was successfully saved to the server";

@@ -141,7 +141,7 @@ export class QuizLoginComponent implements OnInit{
 			this._quizAuthenticationService.removeAutoLogin();
 
 		}else{
-			if(!response.status && this.action == "reg"){
+			if(!response.status && this.action == "resetPass"){
 				this.statusMessageError = response.statusTextClean;
 				this.error=true;
 				this.success=false;
@@ -189,7 +189,7 @@ export class QuizLoginComponent implements OnInit{
 		}else{
 			this.showAuthenticationForm = true;
 		}
-		this.displayInputPassword = true
+		this.displayInputPassword = true;
 		this.action = "reg";
 
 		this.statusMessage="";
@@ -226,7 +226,7 @@ export class QuizLoginComponent implements OnInit{
 		}else{
 			this.showAuthenticationForm = true;
 		}
-		this.displayInputPassword = false
+		this.displayInputPassword = false;
 		this.action = "resetPass";
 
 		this.statusMessage="";

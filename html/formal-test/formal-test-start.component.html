@@ -6,7 +6,7 @@
 		Also remeber to close your windows and hide your kids
 	</div>
 
-	<div *ngIf="!accessCodeWrong" class="jumbotron formalTestStartInfo">
+	<div *ngIf="!accessCodeWrong && _quizAuthenticationService.getAuthenticated()" class="jumbotron formalTestStartInfo">
 
 		<form (ngSubmit)="false" #form="ngForm" >
 
@@ -35,10 +35,14 @@
 	</div>
 
 	<div *ngIf="accessCodeWrong" class="alert alert-danger formalTestStartInfo">
-		<h1>Accesscode inncorect or already used!</h1>
+		<h2>Accesscode inncorect or already used!</h2>
+	</div>
+	<div *ngIf="!_quizAuthenticationService.getAuthenticated()" class="alert alert-danger formalTestStartInfo">
+		<h2>You are not logged inn!</h2>
+		<birdid-quiz-login> </birdid-quiz-login>
 	</div>
 
-	<button  class="btn btn-primary btn-lg"(click)="onStartButtonClick()">{{_quizTranslationService.getTranslationByID(149)}}</button>
+	<button  class="btn btn-primary btn-lg" [disabled]="!_quizAuthenticationService.getAuthenticated()" (click)="onStartButtonClick()">{{_quizTranslationService.getTranslationByID(149)}}</button>
 
 </div>
 

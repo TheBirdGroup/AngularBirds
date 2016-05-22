@@ -9,12 +9,16 @@ const clipboard = require('electron').clipboard;
 const Menu = electron.Menu;
 const Tray = electron.Tray;
 
+const debug = /--debug/.test(process.argv[2])
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let appIcon = null;
 
 function createWindow () {
+
+	console.log("debug: ", process.argv[2]);
 
 
 	var windowOptions = {
@@ -37,7 +41,9 @@ function createWindow () {
 	//mainWindow.loadURL('vg.no')
 
 	// Open the DevTools.
-	//mainWindow.webContents.openDevTools()
+	if(debug){
+		mainWindow.webContents.openDevTools()
+	}
 
 	appIcon = new Tray(__dirname + '/icon.png');
 	var contextMenu = Menu.buildFromTemplate([

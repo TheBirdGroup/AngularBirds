@@ -6,13 +6,16 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizTranslationService }  from './../shared/quiz-translation.service';
 import { QuizSpecieService } from "./../shared/quiz-specie.service";
 import { QuizFormalTestService }  from './../shared/quiz-formal-test.service';
+import { QuizAuthenticationService } from '../shared/quiz-authentication.service';
+
+import {QuizLoginComponent} from '../shared.component/quiz-login.component';
 
 @Component({
 	selector: 'birdid-formal-test-start',
 	templateUrl: 'app/formal-test/formal-test-start.component.html',
 	styleUrls:  ['app/formal-test/formal-test-start.component.css'],
 	directives: [
-
+		QuizLoginComponent
 	],
 	providers: [
 	  HTTP_PROVIDERS
@@ -36,7 +39,8 @@ export class FormalTestStartComponent implements OnInit{
 		private _quizTranslationService: QuizTranslationService,
 		private _quizSpeciesService: QuizSpecieService,
 		private _quizFormalTestService: QuizFormalTestService,
-		private _router: Router
+		private _router: Router,
+		private _quizAuthenticationService: QuizAuthenticationService
 
 	){}
 

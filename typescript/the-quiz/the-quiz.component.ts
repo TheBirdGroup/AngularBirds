@@ -235,5 +235,8 @@ export class TheQuizComponent implements OnInit{
 
 	}
 
+backToWelcomeFromTheQuiz(){
+	this._router.navigate(["QuizWelcome"]);
+	}
 
 }

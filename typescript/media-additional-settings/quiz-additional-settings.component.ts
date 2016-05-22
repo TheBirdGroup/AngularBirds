@@ -230,6 +230,9 @@ export class QuizAdditionalSettingsComponent implements OnInit{
         }
     }*/
 
+backToWelcomeFromAdditionalSettings(){
+	this._router.navigate(["QuizWelcome"]);
 
+	}
 
 }

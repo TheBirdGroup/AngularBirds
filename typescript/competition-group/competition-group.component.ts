@@ -205,6 +205,10 @@ export class QuizCompetitionGroupComponent implements OnInit{
 				this.errorMesageCompGroup = "You need to log in for this group!";
 			}
 
+		}else if(!this._quizAuthenticationService.getAuthenticated() && this.selectedCompetitionGroupData.usingAccessCode){
+				//is logged inn
+				this.errorMesageCompGroup = "You need to be logged inn!!";
+
 		}else{
 			//all ok!
 			this.errorMesageCompGroup = "";

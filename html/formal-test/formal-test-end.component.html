@@ -3,9 +3,9 @@
 </div>
 
 <div *ngIf="!loading && submitError" class="alert alert-danger formalTestEndInfo">
-	<h1>Problems posting results: {{submitErrorText}}</h1>
+	<h2>Problems posting results: {{submitErrorText}}</h2>
 </div>
 
 <div *ngIf="!loading && submitSuccess" class="jumbotron formalTestEndInfo">
-	Formal test is now over and your choices has been submitted successfully!
+	<h3>Formal test is now over and your choices has been submitted successfully!</h3>
 </div>

@@ -20,6 +20,7 @@ import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 
 export class QuizMediaSelectComponent implements OnInit{
+	backButtonTranslation;
 
 	//TODO, convert to array of JSON object
 	mediaTypes = [
@@ -50,6 +51,8 @@ export class QuizMediaSelectComponent implements OnInit{
 		this.mediaTypes[3][1] = this._quizTranslationService.getTranslationByID(312);
 		//beginner quiz
 		this.mediaTypes[4][1] = this._quizTranslationService.getTranslationByID(168);
+		//back
+		this.backButtonTranslation = this._quizTranslationService.getTranslationByID(115);
 
 		//disable beginner quiz if on comp group qithout restrictions
 		if(this._quizSettingsService.getCompetitionGroupID() >= 0){

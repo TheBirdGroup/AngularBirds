@@ -25,6 +25,8 @@ import {QuizLoginComponent} from '../shared.component/quiz-login.component';
 
 
 export class FormalTestStartComponent implements OnInit{
+	//translation variables
+	backButtonTranslation;
 
 	loading = false;
 	codeOk = false;
@@ -45,6 +47,7 @@ export class FormalTestStartComponent implements OnInit{
 	){}
 
 	ngOnInit() {
+		this.backButtonTranslation = this._quizTranslationService.getTranslationByID(115);
 
 
 	}

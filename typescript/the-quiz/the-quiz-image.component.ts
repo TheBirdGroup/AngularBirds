@@ -15,7 +15,7 @@ import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 	providers: [
 	  HTTP_PROVIDERS
 	],
-	inputs: ['specieQuestionObject'], //using ALIAS
+	inputs: ['specieQuestionObject', 'zoomEnabled'], //using ALIAS
 })
 
 
@@ -27,6 +27,7 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 	extraSiteID;
 
 	specieQuestionObject:QuizQuestion;
+	zoomEnabled = true;
 
     mediaID = 0;
 	mediaURL = "";
@@ -103,7 +104,7 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 			this.imageUrlParms = "accessCode="+this.accessCode+"&mediaToken="+this.mediaURL;
 
 		}else{
-			
+
 			this.imageUrlParms = "mediaID="+this.mediaID+"&siteID="+this.siteID;
 
 		}
@@ -114,7 +115,7 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 
 		//console.log("hallo");
 		let canvas = this.myCanvas.nativeElement;
-    	this.context = canvas.getContext("2d")
+    	this.context = canvas.getContext("2d");
 
 		var ctx = this.context;
 
@@ -175,7 +176,7 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 
 
 
-			if(this.mouseOnImage){
+			if(this.mouseOnImage && this.zoomEnabled){
 				ctx.scale(this.zoomFactor, this.zoomFactor);
 				//ctx.drawImage(this.myImage.nativeElement, -this.zoomPointX/this.zoomFactor, -this.zoomPointY/this.zoomFactor, 500, 500);
 				ctx.drawImage(this.myImage.nativeElement, -this.zoomPointX/2, -this.zoomPointY/2, this.canvasSizeX, this.canvasSizeY);
@@ -194,11 +195,29 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 
 	mouseMoveCanvas(event){
 
+		if(!this.zoomEnabled){
+			return;
+		}
+
 		var ctx = this.context;
 
 		let offLeft = ctx.canvas.offsetLeft;
 		let offTop = ctx.canvas.offsetTop;
 
+		//WORK ON PROGRESS
+		// let element = this.myCanvas.nativeElement;
+		//
+		// var top = 0, left = 0;
+	    // do {
+	    //     top += element.offsetTop  || 0;
+	    //     left += element.offsetLeft || 0;
+	    //     element = element.offsetParent;
+	    // } while(element);
+		//
+		// console.log("mose moove: ", top, "|",left);
+		//
+		// offLeft = left;
+		// offTop = top;
 
 		// console.log("hehe1223", event);
 		this.zoomPointX = event.layerX - offLeft; //temp fix
@@ -214,6 +233,10 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 
 	mouseLeaveCanvas(event){
 
+		if(!this.zoomEnabled){
+			return;
+		}
+
 		//console.log("bye");
 		this.mouseOnImage = false;
 		this.updateImage();
@@ -223,11 +246,30 @@ export class TheQuizImageComponent implements OnInit, OnChanges{
 
 	mouseEnterCanvas(event){
 
+		if(!this.zoomEnabled){
+			return;
+		}
+
 		//console.log("welcome");
 		this.mouseOnImage = true;
 		this.updateImage();
 
 
+	}
+
+	mouseClickCanvas(event){
+
+		if(!this.zoomEnabled){
+			return;
+		}
+
+		if(this.mouseOnImage){
+			this.mouseOnImage = false;
+			this.updateImage();
+		}else if(!this.mouseOnImage){
+			this.mouseOnImage = true;
+			this.updateImage();
+		}
 	}
 
 

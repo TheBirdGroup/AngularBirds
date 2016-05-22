@@ -86,7 +86,7 @@ export class QuizMasterComponent implements OnInit {
  	 //2 = quiz
  	 //3 =  result
 
-	 devMode = true;
+	 devMode = false;
 
 	  constructor(
 		  private _quizSettingsService: QuizSettingsService,

@@ -129,4 +129,8 @@ export class FormalTestStartComponent implements OnInit{
 
 	}
 
+	backToWelcomeFromFormalTest(){
+		this._router.navigate(["QuizWelcome"]);
+	}
+
 }

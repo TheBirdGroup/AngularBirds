@@ -43,7 +43,9 @@
 	</div>
 
 	<button  class="btn btn-primary btn-lg" [disabled]="!_quizAuthenticationService.getAuthenticated()" (click)="onStartButtonClick()">{{_quizTranslationService.getTranslationByID(149)}}</button>
-
+	<button (click)="backToWelcomeFromFormalTest()" type="button" class="btn btn-danger btn-lg ">
+		<span class="glyphicon glyphicon-arrow-left"></span> Back
+	</button>
 </div>
 
 <div *ngIf="loading">

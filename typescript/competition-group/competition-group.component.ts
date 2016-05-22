@@ -229,8 +229,12 @@ export class QuizCompetitionGroupComponent implements OnInit{
 		}
 
 		this.loading = false;
-		
 
+
+	}
+
+	backToWelcomeFromCompetitionGroup(){
+		this._router.navigate(["QuizWelcome"]);
 	}
 
 

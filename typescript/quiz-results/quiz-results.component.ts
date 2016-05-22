@@ -69,7 +69,8 @@ export class QuizResultComponent implements OnInit  {
 		//submit statistic if logged in and not several soundquiz
 		if(	this._quizAuthenticationService.getAuthenticated()
 			&& !this._quizSettingsService.isSeveralSoundQuiz()
-			&& !this._quizSettingsService.isUsingHelp()){
+			&& !this._quizSettingsService.isUsingHelp()
+			&& !this._quizSettingsService.isBeginnerQuiz()){
 
 			let payload:string = this._quizLogicService.getQuizPayload();
 

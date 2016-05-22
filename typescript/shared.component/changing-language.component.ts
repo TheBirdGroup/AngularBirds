@@ -3,6 +3,7 @@ import { Http, HTTP_PROVIDERS } from 'angular2/http';
 import { Router } from 'angular2/router';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizChangingLanguageService }  from './../shared/quiz-changing-language.service';
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 
 @Component({
@@ -19,6 +20,10 @@ import { QuizChangingLanguageService }  from './../shared/quiz-changing-language
 })
 
 export class QuizChangingLanguageComponent implements OnInit, OnChanges{
+	//translation variables
+	titleTranslation;
+	saveLanguageTranslation;
+	
     quizSettings;
     competitionGroupID;
     languagesList;
@@ -28,11 +33,15 @@ export class QuizChangingLanguageComponent implements OnInit, OnChanges{
 	constructor(
 		private _quizChangingLanguageService: QuizChangingLanguageService,
 		private _quizSettingsService: QuizSettingsService,
+		private _quizTranslationService: QuizTranslationService,
 		private _router: Router
 	){}
 
 
 		ngOnInit() {
+			//translation
+			this.titleTranslation = this._quizTranslationService.getTranslationByID(27);
+			this.saveLanguageTranslation = this._quizTranslationService.getTranslationByID(28);
 
 			this.languagesList=this._quizChangingLanguageService.getLanguages();
 

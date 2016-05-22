@@ -141,7 +141,7 @@ export class QuizResultsService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post('https://hembstudios.no/birdid/IDprogram/postUserQuizResults.php?JSON=1&siteID='+this.siteID+"&sessionID="+sessionID, body,{
+		return this._http.post(constants.baseURL+'/postUserQuizResults.php?JSON=1&siteID='+this.siteID+"&sessionID="+sessionID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());

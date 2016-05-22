@@ -9,6 +9,9 @@ import { Observable } from 'rxjs/Observable';
 import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
+import {constants} from './../constants';
+
+
 
 // import { quizQuestions } from './mock-quizQuestion';
  //import { QuizQuestion } from './quizQuestion';
@@ -50,7 +53,7 @@ export class QuizFormalTestService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post('https://hembstudios.no/birdid/IDprogram/setStartTimeFormalTest.php?JSON=1&siteID='+this.siteID+"&sessionID="+sessionID, body,{
+		return this._http.post(constants.baseURL+'/setStartTimeFormalTest.php?JSON=1&siteID='+this.siteID+"&sessionID="+sessionID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());
@@ -73,7 +76,7 @@ export class QuizFormalTestService{
 
 		var headers = new Headers();
   		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post('https://hembstudios.no/birdid/IDprogram/postFormalTestResults.php?JSON=1&siteID='+this.siteID+"&sessionID="+sessionID, body,{
+		return this._http.post(constants.baseURL+'/postFormalTestResults.php?JSON=1&siteID='+this.siteID+"&sessionID="+sessionID, body,{
 	    	headers: headers
 	    })
 			.map(response => response.json());

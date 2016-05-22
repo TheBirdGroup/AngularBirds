@@ -14,3 +14,7 @@
 <button *ngIf="arrayOfSelectedSpecies.length > 0" class="btn btn-lg btn-danger" (click)="resetSpecieList()">{{resetSelectedTranslation}}</button>
 <br>
 <button class="btn btn-lg btn-primary" (click)="postSpeciesId()">{{startQuizTranslation}}</button>
+
+<button (click)="backToAdditionalSettingsFromSelectSpecies()" type="button" class="btn btn-danger btn-lg  compBackBtn">
+    <span class="glyphicon glyphicon-arrow-left"></span> Back
+</button>

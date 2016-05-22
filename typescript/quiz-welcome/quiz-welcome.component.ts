@@ -4,6 +4,7 @@ import {QuizLoginComponent} from '../shared.component/quiz-login.component';
 
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 import { QuizTranslationService }  from './../shared/quiz-translation.service';
+import { QuizSettingsService }  from './../shared/quiz-settings.service';
 
 
 @Component({
@@ -28,17 +29,21 @@ export class QuizWelcomeComponent implements OnInit{
     constructor(
         private _router: Router,
         private _quizSpeciesService: QuizSpecieService,
-        private _quizTranslationService: QuizTranslationService
+        private _quizTranslationService: QuizTranslationService,
+		private _quizSettingsService: QuizSettingsService
 
     ){}
-    
+
     ngOnInit(){
         this.titleTranslation = this._quizTranslationService.getTranslationByID(120);
         this.normalQuizTranslation = this._quizTranslationService.getTranslationByID(158);
         this.competitionGroupsTranslation = this._quizTranslationService.getTranslationByID(439);
         this.takeFormalTestTranslation = this._quizTranslationService.getTranslationByID(217);
         this.selectLanguageTranslation = this._quizTranslationService.getTranslationByID(27);
-        
+
+		this._quizSettingsService.setCompetitionGroupID(-1);
+		this._quizSpeciesService.clearSelectedSpecies();
+
     }
 
     theQuiz(){

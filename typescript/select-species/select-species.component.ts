@@ -95,4 +95,8 @@ export class SelectSpeciesComponent implements OnInit {
         this.arrayOfSelectedSpecies = [];
     }
 
+    backToAdditionalSettingsFromSelectSpecies(){
+        this._router.navigate(["QuizMediaAdditionalSettings"]);
+    }
+
 }

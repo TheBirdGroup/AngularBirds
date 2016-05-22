@@ -41,12 +41,10 @@ export class QuizSummaryComponent implements OnInit  {
     ) {}
     ngOnInit() {
         this.quizSummary = this._quizLogicService.quizQuestions;
-        //console.log(this.quizSummary);
         this.specieList = this._quizSpeciesService.getSpecieList();
         this.areaCountry = this._quizSettingsService.getCurrentAreaName();
         this.setQuizInfo();
         this.setName();
-        //this.testFunction();
     }
     goToResults(){
         this._router.navigate(["QuizMediaQuizResults"]);
@@ -63,20 +61,13 @@ export class QuizSummaryComponent implements OnInit  {
                        }
 
                    }
-                   /*if(this.quizSummary[id].selectedChoices[j].id == this.quizSummary[id].rightAnswers[0].id){
-                      // console.log(this.quizSummary[0].rightAnswers[0].id)
-                      // console.log("we have the right answer!!!")
-                       this.isVisible=true;
 
-                   }else{
-                       this.isVisible=false;
-                   }*/
 
                    j++;
                }
                j = 0;
            }
-           //console.log("this is quiz summary", this.quizSummary);
+           
        }else{                                         //checks whole specielist when freetype
            let j = 0;
            for (let id of Object.keys(this.quizSummary)) {

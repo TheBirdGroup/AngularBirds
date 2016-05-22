@@ -30,7 +30,6 @@ export class QuizMediaSelectComponent implements OnInit{
 		[0, 'Beginner quiz', 'glyphicon glyphicon-apple', true],
 	];
 	title = 'Birdid Quiz, select your media type:';
-	//quizMediaSelectedEvent = new EventEmitter<string>();
 
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
@@ -57,7 +56,6 @@ export class QuizMediaSelectComponent implements OnInit{
 			this.mediaTypes[4][3] = false;
 		}
 
-		//console.log("media t: ", this.mediaTypes[0][1]);
 
 	}
 
@@ -83,9 +81,6 @@ export class QuizMediaSelectComponent implements OnInit{
 
 			}else{
 
-				//console.log("scuccess");
-				//Const for value?
-				//this.quizMediaSelectedEvent.emit("MediatypeSelected");
 				this._quizSettingsService.setNormalQuiz();
 
 				this._router.navigate(["QuizMediaAdditionalSettings"]);

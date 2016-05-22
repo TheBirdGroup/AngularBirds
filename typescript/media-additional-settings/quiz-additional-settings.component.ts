@@ -37,8 +37,6 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 	secButtonTranslation;
 
 
-	//mediaDiff = ['1', '2', '3', '4'];
-   // numberOfQuestions = ['10','30','60']; for the beggining we do not check against the array
     mediaDiff;
     numberOfQuestions;
 	areaList=[];
@@ -88,7 +86,6 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		this.quizSettings = this._quizSettingsService.getQuizSettings();
 		this._quizSettingsService.setHelp(false);
 
-		//console.log("My area: ", this._quizSettingsService.getCurrentAreaName());
 
 	}
 
@@ -208,27 +205,6 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 		}
 
 	}
-	/*selectMediaDiff(mediaDifficulity){
-		if(this._quizSettingsService.setMediaDiff(mediaDifficulity)){
-
-            console.log(mediaDifficulity+"media diff");
-            //Const for value?
-            //this.quizMediaSettingsEvent.emit("MediaAditionalSettingsDone");
-
-		}else{
-            console.log("Nope", mediaDifficulity);
-		}
-
-	}*/
-
-   /* selectNumberOfQuestions(numberOfQuestions){
-        if (this._quizSettingsService.selectNumberOfQuestions(numberOfQuestions)) {
-            console.log(numberOfQuestions + 'number of questions')
-        }
-        else{
-            console.log('something went wrong')
-        }
-    }*/
 
 backToWelcomeFromAdditionalSettings(){
 	this._router.navigate(["QuizWelcome"]);

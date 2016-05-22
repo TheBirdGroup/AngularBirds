@@ -2,12 +2,12 @@
 <div class="form-signin">
 
 
-<button class="btn btn-primary btn-m" *ngIf="!_quizAuthenticationService.getAuthenticated()" (click)="loginBTN()">{{loginTranslation}}</button>
-<button class="btn btn-primary btn-m" *ngIf="!_quizAuthenticationService.getAuthenticated()" (click)="registerBTN()">{{registerTranslation}}</button>
-<button class="btn btn-primary btn-m" *ngIf="!_quizAuthenticationService.getAuthenticated()" (click)="forgotPasswordBTN()">{{forgotPasswordTranslation}}</button>
-<button class="btn btn-danger btn-m" *ngIf="_quizAuthenticationService.getAuthenticated()" (click)="logoutBTN()">{{logoutTranslation}}</button>
+	<button class="btn btn-primary btn-m" *ngIf="!_quizAuthenticationService.getAuthenticated()" (click)="loginBTN()">{{loginTranslation}}</button>
+	<button class="btn btn-primary btn-m" *ngIf="!_quizAuthenticationService.getAuthenticated()" (click)="registerBTN()">{{registerTranslation}}</button>
+	<button class="btn btn-primary btn-m" *ngIf="!_quizAuthenticationService.getAuthenticated()" (click)="forgotPasswordBTN()">{{forgotPasswordTranslation}}</button>
+	<button class="btn btn-danger btn-m" *ngIf="_quizAuthenticationService.getAuthenticated()" (click)="logoutBTN()">{{logoutTranslation}}</button>
 
-<br>
+	<br>
 
     <form *ngIf="showAuthenticationForm"(ngSubmit)="onLogin(f)" #f="ngForm">
         <div class="form-group">

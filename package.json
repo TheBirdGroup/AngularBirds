@@ -5,7 +5,10 @@
   "main": "main.js",
   "scripts": {
     "start": "concurrent \"npm run gulp\" \"npm run lite\" ",
+	"build": "npm run gulp --single",
+	"serve": "npm run lite",
     "electron": "electron main.js",
+	"electron-dev": "electron . --debug",
     "gulp": "gulp",
     "lite": "lite-server",
     "typings": "typings",

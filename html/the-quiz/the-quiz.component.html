@@ -11,11 +11,8 @@
 		</birdid-the-quiz-sound>
 	</div>
 
-  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
-	  <h3> What bird is it? </h3>
-<!-- there was short-div before -->
-  	<div class="text-left">
-
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+		<h3> What bird is it? </h3>
 
 		<birdid-the-quiz-choices
 			[inbetweenQuestions]="inbetweenQuestions"
@@ -31,48 +28,47 @@
 			*ngIf="!_quizSettingsService.getQuizSettings()[0].showAlternatives">
 		</birdid-the-quiz-freetype>
 
+		<div>
+			<br>
+			Your score: <b>{{_quizLogicService.getScore()}}</b>
+			<br>
+			Time Limit (sec) : <b>{{getDurationUserFriendly()}}</b>
+			<br>
+			Current Question: <b>{{_quizLogicService.questionNumber+1}} / {{_quizSettingsService.getNumberOfQuestions()}}</b>
+			<br><br>
+
+
+			Quiz Type: <b>{{_quizSettingsService.getMediaTypeUserFriendly()}}</b>
+			<br>
+			Difficulty level: <b>{{_quizSettingsService.getQuizSettings()[0].mediaDificulity}}</b>
+			<br>
+			Area: <b>{{_quizSettingsService.getCurrentAreaName()}}</b>
+			<br>
+			Using alternatives: <b>{{_quizSettingsService.getAlternativeUserFriendly()}}</b>
+			<br>
+			Competition Group: <b>{{_quizSettingsService.getCompetitionGroupIDUserFriendly()}}</b>
+			<br>
+			Current Media ID: <b>{{currentQuizQuestion.getStringMediaIds()}}</b>
+			<br>
+			Extra Info: {{getQuestionExtraInfo()}}
+
+			<br><br>
+			Scoring system:<br>
+			<b>Right answer +1 point
+			<br>Wrong answer -1 point
+			<br>Don't know 0 point</b>
+
+		</div>
 
 
     </div>
 
 
 <!-- there was short-div class before -->
-    <div class="text-left">
-    	<br>
-    	Your score: <b>{{_quizLogicService.getScore()}}</b>
-    	<br>
-		Time Limit (sec) : <b>{{getDurationUserFriendly()}}</b>
-		<br>
-		Current Question: <b>{{_quizLogicService.questionNumber+1}} / {{_quizSettingsService.getNumberOfQuestions()}}</b>
-    	<br><br>
-
-
-    	Quiz Type: <b>{{_quizSettingsService.getMediaTypeUserFriendly()}}</b>
-    	<br>
-    	Difficulty level: <b>{{_quizSettingsService.getQuizSettings()[0].mediaDificulity}}</b>
-    	<br>
-		Area: <b>{{_quizSettingsService.getCurrentAreaName()}}</b>
-    	<br>
-    	Using alternatives: <b>{{_quizSettingsService.getAlternativeUserFriendly()}}</b>
-    	<br>
-		Competition Group: <b>{{_quizSettingsService.getCompetitionGroupIDUserFriendly()}}</b>
-		<br>
-		Current Media ID: <b>{{currentQuizQuestion.getStringMediaIds()}}</b>
-    	<br>
-		Extra Info: {{getQuestionExtraInfo()}}
-
-		<br><br>
-		Scoring system:<br>
-		<b>Right answer +1 point
-		<br>Wrong answer -1 point
-		<br>Don't know 0 point</b>
-
-    </div>
 
 </div>
 <div style="clear:both"></div>
 
- </div>
 
 <div *ngIf="!quizLoaded" class="">
 	<img src="loading.gif" alt="Loading..." height="200" width="200">

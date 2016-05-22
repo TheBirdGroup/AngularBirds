@@ -11,6 +11,7 @@ import { QuizSetting }  from './../shared/quiz.settings.interface.ts';
 import { TheQuizImageComponent }  from './the-quiz-image.component';
 import { TheQuizSoundComponent }  from './the-quiz-sound.component';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 import { TheQuizChoicesComponent }  from './the-quiz-choices.component';
 import { TheQuizFreetypeComponent }  from './the-quiz-freetype.component';
@@ -37,7 +38,22 @@ import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 
 
 export class TheQuizComponent implements OnInit{
-	title = 'Birdid Quiz TheQuizComponent!';
+	//translation variables
+	whatBirdTranslation;
+	timeLeftTranslation;
+	scoreTranslation;
+	timeLeftTextTranslation;
+	secLeftTranslation;
+	numberOfQuestionTranslation;
+
+	aboutScoreTranslation;
+	rightAnswerTranslation;
+	wrongAnswerTranslation;
+	dontKnowTranslation;
+
+	quitButtonTranslation;
+
+
 
 	quizDoneEvent = new EventEmitter<string>();
 
@@ -63,10 +79,27 @@ export class TheQuizComponent implements OnInit{
 		  private _quizQuestionService: QuizQuestionsService,
 		  private _quizLogicService: QuizLogicService,
 		  private _quizSpeciesService: QuizSpecieService,
+		  private _quizTranslationService: QuizTranslationService,
 		  private _router: Router
 	  ){}
 
 	ngOnInit() {
+		//translations
+		this.whatBirdTranslation = this._quizTranslationService.getTranslationByID(248);
+		this.scoreTranslation = this._quizTranslationService.getTranslationByID(229);
+		this.timeLeftTextTranslation = this._quizTranslationService.getTranslationByID(110);
+		this.secLeftTranslation = this._quizTranslationService.getTranslationByID(111);
+		this.numberOfQuestionTranslation = this._quizTranslationService.getTranslationByID(174);
+		this.aboutScoreTranslation = this._quizTranslationService.getTranslationByID(383);
+		this.rightAnswerTranslation = this._quizTranslationService.getTranslationByID(176);
+		this.wrongAnswerTranslation = this._quizTranslationService.getTranslationByID(177);
+		this.dontKnowTranslation = this._quizTranslationService.getTranslationByID(178);
+		this.quitButtonTranslation = this._quizTranslationService.getTranslationByID(569);
+		this.timeLeftTranslation = this._quizTranslationService.getTranslationByID(194);
+		this.timeLeftTranslation = this._quizTranslationService.getTranslationByID(194);
+		this.timeLeftTranslation = this._quizTranslationService.getTranslationByID(194);
+		this.timeLeftTranslation = this._quizTranslationService.getTranslationByID(194);
+
 
 
 		this._quizLogicService.newQuiz();
@@ -186,7 +219,7 @@ export class TheQuizComponent implements OnInit{
 		this.duration = this._quizSettingsService.getDuration();
 
 		if (this.duration==0){
-			return 'unlimited';
+			return this.timeLeftTranslation;
 		}
 		if(this.duration==20) {
 			let currentTime = this.duration - this.ticks;

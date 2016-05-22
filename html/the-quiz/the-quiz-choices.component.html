@@ -20,7 +20,7 @@
 
 <br>
 
-<button class="btn btn-primary" (click)="onAnswerButtonClick()">{{nextQuestionTranslation}}</button>
+<button class="btn btn-primary buttonTextQuestion" (click)="onAnswerButtonClick()">{{nextQuestionTranslation}}</button>
 <br><br>
 <div *ngIf="disableHints == false">
 <button class="btn btn-info" [disabled]="disableHints" (click)="removeWrongAnswer()">Hints</button>: {{hints}}

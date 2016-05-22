@@ -67,10 +67,8 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	ngOnChanges(){
 		if(this.inbetweenQuestions){
-			//console.log("inbetween quests ", this.specieQuestionObject);
 
 		}else{
-			//console.log("!inbetween quests");
 			if(this.specieList.length > 0){
 				this.formSpecieName = ""
 				this.compileProsessedList();
@@ -165,7 +163,6 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	}
 
 	newValueSelectedListEvent(event){
-		//console.log("newValueSelectedListEvent: ", event);
 		this.newValueSelectedList();
 	}
 
@@ -173,12 +170,10 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 
 
-		//console.log("selectedSpecie: ", this.selectedSpecie);
 
 		setTimeout(() => {
 
 			console.log("correct species: ", this.specieQuestionObject.getRigthAnsers()[0].name, " What i added: ", this.selectedSpecie.id);
-			//console.log("added to list: ", this.selectedSpecie.id);
 			this.specieQuestionObject.addSelectedChoice(this.selectedSpecie.id);
 		},10);
 
@@ -199,7 +194,6 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	inputSpecieNameChange(event){
 
 		//key fro firefox, keycode for stupid crome
-		//console.log("event: ", event.keyCode);
 
 		if(event.key == 'Enter' || event.keyCode == 13){
 			//transmit to a higher power what was seleted
@@ -292,13 +286,6 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 		this.nrLetters++;
 
-		//this.disableButton = true;
-		/*this.hints--;
-		 if (this.hints >= 1){
-
-		 }else{
-		 this.disableButton = true;
-		 }*/
 	}
 
 

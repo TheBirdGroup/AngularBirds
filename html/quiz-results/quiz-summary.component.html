@@ -7,54 +7,55 @@
 
         <thead>
   		<tr class="info">
-  		  <th>Media</th>
+  		  <th  >Media</th>
   		  <th>Correct answer(s)</th>
   		  <th>My Choice(s)</th>
           <th>All Choices</th>
   		</tr>
   	  </thead>
-<tbody>
-        <tr *ngFor="let currentQuestion of quizSummary" class="table-info">
-            <td>
-				<div *ngIf="!mediaType">
-                    <span class="imgSummary">
-                        <div class="">
-                        <birdid-the-quiz-image style="width:300px"class="img-responsive" [zoomEnabled]="false" [specieQuestionObject]="currentQuestion"></birdid-the-quiz-image></div>
-                    </span>
-                </div>
-                <div *ngIf="mediaType">
-                    <span class="soundSummary">
-                       <birdid-the-quiz-sound [specieQuestionObject]="currentQuestion" [autoplay]="false" ></birdid-the-quiz-sound>
-                    </span>
-                </div>
+        <tbody>
+                <tr *ngFor="let currentQuestion of quizSummary" class="table-info">
+                    <td>
+        				<div *ngIf="!mediaType">
+                            <span>
+                                <div class="col-lg-9 col-md-7 col-sm-5 col-xs-4">
+                                    <birdid-the-quiz-image class="imgResult" [zoomEnabled]="false" [specieQuestionObject]="currentQuestion"></birdid-the-quiz-image>
+                                </div>
+                            </span>
+                        </div>
+                        <div *ngIf="mediaType">
+                            <span class="soundSummary">
+                               <birdid-the-quiz-sound [specieQuestionObject]="currentQuestion" [autoplay]="false" ></birdid-the-quiz-sound>
+                            </span>
+                        </div>
 
-            </td>
-            <td>
-        <tr *ngFor="let rightAns of currentQuestion.rightAnswers" >
-            <td>{{rightAns.name}}</td>
-        </tr>
-        </td>
-        <td>
-            <tr *ngFor="let selected of currentQuestion.selectedChoices">
-               <td [ngClass]="{'green': checkIfCorrectAnswer(currentQuestion, selected.id),
-                               'red': !checkIfCorrectAnswer(currentQuestion, selected.id)}">
-                   {{selected.name}}
-               </td>
-           </tr>
-        </td>
-            <td>
-                <div *ngIf="alternativeType">
-                    <tr *ngFor="let choice of currentQuestion.choices">
-                        <td>{{choice.name}}</td>
-                    </tr>
-                </div>
-                <div *ngIf="!alternativeType">
-                  Alternatives were species from: {{areaCountry}}
-                </div>
-            </td>
-        </tr>
+                    </td>
+                    <td>
+                <tr *ngFor="let rightAns of currentQuestion.rightAnswers" >
+                    <td>{{rightAns.name}}</td>
+                </tr>
+                </td>
+                <td>
+                    <tr *ngFor="let selected of currentQuestion.selectedChoices">
+                       <td [ngClass]="{'green': checkIfCorrectAnswer(currentQuestion, selected.id),
+                                       'red': !checkIfCorrectAnswer(currentQuestion, selected.id)}">
+                           {{selected.name}}
+                       </td>
+                   </tr>
+                </td>
+                    <td>
+                        <div *ngIf="alternativeType">
+                            <tr *ngFor="let choice of currentQuestion.choices">
+                                <td>{{choice.name}}</td>
+                            </tr>
+                        </div>
+                        <div *ngIf="!alternativeType">
+                          Alternatives were species from: {{areaCountry}}
+                        </div>
+                    </td>
+                </tr>
 
-</tbody>
+        </tbody>
     </table>
     </div>
 </div>

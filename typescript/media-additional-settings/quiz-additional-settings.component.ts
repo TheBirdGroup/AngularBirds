@@ -37,6 +37,7 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 	secButtonTranslation;
 	backButtonTranslation;
 
+	areaSubscription;
 
     mediaDiff;
     numberOfQuestions;
@@ -193,11 +194,12 @@ export class QuizAdditionalSettingsComponent implements OnInit{
 	}
 
 	startQuiz(){
-		this._quizSpeciesService.loadAreaId(this.selectedArea).subscribe((event) => (this.onAreaSubscribe(event)));
+		this.areaSubscription = this._quizSpeciesService.loadAreaId(this.selectedArea).subscribe((event) => (this.onAreaSubscribe(event)));
 		this.loading = true;
 	}
 
 	onAreaSubscribe(event) {
+		this.areaSubscription.unsubscribe();
 		if (event == true) {
 			if (this.selSpecie != true) {
 				this._router.navigate(["QuizMediaQuiz"]);

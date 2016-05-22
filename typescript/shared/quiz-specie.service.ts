@@ -63,7 +63,7 @@ export class QuizSpecieService implements OnInit{
 		this.loadSpecies();
 ​
 		return this.dataLoadedEventEmiter;
-		}
+	}
 
 	private loadSpecies(){
 

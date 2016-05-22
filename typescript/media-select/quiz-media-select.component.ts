@@ -99,4 +99,9 @@ export class QuizMediaSelectComponent implements OnInit{
 
 	}
 
+	backToWelcomeFromMediaSelect(){
+		this._router.navigate(["QuizWelcome"]);
+
+	}
+
 }

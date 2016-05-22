@@ -15,7 +15,7 @@ import { QuizChangingLanguageService }  from './../shared/quiz-changing-language
 	providers: [
 	  HTTP_PROVIDERS
 	],
-	//inputs: ['timespan:usingTimespan', 'limit:usingLimit', 'updateResultlistInc'] //using ALIAS
+	
 })
 
 export class QuizChangingLanguageComponent implements OnInit, OnChanges{
@@ -33,9 +33,9 @@ export class QuizChangingLanguageComponent implements OnInit, OnChanges{
 
 
 		ngOnInit() {
-			//this.competitionGroupID=24;
+
 			this.languagesList=this._quizChangingLanguageService.getLanguages();
-			//console.log("dadasdadada", this.languagesList)
+
 		}
         ngOnChanges(){
 
@@ -46,14 +46,13 @@ export class QuizChangingLanguageComponent implements OnInit, OnChanges{
         }
 
         getLanguagess(){
-			//console.log("list", this.languagesList);
+
 
              this.languagesList = this._quizChangingLanguageService.getLanguages();
 
 		}
 		postLanguageId() {
 			this._quizSettingsService.setLanguageID(this.selectedlanguage.id, true);
-			//this._quizChangingLanguageService.setSelectedLanguage(this.selectedlanguage.id);
 			console.log("this.selectedlanguage.id", this.selectedlanguage.id);
 	    }
 

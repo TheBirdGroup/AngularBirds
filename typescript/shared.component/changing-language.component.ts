@@ -23,6 +23,7 @@ export class QuizChangingLanguageComponent implements OnInit, OnChanges{
 	//translation variables
 	titleTranslation;
 	saveLanguageTranslation;
+	backButtonTranslation;
 
     quizSettings;
     competitionGroupID;
@@ -42,6 +43,7 @@ export class QuizChangingLanguageComponent implements OnInit, OnChanges{
 			//translation
 			this.titleTranslation = this._quizTranslationService.getTranslationByID(27);
 			this.saveLanguageTranslation = this._quizTranslationService.getTranslationByID(28);
+			this.backButtonTranslation = this._quizTranslationService.getTranslationByID(115);
 
 			this.languagesList=this._quizChangingLanguageService.getLanguages();
 
@@ -65,5 +67,9 @@ export class QuizChangingLanguageComponent implements OnInit, OnChanges{
 				console.log("this.selectedlanguage.id", this.selectedlanguage.id);
 			}
 	    }
+	backToWelcomeFromMediaSelect(){
+		this._router.navigate(["QuizWelcome"]);
+
+	}
 
     }

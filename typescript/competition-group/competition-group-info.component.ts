@@ -26,7 +26,7 @@ import { QuizChangingLanguageService }  from './../shared/quiz-changing-language
 })
 export class QuizCompetitionGroupInfoComponent implements OnInit, OnChanges{
 
-	title = "comp info"
+	title = "Group Information";
 	competitionGroup = null;
 	displayInfo = false;
 	noRestrictions = false;

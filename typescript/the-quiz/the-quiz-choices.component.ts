@@ -5,6 +5,8 @@ import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
+
 
 @Component({
 	selector: 'birdid-the-quiz-choices',
@@ -25,11 +27,15 @@ import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 
 
 export class TheQuizChoicesComponent implements OnInit, OnChanges{
+	//translation variables
+	nextQuestionTranslation;
+	amountOfHintsTranslation;
+	savedSelChoiceTranslation;
 
 	formSpecieName;
 	selectedSpecie;
 	disableHints = false;
-	hints = "Unlimited for now";
+	hints;
 	numbOfQuestion =  0;
 	subsiteName = "bird"
 
@@ -45,9 +51,17 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 	constructor(
 		private _quizSettingsService: QuizSettingsService,
 		private _quizSpeciesService: QuizSpecieService,
+		private _quizTranslationService: QuizTranslationService,
 		private _element: ElementRef){}
 
 	ngOnInit() {
+		//translations
+		this.nextQuestionTranslation = this._quizTranslationService.getTranslationByID(38);
+		this.amountOfHintsTranslation = this._quizTranslationService.getTranslationByID(194);
+		this.savedSelChoiceTranslation = this._quizTranslationService.getTranslationByID(550);
+		
+		this.hints = this.amountOfHintsTranslation;
+
 		//console.log(this.specieQuestionObject);
 		this.numbOfQuestion = this._quizSettingsService.numberOfQuestions;
 		this.checkIfDisable();

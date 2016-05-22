@@ -60,7 +60,6 @@ export class ResultlistComponent implements OnInit, OnChanges{
 
 			this.quizSettings = this._quizSettingsService.getQuizSettings();
 			this.loadQuizResults();
-		//	this.checkTimespan();
 
 		}
 
@@ -71,17 +70,13 @@ export class ResultlistComponent implements OnInit, OnChanges{
 			this._quizResultsService.getQuizResults(this.quizSettings, this.timespan, this.limit, this.competitionGroupID)
 	            .subscribe(
 	                data => {
-	                    //console.log(data);
 	                    this.quizHighscoreData = Object.keys(data).map(function(k) {
-							//console.log("data[k]: ", data[k], " K:",k)
-							// if(k != 'returnData'){
 								return data[k];
-							// }
+
 						});
-						//remove returnData = true/false
+
 						this.quizHighscoreData.pop();
 
-						//console.log(this.quizHighscoreData);
 	                    this.quizHighscoreLoaded = true;
 	                },
 	                error => console.error("getQuizResults ERROR! ", error)

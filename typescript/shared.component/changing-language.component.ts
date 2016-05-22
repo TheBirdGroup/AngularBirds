@@ -67,7 +67,7 @@ export class QuizChangingLanguageComponent implements OnInit, OnChanges{
 				console.log("this.selectedlanguage.id", this.selectedlanguage.id);
 			}
 	    }
-	backToWelcomeFromMediaSelect(){
+	backToWelcomeFromSelectLanguage(){
 		this._router.navigate(["QuizWelcome"]);
 
 	}

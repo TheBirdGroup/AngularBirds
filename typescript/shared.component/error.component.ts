@@ -33,9 +33,9 @@ export class ErrorComponent implements OnInit, OnChanges{
 			//this.competitionGroupID=24;
 			let errorID = + this._routeParams.get('errorID');
 			if(errorID == 1){
-				this.errorMessage = "Unable to load qustions. Please change some settings and pray it will work";
+				this.errorMessage = "Unable to load questions. Please change some settings and pray it will work";
 			}else if(errorID == 2){
-				this.errorMessage = "Unable to load qustions. createSeveralSoundquizDistrubutionArray infinate loop detected, > 1000";
+				this.errorMessage = "Unable to load questions. createSeveralSoundquizDistrubutionArray infinate loop detected, > 1000";
 			}
 
 		}

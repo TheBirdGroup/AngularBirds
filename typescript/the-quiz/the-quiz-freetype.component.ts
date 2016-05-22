@@ -6,6 +6,7 @@ import { QuizSpecieService }  from './../shared/quiz-specie.service';
 
 import { QuizQuestion }  from './../shared.class/the-quiz-question.class';
 import {QuizCompetitionService} from "../shared/quiz-competition-group.service";
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 @Component({
 	selector: 'birdid-the-quiz-freetype',
@@ -26,6 +27,14 @@ import {QuizCompetitionService} from "../shared/quiz-competition-group.service";
 
 
 export class TheQuizFreetypeComponent implements OnInit, OnChanges{
+	//translation variables
+	searchForSpecieTranslation;
+	nameTranslation;
+	rightAnswerWasTranslation;
+	amountOfHints;
+	errorMsgTranslation;
+	speciePlaceHolderTranslation;
+
 
 	formSpecieName = "";
 	selectedSpecie;
@@ -39,7 +48,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	specieQuestionObject:QuizQuestion;
 	questionCorrect = false;
 
-	hints = "Unlimited for now";
+	hints;
 	disableHints = true;
 
 	letter = "";
@@ -51,9 +60,20 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		private _quizSettingsService: QuizSettingsService,
 		private _quizSpeciesService: QuizSpecieService,
 		private _quizCompetitionGroupService: QuizCompetitionService,
+		private _quizTranslationService: QuizTranslationService,
 		private _element: ElementRef){}
 
 	ngOnInit() {
+		//translation
+		this.searchForSpecieTranslation = this._quizTranslationService.getTranslationByID(273);
+		this.rightAnswerWasTranslation = this._quizTranslationService.getTranslationByID(458);
+		this.nameTranslation = this._quizTranslationService.getTranslationByID(56);
+		this.errorMsgTranslation = this._quizTranslationService.getTranslationByID(368);
+		this.speciePlaceHolderTranslation = this._quizTranslationService.getTranslationByID(248);
+		this.amountOfHints = this._quizTranslationService.getTranslationByID(194);
+
+		this.hints = this.amountOfHints;
+
 		console.log(this.specieQuestionObject);
 		this.specieList = this._quizSpeciesService.getSpecieList();
 		this.selectedSpecieList = this._quizSpeciesService.getSelectedSpecieList();

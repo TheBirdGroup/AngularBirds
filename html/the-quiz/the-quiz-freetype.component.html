@@ -3,16 +3,16 @@
 	<div class="freetypeInputContainer">
 
 		<h3 *ngIf="inbetweenQuestions">
-			The correct answer was
+			{{rightAnswerWasTranslation}}:
 			<b [ngClass]="{'correctColor': questionCorrect, 'inncorrectColor': !questionCorrect}">{{specieQuestionObject.getRigthAnsers()[0].name}} ({{specieQuestionObject.getRigthAnsers()[0].latin}})</b>
 		</h3>
 		<div *ngIf="disableHints == false">
-			<button class="btn btn-info" [disabled]="disableHints" (click)="showALetter()">Show a letter</button> Letters left: {{hints}}
+			<button class="btn btn-info" [disabled]="disableHints" (click)="showALetter()">Hints</button>: {{hints}}
 		</div>
-		<h4><label for="username">Start by spelling the specie:</label></h4>
+		<h4><label for="username">{{searchForSpecieTranslation}}:</label></h4>
 		<div class="unsernameInput input-group">
 
-			<span class="input-group-addon" id="basic-addon1">Name:</span>
+			<span class="input-group-addon" id="basic-addon1">{{nameTranslation}}:</span>
 			<input
 				type="text"
 				id="username"
@@ -20,12 +20,12 @@
 				[(ngModel)]="formSpecieName"
 				#username="ngForm"
 				class="form-control"
-				placeholder="Specie Name"
+				placeholder={{speciePlaceHolderTranslation}}
 				(keyup)="inputSpecieNameChange($event)"
 				aria-describedby="sizing-addon1 basic-addon1"
 				autocomplete="off"
 				autofocus>
-			<span class="input-group-addon redWarningText"  *ngIf="!username.valid">Not Valid</span>
+			<span class="input-group-addon redWarningText"  *ngIf="!username.valid">{{errorMsgTranslation}}</span>
 
 		</div>
 

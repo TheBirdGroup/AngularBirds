@@ -16,14 +16,14 @@ import { QuizTranslationService }  from './../shared/quiz-translation.service';
 	providers: [
 	  HTTP_PROVIDERS
 	],
-	
+
 })
 
 export class QuizChangingLanguageComponent implements OnInit, OnChanges{
 	//translation variables
 	titleTranslation;
 	saveLanguageTranslation;
-	
+
     quizSettings;
     competitionGroupID;
     languagesList;
@@ -56,13 +56,14 @@ export class QuizChangingLanguageComponent implements OnInit, OnChanges{
 
         getLanguagess(){
 
-
              this.languagesList = this._quizChangingLanguageService.getLanguages();
 
 		}
 		postLanguageId() {
-			this._quizSettingsService.setLanguageID(this.selectedlanguage.id, true);
-			console.log("this.selectedlanguage.id", this.selectedlanguage.id);
+			if(this.selectedlanguage != undefined){
+				this._quizSettingsService.setLanguageID(this.selectedlanguage.id, true);
+				console.log("this.selectedlanguage.id", this.selectedlanguage.id);
+			}
 	    }
 
     }

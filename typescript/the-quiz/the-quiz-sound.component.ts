@@ -107,9 +107,11 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 
 	ngOnDestroy(){
 
+		console.log("ngOnDestroy;");
 		if(this.quizSoundObject != null){
 			this.quizSoundObject.destroy();
 			this.quizSoundObject = null;
+			console.log("ngOnDestroy; done");
 		}
 
 	}

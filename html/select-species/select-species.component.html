@@ -1,16 +1,16 @@
-<h2>{{title}}</h2>
+<h2>{{titleTranslation}}</h2>
 <div class="form-group selectContainer">
 <select class="form-control" [(ngModel)]="selectedSpecie" (ngModelChange)="selectSpecie()">
     <option  *ngFor="let specie of specieList" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 </select>
 
-<h3>Selected species</h3>
+<h3>{{selectedSpeciesTranslation}}</h3>
 <ul>
     <li class="styled-select" *ngFor="let specie of arrayOfSelectedSpecies">
         {{specie.name}} ({{specie.latin}}) <button class="btn btn-xs btn-danger" (click)="deleteSpecie(specie)">x</button>
     </li>
 </ul>
 
-<button *ngIf="arrayOfSelectedSpecies.length > 0" class="btn btn-lg btn-danger" (click)="resetSpecieList()">Remove all</button>
+<button *ngIf="arrayOfSelectedSpecies.length > 0" class="btn btn-lg btn-danger" (click)="resetSpecieList()">{{resetSelectedTranslation}}</button>
 <br>
-<button class="btn btn-lg btn-primary" (click)="postSpeciesId()">Start Quiz</button>
+<button class="btn btn-lg btn-primary" (click)="postSpeciesId()">{{startQuizTranslation}}</button>

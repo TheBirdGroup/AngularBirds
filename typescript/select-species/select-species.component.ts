@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit } from 'angular2/core';
 import { Router } from 'angular2/router';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 import {QuizSettingsService} from "../shared/quiz-settings.service";
+import { QuizTranslationService }  from './../shared/quiz-translation.service';
 
 
 
@@ -12,7 +13,12 @@ import {QuizSettingsService} from "../shared/quiz-settings.service";
 
 })
 export class SelectSpeciesComponent implements OnInit {
-    title = "Select species";
+    //translation variables
+    titleTranslation;
+    selectedSpeciesTranslation;
+    startQuizTranslation;
+    resetSelectedTranslation;
+    
 
     specieList = [];
     selectedSpecie;
@@ -23,10 +29,17 @@ export class SelectSpeciesComponent implements OnInit {
 
     constructor(
         private _quizSpeciesService: QuizSpecieService,
-        private _router: Router
+        private _router: Router,
+        private _quizTranslationService: QuizTranslationService
     ){}
 
     ngOnInit() {
+        //translations
+        this.titleTranslation = this._quizTranslationService.getTranslationByID(248);
+        this.selectedSpeciesTranslation = this._quizTranslationService.getTranslationByID(241);
+        this.startQuizTranslation = this._quizTranslationService.getTranslationByID(149);
+        this.resetSelectedTranslation = this._quizTranslationService.getTranslationByID(60);
+        
         this._quizSpeciesService.getSpecieList();
         this._quizSpeciesService.loadSpecieList();
         //console.log(this.specieList);

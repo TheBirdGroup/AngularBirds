@@ -150,9 +150,9 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	handleSelectAnswer(){
 
-		this.questionCorrect = this.specieQuestionObject.checkIfAnserIsCorrect(this.selectedSpecie.id);
-
-		if(this.inbetweenQuestions){
+		if(!this.inbetweenQuestions){
+			this.questionCorrect = this.specieQuestionObject.checkIfAnserIsCorrect(this.selectedSpecie.id);
+		}else if(this.inbetweenQuestions){
 			this.formSpecieName = ""
 			this.compileProsessedList();
 			this.selectedSpecie = this.specieListProsessed[0];
@@ -168,7 +168,9 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	newValueSelectedList(){
 
-
+		if(this.inbetweenQuestions){
+			return;
+		}
 
 
 		setTimeout(() => {

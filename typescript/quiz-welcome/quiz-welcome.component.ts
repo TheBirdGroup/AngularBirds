@@ -25,7 +25,6 @@ export class QuizWelcomeComponent implements OnInit{
     takeFormalTestTranslation;
     selectLanguageTranslation;
 
-
     constructor(
         private _router: Router,
         private _quizSpeciesService: QuizSpecieService,

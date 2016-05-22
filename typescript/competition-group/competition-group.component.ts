@@ -4,16 +4,14 @@ import { Router } from 'angular2/router';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';
-
-import { ResultlistComponent }  from './../shared.component/resultlist.component';
-
-import {QuizCompetitionService} from '../shared/quiz-competition-group.service';
+import { QuizCompetitionService } from '../shared/quiz-competition-group.service';
 import { QuizChangingLanguageService }  from './../shared/quiz-changing-language.service';
-
-import { QuizCompetitionGroupInfoComponent }  from './../competition-group/competition-group-info.component';
-
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 import { QuizAuthenticationService } from '../shared/quiz-authentication.service';
+
+import { ResultlistComponent }  from './../shared.component/resultlist.component';
+import { QuizCompetitionGroupInfoComponent }  from './../competition-group/competition-group-info.component';
+import { QuizLoginComponent } from '../shared.component/quiz-login.component';
 
 @Component({
 	selector: 'birdid-quiz-competition-group',
@@ -22,7 +20,8 @@ import { QuizAuthenticationService } from '../shared/quiz-authentication.service
 
     directives: [
 		ResultlistComponent,
-		QuizCompetitionGroupInfoComponent
+		QuizCompetitionGroupInfoComponent,
+		QuizLoginComponent
 	],
 	providers: [
 

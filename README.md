@@ -14,10 +14,10 @@ Install git, npm, node and gulp (and maybe even more)
 
 `npm install`
 
-`npm start`
+`npm run build`
 
-Kill the prosess when grunt completes and then change index.htm base url to current folder and then do
+Kill the prosess when grunt completes and then do
 
 `npm run electron`
 
-Temporary solution untill fixed (relative url and ts compiling)
+Temporary solution untill fixed (ts compiling)

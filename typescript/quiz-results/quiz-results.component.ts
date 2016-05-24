@@ -126,7 +126,7 @@ export class QuizResultComponent implements OnInit  {
 
 
 		this.dataSavedStatus = "Saved: " + response['returnData'];
-		this.dataSavedStatus = "Your score was successfully saved to the server";
+		this.dataSavedStatus = "Your score was successfully saved";
 		this.loadQuizResults();
 
 	}

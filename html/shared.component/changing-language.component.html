@@ -8,8 +8,9 @@
 </div>
 
 <br><br>
-<button class="btn btn-lg btn-primary" (click)="postLanguageId()">{{saveLanguageTranslation}}</button>
 
 <button (click)="backToWelcomeFromSelectLanguage()"type="button" class="mediaButton mediaSelectTypeButton btn btn-info btn-lg">
     <span class="glyphicon glyphicon-arrow-left"></span> {{backButtonTranslation}}
 </button>
+
+<button class="btn btn-lg btn-primary" (click)="postLanguageId()" [disabled]="selectedlanguage == undefined">{{saveLanguageTranslation}}</button>

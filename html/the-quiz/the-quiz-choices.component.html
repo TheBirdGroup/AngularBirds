@@ -11,7 +11,7 @@
 
 		{{current.name}} ({{current.latin}})
 		<span *ngIf="checkIfButtonIsSelected(current.id, true)">
-			 - <b class="black" >Selected</b>
+			<span *ngIf="_quizSettingsService.isSeveralSoundQuiz()"> - <b class="black" >Selected</b></span>
 		</span>
 
 	</button>

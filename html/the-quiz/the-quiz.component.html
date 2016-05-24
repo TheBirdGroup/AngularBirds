@@ -35,8 +35,9 @@
 			{{timeLeftTextTranslation}} ({{secLeftTranslation}}): <b>{{getDurationUserFriendly()}}</b>
 			<br>
 			{{numberOfQuestionTranslation}}: <b>{{_quizLogicService.questionNumber+1}} / {{_quizSettingsService.getNumberOfQuestions()}}</b>
-			<br>
-			Extra Info: {{getQuestionExtraInfo()}}
+			<div *ngIf="getQuestionExtraInfo().length > 0">
+				Extra Info: {{getQuestionExtraInfo()}}
+			</div>
 			<br><br>
 
 		<div *ngIf="!_quizSettingsService.isBeginnerQuiz()" class="quizExtraInformation">

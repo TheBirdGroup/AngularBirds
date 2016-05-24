@@ -3,16 +3,23 @@
 <br>
 <div class="buttonsDiv">
 
-    <button  class="quizTypeButton btn btn-primary btn-lg"(click)="theQuiz()">{{normalQuizTranslation}}</button>
+    <button  class="quizTypeButton btn btn-primary btn-lg welcomeButtons"(click)="theQuiz()">{{normalQuizTranslation}}</button>
+    <br>
+    <button  class="quizTypeButton btn btn-primary btn-lg welcomeButtons"(click)="competitionGroup()">{{competitionGroupsTranslation}}</button>
+    <br>
+    <button  class="quizTypeButton btn btn-primary btn-lg welcomeButtons"(click)="formalTest()">{{takeFormalTestTranslation}}</button>
     <br>
     <br>
-    <button  class="quizTypeButton btn btn-primary btn-lg"(click)="competitionGroup()">{{competitionGroupsTranslation}}</button>
-    <br>
-    <br>
-    <button  class="quizTypeButton btn btn-primary btn-lg"(click)="formalTest()">{{takeFormalTestTranslation}}</button>
-    <br>
-    <br>    <button  class="quizTypeButton btn btn-info btn-lg"(click)="changeLanguage()">{{selectLanguageTranslation}}</button>
+    <button  class="quizTypeButton btn btn-primary btn-lg welcomeButtons"(click)="changeLanguage()">{{selectLanguageTranslation}}</button>
 
+</div>
+
+<div >
+    <h3>Welcome to the angular 2 quis</h3>
+    Here you can take a quiz of your choce on birds.<br>
+    You can alos compete against other people and your frends in competition groups<br>
+    selecting formal test will allow you to take tehe exam, but you'll have to register first<br>
+    Loggin in before starting will gran many benefits icluding presistent statistics
 </div>
 <!--
 

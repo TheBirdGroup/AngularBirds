@@ -38,6 +38,8 @@
 		    <option *ngFor="let specie of specieListProsessed" [ngValue]="specie">{{specie.name}} ({{specie.latin}})</option>
 		</select>
 
+		<button class="btn btn-primary buttonTextQuestion" (click)="handleSelectAnswer()">{{nextQuestionTranslation}}</button>
+
 	</div>
 
 

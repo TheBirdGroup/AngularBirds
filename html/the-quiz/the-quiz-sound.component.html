@@ -1,3 +1,4 @@
+<h3>Sound player</h3>
 <div
 	class="progress"
 	#progressBarContainer
@@ -25,8 +26,17 @@
 
 
 <div>
-	<button class="btn btn-primary btn-lg" (click)="playAudio()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-play"></span></button>
-	<button class="btn btn-danger btn-lg" (click)="pauseAudio()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-pause"></span></button>
-	<button class="btn btn-info btn-lg" (click)="volumeIncrease()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-volume-up"></span></button>
-	<button class="btn btn-info btn-lg" (click)="volumeDecrease()" [disabled]="!quizSoundObject.isAllMediaLoaded()"><span class="glyphicon glyphicon-volume-down"></span></button>
+	<button class="btn btn-primary btn-lg" (click)="toggleAudio()" [disabled]="!quizSoundObject.isAllMediaLoaded()">
+		<span class="glyphicon"
+			[ngClass]="{	'glyphicon-play': !isPlaying(),
+							'glyphicon-pause':  isPlaying()}">
+		</span>
+	</button>
+	<button class="btn btn-info btn-lg" (click)="toggleVolume()" [disabled]="!quizSoundObject.isAllMediaLoaded()">
+		<span class="glyphicon"
+			[ngClass]="{	'glyphicon-volume-off': !isMuted(),
+							'glyphicon-volume-up':  isMuted()}">
+		</span>
+	</button>
+
 </div>

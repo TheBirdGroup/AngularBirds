@@ -35,7 +35,11 @@
 			{{timeLeftTextTranslation}} ({{secLeftTranslation}}): <b>{{getDurationUserFriendly()}}</b>
 			<br>
 			{{numberOfQuestionTranslation}}: <b>{{_quizLogicService.questionNumber+1}} / {{_quizSettingsService.getNumberOfQuestions()}}</b>
+			<br>
+			Extra Info: {{getQuestionExtraInfo()}}
 			<br><br>
+
+		<div *ngIf="!_quizSettingsService.isBeginnerQuiz()" class="quizExtraInformation">
 
 
 			Quiz Type: <b>{{_quizSettingsService.getMediaTypeUserFriendly()}}</b>
@@ -49,16 +53,19 @@
 			Competition Group: <b>{{_quizSettingsService.getCompetitionGroupIDUserFriendly()}}</b>
 			<br>
 			Current Media ID: <b>{{currentQuizQuestion.getStringMediaIds()}}</b>
-			<br>
-			Extra Info: {{getQuestionExtraInfo()}}
+
 
 			<br><br>
+
+		</div>
+
+		<div>
 			{{aboutScoreTranslation}} {{scoreTranslation}}:<br>
 			<b>{{rightAnswerTranslation}}
 			<br>{{wrongAnswerTranslation}}
 			<br>{{dontKnowTranslation}}</b>
-
 		</div>
+
 		<br>
 		<button (click)="backToWelcomeFromTheQuiz()" type="button" class="btn btn-danger btn-m ">
 			<span class="glyphicon glyphicon-remove-sign"></span> {{quitButtonTranslation}}

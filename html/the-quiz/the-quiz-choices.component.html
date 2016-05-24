@@ -1,11 +1,12 @@
 <div *ngFor="let current of specieQuestionObject.getChoices(); let i=index" >
 	<button
-		class="btn btn-primary"
+		class="btn"
 		style="margin: 5px"
 		[disabled]="selectAnswerDisabled()"
 		[ngClass]="{	'btn-success': checkIfButtonColorIsCorrect(current.id),
 						'btn-danger':  checkIfButtonColorIsWrong(current.id),
-						'btn-primary': checkIfButtonIsSelected(current.id)}"
+						'btn-primary': checkIfButtonIsSelected(current.id),
+						'btn-info':    checkIfButtonIsDefaultColor(current.id)}"
 		(click)="setUserChoice(current.id)">
 
 		{{current.name}} ({{current.latin}})

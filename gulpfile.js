@@ -26,6 +26,8 @@ var typescript = require('gulp-typescript');
 /* Images */
 var imagemin = require('gulp-imagemin');
 
+var concat = require('gulp-concat');
+
 var tsProject = typescript.createProject('tsconfig.json');
 
 //gulp.task('build-css', function () {
@@ -43,11 +45,14 @@ gulp.task('build-css', function () {
 });
 
 gulp.task('build-ts', function () {
+
+
     return gulp.src(appDev + '**/*.ts')
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject))
         .pipe(sourcemaps.write())
-        //.pipe(jsuglify())
+        .pipe(jsuglify())
+        //.pipe(concat('main.js'))
         .pipe(gulp.dest(appProd));
 });
 
@@ -72,3 +77,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['watch', 'build-ts', 'build-css', 'build-html']);
+gulp.task('build', ['build-ts', 'build-css', 'build-html']);

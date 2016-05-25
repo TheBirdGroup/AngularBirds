@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "concurrent \"npm run gulp\" \"npm run lite\" ",
-	"build": "npm run gulp --single",
+	"build": "npm run gulp build",
 	"serve": "npm run lite",
     "electron": "electron main.js",
 	"electron-dev": "electron . --debug",
@@ -37,6 +37,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.13.0",
     "gulp-uglify": "^1.5.1",
+    "gulp-concat": "^2.6.0",
     "concurrently": "^2.0.0",
     "lite-server": "^2.2.0",
     "typescript": "^1.8.2",

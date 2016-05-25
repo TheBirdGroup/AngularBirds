@@ -299,6 +299,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		//if one choice oly, select it (eg i don't know + choice)
 		if(this.specieListProsessed.length == 2){
 			this.selectedSpecie = this.specieListProsessed[1];
+			this.newValueSelectedList();
 		}
 
 

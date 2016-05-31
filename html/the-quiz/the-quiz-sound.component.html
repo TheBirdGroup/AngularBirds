@@ -34,8 +34,8 @@
 	</button>
 	<button class="btn btn-info btn-lg" (click)="toggleVolume()" [disabled]="!quizSoundObject.isAllMediaLoaded()">
 		<span class="glyphicon"
-			[ngClass]="{	'glyphicon-volume-off': !isMuted(),
-							'glyphicon-volume-up':  isMuted()}">
+			[ngClass]="{	'glyphicon-volume-off': isMuted(),
+							'glyphicon-volume-up':  !isMuted()}">
 		</span>
 	</button>
 

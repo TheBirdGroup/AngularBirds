@@ -85,6 +85,9 @@
 			  </button>
 			</div>
 			<br>
+			<div class="LessThan1000px" *ngIf="!_quizSettingsService.getAlternative()">
+				<b>NB! Disabling alternatives is not recomended on mobile witout a keayboard</b>
+			</div>
 		</span>
 
 		<h4> {{selSpeciesTitleTranslation}}? </h4>

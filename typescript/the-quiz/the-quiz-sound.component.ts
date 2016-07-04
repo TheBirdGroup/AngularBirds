@@ -143,6 +143,13 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 
 	}
 
+	toggleAudio(){
+		if(this.quizSoundObject.isPlaying()){
+			this.quizSoundObject.pause();
+		}else{
+			this.quizSoundObject.play();
+		}
+	}
 
 	playAudio(){
 
@@ -156,6 +163,18 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 
 	}
 
+	toggleVolume(){
+		if(this.quizSoundObject.getVolume() == 0){
+			this.quizSoundObject.setVolume(1);
+		}else{
+			this.quizSoundObject.setVolume(-1);
+		}
+	}
+
+	isMuted(){
+		return (this.quizSoundObject.getVolume() == 0);
+	}
+
 	volumeIncrease(){
 
 		this.quizSoundObject.setVolume(0.1);
@@ -165,6 +184,12 @@ export class TheQuizSoundComponent implements OnInit, OnChanges, OnDestroy{
 	volumeDecrease(){
 
 		this.quizSoundObject.setVolume(-0.1);
+
+	}
+
+	isPlaying(){
+
+		return this.quizSoundObject.isPlaying();
 
 	}
 

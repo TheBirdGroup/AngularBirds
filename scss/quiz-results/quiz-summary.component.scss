@@ -20,5 +20,27 @@ border-bottom-color:#286090;
 }
 
 .imgResult{
-    width: 100%;
+    /*width: 100%;*/
+}
+
+.mediaDiv{
+    width: 200px;
+}
+
+@media screen and (min-width: 750px) {
+    .mediaDiv{
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .mediaDiv{
+        width: 600px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .mediaDiv{
+        width: 750px;
+    }
 }

@@ -8,7 +8,7 @@
 		<span class="glyphicon glyphicon-arrow-left"></span> Back
 	</button>
 
-	<div class="resultsListTable col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	<div class="resultsListTable col-lg-6 col-md-12 col-sm-12 col-xs-12">
 
 		<div *ngIf="needAccessCode && _quizAuthenticationService.getAuthenticated()" >
 			<form (ngSubmit)="checkAccessCode()" >
@@ -71,7 +71,7 @@
 
 	</div>
 
-	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 
 		<br>
 		<birdid-quiz-competition-group-info [competitionGroup]="selectedCompetitionGroupData"></birdid-quiz-competition-group-info>

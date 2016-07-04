@@ -19,8 +19,9 @@
 		  <th scope="row">{{i+1}}</th>
 		  <td>{{current.name}}</td>
 		  <td>{{current.area}}</td>
-		  <td>{{current.scorePercent}}</td>
-		  <td>{{current.time}}</td>
+		  <td>{{current.scorePercent}}%</td>
+		  <td *ngIf="timespan =='day'">{{displayTimeLastDay(current.time)}}</td>
+		  <td *ngIf="timespan =='year'">{{current.time}}</td>
 		</tr>
 
 	  </tbody>

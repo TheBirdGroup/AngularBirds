@@ -6,6 +6,8 @@ export class QuizSoundplayer {
 	private volume = 1;
 	private numLoaded = 0;
 
+	private playing:boolean = false;
+
 	private longestAudioIndex = 0;
 	private longestDuration = 0;
 	private currentDurationLongest = 0;
@@ -128,6 +130,7 @@ export class QuizSoundplayer {
 		for (let currentID of Object.keys(this.mediaObjects)) {
 			this.mediaObjects[currentID].play();
 		}
+		this.playing = true;
 
 	}
 
@@ -137,7 +140,12 @@ export class QuizSoundplayer {
 		for (let currentID of Object.keys(this.mediaObjects)) {
 			this.mediaObjects[currentID].pause();
 		}
+		this.playing = false;
 
+	}
+
+	isPlaying(){
+		return this.playing;
 	}
 
 	//changing volume, using non abselut values
@@ -157,6 +165,10 @@ export class QuizSoundplayer {
 		this.updateVolumelevels();
 
 
+	}
+
+	getVolume(){
+		return this.volume;
 	}
 
 	//seekt to percent of total time of max lenth object

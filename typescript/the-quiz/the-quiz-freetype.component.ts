@@ -34,6 +34,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 	amountOfHints;
 	errorMsgTranslation;
 	speciePlaceHolderTranslation;
+	nextQuestionTranslation;
 
 
 	formSpecieName = "";
@@ -71,6 +72,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		this.errorMsgTranslation = this._quizTranslationService.getTranslationByID(368);
 		this.speciePlaceHolderTranslation = this._quizTranslationService.getTranslationByID(248);
 		this.amountOfHints = this._quizTranslationService.getTranslationByID(194);
+		this.nextQuestionTranslation = this._quizTranslationService.getTranslationByID(38);
 
 		this.hints = this.amountOfHints;
 
@@ -212,6 +214,8 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 
 	}
 
+
+
 	//well, pipes did not work, neither did pre prosessing of list so this will have to do...
 	inputSpecieNameChange(event){
 
@@ -295,6 +299,7 @@ export class TheQuizFreetypeComponent implements OnInit, OnChanges{
 		//if one choice oly, select it (eg i don't know + choice)
 		if(this.specieListProsessed.length == 2){
 			this.selectedSpecie = this.specieListProsessed[1];
+			this.newValueSelectedList();
 		}
 
 

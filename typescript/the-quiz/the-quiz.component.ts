@@ -263,7 +263,7 @@ export class TheQuizComponent implements OnInit{
     }
 
     getQuestionExtraInfo(){
-
+		
 		return this.currentQuizQuestion.getExtraInfo();
 
 	}

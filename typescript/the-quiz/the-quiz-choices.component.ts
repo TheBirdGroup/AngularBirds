@@ -59,7 +59,7 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 		this.nextQuestionTranslation = this._quizTranslationService.getTranslationByID(38);
 		this.amountOfHintsTranslation = this._quizTranslationService.getTranslationByID(194);
 		this.savedSelChoiceTranslation = this._quizTranslationService.getTranslationByID(550);
-		
+
 		this.hints = this.amountOfHintsTranslation;
 
 		//console.log(this.specieQuestionObject);
@@ -98,6 +98,19 @@ export class TheQuizChoicesComponent implements OnInit, OnChanges{
 			this.hints ="Hints are disabled";
 		}
 
+	}
+
+	checkIfButtonIsDefaultColor(specieID){
+		if(this.checkIfButtonIsSelected(specieID)){
+			return false;
+		}
+		if(this.checkIfButtonColorIsCorrect(specieID)){
+			return false;
+		}
+		if(this.checkIfButtonColorIsWrong(specieID)){
+			return false;
+		}
+		return true
 	}
 
 

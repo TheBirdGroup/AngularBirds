@@ -21,6 +21,20 @@ body {
 
 }
 
+.centerLoading{
+    display: block;
+    margin: 0 auto;
+}
+
+.LessThan1000px{
+    display: block;
+}
+@media screen and (min-width: 1000px) {
+    .LessThan1000px{
+        display: none;
+    }
+}
+
 /*button {
   font-family: Arial;
   background-color: #eee;

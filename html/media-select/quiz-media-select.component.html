@@ -1,5 +1,7 @@
 <div class="buttonsDiv">
 	<div *ngFor="let current of mediaTypes; let i=index" class="row" >
+		<br *ngIf="i == 3">
+		<br *ngIf="i == 3">
 		<div class="mediaSelectTypeButtonDiv col-sm-4" *ngIf="current[3]">
 			<button (click)="selectMediaType(current[0])" type="button" class="mediaButton mediaSelectTypeButton btn btn-primary btn-lg">
 				<span [ngClass]="current[2]" aria-hidden="true"></span> {{current[1]}}

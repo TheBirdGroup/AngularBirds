@@ -63,6 +63,14 @@ export class ResultlistComponent implements OnInit, OnChanges{
 
 		}
 
+		displayTimeLastDay(value){
+			if(value == 0){
+				return 'In the last hour';
+			}else{
+				return value+' hours ago';
+			}
+		}
+
 		loadQuizResults(){
 
 			this.competitionGroupID = this._quizSettingsService.getCompetitionGroupID();

@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit }       from 'angular2/core';
-import { Http, HTTP_PROVIDERS } from 'angular2/http';
-import { Router } from 'angular2/router';
+import { Component, EventEmitter, Input, OnInit }       from '@angular/core';
+import { Http, HTTP_PROVIDERS } from '@angular/http';
+import { Router } from '@angular/router-deprecated';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';

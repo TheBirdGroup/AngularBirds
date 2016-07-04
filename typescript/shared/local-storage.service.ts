@@ -1,4 +1,4 @@
-import { Injectable, OnInit, EventEmitter } from 'angular2/core';
+import { Injectable, OnInit, EventEmitter } from '@angular/core';
 
 //credit to https://github.com/rrgarciach/angular2-local-storage
 

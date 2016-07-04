@@ -1,5 +1,5 @@
-import { Component, OnInit }       from 'angular2/core';
-import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Component, OnInit }       from '@angular/core';
+import { Http, HTTP_PROVIDERS } from '@angular/http';
 import { QuizAuthenticationService } from '../shared/quiz-authentication.service';
 import { QuizTranslationService }  from './../shared/quiz-translation.service';
 

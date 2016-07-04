@@ -1,6 +1,6 @@
-import { Injectable, OnInit, EventEmitter } from 'angular2/core';
-import { Http, Headers } from 'angular2/http';
-import { Router } from 'angular2/router';
+import { Injectable, OnInit, EventEmitter } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import { Router } from '@angular/router-deprecated';
 
 import { LocalStorageService }  from './../shared/local-storage.service';
 import { QuizSettingsService }  from './../shared/quiz-settings.service';

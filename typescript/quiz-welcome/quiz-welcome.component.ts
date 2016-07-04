@@ -1,5 +1,5 @@
-import { Component, OnInit } from 'angular2/core';
-import { Router } from 'angular2/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 import {QuizLoginComponent} from '../shared.component/quiz-login.component';
 
 import { QuizSpecieService }  from './../shared/quiz-specie.service';

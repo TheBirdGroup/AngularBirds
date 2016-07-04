@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, OnChanges, ViewChild, AfterViewInit, ElementRef } from 'angular2/core';
-import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Component, EventEmitter, OnInit, OnChanges, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Http, HTTP_PROVIDERS } from '@angular/http';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';

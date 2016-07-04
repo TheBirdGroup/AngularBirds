@@ -1,6 +1,6 @@
-import { Component, OnInit }       from 'angular2/core';
-import { Http, HTTP_PROVIDERS } from 'angular2/http';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { Component, OnInit }       from '@angular/core';
+import { Http, HTTP_PROVIDERS } from '@angular/http';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 
 import { QuizSettingsService }  from './shared/quiz-settings.service';

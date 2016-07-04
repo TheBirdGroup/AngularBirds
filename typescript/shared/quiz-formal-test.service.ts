@@ -1,7 +1,7 @@
 
-import { Injectable } from 'angular2/core';
-import { Http, Headers } from 'angular2/http';
-import { Router } from 'angular2/router';
+import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import { Router } from '@angular/router-deprecated';
 
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';

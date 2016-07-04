@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit } from 'angular2/core';
-import { Router } from 'angular2/router';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 import { QuizSpecieService }  from './../shared/quiz-specie.service';
 import {QuizSettingsService} from "../shared/quiz-settings.service";
 import { QuizTranslationService }  from './../shared/quiz-translation.service';

@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, OnChanges, ViewChild, AfterViewInit, ElementRef }       from 'angular2/core';
-import { Http, HTTP_PROVIDERS } from 'angular2/http';
-import { Router, RouteParams } from 'angular2/router';
+import { Component, EventEmitter, OnInit, OnChanges, ViewChild, AfterViewInit, ElementRef }       from '@angular/core';
+import { Http, HTTP_PROVIDERS } from '@angular/http';
+import { Router, RouteParams } from '@angular/router-deprecated';
 
 import { QuizSettingsService }  from './../shared/quiz-settings.service';
 import { QuizResultsService }  from './../shared/quiz-results.service';
